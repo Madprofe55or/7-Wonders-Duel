@@ -42,7 +42,7 @@
     <ClCompile Include="Card.cpp">
       <Filter>Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Wonders.cpp">
+    <ClCompile Include="Wonders.h">
       <Filter>Cards</Filter>
     </ClCompile>
   </ItemGroup>

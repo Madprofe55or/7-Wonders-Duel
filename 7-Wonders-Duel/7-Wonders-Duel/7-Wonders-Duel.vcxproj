@@ -146,7 +146,7 @@
     <ClCompile Include="MilitaryToken.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProgressToken.cpp" />
-    <ClCompile Include="Wonders.cpp" />
+    <ClCompile Include="Wonders.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
