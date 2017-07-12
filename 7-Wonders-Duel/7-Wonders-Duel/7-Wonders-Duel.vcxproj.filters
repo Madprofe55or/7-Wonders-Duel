@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Cards">
+      <UniqueIdentifier>{7d4abbc3-a482-4d43-94c0-6d1060094543}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Card.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConflictPawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,17 +39,14 @@
     <ClCompile Include="ProgressToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
     <ClCompile Include="Wonders.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cards</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Card.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CardProperties.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConflictPawn.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -68,8 +65,14 @@
     <ClInclude Include="ProgressToken.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="WonderDeck.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="CardProperties.h">
+      <Filter>Cards</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
