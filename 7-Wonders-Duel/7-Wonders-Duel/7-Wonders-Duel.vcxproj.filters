@@ -5,74 +5,74 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Cards">
-      <UniqueIdentifier>{7d4abbc3-a482-4d43-94c0-6d1060094543}</UniqueIdentifier>
+    <Filter Include="Class Headers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Class Definitions">
+      <UniqueIdentifier>{31debc90-1d30-49a6-b05f-d5d115e07cc5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConflictPawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Initialization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MilitaryToken.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProgressToken.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Cards</Filter>
+      <Filter>Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="Wonders.cpp">
-      <Filter>Cards</Filter>
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="ConflictPawn.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Initialization.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryToken.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressToken.cpp">
+      <Filter>Class Definitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConflictPawn.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game_Constants.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MilitaryToken.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProgressToken.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="WonderDeck.h">
-      <Filter>Header Files</Filter>
+      <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Cards</Filter>
+      <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="CardProperties.h">
-      <Filter>Cards</Filter>
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConflictPawn.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Constants.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryToken.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressToken.h">
+      <Filter>Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
