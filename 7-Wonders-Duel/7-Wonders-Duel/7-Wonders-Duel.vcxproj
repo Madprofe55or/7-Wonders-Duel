@@ -149,6 +149,7 @@
     <ClCompile Include="Wonders.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardProperties.h" />
     <ClInclude Include="ConflictPawn.h" />

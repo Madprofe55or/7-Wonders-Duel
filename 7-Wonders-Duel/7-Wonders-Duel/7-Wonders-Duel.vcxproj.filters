@@ -24,9 +24,6 @@
     <ClCompile Include="Card.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="Wonders.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
     <ClCompile Include="ConflictPawn.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
@@ -44,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="ProgressToken.cpp">
       <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Wonders.h">
+      <Filter>Class Headers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,9 @@
       <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="ProgressToken.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
