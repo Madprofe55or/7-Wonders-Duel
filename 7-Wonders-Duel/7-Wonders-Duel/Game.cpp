@@ -2,8 +2,13 @@
 // Game class functions
 
 #include "Game.h"
+#include "DecksCreator.h"
+#include <algorithm>
+#include <vector>
 #include <stdarg.h>
 #include <iostream>
+#include <time.h>
+#include <cstdlib>
 using namespace std;
 
 Game::Game()
@@ -119,20 +124,61 @@ void Game::Run()
 {
 	cout << "Starting Game::Run()" << endl << endl;
 	system("pause");
-	Initialize();
+	Setup();
 	gameLoop();
 	Shutdown();
 	cout << "Exiting Game::Run()" << endl << endl;
 }
 
-void Game::Initialize()
+void Game::Setup()
 {
+	// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
+	//       a.  Age 1 and 2 have 3 cards removed
+	//       b.  Guild deck has 3 cards moved to Age 3 deck
+	// 2. Pick first 5 Progress Token and setOwner to Board and location to somewhere on visual game board, others moved off-board, keep vector
+	// 3. Show first 4 wonders, player 1 picks 1, player 2 picks 2, then player 1 gets last one
+	// 4. Show next 4 wonders, player 2 picks 1, player 1 picks 2, then player 2 gets last one, discard remaining 4, destroy the vector
+	// 5. Deal Age 1 cards
+	
+	
+	// Progress token deck and shuffling
+	vector <ProgressToken> progressTokenDeck;
+	progressTokenDeck.push_back(progressTokenAgriculture);
+	progressTokenDeck.push_back(progressTokenArchitecture);
+	progressTokenDeck.push_back(progressTokenEconomy);
+	progressTokenDeck.push_back(progressTokenLaw);
+	progressTokenDeck.push_back(progressTokenMasonry);
+	progressTokenDeck.push_back(progressTokenMathematics);
+	progressTokenDeck.push_back(progressTokenPhilosophy);
+	progressTokenDeck.push_back(progressTokenStrategy);
+	progressTokenDeck.push_back(progressTokenTheology);
+	progressTokenDeck.push_back(progressTokenUrbanism);
+
+	srand((unsigned)time(NULL));
+	random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "Progress Token: " << progressTokenDeck[i].getName() << endl;
+		system("pause");
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "Dealt: " << progressTokenDeck.back().getName() << endl;
+		progressTokenDeck.pop_back();
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "Remaining: " << progressTokenDeck[i].getName() << endl;
+	}
+
+	// End progress token deck, shuffling, and selection
 
 }
 
 void Game::gameLoop()
 {
-
+	
 }
 
 void Game::Shutdown()

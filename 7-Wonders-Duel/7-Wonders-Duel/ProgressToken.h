@@ -16,6 +16,8 @@ public:
 	void setName(int indexNumber);
 	int* getLocation();
 	void setLocation(int xLocation, int yLocation);
+	int getOwner();
+	void setOwner(int playerNumber);
 	void doEffect();
 
 private:

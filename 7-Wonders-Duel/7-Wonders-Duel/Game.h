@@ -21,7 +21,7 @@ public:
 	void Run();
 
 private:
-	void Initialize();
+	void Setup();
 	void gameLoop();
 	void Shutdown();
 	Player player1;

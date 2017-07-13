@@ -16,6 +16,9 @@
     <Filter Include="Class Definitions">
       <UniqueIdentifier>{31debc90-1d30-49a6-b05f-d5d115e07cc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Deprecated">
+      <UniqueIdentifier>{ab00f626-8d02-4df2-a880-c2a337af10e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,9 +33,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="Initialization.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
     <ClCompile Include="MilitaryToken.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
@@ -42,14 +42,17 @@
     <ClCompile Include="ProgressToken.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="Wonders.h">
-      <Filter>Class Headers</Filter>
+    <ClCompile Include="Initialization_DEP.cpp">
+      <Filter>Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="Wonders_DEP.h">
+      <Filter>Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="DecksCreator.h">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WonderDeck.h">
-      <Filter>Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WonderDeck_DEP.h">
+      <Filter>Deprecated</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

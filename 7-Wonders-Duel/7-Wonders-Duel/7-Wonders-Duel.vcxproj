@@ -140,13 +140,14 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="ConflictPawn.cpp" />
+    <ClCompile Include="DecksCreator.h" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="Initialization_DEP.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MilitaryToken.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProgressToken.cpp" />
-    <ClCompile Include="Wonders.h" />
+    <ClCompile Include="Wonders_DEP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -155,7 +156,7 @@
     <ClInclude Include="ConflictPawn.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game_Constants.h" />
-    <ClInclude Include="WonderDeck.h" />
+    <ClInclude Include="WonderDeck_DEP.h" />
     <ClInclude Include="MilitaryToken.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ProgressToken.h" />

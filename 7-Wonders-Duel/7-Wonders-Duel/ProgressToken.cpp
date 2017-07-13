@@ -32,6 +32,16 @@ void ProgressToken::setName(int indexNumber)
 	mName = progressTokenNames[indexNumber];
 }
 
+int ProgressToken::getOwner()
+{
+	return mOwner;
+}
+
+void ProgressToken::setOwner(int playerNumber)
+{
+	mOwner = playerNumber;
+}
+
 int* ProgressToken::getLocation()
 {
 	return mLocation;
