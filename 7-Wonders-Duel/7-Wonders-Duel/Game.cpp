@@ -2,7 +2,6 @@
 // Game class functions
 
 #include "Game.h"
-#include "DecksCreator.h"
 #include <algorithm>
 #include <vector>
 #include <stdarg.h>
@@ -178,11 +177,58 @@ void Game::Setup()
 
 void Game::gameLoop()
 {
+	// 1. After setup is complete this will run the main game loop
+	// 2. It starts with whoever was decided to be the first player
+	// 3. At each turn, a player has three choices:
+	//		a. Build an available card, if the player has the needed resources.
+	//		b. Discard an available card for coins.
+	//		c. Use an available card for building a wonder, if the player has the needed resources.
+	// 4. After each choice is made, the following will happen:
+	//		a. A check will be made for an immeidate effect. If true, then that effect will take place.
+	//		b. A check will be made for an immediate victory condition (military, science).
+	//		b. Player resources/attributes/etc will be updated.
+	// 5. The turn will then pass to the next player, unless the effect was to repeat a turn (some Wonders do this).
+	// 6. Steps 3-5 are repeated, alternating players, until the last card is used.
+	// 7. If it's the end of Age 1 or 2, then cards will be dealt for the next age, from the appropriate vector.
+	// 8. If it's the end of Age 3, and no immediate victory condition was met when the last card was played, the scores will be added up and a winner announced.
+	// 9. Player will be asked for another game.
+
+	cout << "Starting main loop..." << endl;
+	system("pause");
+
+	if (player1.getGoesFirst() == true) currentPlayer = &player1;
+	else if (player2.getGoesFirst() == true)  currentPlayer = &player2;
+
+	// get player input, determine the card that was clicked on based on location of click
+	// Card * cardToDisplay = getCardAtLocation(mouseclick);
+	// displayCard(cardToDisplay);
 	
+	
+
+	
+
+
+
+
+
+
+
+	
+
+
+
 }
 
 void Game::Shutdown()
 {
+
+}
+
+void Game::displayCard(Card & cardToDisplay)
+{
+	// code to change state to zoomed card display and show all important parts of this (to be designed later)
+	// selectedCard
+
 
 }
 

@@ -24,6 +24,8 @@ private:
 	void Setup();
 	void gameLoop();
 	void Shutdown();
+	void displayCard(Card & cardToDisplay);
+	Player * currentPlayer = nullptr;
 	Player player1;
 	Player player2;
 	ConflictPawn conflictPawn;

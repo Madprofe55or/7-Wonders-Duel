@@ -14,6 +14,7 @@ public:
 	void constructorDebug();
 	int getPlayerNumber();
 	void setGoesFirst(bool goesfirst);
+	bool getGoesFirst();
 	int getCoins();
 	void setCoins(int changeInCoins);
 	int getWood();

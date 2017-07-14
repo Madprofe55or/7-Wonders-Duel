@@ -74,6 +74,11 @@ void Player::setGoesFirst(bool goesfirst)
 	mGoesFirst = goesfirst;
 }
 
+bool Player::getGoesFirst()
+{
+	return mGoesFirst;
+}
+
 int Player::getCoins()
 {
 	return mCoins;

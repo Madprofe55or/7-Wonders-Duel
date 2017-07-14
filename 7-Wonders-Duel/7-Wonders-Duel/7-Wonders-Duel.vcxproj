@@ -140,7 +140,7 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="ConflictPawn.cpp" />
-    <ClCompile Include="DecksCreator.h" />
+    <ClCompile Include="DecksCreator_DEP.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Initialization_DEP.cpp" />
     <ClCompile Include="Main.cpp" />
