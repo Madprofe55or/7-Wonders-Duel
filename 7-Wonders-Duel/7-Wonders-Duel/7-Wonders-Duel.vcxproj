@@ -141,6 +141,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="ConflictPawn.cpp" />
     <ClCompile Include="DecksCreator_DEP.h" />
+    <ClCompile Include="Effects.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Initialization_DEP.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardProperties.h" />
     <ClInclude Include="ConflictPawn.h" />
+    <ClInclude Include="Effects.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game_Constants.h" />
     <ClInclude Include="WonderDeck_DEP.h" />

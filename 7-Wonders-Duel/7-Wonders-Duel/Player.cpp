@@ -9,7 +9,7 @@ using namespace std;
 
 Player::Player(int playerNumber) // constructor will need to set all starting resource values
 {
-	if (playerNumber == PLAYER_1) 
+	if (playerNumber == PLAYER_1)
 	{
 		mPlayerNumber = PLAYER_1;
 		setGoesFirst(true); // for now Player 1 will go first
@@ -44,7 +44,7 @@ Player::Player(int playerNumber) // constructor will need to set all starting re
 	constructorDebug();
 	system("pause");
 
-	delete [] p_startingResources;
+	delete[] p_startingResources;
 	p_startingResources = nullptr;
 }
 
@@ -138,5 +138,4 @@ void Player::setGlass(int changeInGlass)
 {
 	mGlass = mGlass + changeInGlass;
 }
-
 

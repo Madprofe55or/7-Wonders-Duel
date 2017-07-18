@@ -12,6 +12,7 @@
 #include "ProgressToken.h"
 #include "Card.h"
 #include "Game_Constants.h"
+#include "Effects.h"
 using namespace std;
 
 class Game
