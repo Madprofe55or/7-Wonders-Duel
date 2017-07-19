@@ -202,21 +202,15 @@ void Game::gameLoop()
 	// get player input, determine the card that was clicked on based on location of click
 	// Card * cardToDisplay = getCardAtLocation(mouseclick);
 	// displayCard(cardToDisplay);
+
+	cout << "Number of Arch symbols starting: " << currentPlayer->getNumOfScienceSymbols("Arch") << endl;
+	Effects::workshop(*currentPlayer);
+	cout << "Number of Arch symbols after workshop: " << currentPlayer->getNumOfScienceSymbols("Arch") << endl;
+	system("pause");
+	cout << "Current player: " << currentPlayer->getPlayerNumber() << endl;
+	system("pause");
 	
 	
-
-	
-
-
-
-
-
-
-
-	
-
-
-
 }
 
 void Game::Shutdown()

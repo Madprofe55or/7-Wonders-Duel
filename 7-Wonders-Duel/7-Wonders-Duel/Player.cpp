@@ -139,3 +139,22 @@ void Player::setGlass(int changeInGlass)
 	mGlass = mGlass + changeInGlass;
 }
 
+int Player::getNumOfScienceSymbols(string symbolType)
+{
+	return scienceSymbolsMap[symbolType];
+}
+void Player::setNumOfScienceSymbols(string symbolType, int changeInSymbols)
+{
+	scienceSymbolsMap[symbolType] = scienceSymbolsMap[symbolType] + changeInSymbols;
+}
+
+bool Player::getTradeFlag(string resourceType)
+{
+	return tradeFlagsMap[resourceType];
+}
+void Player::setTradeFlag(string resourceType, bool flagSetting)
+{
+	tradeFlagsMap[resourceType] = flagSetting;
+}
+
+

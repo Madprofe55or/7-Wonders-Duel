@@ -5,6 +5,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Game_Constants.h"
+#include <map>
+using namespace std;
 
 class Player
 {
@@ -27,8 +29,11 @@ public:
 	void setPapyrus(int changeInPapyrus);
 	int getGlass();
 	void setGlass(int changeInGlass);
-
-
+	int getNumOfScienceSymbols(string symbolType);
+	void setNumOfScienceSymbols(string symbolType, int changeInSymbols);
+	bool getTradeFlag(string resourceType);
+	void setTradeFlag(string resourceType, bool flagSetting);
+	
 private:
 	int mPlayerNumber;
 	bool mGoesFirst;
@@ -40,6 +45,12 @@ private:
 	int mGlass = 0;
 	static const int STARTING_COINS = 7;
 	static const int STARTING_ALL_OTHERS = 0;
+
+
+	map<string, int> scienceSymbolsMap = { {"Arch", 0}, {"Wheel", 0}, {"Quill", 0}, {"Mortar", 0}, {"Balance", 0}, {"Tablet", 0}, {"Globe", 0} };
+	map<string, bool> tradeFlagsMap = { {"Wood", false}, {"Stone", false}, {"Clay", false}, {"Papyrus", false}, {"Glass", false} };
+	
+
 };
 
 #endif // PLAYER_H

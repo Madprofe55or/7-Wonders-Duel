@@ -21,8 +21,10 @@ Card::Card(int cardIndexNumber)
 	setPapyrusCost(cardIndexNumber);
 	setGlassCost(cardIndexNumber);
 	setLocation(0, 0);
+	// debug	
 	constructorDebug();
 	system("pause");
+	// end debug
 }
 
 void Card::constructorDebug()

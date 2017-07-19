@@ -6,7 +6,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <string>
-#include "Player.h"
+// #include "Player.h" // included in Effects.h
 #include "ConflictPawn.h"
 #include "MilitaryToken.h"
 #include "ProgressToken.h"
