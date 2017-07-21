@@ -5,6 +5,8 @@
 #ifndef EFFECTS_H
 #define EFFECTS_H
 #include "Player.h"
+#include "Card.h"
+#include "ConflictPawn.h"
 
 class Effects
 {
@@ -119,9 +121,9 @@ public:
 	static void theology(Player & currentPlayer);
 	static void urbanism(Player & currentPlayer);
 
+	static void greenCardEffects(Player & currentPlayer, Card &	greenCard);
 
-
-
+	static void redCardEffects(Player & currentPlayer, Card & redCard, ConflictPawn & conflictPawn);
 
 };
 

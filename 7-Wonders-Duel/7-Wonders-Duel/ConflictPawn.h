@@ -16,13 +16,14 @@ public:
 	void setName(string name);
 	int* getLocation();
 	void setLocation(int xPosition, int yPosition);
-	void movePawn(int moveAmount);
+	int getThreat();
+	void setThreat(int numOfShields, int direction);
 	void doEffect();
 	
 private:
 	string mName; // pretty much for debugging
 	int mLocation[2];
-	const int STARTING_LOCATION = 0;
+	int mthreatLevel = 0;
 	
 };
 

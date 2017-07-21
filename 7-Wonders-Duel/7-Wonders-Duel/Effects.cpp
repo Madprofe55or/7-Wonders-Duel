@@ -492,7 +492,7 @@ void Effects::philosphy(Player & currentPlayer)
 
 void Effects::strategy(Player & currentPlayer)
 {
-	// need to figure out how to flag for one extra shield when building new red cards after this...DOES NOT APPLY TO WONDERS
+	currentPlayer.setStrategyFlag(true);
 }
 
 void Effects::theology(Player & currentPlayer)
@@ -504,5 +504,28 @@ void Effects::urbanism(Player & currentPlayer)
 {
 	currentPlayer.setCoins(6);
 	// need to figure out how to flag for current player getting coins when building future cards through linking
+}
+
+void Effects::greenCardEffects(Player & currentPlayer, Card & greenCard)
+{
+	currentPlayer.setNumOfScienceSymbols(greenCard.getSymbol(), 1);
+}
+
+// Pass de-references to current player, the card being player, and the conflict pawn
+void Effects::redCardEffects(Player & currentPlayer, Card & redCard, ConflictPawn & conflictPawn)
+{
+	int cardIndex = redCard.getIndex();
+	int numOfShields = redCard.getMilitarySymbol();
+
+	// checking for strategy token flag
+	int strategyFlagAddition = 0;
+	if (currentPlayer.getStrategyFlag()) strategyFlagAddition = 1;
+	
+	// checking player number to determine direction of conflict pawn movement
+	int direction;
+	if (currentPlayer.getPlayerNumber() == PLAYER_1) direction = 1;
+	else if (currentPlayer.getPlayerNumber() == PLAYER_2) direction = -1;
+	
+	conflictPawn.setThreat((numOfShields + strategyFlagAddition) , direction);
 }
 

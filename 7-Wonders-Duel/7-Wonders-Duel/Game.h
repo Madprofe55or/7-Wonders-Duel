@@ -7,10 +7,10 @@
 #define GAME_H
 #include <string>
 // #include "Player.h" // included in Effects.h
-#include "ConflictPawn.h"
+// #include "ConflictPawn.h" // included in Effeccts.h
 #include "MilitaryToken.h"
 #include "ProgressToken.h"
-#include "Card.h"
+// #include "Card.h" // included in Effects.h
 #include "Game_Constants.h"
 #include "Effects.h"
 using namespace std;
@@ -26,6 +26,8 @@ private:
 	void gameLoop();
 	void Shutdown();
 	void displayCard(Card & cardToDisplay);
+	static bool checkForScienceVictory(Player & currentPlayer);
+	static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
 	Player * currentPlayer = nullptr;
 	Player player1;
 	Player player2;

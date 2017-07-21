@@ -33,6 +33,8 @@ public:
 	void setNumOfScienceSymbols(string symbolType, int changeInSymbols);
 	bool getTradeFlag(string resourceType);
 	void setTradeFlag(string resourceType, bool flagSetting);
+	bool getStrategyFlag();
+	void setStrategyFlag(bool flagSetting);
 	
 private:
 	int mPlayerNumber;
@@ -43,11 +45,12 @@ private:
 	int mClay = 0;
 	int mPapyrus = 0;
 	int mGlass = 0;
+	bool mStrategyFlag = false;
 	static const int STARTING_COINS = 7;
 	static const int STARTING_ALL_OTHERS = 0;
 
 
-	map<string, int> scienceSymbolsMap = { {"Arch", 0}, {"Wheel", 0}, {"Quill", 0}, {"Mortar", 0}, {"Balance", 0}, {"Tablet", 0}, {"Globe", 0} };
+	map<string, int> scienceSymbolsMap = { {"Arch", 1}, {"Wheel", 1}, {"Quill", 1}, {"Mortar", 1}, {"Balance", 1}, {"Tablet", 0}, {"Globe", 1} };
 	map<string, bool> tradeFlagsMap = { {"Wood", false}, {"Stone", false}, {"Clay", false}, {"Papyrus", false}, {"Glass", false} };
 	
 

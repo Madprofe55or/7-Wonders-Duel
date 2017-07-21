@@ -157,4 +157,14 @@ void Player::setTradeFlag(string resourceType, bool flagSetting)
 	tradeFlagsMap[resourceType] = flagSetting;
 }
 
+bool Player::getStrategyFlag()
+{
+	return mStrategyFlag;
+}
+
+void Player::setStrategyFlag(bool flagSetting)
+{
+	mStrategyFlag = flagSetting;
+}
+
 

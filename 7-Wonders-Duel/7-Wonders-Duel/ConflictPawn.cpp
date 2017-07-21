@@ -41,10 +41,18 @@ void ConflictPawn::setLocation(int xPosition, int yPosition)
 	mLocation[1] = yPosition;
 }
 
-void ConflictPawn::movePawn(int moveAmount) // not sure how to do this movement quite  yet
+int ConflictPawn::getThreat()
 {
-	
+	return mthreatLevel;
 }
+
+// numOfShields can be passed by the number of shields on the red card
+// direction will be determined by currentplayer (+1 for player 1, -1 for player 2)
+void ConflictPawn::setThreat(int numOfShields, int direction)
+{
+	mthreatLevel += (numOfShields * direction);
+}
+
 
 void ConflictPawn::doEffect()
 {

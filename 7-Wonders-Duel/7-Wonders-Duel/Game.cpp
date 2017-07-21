@@ -203,14 +203,8 @@ void Game::gameLoop()
 	// Card * cardToDisplay = getCardAtLocation(mouseclick);
 	// displayCard(cardToDisplay);
 
-	cout << "Number of Arch symbols starting: " << currentPlayer->getNumOfScienceSymbols("Arch") << endl;
-	Effects::workshop(*currentPlayer);
-	cout << "Number of Arch symbols after workshop: " << currentPlayer->getNumOfScienceSymbols("Arch") << endl;
-	system("pause");
-	cout << "Current player: " << currentPlayer->getPlayerNumber() << endl;
-	system("pause");
-	
-	
+
+
 }
 
 void Game::Shutdown()
@@ -222,7 +216,27 @@ void Game::displayCard(Card & cardToDisplay)
 {
 	// code to change state to zoomed card display and show all important parts of this (to be designed later)
 	// selectedCard
+}
 
+bool Game::checkForScienceVictory(Player & currentPlayer)
+{
+	int numOfUniqueSymbols = 0;
+	if (currentPlayer.getNumOfScienceSymbols("Arch") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Wheel") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Quill") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Mortar") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Balance") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Tablet") > 0) numOfUniqueSymbols++;
+	if (currentPlayer.getNumOfScienceSymbols("Globe") > 0) numOfUniqueSymbols++;
 
+	if (numOfUniqueSymbols >= 6) return true;
+	else return false;
+}
+// need to pass currentPlayer.getPlayerNumber() to function
+int Game::checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn)
+{
+	if (playerNumber == PLAYER_1 && conflictPawn.getThreat() == 9) return PLAYER_1;
+	else if (playerNumber == PLAYER_2 && conflictPawn.getThreat() == -9) return PLAYER_2;
+	else return 0;
 }
 
