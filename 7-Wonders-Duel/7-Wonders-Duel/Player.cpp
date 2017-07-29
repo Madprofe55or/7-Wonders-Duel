@@ -6,165 +6,166 @@
 #include <stdarg.h>
 #include <iostream>
 using namespace std;
+using namespace Seven_Wonders;
 
-Player::Player(int playerNumber) // constructor will need to set all starting resource values
-{
-	if (playerNumber == PLAYER_1)
+namespace Seven_Wonders {
+
+	Player::Player(int playerNumber) // constructor will need to set all starting resource values
 	{
-		mPlayerNumber = PLAYER_1;
-		setGoesFirst(true); // for now Player 1 will go first
+		if (playerNumber == PLAYER_1)
+		{
+			mPlayerNumber = PLAYER_1;
+			setGoesFirst(true); // for now Player 1 will go first
+		}
+		else if (playerNumber == PLAYER_2)
+		{
+			mPlayerNumber = PLAYER_2;
+			setGoesFirst(false);
+		}
+
+		int * p_startingResources; // pointer to integer array for starting resources
+		p_startingResources = new (nothrow) int[6]; // pointer to integer array for starting resources
+		if (p_startingResources == nullptr) // error-handling
+		{
+			cout << "Could not allocate memory for player creation...exiting..." << endl;
+			system("pause");
+			EXIT_FAILURE;
+		}
+		p_startingResources[0] = STARTING_COINS; // starting gold
+		for (int i = 0; i < 5; i++) // assigning zero to each other resource
+		{
+			p_startingResources[1 + i] = STARTING_ALL_OTHERS;
+		}
+
+		setCoins(p_startingResources[0]);
+		setWood(p_startingResources[1]);
+		setStone(p_startingResources[2]);
+		setClay(p_startingResources[3]);
+		setPapyrus(p_startingResources[4]);
+		setGlass(p_startingResources[5]);
+
+		delete[] p_startingResources;
+		p_startingResources = nullptr;
 	}
-	else if (playerNumber == PLAYER_2)
+
+	Player::~Player()
 	{
-		mPlayerNumber = PLAYER_2;
-		setGoesFirst(false);
 	}
 
-	int * p_startingResources; // pointer to integer array for starting resources
-	p_startingResources = new (nothrow) int[6]; // pointer to integer array for starting resources
-	if (p_startingResources == nullptr) // error-handling
+	void Player::constructorDebug()
 	{
-		cout << "Could not allocate memory for player creation...exiting..." << endl;
-		system("pause");
-		EXIT_FAILURE;
+		cout << "Created Player, #" << getPlayerNumber() << ", with the following starting resources:" << endl <<
+			"Coins: " << getCoins() << endl <<
+			"Wood: " << getWood() << endl <<
+			"Stone: " << getStone() << endl <<
+			"Clay: " << getClay() << endl <<
+			"Papyrus: " << getPapyrus() << endl <<
+			"Glass: " << getGlass() << endl << endl;
 	}
-	p_startingResources[0] = STARTING_COINS; // starting gold
-	for (int i = 0; i < 5; i++) // assigning zero to each other resource
+
+	int Player::getPlayerNumber()
 	{
-		p_startingResources[1 + i] = STARTING_ALL_OTHERS;
+		return mPlayerNumber;
 	}
 
-	setCoins(p_startingResources[0]);
-	setWood(p_startingResources[1]);
-	setStone(p_startingResources[2]);
-	setClay(p_startingResources[3]);
-	setPapyrus(p_startingResources[4]);
-	setGlass(p_startingResources[5]);
+	void Player::setGoesFirst(bool goesfirst)
+	{
+		mGoesFirst = goesfirst;
+	}
 
-	constructorDebug();
-	system("pause");
+	bool Player::getGoesFirst()
+	{
+		return mGoesFirst;
+	}
 
-	delete[] p_startingResources;
-	p_startingResources = nullptr;
-}
+	int Player::getCoins()
+	{
+		return mCoins;
+	}
 
-Player::~Player()
-{
-	cout << "Player destroyed"; // for debugging
-}
+	void Player::setCoins(int changeInCoins)
+	{
+		mCoins = mCoins + changeInCoins;
+	}
 
-void Player::constructorDebug()
-{
-	cout << "Created Player, #" << getPlayerNumber() << ", with the following starting resources:" << endl <<
-		"Coins: " << getCoins() << endl <<
-		"Wood: " << getWood() << endl <<
-		"Stone: " << getStone() << endl <<
-		"Clay: " << getClay() << endl <<
-		"Papyrus: " << getPapyrus() << endl <<
-		"Glass: " << getGlass() << endl << endl;
-}
+	int Player::getWood()
+	{
+		return mWood;
+	}
 
-int Player::getPlayerNumber()
-{
-	return mPlayerNumber;
-}
+	void Player::setWood(int changeInWood)
+	{
+		mWood = mWood + changeInWood;
+	}
 
-void Player::setGoesFirst(bool goesfirst)
-{
-	mGoesFirst = goesfirst;
-}
+	int Player::getStone()
+	{
+		return mStone;
+	}
 
-bool Player::getGoesFirst()
-{
-	return mGoesFirst;
-}
+	void Player::setStone(int changeInStone)
+	{
+		mStone = mStone + changeInStone;
+	}
 
-int Player::getCoins()
-{
-	return mCoins;
-}
+	int Player::getClay()
+	{
+		return mClay;
+	}
 
-void Player::setCoins(int changeInCoins)
-{
-	mCoins = mCoins + changeInCoins;
-}
+	void Player::setClay(int changeInClay)
+	{
+		mClay = mClay + changeInClay;
+	}
 
-int Player::getWood()
-{
-	return mWood;
-}
+	int Player::getPapyrus()
+	{
+		return mPapyrus;
+	}
 
-void Player::setWood(int changeInWood)
-{
-	mWood = mWood + changeInWood;
-}
+	void Player::setPapyrus(int changeInPapyrus)
+	{
+		mPapyrus = mPapyrus + changeInPapyrus;
+	}
 
-int Player::getStone()
-{
-	return mStone;
-}
+	int Player::getGlass()
+	{
+		return mGlass;
+	}
 
-void Player::setStone(int changeInStone)
-{
-	mStone = mStone + changeInStone;
-}
+	void Player::setGlass(int changeInGlass)
+	{
+		mGlass = mGlass + changeInGlass;
+	}
 
-int Player::getClay()
-{
-	return mClay;
-}
+	int Player::getNumOfScienceSymbols(string symbolType)
+	{
+		return scienceSymbolsMap[symbolType];
+	}
+	void Player::setNumOfScienceSymbols(string symbolType, int changeInSymbols)
+	{
+		scienceSymbolsMap[symbolType] = scienceSymbolsMap[symbolType] + changeInSymbols;
+	}
 
-void Player::setClay(int changeInClay)
-{
-	mClay = mClay + changeInClay;
-}
+	bool Player::getTradeFlag(string resourceType)
+	{
+		return tradeFlagsMap[resourceType];
+	}
+	void Player::setTradeFlag(string resourceType, bool flagSetting)
+	{
+		tradeFlagsMap[resourceType] = flagSetting;
+	}
 
-int Player::getPapyrus()
-{
-	return mPapyrus;
-}
+	bool Player::getStrategyFlag()
+	{
+		return mStrategyFlag;
+	}
 
-void Player::setPapyrus(int changeInPapyrus)
-{
-	mPapyrus = mPapyrus + changeInPapyrus;
-}
+	void Player::setStrategyFlag(bool flagSetting)
+	{
+		mStrategyFlag = flagSetting;
+	}
 
-int Player::getGlass()
-{
-	return mGlass;
-}
-
-void Player::setGlass(int changeInGlass)
-{
-	mGlass = mGlass + changeInGlass;
-}
-
-int Player::getNumOfScienceSymbols(string symbolType)
-{
-	return scienceSymbolsMap[symbolType];
-}
-void Player::setNumOfScienceSymbols(string symbolType, int changeInSymbols)
-{
-	scienceSymbolsMap[symbolType] = scienceSymbolsMap[symbolType] + changeInSymbols;
-}
-
-bool Player::getTradeFlag(string resourceType)
-{
-	return tradeFlagsMap[resourceType];
-}
-void Player::setTradeFlag(string resourceType, bool flagSetting)
-{
-	tradeFlagsMap[resourceType] = flagSetting;
-}
-
-bool Player::getStrategyFlag()
-{
-	return mStrategyFlag;
-}
-
-void Player::setStrategyFlag(bool flagSetting)
-{
-	mStrategyFlag = flagSetting;
 }
 
 

@@ -7,34 +7,38 @@
 #include <string>
 using namespace std;
 
-class ProgressToken
-{
-public:
-	ProgressToken(int indexNumber);
-	void constructorDebug();
-	string getName();
-	void setName(int indexNumber);
-	int* getLocation();
-	void setLocation(int xLocation, int yLocation);
-	int getOwner();
-	void setOwner(int playerNumber);
-	void doEffect();
+namespace Seven_Wonders {
 
-private:
-	string mName;
-	bool mInThisGame;
-	int mOwner;
-	int mLocation[2];
-	string progressTokenNames[10] = { "Agriculture",
-									  "Architecture",
-									  "Economy",
-									  "Law",
-									  "Masonry",
-									  "Mathematics",
-									  "Philosphy",
-									  "Strategy",
-									  "Theology",
-									  "Urbanism" };
-};
+	class ProgressToken
+	{
+	public:
+		ProgressToken(int indexNumber);
+		void constructorDebug();
+		string getName();
+		void setName(int indexNumber);
+		int* getLocation();
+		void setLocation(int xLocation, int yLocation);
+		int getOwner();
+		void setOwner(int playerNumber);
+		void doEffect();
+
+	private:
+		string mName;
+		bool mInThisGame;
+		int mOwner;
+		int mLocation[2];
+		string progressTokenNames[10] = { "Agriculture",
+										  "Architecture",
+										  "Economy",
+										  "Law",
+										  "Masonry",
+										  "Mathematics",
+										  "Philosphy",
+										  "Strategy",
+										  "Theology",
+										  "Urbanism" };
+	};
+
+}
 
 #endif // PROGRESSTOKEN_H

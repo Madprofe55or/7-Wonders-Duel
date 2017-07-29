@@ -21,16 +21,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="ConflictPawn.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
     <ClCompile Include="MilitaryToken.cpp">
@@ -54,6 +48,9 @@
     <ClCompile Include="Effects.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Class Definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -63,9 +60,6 @@
       <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="ConflictPawn.h">
-      <Filter>Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Game_Constants.h">
@@ -87,6 +81,9 @@
       <Filter>Deprecated</Filter>
     </ClInclude>
     <ClInclude Include="Effects.h">
+      <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
   </ItemGroup>

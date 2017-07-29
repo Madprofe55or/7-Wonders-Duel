@@ -5,55 +5,59 @@
 #include <stdarg.h>
 #include <iostream>
 using namespace std;
+using namespace Seven_Wonders;
 
-ProgressToken::ProgressToken(int indexNumber)
-{
-	setName(indexNumber);
-	setLocation(0, 0);
-	constructorDebug();
-}
+namespace Seven_Wonders {
 
-void ProgressToken::constructorDebug()
-{
-	string name = getName();
-	int *location;
-	location = getLocation();
-	cout << "Created progress token, named " << name << ", at location " << location[0] << ", " << location[1] << "..." << endl << endl;
-	system("pause");
-}
+	ProgressToken::ProgressToken(int indexNumber)
+	{
+		setName(indexNumber);
+		setLocation(0, 0);
+	}
 
-string ProgressToken::getName()
-{
-	return mName;
-}
+	void ProgressToken::constructorDebug()
+	{
+		string name = getName();
+		int *location;
+		location = getLocation();
+		cout << "Created progress token, named " << name << ", at location " << location[0] << ", " << location[1] << "..." << endl << endl;
+		system("pause");
+	}
 
-void ProgressToken::setName(int indexNumber)
-{
-	mName = progressTokenNames[indexNumber];
-}
+	string ProgressToken::getName()
+	{
+		return mName;
+	}
 
-int ProgressToken::getOwner()
-{
-	return mOwner;
-}
+	void ProgressToken::setName(int indexNumber)
+	{
+		mName = progressTokenNames[indexNumber];
+	}
 
-void ProgressToken::setOwner(int playerNumber)
-{
-	mOwner = playerNumber;
-}
+	int ProgressToken::getOwner()
+	{
+		return mOwner;
+	}
 
-int* ProgressToken::getLocation()
-{
-	return mLocation;
-}
+	void ProgressToken::setOwner(int playerNumber)
+	{
+		mOwner = playerNumber;
+	}
 
-void ProgressToken::setLocation(int xPosition, int yPosition) 
-{
-	mLocation[0] = xPosition;
-	mLocation[1] = yPosition;
-}
+	int* ProgressToken::getLocation()
+	{
+		return mLocation;
+	}
 
-void ProgressToken::doEffect() 
-{
+	void ProgressToken::setLocation(int xPosition, int yPosition)
+	{
+		mLocation[0] = xPosition;
+		mLocation[1] = yPosition;
+	}
+
+	void ProgressToken::doEffect()
+	{
+
+	}
 
 }
