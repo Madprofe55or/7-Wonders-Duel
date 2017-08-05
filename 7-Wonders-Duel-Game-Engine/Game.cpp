@@ -44,7 +44,7 @@ void Game::gameLoop()
 		float dt = timeElapsed.asSeconds();
 
 		if (peekState() == nullptr) continue;
-		peekState()->handleInput();
+		peekState()->handleInput(this);
 		peekState()->update(dt);
 		this->window.clear(sf::Color::Black);
 		peekState()->draw(dt);
@@ -54,15 +54,34 @@ void Game::gameLoop()
 
 Game::Game()
 {
+	// Loading textures, but should probably be done depending on state
+	this->loadTextures();
+	
+	// Loading fonts
+	this->loadFonts();
+	
 	// Creating the window
-	this->window.create(sf::VideoMode(1600, 900), "7 Wonders Duel");
+	this->window.create(sf::VideoMode(1600, 900), "7 Wonders Duel", sf::Style::Titlebar | sf::Style::Close);
 	this->window.setFramerateLimit(60);
+
 }
 
 Game::~Game()
 {
 	// Will remove states one at a time from stack until empty
 	while (!this->states.empty()) popState();
+}
+
+void Game::loadTextures()
+{
+	textureManager.loadTexture("GameStateStart Background", "Resources/Backgrounds/gamestartbackground.jpg");
+	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
+	textureManager.loadTexture("GameStatePlaying Background", "Resources/Backgrounds/gameplayingbackground.jpg");
+}
+
+void Game::loadFonts()
+{
+	fontManager.loadFont("Menu Font", "Resources/Fonts/americancaptain.ttf");
 }
 
 
