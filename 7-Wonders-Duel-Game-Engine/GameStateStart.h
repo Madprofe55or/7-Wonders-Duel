@@ -8,10 +8,14 @@
 class GameStateStart : public GameState
 {
 public:
+	// Sprites
 	sf::Sprite background;
 	sf::Sprite title;
+	
+	// Fonts
 	sf::Font font;
 
+	// Texts
 	sf::Text startGameText;
 	sf::Text exitGameText;
 	
@@ -20,7 +24,8 @@ public:
 	virtual void handleInput(Game * game);
 
 	GameStateStart(Game * game);
-	~GameStateStart();
+	// destructor not needed
+	~GameStateStart() {};
 private:
 
 };

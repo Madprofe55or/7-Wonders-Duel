@@ -10,9 +10,13 @@
 
 class GameState;
 
+/* Defines render window, texture manager, font manager, input manager, state manager functions
+   and the main game loop, to be used for the rest of the game objects .
+   Still needs a sounds/music manager, which would be simple. */
 class Game
 {
 public:
+	// game state stack
 	std::stack<GameState*> states;
 
 	sf::RenderWindow window;

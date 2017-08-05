@@ -4,11 +4,10 @@
 
 void GameStateStart::draw(const float dt)
 {
-	this->game->window.clear(sf::Color::Black);
-	this->game->window.draw(this->background);
-	this->game->window.draw(this->title);
-	this->game->window.draw(this->startGameText);
-	this->game->window.draw(this->exitGameText);
+	game->window.draw(background);
+	game->window.draw(title);
+	game->window.draw(startGameText);
+	game->window.draw(exitGameText);
 }
 
 void GameStateStart::update(const float dt)
@@ -51,6 +50,7 @@ void GameStateStart::handleInput(Game * game)
 		}
 		case sf::Event::MouseMoved:
 		{
+			// These sf::IntRect objects are needed to be able to use .contains() below
 			sf::IntRect tempExitRect(this->exitGameText.getPosition().x, this->exitGameText.getPosition().y, this->exitGameText.getGlobalBounds().width, this->exitGameText.getGlobalBounds().height);
 			sf::IntRect tempStartRect(this->startGameText.getPosition().x, this->startGameText.getPosition().y, this->startGameText.getGlobalBounds().width, this->startGameText.getGlobalBounds().height);
 
@@ -82,15 +82,15 @@ GameStateStart::GameStateStart(Game * game)
 {
 	this->game = game;
 
-	// Setting background
+	// Background
 	this->background.setTexture(game->textureManager.getRef("GameStateStart Background"));
 
-	// Setting up title card
+	// Title Card at top
 	this->title.setTexture(game->textureManager.getRef("GameStateStart Title"));
 	this->title.setOrigin(this->title.getGlobalBounds().width / 2, this->title.getGlobalBounds().height / 2);
 	this->title.setPosition(800, 200);
 
-	// Setting texts
+	// Texts for "Start Game" and "Exit"
 	this->startGameText.setFont(game->fontManager.getRef("Menu Font"));
 	this->exitGameText.setFont(game->fontManager.getRef("Menu Font"));
 	this->startGameText.setString("Start Game");
@@ -104,6 +104,3 @@ GameStateStart::GameStateStart(Game * game)
 	
 }
 
-GameStateStart::~GameStateStart()
-{
-}

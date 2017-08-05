@@ -37,12 +37,17 @@ GameState * Game::peekState()
 void Game::gameLoop()
 {
 	sf::Clock clock;
-
+	
+	// while loop for the game window
 	while (this->window.isOpen())
 	{
+		// time-update controls
 		sf::Time timeElapsed = clock.restart();
 		float dt = timeElapsed.asSeconds();
 
+		/* looks at state on top of stack and runs functions of that state 
+		   if the state stack is empty, it runs the loop again...basically if
+		   no state is loaded at the beginning of the game, a black screen is shown */
 		if (peekState() == nullptr) continue;
 		peekState()->handleInput(this);
 		peekState()->update(dt);
@@ -74,6 +79,9 @@ Game::~Game()
 
 void Game::loadTextures()
 {
+	/* With a small game like this, it's probably ok to load all textures at game creation
+	   However, for efficiency, only textures needed for a specific game state should be loaded unless 
+	   states are stil stacked.  We can keep doing it this way for now, until we run into problems, if any. */
 	textureManager.loadTexture("GameStateStart Background", "Resources/Backgrounds/gamestartbackground.jpg");
 	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
 	textureManager.loadTexture("GameStatePlaying Background", "Resources/Backgrounds/gameplayingbackground.jpg");
@@ -81,6 +89,7 @@ void Game::loadTextures()
 
 void Game::loadFonts()
 {
+	/* It will be fine loading fonts at game creation since only a few will be needed. */
 	fontManager.loadFont("Menu Font", "Resources/Fonts/americancaptain.ttf");
 }
 
