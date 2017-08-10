@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <vector>
+
 namespace Seven_Wonders {
 
 	// Defining players
@@ -131,4 +133,111 @@ namespace Seven_Wonders {
 	const int CARD_THE_STATUE_OF_ZEUS = 83;
 	const int CARD_THE_TEMPLE_OF_ARTEMIS = 84;
 
+
+	// Game Properties
+	const int GAME_WINDOW_WIDTH = 1600;
+	const int GAME_WINDOW_HEIGHT = 900;
+
+	// Card Sizes
+	const std::vector<int> CARD_SIZE = { 110, 175 };
+
+	// Card Positioning
+	const int CARD_STRUCTURE_VERT_CENTER = 770;
+	const int CARD_STRUCTURE_VERT_SPACING = 30;
+	const int CARD_STRUCTURE_HORZ_SPACING = 98;
+	const int CARD_STRUCTURE_AGE_1_START_X = 635;
+	const int CARD_STRUCTURE_AGE_1_START_Y = 150;
+
+	const std::vector<std::vector<int>> AGE_1_POSITIONS = {
+		{ 635, 150 }, // card 1 (top left)
+		{ 785, 150 },
+ 
+		{ 560, 263 },
+		{ 710, 263 },
+		{ 860, 263 },
+
+		{ 485, 376 },
+		{ 635, 376 },
+		{ 785, 376 },
+		{ 935, 376 },
+
+		{ 410, 489 },
+		{ 560, 489 },
+		{ 710, 489 },
+		{ 860, 489 },
+		{ 1010, 489 },
+
+		{ 335, 602 },
+		{ 485, 602 },
+		{ 635, 602 },
+		{ 785, 602 },
+		{ 935, 602 },
+		{ 1085, 602 }, // card 20 (bottom right)
+	};
+
+	const std::vector<std::vector<int>> AGE_2_POSITIONS = {
+		{ 335, 150 }, // card 1 (top left)
+		{ 485, 150 },
+		{ 635, 150 },
+		{ 785, 150 },
+		{ 935, 150 },
+		{ 1085, 150 },
+
+		{ 410, 263 },
+		{ 560, 263 },
+		{ 710, 263 },
+		{ 860, 263 },
+		{ 1010, 263 },
+
+		{ 485, 376 },
+		{ 635, 376 },
+		{ 785, 376 },
+		{ 935, 376 },
+
+		{ 560, 489 },
+		{ 710, 489 },
+		{ 860, 489 },
+
+		{ 635, 602 },
+		{ 785, 602 }, // card 20 (bottom right)
+
+	};
+
+	const std::vector<std::vector<int>> AGE_3_POSITIONS = {
+		{ 635, 80 }, // card 1 (top left)
+		{ 785, 80 },
+
+		{ 560, 170 },
+		{ 710, 170 },
+		{ 860, 170 },
+
+		{ 485, 260 },
+		{ 635, 260 },
+		{ 785, 260 },
+		{ 935, 260 },
+
+		{ 560, 350 },
+		{ 860, 350 },
+
+		{ 485, 440 },
+		{ 635, 440 },
+		{ 785, 440 },
+		{ 935, 440 },
+
+		{ 560, 530 },
+		{ 710, 530 },
+		{ 860, 530 },
+
+		{ 635, 620 },
+		{ 785, 620 },
+
+	};
+
+	// Game Textures
+
+
+	// Game Fonts
+
+
+	// Game Sounds/Music
 }

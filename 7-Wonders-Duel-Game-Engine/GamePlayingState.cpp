@@ -3,39 +3,22 @@
 
 void GamePlayingState::draw(const float dt)
 {
-	this->game->window.clear(sf::Color::Black);
-	this->game->window.draw(this->background);
-	//this->game->window.draw(this->exitText);
-	this->game->window.draw(this->mAge1Card1);
-	this->game->window.draw(this->mAge1Card2);
-	this->game->window.draw(this->mAge1Card3);
-	this->game->window.draw(this->mAge1Card4);
-	this->game->window.draw(this->mAge1Card5);
-	this->game->window.draw(this->mAge1Card6);
-	this->game->window.draw(this->mAge1Card7);
-	this->game->window.draw(this->mAge1Card8);
-	this->game->window.draw(this->mAge1Card9);
-	this->game->window.draw(this->mAge1Card10);
-	this->game->window.draw(this->mAge1Card11);
-	this->game->window.draw(this->mAge1Card12);
-	this->game->window.draw(this->mAge1Card13);
-	this->game->window.draw(this->mAge1Card14);
-	this->game->window.draw(this->mAge1Card15);
-	this->game->window.draw(this->mAge1Card16);
-	this->game->window.draw(this->mAge1Card17);
-	this->game->window.draw(this->mAge1Card18);
-	this->game->window.draw(this->mAge1Card19);
-	this->game->window.draw(this->mAge1Card20);
+	p_game->window.draw(background);
 
-	this->game->window.draw(this->mPlayer1GUI);
-	this->game->window.draw(this->mPlayer2GUI);
-	this->game->window.draw(this->player1GUIText);
-	this->game->window.draw(this->player2GUIText);
+	for (int i = 0; i < 20; ++i)
+	{
+		p_game->window.draw(mAge1Rects[i]);
+	}
 
-	this->game->window.draw(this->mGameBoard);
-	this->game->window.draw(this->mWondersDisplay);
-	this->game->window.draw(this->gameBoardGUIText);
-	this->game->window.draw(this->wondersDisplayText);
+	p_game->window.draw(mPlayer1GUI);
+	p_game->window.draw(mPlayer2GUI);
+	p_game->window.draw(player1GUIText);
+	p_game->window.draw(player2GUIText);
+
+	p_game->window.draw(mGameBoard);
+	p_game->window.draw(mWondersDisplay);
+	p_game->window.draw(gameBoardGUIText);
+	p_game->window.draw(wondersDisplayText);
 
 }
 
@@ -44,20 +27,19 @@ void GamePlayingState::update(const float dt)
 {
 }
 
-void GamePlayingState::handleInput(Game * game)
+void GamePlayingState::handleInput()
 {
 	sf::Event event;
-	this->game = game;
 	bool poppingState = false;
 	bool cardPickState = false;
 
-	while (this->game->window.pollEvent(event))
+	while (p_game->window.pollEvent(event))
 	{
 		switch (event.type)
 		{
 		case sf::Event::Closed:
 		{
-			game->window.close();
+			p_game->window.close();
 			break;
 		}
 		case sf::Event::KeyPressed:
@@ -76,90 +58,104 @@ void GamePlayingState::handleInput(Game * game)
 		default: break;
 		}
 	}
-	if (poppingState == true) game->popState(); // pop state here, outside while loop
-	if (cardPickState == true) game->pushState(new CardPickerState(this->game, this)); // push card picker state
+	if (poppingState == true) p_game->popState(); // pop state here, outside while loop
+	if (cardPickState == true) p_game->pushState(new CardPickerState(p_game, this)); // push card picker state
 }
 
 GamePlayingState::GamePlayingState(Game * game)
 {
-	this->game = game;
-
-	//exitText.setFont(game->fontManager.getRef("Menu Font"));
-	//exitText.setString("Gameplaying state test: Press Escape to exit to Main Menu");
-	//exitText.setPosition(0, 400);
-	//exitText.setCharacterSize(50);
-	//exitText.setFillColor(sf::Color::White);
+	p_game = game;
 
 	// Setting background
-	this->background.setTexture(game->textureManager.getRef("GameStatePlaying Background"));
-
-
+	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
 
 	mCurrentAge = 1;
+
+	for (int i = 0; i < 20; ++i)
+	{
+		mAge1Rects[i].setPosition(Seven_Wonders::AGE_3_POSITIONS[i][0], Seven_Wonders::AGE_3_POSITIONS[i][1]);
+		mAge1Rects[i].setTexture(p_game->textureManager.getRef("Card-Glassworks"));
+
+
+		/*if (i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 8 || i == 14 || i == 15 || i == 16 || i == 17 || i == 18 || i == 19)
+		{
+			mAge1Rects[i].setFillColor(sf::Color(34, 100, 170, 180));
+		}
+		else
+		{
+			mAge1Rects[i].setFillColor(sf::Color(209, 93, 75, 180));
+		}*/
+
+	}
+
+
+	/*
 	mAge1Card1.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card1.setPosition(mAge1Card1Loc);
+	mAge1Card1.setPosition(Seven_Wonders::AGE_1_POSITIONS[0][0], Seven_Wonders::AGE_1_POSITIONS[0][1]);
 	mAge1Card1.setSize(CARD_SIZE);
 	mAge1Card2.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card2.setPosition(mAge1Card2Loc);
+	mAge1Card2.setPosition(Seven_Wonders::AGE_1_POSITIONS[1][0], Seven_Wonders::AGE_1_POSITIONS[1][1]);
 	mAge1Card2.setSize(CARD_SIZE);
 
 	mAge1Card3.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card3.setPosition(mAge1Card3Loc);
+	mAge1Card3.setPosition(Seven_Wonders::AGE_1_POSITIONS[2][0], Seven_Wonders::AGE_1_POSITIONS[2][1]);
 	mAge1Card3.setSize(CARD_SIZE);
 	mAge1Card4.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card4.setPosition(mAge1Card4Loc);
+	mAge1Card4.setPosition(Seven_Wonders::AGE_1_POSITIONS[3][0], Seven_Wonders::AGE_1_POSITIONS[3][1]);
 	mAge1Card4.setSize(CARD_SIZE);
 	mAge1Card5.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card5.setPosition(mAge1Card5Loc);
+	mAge1Card5.setPosition(Seven_Wonders::AGE_1_POSITIONS[4][0], Seven_Wonders::AGE_1_POSITIONS[4][1]);
 	mAge1Card5.setSize(CARD_SIZE);
 
 	mAge1Card6.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card6.setPosition(mAge1Card6Loc);
+	mAge1Card6.setPosition(Seven_Wonders::AGE_1_POSITIONS[5][0], Seven_Wonders::AGE_1_POSITIONS[5][1]);
 	mAge1Card6.setSize(CARD_SIZE);
 	mAge1Card7.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card7.setPosition(mAge1Card7Loc);
+	mAge1Card7.setPosition(Seven_Wonders::AGE_1_POSITIONS[6][0], Seven_Wonders::AGE_1_POSITIONS[6][1]);
 	mAge1Card7.setSize(CARD_SIZE);
 	mAge1Card8.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card8.setPosition(mAge1Card8Loc);
+	mAge1Card8.setPosition(Seven_Wonders::AGE_1_POSITIONS[7][0], Seven_Wonders::AGE_1_POSITIONS[7][1]);
 	mAge1Card8.setSize(CARD_SIZE);
 	mAge1Card9.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card9.setPosition(mAge1Card9Loc);
+	mAge1Card9.setPosition(Seven_Wonders::AGE_1_POSITIONS[8][0], Seven_Wonders::AGE_1_POSITIONS[8][1]);
 	mAge1Card9.setSize(CARD_SIZE);
 
 	mAge1Card10.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card10.setPosition(mAge1Card10Loc);
+	mAge1Card10.setPosition(Seven_Wonders::AGE_1_POSITIONS[9][0], Seven_Wonders::AGE_1_POSITIONS[9][1]);
 	mAge1Card10.setSize(CARD_SIZE);
 	mAge1Card11.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card11.setPosition(mAge1Card11Loc);
+	mAge1Card11.setPosition(Seven_Wonders::AGE_1_POSITIONS[10][0], Seven_Wonders::AGE_1_POSITIONS[10][1]);
 	mAge1Card11.setSize(CARD_SIZE);
 	mAge1Card12.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card12.setPosition(mAge1Card12Loc);
+	mAge1Card12.setPosition(Seven_Wonders::AGE_1_POSITIONS[11][0], Seven_Wonders::AGE_1_POSITIONS[11][1]);
 	mAge1Card12.setSize(CARD_SIZE);
 	mAge1Card13.setFillColor(sf::Color(209, 93, 75, 180));;
-	mAge1Card13.setPosition(mAge1Card13Loc);
+	mAge1Card13.setPosition(Seven_Wonders::AGE_1_POSITIONS[12][0], Seven_Wonders::AGE_1_POSITIONS[12][1]);
 	mAge1Card13.setSize(CARD_SIZE);
 	mAge1Card14.setFillColor(sf::Color(209, 93, 75, 180));
-	mAge1Card14.setPosition(mAge1Card14Loc);
+	mAge1Card14.setPosition(Seven_Wonders::AGE_1_POSITIONS[13][0], Seven_Wonders::AGE_1_POSITIONS[13][1]);
 	mAge1Card14.setSize(CARD_SIZE);
 
 	mAge1Card15.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card15.setPosition(mAge1Card15Loc);
+	mAge1Card15.setPosition(Seven_Wonders::AGE_1_POSITIONS[14][0], Seven_Wonders::AGE_1_POSITIONS[14][1]);
 	mAge1Card15.setSize(CARD_SIZE);
 	mAge1Card16.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card16.setPosition(mAge1Card16Loc);
+	mAge1Card16.setPosition(Seven_Wonders::AGE_1_POSITIONS[15][0], Seven_Wonders::AGE_1_POSITIONS[15][1]);
 	mAge1Card16.setSize(CARD_SIZE);
 	mAge1Card17.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card17.setPosition(mAge1Card17Loc);
+	mAge1Card17.setPosition(Seven_Wonders::AGE_1_POSITIONS[16][0], Seven_Wonders::AGE_1_POSITIONS[16][1]);
 	mAge1Card17.setSize(CARD_SIZE);
 	mAge1Card18.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card18.setPosition(mAge1Card18Loc);
+	mAge1Card18.setPosition(Seven_Wonders::AGE_1_POSITIONS[17][0], Seven_Wonders::AGE_1_POSITIONS[17][1]);
 	mAge1Card18.setSize(CARD_SIZE);
 	mAge1Card19.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card19.setPosition(mAge1Card19Loc);
+	mAge1Card19.setPosition(Seven_Wonders::AGE_1_POSITIONS[18][0], Seven_Wonders::AGE_1_POSITIONS[18][1]);
 	mAge1Card19.setSize(CARD_SIZE);
 	mAge1Card20.setFillColor(sf::Color(34, 100, 170, 180));
-	mAge1Card20.setPosition(mAge1Card20Loc);
+	mAge1Card20.setPosition(Seven_Wonders::AGE_1_POSITIONS[19][0], Seven_Wonders::AGE_1_POSITIONS[19][1]);
 	mAge1Card20.setSize(CARD_SIZE);
+
+	*/
 
 	mPlayer1GUI.setPosition(0.0f, 0.0f);
 	mPlayer1GUI.setSize(PLAYER_GUI_SIZE);

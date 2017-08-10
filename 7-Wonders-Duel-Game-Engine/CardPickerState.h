@@ -17,7 +17,7 @@ public:
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
-	virtual void handleInput(Game * game);
+	virtual void handleInput();
 
 	CardPickerState(Game * game, GamePlayingState * gameplayingstate);
 

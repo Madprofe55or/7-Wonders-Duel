@@ -4,46 +4,45 @@
 
 void GameStateStart::draw(const float dt)
 {
-	game->window.draw(background);
-	game->window.draw(title);
-	game->window.draw(startGameText);
-	game->window.draw(exitGameText);
+	p_game->window.draw(background);
+	p_game->window.draw(title);
+	p_game->window.draw(startGameText);
+	p_game->window.draw(exitGameText);
 }
 
 void GameStateStart::update(const float dt)
 {
 }
 
-void GameStateStart::handleInput(Game * game)
+void GameStateStart::handleInput()
 {
 	sf::Event event;
-	this->game = game;
 
-	while (this->game->window.pollEvent(event))
+	while (p_game->window.pollEvent(event))
 	{
 		switch (event.type)
 		{
 		case sf::Event::Closed:
 		{
-			game->window.close();
+			p_game->window.close();
 			break;
 		}
 		case sf::Event::KeyPressed:
 		{
-			if (event.key.code == sf::Keyboard::Escape) this->game->window.close();
+			if (event.key.code == sf::Keyboard::Escape) p_game->window.close();
 			break;
 		}
 		case sf::Event::MouseButtonPressed:
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (game->inputManager.isObjectClicked(this->exitGameText, event.mouseButton.button, this->game->window) == true)
+				if (p_game->inputManager.isObjectClicked(exitGameText, event.mouseButton.button, p_game->window) == true)
 				{
-					this->game->window.close();
+					p_game->window.close();
 				}
-				else if (game->inputManager.isObjectClicked(this->startGameText, event.mouseButton.button, this->game->window) == true)
+				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
-					game->pushState(new GamePlayingState(this->game));
+					p_game->pushState(new GamePlayingState(p_game));
 				}
 			}
 			
@@ -51,24 +50,24 @@ void GameStateStart::handleInput(Game * game)
 		case sf::Event::MouseMoved:
 		{
 			// These sf::IntRect objects are needed to be able to use .contains() below
-			sf::IntRect tempExitRect(this->exitGameText.getPosition().x, this->exitGameText.getPosition().y, this->exitGameText.getGlobalBounds().width, this->exitGameText.getGlobalBounds().height);
-			sf::IntRect tempStartRect(this->startGameText.getPosition().x, this->startGameText.getPosition().y, this->startGameText.getGlobalBounds().width, this->startGameText.getGlobalBounds().height);
+			sf::IntRect tempExitRect(exitGameText.getPosition().x, exitGameText.getPosition().y, exitGameText.getGlobalBounds().width, exitGameText.getGlobalBounds().height);
+			sf::IntRect tempStartRect(startGameText.getPosition().x, startGameText.getPosition().y, startGameText.getGlobalBounds().width, startGameText.getGlobalBounds().height);
 
-			if (tempExitRect.contains(game->inputManager.getMousePosition(this->game->window)))
+			if (tempExitRect.contains(p_game->inputManager.getMousePosition(p_game->window)))
 			{
-				this->exitGameText.setFillColor(sf::Color::Red);
+				exitGameText.setFillColor(sf::Color::Red);
 			}
 			else
 			{
-				this->exitGameText.setFillColor(sf::Color::White);
+				exitGameText.setFillColor(sf::Color::White);
 			}
-			if (tempStartRect.contains(game->inputManager.getMousePosition(this->game->window)))
+			if (tempStartRect.contains(p_game->inputManager.getMousePosition(p_game->window)))
 			{
-				this->startGameText.setFillColor(sf::Color::Green);
+				startGameText.setFillColor(sf::Color::Green);
 			}
 			else
 			{
-				this->startGameText.setFillColor(sf::Color::White);
+				startGameText.setFillColor(sf::Color::White);
 			}
 
 		} 
@@ -80,27 +79,27 @@ void GameStateStart::handleInput(Game * game)
 
 GameStateStart::GameStateStart(Game * game)
 {
-	this->game = game;
+	p_game = game;
 
 	// Background
-	this->background.setTexture(game->textureManager.getRef("GameStateStart Background"));
+	background.setTexture(p_game->textureManager.getRef("GameStateStart Background"));
 
 	// Title Card at top
-	this->title.setTexture(game->textureManager.getRef("GameStateStart Title"));
-	this->title.setOrigin(this->title.getGlobalBounds().width / 2, this->title.getGlobalBounds().height / 2);
-	this->title.setPosition(800, 200);
+	title.setTexture(p_game->textureManager.getRef("GameStateStart Title"));
+	title.setOrigin(title.getGlobalBounds().width / 2, title.getGlobalBounds().height / 2);
+	title.setPosition(800, 200);
 
 	// Texts for "Start Game" and "Exit"
-	this->startGameText.setFont(game->fontManager.getRef("Menu Font"));
-	this->exitGameText.setFont(game->fontManager.getRef("Menu Font"));
-	this->startGameText.setString("Start Game");
-	this->exitGameText.setString("Exit");
-	this->startGameText.setFillColor(sf::Color::White);
-	this->exitGameText.setFillColor(sf::Color::White);
-	this->startGameText.setCharacterSize(50);
-	this->exitGameText.setCharacterSize(50);
-	this->startGameText.setPosition(800 - 0.5 * this->startGameText.getGlobalBounds().width, 400);
-	this->exitGameText.setPosition(800 - 0.5 * this->exitGameText.getGlobalBounds().width, 500);
+	startGameText.setFont(p_game->fontManager.getRef("Menu Font"));
+	exitGameText.setFont(p_game->fontManager.getRef("Menu Font"));
+	startGameText.setString("Start Game");
+	exitGameText.setString("Exit");
+	startGameText.setFillColor(sf::Color::White);
+	exitGameText.setFillColor(sf::Color::White);
+	startGameText.setCharacterSize(50);
+	exitGameText.setCharacterSize(50);
+	startGameText.setPosition(800 - 0.5 * startGameText.getGlobalBounds().width, 400);
+	exitGameText.setPosition(800 - 0.5 * exitGameText.getGlobalBounds().width, 500);
 	
 }
 
