@@ -118,7 +118,7 @@ namespace Seven_Wonders {
 	{}
 
 	void World::Setup()
-	{
+		{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
 		//       a.  Age 1 and 2 have 3 cards removed
 		//       b.  Guild deck has 3 cards moved to Age 3 deck
@@ -127,9 +127,7 @@ namespace Seven_Wonders {
 		// 4. Show next 4 wonders, player 2 picks 1, player 1 picks 2, then player 2 gets last one, discard remaining 4, destroy the vector
 		// 5. Deal Age 1 cards
 
-
 		// Progress token deck and shuffling
-		vector <ProgressToken> progressTokenDeck;
 		progressTokenDeck.push_back(progressTokenAgriculture);
 		progressTokenDeck.push_back(progressTokenArchitecture);
 		progressTokenDeck.push_back(progressTokenEconomy);
@@ -144,66 +142,182 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
 
-		for (int i = 0; i < 10; i++)
-		{
-			cout << "Progress Token: " << progressTokenDeck[i].getName() << endl;
-			system("pause");
-		}
 		for (int i = 0; i < 5; i++)
 		{
-			cout << "Dealt: " << progressTokenDeck.back().getName() << endl;
 			progressTokenDeck.pop_back();
 		}
-		for (int i = 0; i < 5; i++)
-		{
-			cout << "Remaining: " << progressTokenDeck[i].getName() << endl;
-		}
-
 		// End progress token deck, shuffling, and selection
 
-	}
+		// Wonder deck and shuffling
+		//Choose Eight Wonder Cards from Deck to be chosen by player 1 and player 2
+		//fill wonder deck (vector) with wonder cards
+		wonderCardDeck.push_back(cardTheAppianWay);
+		wonderCardDeck.push_back(cardCircusMaximus);
+		wonderCardDeck.push_back(cardTheColossus);
+		wonderCardDeck.push_back(cardTheGreatLibrary);
+		wonderCardDeck.push_back(cardTheGreatLighthouse);
+		wonderCardDeck.push_back(cardTheHangingGardens);
+		wonderCardDeck.push_back(cardTheMausoleum);
+		wonderCardDeck.push_back(cardThePyramids);
+		wonderCardDeck.push_back(cardPiraeus);
+		wonderCardDeck.push_back(cardTheSphinx);
+		wonderCardDeck.push_back(cardTheStatueOfZeus);
+		wonderCardDeck.push_back(cardTheTempleOfArtemis);
 
-	void World::gameLoop()
-	{
-		// 1. After setup is complete this will run the main game loop
-		// 2. It starts with whoever was decided to be the first player
-		// 3. At each turn, a player has three choices:
-		//		a. Build an available card, if the player has the needed resources.
-		//		b. Discard an available card for coins.
-		//		c. Use an available card for building a wonder, if the player has the needed resources.
-		// 4. After each choice is made, the following will happen:
-		//		a. A check will be made for an immeidate effect. If true, then that effect will take place.
-		//		b. A check will be made for an immediate victory condition (military, science).
-		//		b. Player resources/attributes/etc will be updated.
-		// 5. The turn will then pass to the next player, unless the effect was to repeat a turn (some Wonders do this).
-		// 6. Steps 3-5 are repeated, alternating players, until the last card is used.
-		// 7. If it's the end of Age 1 or 2, then cards will be dealt for the next age, from the appropriate vector.
-		// 8. If it's the end of Age 3, and no immediate victory condition was met when the last card was played, the scores will be added up and a winner announced.
-		// 9. Player will be asked for another game.
+		srand((unsigned)time(NULL));
+		random_shuffle(wonderCardDeck.begin(), wonderCardDeck.end());
 
-		cout << "Starting main loop..." << endl;
-		system("pause");
-
-		if (player1.getGoesFirst() == true) currentPlayer = &player1;
-		else if (player2.getGoesFirst() == true)  currentPlayer = &player2;
-
-		// get player input, determine the card that was clicked on based on location of click
-		// Card * cardToDisplay = getCardAtLocation(mouseclick);
-		// displayCard(cardToDisplay);
+		for (int i = 0; i < 8; i++)
+		{
+			wonderCardDeck.pop_back();
+			//pop back to delete the wonders that have already 
+			//been chosen to remove from deck
+		}
+		// End Wonder Card Deck, shuffling, and selection
 
 
+		// Age1 Deck and shuffling
+		//Remove three cards from Age 1 Deck and then move cards to correct location on board
+		//fill age 1 deck (vector) with all age 1 cards
+		age1Deck.push_back(cardLumberYard);
+		age1Deck.push_back(cardLoggingCamp);
+		age1Deck.push_back(cardClayPool);
+		age1Deck.push_back(cardClayPit);
+		age1Deck.push_back(cardQuarry);
+		age1Deck.push_back(cardStonePit);
+		age1Deck.push_back(cardGlassworks);
+		age1Deck.push_back(cardPress);
+		age1Deck.push_back(cardGuardTower);
+		age1Deck.push_back(cardWorkshop);
+		age1Deck.push_back(cardApothecary);
+		age1Deck.push_back(cardStoneReserve);
+		age1Deck.push_back(cardClayReserve);
+		age1Deck.push_back(cardWoodReserve);
+		age1Deck.push_back(cardStable);
+		age1Deck.push_back(cardGarrison);
+		age1Deck.push_back(cardPalisade);
+		age1Deck.push_back(cardScriptorium);
+		age1Deck.push_back(cardPharmacist);
+		age1Deck.push_back(cardTheater);
+		age1Deck.push_back(cardAltar);
+		age1Deck.push_back(cardBaths);
+		age1Deck.push_back(cardTavern);
+		
+		srand((unsigned)time(NULL));
+		random_shuffle(age1Deck.begin(), age1Deck.end());
 
+		for (int i = 0; i < 20; i++)
+		{
+			age1Deck.pop_back();
+
+		}
+		// end age1 card deck, shuffling, and selection
+
+
+		// Age2 Deck and shuffling
+		//Remove three cards from Age 2 Deck and then move cards to correct location on board
+		//Need to move these to a location for players hand and out of deck
+		//fill age 1 deck (vector) with all age 2 cards
+		age2Deck.push_back(cardSawmill);
+		age2Deck.push_back(cardBrickyard);
+		age2Deck.push_back(cardShelfQuarry);
+		age2Deck.push_back(cardGlassBlower);
+		age2Deck.push_back(cardDryingRoom);
+		age2Deck.push_back(cardWalls);
+		age2Deck.push_back(cardForum);
+		age2Deck.push_back(cardCaravansery);
+		age2Deck.push_back(cardCustomsHouse);
+		age2Deck.push_back(cardTribunal);
+		age2Deck.push_back(cardHorseBreeders);
+		age2Deck.push_back(cardBarracks);
+		age2Deck.push_back(cardArcheryRange);
+		age2Deck.push_back(cardParadeGround);
+		age2Deck.push_back(cardLibrary);
+		age2Deck.push_back(cardDispensary);
+		age2Deck.push_back(cardSchool);
+		age2Deck.push_back(cardLaboratory);
+		age2Deck.push_back(cardStatue);
+		age2Deck.push_back(cardTemple);
+		age2Deck.push_back(cardAqueduct);
+		age2Deck.push_back(cardRostrum);
+		age2Deck.push_back(cardBrewery);
+		
+		srand((unsigned)time(NULL));
+		random_shuffle(age2Deck.begin(), age2Deck.end());
+
+		for (int i = 0; i < 20; i++)
+		{
+			age2Deck.pop_back();
+
+		}
+		// end age2 card deck, shuffling, and selection
+
+
+		// Age3 Deck and shuffling
+		//Remove three cards from Age 3 Deck and then move cards to correct location on board
+		//fill age 3 deck (vector) with all age 2 cards
+		age3Deck.push_back(cardArsenal);
+		age3Deck.push_back(cardCourthouse);
+		age3Deck.push_back(cardAcademy);
+		age3Deck.push_back(cardStudy);
+		age3Deck.push_back(cardChamberOfCommerce);
+		age3Deck.push_back(cardPort);
+		age3Deck.push_back(cardArmory);
+		age3Deck.push_back(cardPalace);
+		age3Deck.push_back(cardTownHall);
+		age3Deck.push_back(cardObelisk);
+		age3Deck.push_back(cardFortifications);
+		age3Deck.push_back(cardSiegeWorkshop);
+		age3Deck.push_back(cardCircus);
+		age3Deck.push_back(cardUniversity);
+		age3Deck.push_back(cardObservatory);
+		age3Deck.push_back(cardGardens);
+		age3Deck.push_back(cardPantheon);
+		age3Deck.push_back(cardSenate);
+		age3Deck.push_back(cardLighthouse);
+		age3Deck.push_back(cardArena);
+		// end age3 card deck, shuffling, and selection
+		
+		// Guild deck and shuffling
+		//create Guild Deck and remove three cards to add to Age 3 deck
+		guildDeck.push_back(cardMerchantsGuild);    //will need to seperate the guilds deck
+		guildDeck.push_back(cardShipownersGuild);
+		guildDeck.push_back(cardBuildersGuild);
+		guildDeck.push_back(cardMagistratesGuild);
+		guildDeck.push_back(cardMoneylendersGuild);
+		guildDeck.push_back(cardTacticiansGuild);
+
+		//shuffle age 3 deck
+		srand((unsigned)time(NULL));
+		random_shuffle(age3Deck.begin(), age3Deck.end());
+
+		for (int i = 0; i < 3; i++) //show that cards were succesfully removed from age 3 deck to create room for the three guild cards
+		{
+			age3Deck.pop_back();
+		}
+
+		//shuffle guild deck
+		srand((unsigned)time(NULL));
+		random_shuffle(guildDeck.begin(), guildDeck.end());
+
+		for (int i = 0; i < 3; i++) //show the guild deck cards added to Age 3 deck
+		{
+			guildDeck.pop_back();
+			age3Deck.push_back(guildDeck[i]); //add three guild cards to age 3 final deck
+		}
+
+		//reshuffle age 3 deck
+		srand((unsigned)time(NULL));
+		random_shuffle(age3Deck.begin(), age3Deck.end());
+
+		for (int i = 0; i < 17; i++) //show all age 3 cards dealt to the board including the 3 guild cards
+		{
+			age3Deck.pop_back();
+		}
 	}
 
 	void World::Shutdown()
 	{
-
-	}
-
-	void World::displayCard(Card & cardToDisplay)
-	{
-		// code to change state to zoomed card display and show all important parts of this (to be designed later)
-		// selectedCard
 	}
 
 	bool World::checkForScienceVictory(Player & currentPlayer)

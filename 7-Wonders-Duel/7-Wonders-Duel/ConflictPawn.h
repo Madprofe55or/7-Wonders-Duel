@@ -5,6 +5,8 @@
 #ifndef CONFLICTPAWN_H
 #define CONFLICTPAWN_H
 #include <string>
+#include <vector>
+#include "Game_Constants.h"
 using namespace std;
 
 namespace Seven_Wonders {
@@ -13,18 +15,15 @@ namespace Seven_Wonders {
 	{
 	public:
 		ConflictPawn();
-		void constructorDebug();
 		string getName();
 		void setName(string name);
-		int* getLocation();
-		void setLocation(int xPosition, int yPosition);
 		int getThreat();
 		void setThreat(int numOfShields, int direction);
 		void doEffect();
 
 	private:
 		string mName; // pretty much for debugging
-		int mLocation[2];
+		std::vector<float> mPosition = START_POSITION;
 		int mthreatLevel = 0;
 
 	};

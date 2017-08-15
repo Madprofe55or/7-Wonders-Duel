@@ -10,16 +10,7 @@ namespace Seven_Wonders {
 
 	ConflictPawn::ConflictPawn()
 	{
-		setLocation(0, 0);
 		setName("Conflict Pawn");
-	}
-
-	void ConflictPawn::constructorDebug()
-	{
-		string name = getName();
-		int *location;
-		location = getLocation();
-		cout << "Created conflict pawn, named " << name << ", at location " << location[0] << ", " << location[1] << "..." << endl << endl;
 	}
 
 	string ConflictPawn::getName()
@@ -30,17 +21,6 @@ namespace Seven_Wonders {
 	void ConflictPawn::setName(string name)
 	{
 		mName = name;
-	}
-
-	int* ConflictPawn::getLocation()
-	{
-		return mLocation;
-	}
-
-	void ConflictPawn::setLocation(int xPosition, int yPosition)
-	{
-		mLocation[0] = xPosition;
-		mLocation[1] = yPosition;
 	}
 
 	int ConflictPawn::getThreat()

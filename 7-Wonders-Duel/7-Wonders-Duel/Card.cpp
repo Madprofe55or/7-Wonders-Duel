@@ -23,7 +23,6 @@ namespace Seven_Wonders {
 		setClayCost(cardIndexNumber);
 		setPapyrusCost(cardIndexNumber);
 		setGlassCost(cardIndexNumber);
-		setLocation(0, 0);
 	}
 
 	void Card::constructorDebug()
@@ -150,17 +149,6 @@ namespace Seven_Wonders {
 	void Card::setGlassCost(int cardIndexNumber)
 	{
 		mGlassCost = glassCost[cardIndexNumber];
-	}
-
-	int* Card::getLocation()
-	{
-		return mPosition;
-	}
-
-	void Card::setLocation(int xPosition, int yPosition)
-	{
-		mPosition[0] = xPosition;
-		mPosition[1] = yPosition;
 	}
 
 	void Card::DoEffect()

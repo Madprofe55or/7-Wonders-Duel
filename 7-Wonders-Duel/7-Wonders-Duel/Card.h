@@ -5,6 +5,8 @@
 #ifndef CARD_H
 #define CARD_H
 #include <string>
+#include <vector>
+#include "Game_Constants.h"
 using namespace std;
 
 namespace Seven_Wonders {
@@ -37,7 +39,6 @@ namespace Seven_Wonders {
 		int getGlassCost();
 		void setGlassCost(int cardIndexNumber);
 		int* getLocation();
-		void setLocation(int xPosition, int yPosition);
 		void DoEffect();
 
 	private:
@@ -52,7 +53,7 @@ namespace Seven_Wonders {
 		int mClayCost;
 		int mPapyrusCost;
 		int mGlassCost;
-		int mPosition[2]; // needs to be an x,y position
+		std::vector<float> mPosition = START_POSITION; // needs to be an x,y position, and float to be able to pass to vector2f in SFML
 	};
 
 }

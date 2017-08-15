@@ -4,6 +4,7 @@
 #pragma once
 
 #include <vector>
+#include <float.h>
 
 namespace Seven_Wonders {
 
@@ -147,6 +148,7 @@ namespace Seven_Wonders {
 	const int CARD_STRUCTURE_HORZ_SPACING = 98;
 	const int CARD_STRUCTURE_AGE_1_START_X = 635;
 	const int CARD_STRUCTURE_AGE_1_START_Y = 150;
+	const std::vector<float> START_POSITION = { -400.0f,-400.0f };
 
 	const std::vector<std::vector<int>> AGE_1_POSITIONS = {
 		{ 635, 150 }, // card 1 (top left)

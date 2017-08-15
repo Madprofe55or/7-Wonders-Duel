@@ -11,6 +11,10 @@ class GamePlayingState : public GameState
 public:
 	// sprites
 	sf::Sprite background;
+	sf::Sprite gameBoard;
+
+	// shapes (usually just for testing)
+	sf::CircleShape circleTestPawn;
 	
 	// fonts
 	sf::Font font;
@@ -20,6 +24,8 @@ public:
 	sf::Text player2GUIText;
 	sf::Text gameBoardGUIText;
 	sf::Text wondersDisplayText;
+
+
 
 	sf::Sprite mAge1Card1;
 	sf::Sprite mAge1Card2;

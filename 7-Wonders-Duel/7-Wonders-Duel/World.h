@@ -1,6 +1,5 @@
 // 7 Wonders Duel
-// Game class header
-// yo
+// World class header
 
 #pragma once
 #ifndef WORLD_H
@@ -22,18 +21,22 @@ namespace Seven_Wonders {
 	{
 	public:
 		World();
-		void Run();
 
 	private:
 		void Setup();
-		void gameLoop();
 		void Shutdown();
-		void displayCard(Card & cardToDisplay);
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
+		vector<ProgressToken> progressTokenDeck;
+		vector<Card> wonderCardDeck;
+		vector<Card> age1Deck;
+		vector<Card> age2Deck;
+		vector<Card> age3Deck;
+		vector<Card> guildDeck;
+		vector<Card> discardDeck;
 		ConflictPawn conflictPawn;
 		MilitaryToken militaryTokenP12;
 		MilitaryToken militaryTokenP15;
@@ -135,7 +138,6 @@ namespace Seven_Wonders {
 		Card cardTheStatueOfZeus;
 		Card cardTheTempleOfArtemis;
 	};
-
 }
 
 #endif // WORLD_H

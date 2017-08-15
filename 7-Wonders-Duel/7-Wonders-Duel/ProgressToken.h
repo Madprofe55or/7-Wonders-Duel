@@ -5,6 +5,8 @@
 #ifndef PROGRESSTOKEN_H
 #define PROGRESSTOKEN_H
 #include <string>
+#include <vector>
+#include "Game_Constants.h"
 using namespace std;
 
 namespace Seven_Wonders {
@@ -13,11 +15,8 @@ namespace Seven_Wonders {
 	{
 	public:
 		ProgressToken(int indexNumber);
-		void constructorDebug();
 		string getName();
 		void setName(int indexNumber);
-		int* getLocation();
-		void setLocation(int xLocation, int yLocation);
 		int getOwner();
 		void setOwner(int playerNumber);
 		void doEffect();
@@ -26,7 +25,7 @@ namespace Seven_Wonders {
 		string mName;
 		bool mInThisGame;
 		int mOwner;
-		int mLocation[2];
+		std::vector<float> mPosition = START_POSITION;
 		string progressTokenNames[10] = { "Agriculture",
 										  "Architecture",
 										  "Economy",

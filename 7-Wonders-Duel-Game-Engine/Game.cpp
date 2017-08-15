@@ -83,6 +83,7 @@ void Game::loadTextures()
 	   However, for efficiency, only textures needed for a specific game state should be loaded unless 
 	   states are stil stacked.  We can keep doing it this way for now, until we run into problems, if any. 
 	   Textures should be defined in the game logic, in some type of container (likely a map). */
+	textureManager.loadTexture("Game Board", "Resources/BoardItems/gameboard.png");
 	textureManager.loadTexture("GameStateStart Background", "Resources/Backgrounds/gamestartbackground.jpg");
 	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
 	textureManager.loadTexture("GameStatePlaying Background", "Resources/Backgrounds/gameplayingbackground.jpg");

@@ -12,16 +12,6 @@ namespace Seven_Wonders {
 	ProgressToken::ProgressToken(int indexNumber)
 	{
 		setName(indexNumber);
-		setLocation(0, 0);
-	}
-
-	void ProgressToken::constructorDebug()
-	{
-		string name = getName();
-		int *location;
-		location = getLocation();
-		cout << "Created progress token, named " << name << ", at location " << location[0] << ", " << location[1] << "..." << endl << endl;
-		system("pause");
 	}
 
 	string ProgressToken::getName()
@@ -42,17 +32,6 @@ namespace Seven_Wonders {
 	void ProgressToken::setOwner(int playerNumber)
 	{
 		mOwner = playerNumber;
-	}
-
-	int* ProgressToken::getLocation()
-	{
-		return mLocation;
-	}
-
-	void ProgressToken::setLocation(int xPosition, int yPosition)
-	{
-		mLocation[0] = xPosition;
-		mLocation[1] = yPosition;
 	}
 
 	void ProgressToken::doEffect()
