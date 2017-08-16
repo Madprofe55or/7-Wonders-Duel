@@ -117,6 +117,16 @@ namespace Seven_Wonders {
 		cardTheTempleOfArtemis(84)
 	{}
 
+		int World::getAge()
+		{
+			return mAge;
+		}
+
+		void World::setAge(int age)
+		{
+			mAge = age;
+		}
+
 	void World::Setup()
 		{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
@@ -206,10 +216,13 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(age1Deck.begin(), age1Deck.end());
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			age1Deck.pop_back();
-
+		}
+		for (int i = 0; i < 20; i++)
+		{
+			age1Deck[i].setPosition(AGE_1_POSITIONS[i]);
 		}
 		// end age1 card deck, shuffling, and selection
 
@@ -245,10 +258,13 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(age2Deck.begin(), age2Deck.end());
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			age2Deck.pop_back();
-
+		}
+		for (int i = 0; i < 20; i++)
+		{
+			age2Deck[i].setPosition(AGE_2_POSITIONS[i]);
 		}
 		// end age2 card deck, shuffling, and selection
 
@@ -302,17 +318,17 @@ namespace Seven_Wonders {
 
 		for (int i = 0; i < 3; i++) //show the guild deck cards added to Age 3 deck
 		{
+			age3Deck.push_back(guildDeck.back()); //add three guild cards to age 3 final deck
 			guildDeck.pop_back();
-			age3Deck.push_back(guildDeck[i]); //add three guild cards to age 3 final deck
 		}
 
 		//reshuffle age 3 deck
 		srand((unsigned)time(NULL));
 		random_shuffle(age3Deck.begin(), age3Deck.end());
 
-		for (int i = 0; i < 17; i++) //show all age 3 cards dealt to the board including the 3 guild cards
+		for (int i = 0; i < 20; i++)
 		{
-			age3Deck.pop_back();
+			age3Deck[i].setPosition(AGE_3_POSITIONS[i]);
 		}
 	}
 

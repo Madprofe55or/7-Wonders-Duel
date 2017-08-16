@@ -87,7 +87,32 @@ void Game::loadTextures()
 	textureManager.loadTexture("GameStateStart Background", "Resources/Backgrounds/gamestartbackground.jpg");
 	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
 	textureManager.loadTexture("GameStatePlaying Background", "Resources/Backgrounds/gameplayingbackground.jpg");
-	textureManager.loadTexture("Card-Glassworks", "Resources/CardImages/glassworks.jpg");
+	textureManager.loadTexture("Age 1 Back", "Resources/CardImages/age1back.jpg");
+	textureManager.loadTexture("Altar", "Resources/CardImages/altar.jpg");
+	textureManager.loadTexture("Apothecary", "Resources/CardImages/apothecary.jpg");
+	textureManager.loadTexture("Baths", "Resources/CardImages/baths.jpg");
+	textureManager.loadTexture("Clay Pit", "Resources/CardImages/claypit.jpg");
+	textureManager.loadTexture("Clay Pool", "Resources/CardImages/claypool.jpg");
+	textureManager.loadTexture("Clay Reserve", "Resources/CardImages/clayreserve.jpg");
+	textureManager.loadTexture("Garrison", "Resources/CardImages/garrison.jpg");
+	textureManager.loadTexture("Glassworks", "Resources/CardImages/glassworks.jpg");
+	textureManager.loadTexture("Guard Tower", "Resources/CardImages/guardtower.jpg");
+	textureManager.loadTexture("Logging Camp", "Resources/CardImages/loggingcamp.jpg");
+	textureManager.loadTexture("Lumber Yard", "Resources/CardImages/lumberyard.jpg");
+	textureManager.loadTexture("Palisade", "Resources/CardImages/palisade.jpg");
+	textureManager.loadTexture("Pharmacist", "Resources/CardImages/pharmacist.jpg");
+	textureManager.loadTexture("Press", "Resources/CardImages/press.jpg");
+	textureManager.loadTexture("Quarry", "Resources/CardImages/quarry.jpg");
+	textureManager.loadTexture("Scriptorium", "Resources/CardImages/scriptorium.jpg");
+	textureManager.loadTexture("Stable", "Resources/CardImages/stable.jpg");
+	textureManager.loadTexture("Stone Pit", "Resources/CardImages/stonepit.jpg");
+	textureManager.loadTexture("Stone Reserve", "Resources/CardImages/stonereserve.jpg");
+	textureManager.loadTexture("Tavern", "Resources/CardImages/tavern.jpg");
+	textureManager.loadTexture("Theater", "Resources/CardImages/theater.jpg");
+	textureManager.loadTexture("Wood Reserve", "Resources/CardImages/woodreserve.jpg");
+	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
+
+	world.Setup();
 }
 
 void Game::loadFonts()

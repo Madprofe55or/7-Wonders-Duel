@@ -15,7 +15,6 @@ namespace Seven_Wonders {
 	{
 	public:
 		Card(int cardIndexNumber);
-		void constructorDebug();
 		int getOwner();
 		void setOwner(int playerNumber);
 		string getName();
@@ -38,7 +37,8 @@ namespace Seven_Wonders {
 		void setPapyrusCost(int cardIndexNumber);
 		int getGlassCost();
 		void setGlassCost(int cardIndexNumber);
-		int* getLocation();
+		vector<float> getPosition();
+		void setPosition(vector<float> position);
 		void DoEffect();
 
 	private:

@@ -15,6 +15,8 @@ public:
 
 	sf::Vector2f const CARD_GUI_SIZE = { 600, 400 };
 
+	sf::Sprite testCard;
+
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
 	virtual void handleInput();

@@ -8,6 +8,7 @@
 #include "FontManager.h"
 #include "InputManager.h"
 #include "Game_Constants.h"
+#include "World.h"
 
 class GameState;
 
@@ -24,7 +25,10 @@ public:
 	TextureManager textureManager;
 	FontManager fontManager;
 	InputManager inputManager;
+	
+	World world;
 
+	// State manager functions
 	void pushState(GameState * state);
 	void popState();
 	void changeState(GameState * state);

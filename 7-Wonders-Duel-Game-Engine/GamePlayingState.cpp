@@ -58,7 +58,13 @@ void GamePlayingState::handleInput()
 		}
 	}
 	if (poppingState == true) p_game->popState(); // pop state here, outside while loop
-	if (cardPickState == true) p_game->pushState(new CardPickerState(p_game, this)); // push card picker state
+	if (cardPickState == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0,0,0,126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		p_game->pushState(new CardPickerState(p_game, this)); // push card picker state
+	}
 }
 
 GamePlayingState::GamePlayingState(Game * game)
@@ -68,12 +74,54 @@ GamePlayingState::GamePlayingState(Game * game)
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
 
-	mCurrentAge = 1;
-
 	for (int i = 0; i < 20; ++i)
-	{
-		mAge1Rects[i].setPosition(Seven_Wonders::AGE_3_POSITIONS[i][0], Seven_Wonders::AGE_3_POSITIONS[i][1]);
-		mAge1Rects[i].setTexture(p_game->textureManager.getRef("Card-Glassworks"));
+	{		
+		if (p_game->world.getAge() == 1)
+		{
+			mAge1Rects[i].setPosition(p_game->world.age1Deck[i].getPosition()[0], p_game->world.age1Deck[i].getPosition()[1]);
+
+			mAge1Rects[i].setScale(0.5f, 0.5f);
+
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+			}
+			else 
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef(p_game->world.age1Deck[i].getName()));
+			}
+		}
+
+		if (p_game->world.getAge() == 2)
+		{
+			mAge1Rects[i].setPosition(p_game->world.age2Deck[i].getPosition()[0], p_game->world.age2Deck[i].getPosition()[1]);
+
+			mAge1Rects[i].setScale(0.5f, 0.5f);
+
+			if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+			}
+			else
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef(p_game->world.age1Deck[i].getName()));
+			}
+		}
+		if (p_game->world.getAge() == 3)
+		{
+			mAge1Rects[i].setPosition(p_game->world.age3Deck[i].getPosition()[0], p_game->world.age3Deck[i].getPosition()[1]);
+
+			mAge1Rects[i].setScale(0.5f, 0.5f);
+
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+			}
+			else
+			{
+				mAge1Rects[i].setTexture(p_game->textureManager.getRef(p_game->world.age1Deck[i].getName()));
+			}
+		}
 	}
 
 	mPlayer1GUI.setPosition(0.0f, 0.0f);
@@ -116,7 +164,7 @@ GamePlayingState::GamePlayingState(Game * game)
 	circleTestPawn.setFillColor(sf::Color::Red);
 	circleTestPawn.setRadius(25.0f);
 	circleTestPawn.setScale(1.0f, 0.50f);
-	circleTestPawn.setPosition(110.0f, 425.0f);
+	circleTestPawn.setPosition(108.0f, 427.0f);
 
 	wondersDisplayText.setFont(game->fontManager.getRef("Menu Font"));
 	wondersDisplayText.setString("Wonders GUI");

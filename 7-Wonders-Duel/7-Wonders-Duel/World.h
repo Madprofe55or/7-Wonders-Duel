@@ -21,22 +21,26 @@ namespace Seven_Wonders {
 	{
 	public:
 		World();
-
-	private:
-		void Setup();
-		void Shutdown();
-		static bool checkForScienceVictory(Player & currentPlayer);
-		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		Player * currentPlayer = nullptr;
-		Player player1;
-		Player player2;
-		vector<ProgressToken> progressTokenDeck;
-		vector<Card> wonderCardDeck;
+		int getAge();
+		void setAge(int age);
 		vector<Card> age1Deck;
+		vector<Card> wonderCardDeck;
 		vector<Card> age2Deck;
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
 		vector<Card> discardDeck;
+		void Setup();
+
+	private:
+
+		void Shutdown();
+		static bool checkForScienceVictory(Player & currentPlayer);
+		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
+		int mAge = 1;
+		Player * currentPlayer = nullptr;
+		Player player1;
+		Player player2;
+		vector<ProgressToken> progressTokenDeck;
 		ConflictPawn conflictPawn;
 		MilitaryToken militaryTokenP12;
 		MilitaryToken militaryTokenP15;

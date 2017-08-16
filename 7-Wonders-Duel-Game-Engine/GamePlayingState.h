@@ -16,6 +16,9 @@ public:
 	// shapes (usually just for testing)
 	sf::CircleShape circleTestPawn;
 	
+	sf::Vector2f rectPickingCardSize = { 1600,900 };
+	sf::RectangleShape rectPickingCard;
+	
 	// fonts
 	sf::Font font;
 
@@ -61,12 +64,9 @@ public:
 	sf::RectangleShape mWondersDisplay;
 	sf::RectangleShape mGameBoard;
 
-	// will be used by update() to determine which location vector to use when positioning cards
-	int mCurrentAge;
-
 	// constants here should go into the game logic...I think...
 	sf::Vector2f const CARD_SIZE = { Seven_Wonders::CARD_SIZE[0], Seven_Wonders::CARD_SIZE[1] };
-	sf::Vector2f const PLAYER_GUI_SIZE = { 1600,75 };
+	sf::Vector2f const PLAYER_GUI_SIZE = { 1600, 75 };
 	sf::Vector2f const GAME_BOARD_SIZE = { 150, 750 };
 	sf::Vector2f const WONDER_GUI_SIZE = { 150, 750 };
 

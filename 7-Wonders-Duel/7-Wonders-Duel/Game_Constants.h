@@ -150,7 +150,7 @@ namespace Seven_Wonders {
 	const int CARD_STRUCTURE_AGE_1_START_Y = 150;
 	const std::vector<float> START_POSITION = { -400.0f,-400.0f };
 
-	const std::vector<std::vector<int>> AGE_1_POSITIONS = {
+	const std::vector<std::vector<float>> AGE_1_POSITIONS = {
 		{ 635, 150 }, // card 1 (top left)
 		{ 785, 150 },
  
@@ -177,7 +177,7 @@ namespace Seven_Wonders {
 		{ 1085, 602 }, // card 20 (bottom right)
 	};
 
-	const std::vector<std::vector<int>> AGE_2_POSITIONS = {
+	const std::vector<std::vector<float>> AGE_2_POSITIONS = {
 		{ 335, 150 }, // card 1 (top left)
 		{ 485, 150 },
 		{ 635, 150 },
@@ -205,7 +205,7 @@ namespace Seven_Wonders {
 
 	};
 
-	const std::vector<std::vector<int>> AGE_3_POSITIONS = {
+	const std::vector<std::vector<float>> AGE_3_POSITIONS = {
 		{ 635, 80 }, // card 1 (top left)
 		{ 785, 80 },
 

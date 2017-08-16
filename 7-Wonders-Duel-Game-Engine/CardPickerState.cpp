@@ -5,9 +5,14 @@ void CardPickerState::draw(const float dt)
 {
 	// need to first draw the game playing state that's on the stack underneath
 	p_GamePlayingState->draw(dt);
+	p_game->window.draw(p_GamePlayingState->rectPickingCard);
+
 	
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testCardText);
+	p_game->window.draw(testCard);
+
+
 }
 
 void CardPickerState::update(const float dt)
@@ -39,7 +44,10 @@ void CardPickerState::handleInput()
 		default: break;
 		}
 	}
-	if (poppingState == true) p_game->popState(); // state is popped here since there is no while loop to return to at this point
+	if (poppingState == true)
+	{		
+		p_game->popState(); // state is popped here since there is no while loop to return to at this point
+	}
 }
 
 CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstate)
@@ -56,6 +64,9 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	testCardText.setPosition(670, 400);
 	testCardText.setFillColor(sf::Color::White);
 	testCardText.setCharacterSize(60);
+
+	testCard.setTexture(game->textureManager.getRef("Glassworks"));
+	testCard.setPosition(500, 250);
 
 
 }
