@@ -1,4 +1,5 @@
 #include "GamePlayingState.h"
+#include "WonderPickerState.h"
 #include "GameStateStart.h"
 #include "GameState.h"
 
@@ -42,7 +43,7 @@ void GameStateStart::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
-					p_game->pushState(new GamePlayingState(p_game));
+					p_game->pushState(new WonderPickerState(p_game));
 				}
 			}
 			

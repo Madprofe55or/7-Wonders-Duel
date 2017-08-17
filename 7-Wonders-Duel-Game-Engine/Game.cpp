@@ -69,6 +69,8 @@ Game::Game()
 	window.create(sf::VideoMode(Seven_Wonders::GAME_WINDOW_WIDTH, Seven_Wonders::GAME_WINDOW_HEIGHT), "7 Wonders Duel", sf::Style::Titlebar | sf::Style::Close);
 	window.setFramerateLimit(60);
 
+	world.Setup();
+
 }
 
 Game::~Game()
@@ -88,6 +90,20 @@ void Game::loadTextures()
 	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
 	textureManager.loadTexture("GameStatePlaying Background", "Resources/Backgrounds/gameplayingbackground.jpg");
 	textureManager.loadTexture("Card-Glassworks", "Resources/CardImages/glassworks.jpg");
+
+	//loading of all wonder texture
+	textureManager.loadTexture("The Appian Way", "Resources/WonderCards/TheAppianWay.jpg");
+	textureManager.loadTexture("Circus Maximus", "Resources/WonderCards/CircusMaximus.jpg");
+	textureManager.loadTexture("The Colossus", "Resources/WonderCards/TheColossus.jpg");
+	textureManager.loadTexture("The Great Library", "Resources/WonderCards/TheGreatLibrary.jpg");
+	textureManager.loadTexture("The Great Lighthouse", "Resources/WonderCards/TheGreatLighthouse.jpg");
+	textureManager.loadTexture("The Hanging Gardens", "Resources/WonderCards/TheHangingGardens.jpg");
+	textureManager.loadTexture("The Mausoleum", "Resources/WonderCards/TheMausoleum.jpg");
+	textureManager.loadTexture("Piraeus", "Resources/WonderCards/Piraeus.jpg");
+	textureManager.loadTexture("The Pyramids", "Resources/WonderCards/ThePyramids.jpg");
+	textureManager.loadTexture("The Sphinx", "Resources/WonderCards/TheSphinx.jpg");
+	textureManager.loadTexture("The Statue of Zeus", "Resources/WonderCards/Zeus.jpg");
+	textureManager.loadTexture("The Temple of Artemis", "Resources/WonderCards/TheTempleofArtemis.jpg");
 }
 
 void Game::loadFonts()

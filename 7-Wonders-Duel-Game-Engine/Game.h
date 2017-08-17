@@ -8,6 +8,8 @@
 #include "FontManager.h"
 #include "InputManager.h"
 #include "Game_Constants.h"
+#include "World.h"
+
 
 class GameState;
 
@@ -19,6 +21,11 @@ class Game
 public:
 	// game state stack
 	std::stack<GameState*> states;
+
+
+	//create World object
+
+	World world;
 
 	sf::RenderWindow window;
 	TextureManager textureManager;

@@ -38,7 +38,8 @@ namespace Seven_Wonders {
 		void setPapyrusCost(int cardIndexNumber);
 		int getGlassCost();
 		void setGlassCost(int cardIndexNumber);
-		int* getLocation();
+		vector<float> getPosition();
+		void setPosition(vector<float> position);
 		void DoEffect();
 
 	private:

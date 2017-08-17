@@ -25,22 +25,6 @@ namespace Seven_Wonders {
 		setGlassCost(cardIndexNumber);
 	}
 
-	void Card::constructorDebug()
-	{
-		string name = getName();
-		int *location;
-		location = getLocation();
-		cout << "Created card, named " << name << ", at location " << location[0] << ", " << location[1] << " with the following properties: " << endl <<
-			"Age: " << getAge() << endl <<
-			"Type: " << getType() << endl <<
-			"Coin Cost: " << getCoinCost() << endl <<
-			"Wood Cost: " << getWoodCost() << endl <<
-			"Stone Cost: " << getStoneCost() << endl <<
-			"Clay Cost: " << getClayCost() << endl <<
-			"Papyrus Cost: " << getPapyrusCost() << endl <<
-			"Glass Cost: " << getGlassCost() << endl << endl;
-	}
-
 
 	int Card::getOwner()
 	{
@@ -149,6 +133,16 @@ namespace Seven_Wonders {
 	void Card::setGlassCost(int cardIndexNumber)
 	{
 		mGlassCost = glassCost[cardIndexNumber];
+	}
+
+	vector<float> Card::getPosition()
+	{
+		return mPosition;
+	}
+
+	void Card::setPosition(vector<float> position)
+	{
+		mPosition = position;
 	}
 
 	void Card::DoEffect()
