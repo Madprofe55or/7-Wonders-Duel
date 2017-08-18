@@ -223,6 +223,17 @@ namespace Seven_Wonders {
 		for (int i = 0; i < 20; i++)
 		{
 			age1Deck[i].setPosition(AGE_1_POSITIONS[i]);
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+			{
+				age1Deck[i].setFaceup(false);
+				age1Deck[i].setExposed(false);
+			}
+
+			if (i != 14 && i != 15 && i != 16 && i != 17 && i != 18 && i != 19)
+			{
+				age1Deck[i].setExposed(false);
+			}
+
 		}
 		// end age1 card deck, shuffling, and selection
 
@@ -265,6 +276,16 @@ namespace Seven_Wonders {
 		for (int i = 0; i < 20; i++)
 		{
 			age2Deck[i].setPosition(AGE_2_POSITIONS[i]);
+			if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				age2Deck[i].setFaceup(false);
+				age2Deck[i].setExposed(false);
+			}
+
+			if (i != 18 && i != 19)
+			{
+				age2Deck[i].setExposed(false);
+			}
 		}
 		// end age2 card deck, shuffling, and selection
 
@@ -330,7 +351,44 @@ namespace Seven_Wonders {
 		for (int i = 0; i < 20; i++)
 		{
 			age3Deck[i].setPosition(AGE_3_POSITIONS[i]);
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				age3Deck[i].setFaceup(false);
+				age3Deck[i].setExposed(false);
+			}
+
+			if (i != 18 && i != 19)
+			{
+				age3Deck[i].setExposed(false);
+			}
 		}
+
+		if (mAge == 1)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age1Deck[i]);
+			}
+			age1Deck.clear();
+		}
+		else if (mAge == 2)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age2Deck[i]);
+			}
+			age2Deck.clear();
+		}
+		else if (mAge == 3)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age3Deck[i]);
+			}
+			age3Deck.clear();
+		}
+
+
 	}
 
 	void World::Shutdown()

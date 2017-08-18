@@ -134,6 +134,26 @@ namespace Seven_Wonders {
 		mGlassCost = glassCost[cardIndexNumber];
 	}
 
+	bool Card::getFaceup()
+	{
+		return mFaceup;
+	}
+
+	void Card::setFaceup(bool faceup)
+	{
+		mFaceup = faceup;
+	}
+
+	bool Card::getExposed()
+	{
+		return mExposed;
+	}
+
+	void Card::setExposed(bool exposed)
+	{
+		mExposed = exposed;
+	}
+
 	vector<float> Card::getPosition()
 	{
 		return mPosition;

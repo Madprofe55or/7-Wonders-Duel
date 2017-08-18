@@ -29,6 +29,7 @@ namespace Seven_Wonders {
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
 		vector<Card> discardDeck;
+		vector<Card> currentBoardDeck;
 		void Setup();
 
 	private:
@@ -36,7 +37,7 @@ namespace Seven_Wonders {
 		void Shutdown();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 3;
+		int mAge = 2;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;

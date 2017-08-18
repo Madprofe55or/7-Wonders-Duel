@@ -49,25 +49,17 @@ void GamePlayingState::handleInput()
 				poppingState = true; // can't popstate while in loop, since loop references this and popstate deletes this
 				break;
 			}
-			//else if (event.key.code == sf::Keyboard::Space)
-			//{
-			//	cardPickState = true; // we could actually push state here, but for consistency we'll just do all state changes outside loop
-			//	break;
-			//}
 		}
-
 		case sf::Event::MouseButtonPressed:
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 				for (int i = 0; i < 20; i++)
 				{
-					if (p_game->inputManager.isObjectClicked(mCardSprites[i], event.mouseButton.button, p_game->window) == true)
+					if (p_game->inputManager.isObjectClicked(mCardSprites[i], event.mouseButton.button, p_game->window) == true &&
+						p_game->world.currentBoardDeck[i].getFaceup() == true)
 					{						
-						if (p_game->world.getAge() == 1) clickedCard = &p_game->world.age1Deck[i];
-						else if (p_game->world.getAge() == 2) clickedCard = &p_game->world.age2Deck[i];
-						else if (p_game->world.getAge() == 3) clickedCard = &p_game->world.age3Deck[i];
-
+						clickedCard = &p_game->world.currentBoardDeck[i];
 						cardPickState = true;
 					}
 				}
@@ -97,23 +89,24 @@ GamePlayingState::GamePlayingState(Game * game)
 	{		
 		if (p_game->world.getAge() == 1)
 		{
-			mCardSprites[i].setPosition(p_game->world.age1Deck[i].getPosition()[0], p_game->world.age1Deck[i].getPosition()[1]);
+			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
 
 			mCardSprites[i].setScale(0.5f, 0.5f);
 
 			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
 			{
 				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+				//mCardSprites[i].setColor(sf::Color(255, 255, 255, 200)); // for transparency, if desired
 			}
 			else 
 			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.age1Deck[i].getName()));
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
 			}
 		}
 
 		if (p_game->world.getAge() == 2)
 		{
-			mCardSprites[i].setPosition(p_game->world.age2Deck[i].getPosition()[0], p_game->world.age2Deck[i].getPosition()[1]);
+			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
 
 			mCardSprites[i].setScale(0.5f, 0.5f);
 
@@ -123,18 +116,18 @@ GamePlayingState::GamePlayingState(Game * game)
 			}
 			else
 			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.age2Deck[i].getName()));
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
 			}
 		}
 		if (p_game->world.getAge() == 3)
 		{
-			mCardSprites[i].setPosition(p_game->world.age3Deck[i].getPosition()[0], p_game->world.age3Deck[i].getPosition()[1]);
+			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
 
 			mCardSprites[i].setScale(0.5f, 0.5f);
 
 			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
 			{
-				if (p_game->world.age3Deck[i].getAge() == AGE_GUILD)
+				if (p_game->world.currentBoardDeck[i].getAge() == AGE_GUILD)
 				{
 					mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
 				}
