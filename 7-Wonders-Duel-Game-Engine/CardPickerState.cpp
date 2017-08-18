@@ -9,8 +9,9 @@ void CardPickerState::draw(const float dt)
 
 	
 	p_game->window.draw(testRectangle);
-	p_game->window.draw(testCardText);
 	p_game->window.draw(testCard);
+
+	p_game->window.draw(textCardName);
 
 
 }
@@ -41,6 +42,16 @@ void CardPickerState::handleInput()
 				break;
 			}
 		}
+		case sf::Event::MouseButtonPressed:
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (p_game->inputManager.isObjectClicked(testRectangle, event.mouseButton.button, p_game->window) == false)
+				{
+					poppingState = true;
+				}
+			}
+		}
 		default: break;
 		}
 	}
@@ -50,7 +61,7 @@ void CardPickerState::handleInput()
 	}
 }
 
-CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstate)
+CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstate, Seven_Wonders::Card * card)
 {
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
@@ -59,14 +70,15 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	testRectangle.setSize(CARD_GUI_SIZE);
 	testRectangle.setPosition(500, 250);
 
-	testCardText.setFont(game->fontManager.getRef("Menu Font"));
-	testCardText.setString("Card Picker GUI");
-	testCardText.setPosition(670, 400);
-	testCardText.setFillColor(sf::Color::White);
-	testCardText.setCharacterSize(60);
+	testCard.setTexture(game->textureManager.getRef(card->getName()));
+	testCard.setPosition(500, 300);
 
-	testCard.setTexture(game->textureManager.getRef("Glassworks"));
-	testCard.setPosition(500, 250);
+	textCardName.setFont(p_game->fontManager.getRef("Menu Font"));
+	textCardName.setString("Test Text");
+	textCardName.setCharacterSize(40);
+	textCardName.setFillColor(sf::Color::White);
+	textCardName.setOrigin(textCardName.getGlobalBounds().width / 2.0f, textCardName.getGlobalBounds().height / 2.0f);
+	textCardName.setPosition(800, 265);
 
 
 }

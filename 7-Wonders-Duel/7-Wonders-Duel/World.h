@@ -36,7 +36,7 @@ namespace Seven_Wonders {
 		void Shutdown();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 1;
+		int mAge = 3;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;

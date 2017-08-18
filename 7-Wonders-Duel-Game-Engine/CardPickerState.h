@@ -12,6 +12,8 @@ public:
 	
 	sf::RectangleShape testRectangle;
 	sf::Text testCardText;
+	sf::Text textCardName;
+	sf::Text textResourcesTitle;
 
 	sf::Vector2f const CARD_GUI_SIZE = { 600, 400 };
 
@@ -21,7 +23,7 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	CardPickerState(Game * game, GamePlayingState * gameplayingstate);
+	CardPickerState(Game * game, GamePlayingState * gameplayingstate, Seven_Wonders::Card * card);
 
 	GamePlayingState * p_GamePlayingState;
 	

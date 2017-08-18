@@ -30,33 +30,33 @@ public:
 
 
 
-	sf::Sprite mAge1Card1;
-	sf::Sprite mAge1Card2;
-	sf::Sprite mAge1Card3;
-	sf::Sprite mAge1Card4;
-	sf::Sprite mAge1Card5;
-	sf::Sprite mAge1Card6;
-	sf::Sprite mAge1Card7;
-	sf::Sprite mAge1Card8;
-	sf::Sprite mAge1Card9;
-	sf::Sprite mAge1Card10;
-	sf::Sprite mAge1Card11;
-	sf::Sprite mAge1Card12;
-	sf::Sprite mAge1Card13;
-	sf::Sprite mAge1Card14;
-	sf::Sprite mAge1Card15;
-	sf::Sprite mAge1Card16;
-	sf::Sprite mAge1Card17;
-	sf::Sprite mAge1Card18;
-	sf::Sprite mAge1Card19;
-	sf::Sprite mAge1Card20;
+	sf::Sprite mCard1;
+	sf::Sprite mCard2;
+	sf::Sprite mCard3;
+	sf::Sprite mCard4;
+	sf::Sprite mCard5;
+	sf::Sprite mCard6;
+	sf::Sprite mCard7;
+	sf::Sprite mCard8;
+	sf::Sprite mCard9;
+	sf::Sprite mCard10;
+	sf::Sprite mCard11;
+	sf::Sprite mCard12;
+	sf::Sprite mCard13;
+	sf::Sprite mCard14;
+	sf::Sprite mCard15;
+	sf::Sprite mCard16;
+	sf::Sprite mCard17;
+	sf::Sprite mCard18;
+	sf::Sprite mCard19;
+	sf::Sprite mCard20;
 
-	std::vector <sf::Sprite> mAge1Rects = {
-		mAge1Card1, mAge1Card2,
-		mAge1Card3, mAge1Card4, mAge1Card5,
-		mAge1Card6, mAge1Card7, mAge1Card8, mAge1Card9,
-		mAge1Card10, mAge1Card11, mAge1Card12, mAge1Card13, mAge1Card14,
-		mAge1Card15, mAge1Card16, mAge1Card17, mAge1Card18, mAge1Card19, mAge1Card20 };
+	std::vector <sf::Sprite> mCardSprites = {
+		mCard1, mCard2,
+		mCard3, mCard4, mCard5,
+		mCard6, mCard7, mCard8, mCard9,
+		mCard10, mCard11, mCard12, mCard13, mCard14,
+		mCard15, mCard16, mCard17, mCard18, mCard19, mCard20 };
 
 	// placeholder gui stuff
 	sf::RectangleShape mPlayer1GUI;

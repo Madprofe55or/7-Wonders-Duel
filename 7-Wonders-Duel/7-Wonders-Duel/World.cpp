@@ -302,6 +302,7 @@ namespace Seven_Wonders {
 		guildDeck.push_back(cardMagistratesGuild);
 		guildDeck.push_back(cardMoneylendersGuild);
 		guildDeck.push_back(cardTacticiansGuild);
+		guildDeck.push_back(cardScientistsGuild);
 
 		//shuffle age 3 deck
 		srand((unsigned)time(NULL));

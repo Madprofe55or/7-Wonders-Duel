@@ -36,6 +36,7 @@ namespace Seven_Wonders {
 		"Altar", // altar
 		"Baths", // baths
 		"Tavern", // tavern
+
 		"Sawmill", // sawmill
 		"Brickyard", // brickyard
 		"Shelf Quarry", // shelf quarry
@@ -59,6 +60,7 @@ namespace Seven_Wonders {
 		"Aqueduct", // aqueduct
 		"Rostrum", // rostrum
 		"Brewery", // brewery
+
 		"Arsenal", // arsenal
 		"Courthouse", // courthouse
 		"Academy", // academy
@@ -79,13 +81,15 @@ namespace Seven_Wonders {
 		"Senate", // senate
 		"Lighthouse", // lighthouse
 		"Arena", // arena
-		"Merchant\'s Guild", // merchants guild
-		"Shipowner\'s Guild", // shipowners guild
-		"Builder\'s Guild", // builders guild
-		"Magistrate\'s Guild", // magistrates guild
-		"Scientist\'s Guild", // scientists guild
-		"Moneylender\'s Guild", // moneylenders guild
-		"Tactician\'s Guild", // tacticians guild
+
+		"Merchants Guild", // merchants guild
+		"Shipowners Guild", // shipowners guild
+		"Builders Guild", // builders guild
+		"Magistrates Guild", // magistrates guild
+		"Scientists Guild", // scientists guild
+		"Moneylenders Guild", // moneylenders guild
+		"Tacticians Guild", // tacticians guild
+
 		"The Appian Way", // the appian way
 		"Circus Maximus", // circus maximus
 		"The Colossus", // the colossus

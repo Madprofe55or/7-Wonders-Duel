@@ -12,6 +12,12 @@ void GameStateStart::draw(const float dt)
 
 void GameStateStart::update(const float dt)
 {
+	if (mRotating == true)
+	{
+		title.setRotation(title.getRotation() + mRotatingSpeed);
+		startGameText.setRotation(startGameText.getRotation() + mRotatingSpeed);
+		exitGameText.setRotation(exitGameText.getRotation() + mRotatingSpeed);
+	}
 }
 
 void GameStateStart::handleInput()
@@ -30,6 +36,14 @@ void GameStateStart::handleInput()
 		case sf::Event::KeyPressed:
 		{
 			if (event.key.code == sf::Keyboard::Escape) p_game->window.close();
+			else if (event.key.code == sf::Keyboard::R)
+			{
+				if (mRotating == false) mRotating = true;
+				else if (mRotating == true) mRotating = false;
+			}
+			else if (event.key.code == sf::Keyboard::Up) mRotatingSpeed++;
+			else if (event.key.code == sf::Keyboard::Down) mRotatingSpeed--;
+
 			break;
 		}
 		case sf::Event::MouseButtonPressed:
@@ -50,10 +64,12 @@ void GameStateStart::handleInput()
 		case sf::Event::MouseMoved:
 		{
 			// These sf::IntRect objects are needed to be able to use .contains() below
-			sf::IntRect tempExitRect(exitGameText.getPosition().x, exitGameText.getPosition().y, exitGameText.getGlobalBounds().width, exitGameText.getGlobalBounds().height);
-			sf::IntRect tempStartRect(startGameText.getPosition().x, startGameText.getPosition().y, startGameText.getGlobalBounds().width, startGameText.getGlobalBounds().height);
+			sf::FloatRect startRect = startGameText.getGlobalBounds();
+			sf::FloatRect exitRect = exitGameText.getGlobalBounds();
 
-			if (tempExitRect.contains(p_game->inputManager.getMousePosition(p_game->window)))
+			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
+
+			if (exitRect.contains(mouse))
 			{
 				exitGameText.setFillColor(sf::Color::Red);
 			}
@@ -61,7 +77,7 @@ void GameStateStart::handleInput()
 			{
 				exitGameText.setFillColor(sf::Color::White);
 			}
-			if (tempStartRect.contains(p_game->inputManager.getMousePosition(p_game->window)))
+			if (startRect.contains(mouse))
 			{
 				startGameText.setFillColor(sf::Color::Green);
 			}
@@ -69,7 +85,6 @@ void GameStateStart::handleInput()
 			{
 				startGameText.setFillColor(sf::Color::White);
 			}
-
 		} 
 		default: break;
 		}
@@ -98,8 +113,15 @@ GameStateStart::GameStateStart(Game * game)
 	exitGameText.setFillColor(sf::Color::White);
 	startGameText.setCharacterSize(50);
 	exitGameText.setCharacterSize(50);
-	startGameText.setPosition(800 - 0.5 * startGameText.getGlobalBounds().width, 400);
-	exitGameText.setPosition(800 - 0.5 * exitGameText.getGlobalBounds().width, 500);
+
+	startGameText.setOrigin(startGameText.getLocalBounds().width / 2.0f, startGameText.getLocalBounds().height / 2.0f);
+	exitGameText.setOrigin(exitGameText.getLocalBounds().width / 2.0f, exitGameText.getLocalBounds().height / 2.0f);
+
+	startGameText.setPosition(800, 400);
+	exitGameText.setPosition(800, 500);
+
+	//startGameText.setPosition(800 - 0.5 * startGameText.getGlobalBounds().width, 400);
+	//exitGameText.setPosition(800 - 0.5 * exitGameText.getGlobalBounds().width, 500);
 	
 }
 
