@@ -9,6 +9,7 @@ class GameState
 public:
 	// Need pointer to the game in order to access state changes, render window, and manager functions
 	Game * p_game;
+	
 
 	// All of these need to be defined for each state that inherits
 	virtual void draw(const float dt) = 0;

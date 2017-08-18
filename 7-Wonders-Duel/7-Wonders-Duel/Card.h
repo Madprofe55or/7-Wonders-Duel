@@ -15,7 +15,6 @@ namespace Seven_Wonders {
 	{
 	public:
 		Card(int cardIndexNumber);
-		void constructorDebug();
 		int getOwner();
 		void setOwner(int playerNumber);
 		string getName();

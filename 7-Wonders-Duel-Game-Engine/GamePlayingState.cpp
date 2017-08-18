@@ -1,5 +1,6 @@
 #include "GamePlayingState.h"
 #include "CardPickerState.h"
+#include "WonderPickerState.h"
 
 void GamePlayingState::draw(const float dt)
 {
@@ -9,6 +10,7 @@ void GamePlayingState::draw(const float dt)
 	{
 		p_game->window.draw(mAge1Rects[i]);
 	}
+
 
 	p_game->window.draw(mPlayer1GUI);
 	p_game->window.draw(mPlayer2GUI);
@@ -61,9 +63,10 @@ void GamePlayingState::handleInput()
 	if (cardPickState == true) p_game->pushState(new CardPickerState(p_game, this)); // push card picker state
 }
 
-GamePlayingState::GamePlayingState(Game * game)
+GamePlayingState::GamePlayingState(Game * game, WonderPickerState * wonderpickerstate)
 {
 	p_game = game;
+	p_WonderPickerState = wonderpickerstate;
 
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));

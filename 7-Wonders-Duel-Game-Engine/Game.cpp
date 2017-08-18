@@ -69,7 +69,7 @@ Game::Game()
 	window.create(sf::VideoMode(Seven_Wonders::GAME_WINDOW_WIDTH, Seven_Wonders::GAME_WINDOW_HEIGHT), "7 Wonders Duel", sf::Style::Titlebar | sf::Style::Close);
 	window.setFramerateLimit(60);
 
-	world.Setup();
+	
 
 }
 
@@ -104,6 +104,8 @@ void Game::loadTextures()
 	textureManager.loadTexture("The Sphinx", "Resources/WonderCards/TheSphinx.jpg");
 	textureManager.loadTexture("The Statue of Zeus", "Resources/WonderCards/Zeus.jpg");
 	textureManager.loadTexture("The Temple of Artemis", "Resources/WonderCards/TheTempleofArtemis.jpg");
+
+	world.Setup();
 }
 
 void Game::loadFonts()

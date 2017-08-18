@@ -19,13 +19,11 @@ class GameState;
 class Game
 {
 public:
+	//initiaion of world building need to figure out how to do this when start is clicked//
+	World world;
+
 	// game state stack
 	std::stack<GameState*> states;
-
-
-	//create World object
-
-	World world;
 
 	sf::RenderWindow window;
 	TextureManager textureManager;

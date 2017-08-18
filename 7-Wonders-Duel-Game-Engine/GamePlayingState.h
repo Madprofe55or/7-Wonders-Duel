@@ -4,11 +4,17 @@
 #include "SFML\Graphics.hpp"
 
 #include "GameState.h"
+#include "WonderPickerState.h"
 
 
 class GamePlayingState : public GameState
 {
 public:
+	GamePlayingState(Game * game, WonderPickerState * wonderpickerstate);
+
+	WonderPickerState * p_WonderPickerState;
+
+
 	// sprites
 	sf::Sprite background;
 	sf::Sprite gameBoard;
@@ -80,7 +86,6 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 	
-	GamePlayingState(Game * game);
 	~GamePlayingState();
 };
 

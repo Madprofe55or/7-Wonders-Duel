@@ -141,6 +141,7 @@ namespace Seven_Wonders {
 
 	// Card Sizes
 	const std::vector<int> CARD_SIZE = { 110, 175 };
+	const std::vector<int> WONDER_SIZE = { 110, 175 };
 
 	// Card Positioning
 	const int CARD_STRUCTURE_VERT_CENTER = 770;

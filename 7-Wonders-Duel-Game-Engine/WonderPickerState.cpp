@@ -1,5 +1,7 @@
+#include "Game.h"
 #include "GameState.h"
 #include "WonderPickerState.h"
+#include "GamePlayingState.h"
 
 void WonderPickerState::draw(const float dt)
 {
@@ -29,6 +31,8 @@ void WonderPickerState::handleInput()
 	sf::Event event;
 	bool poppingState = false;
 	bool wonderPickState = false;
+	bool wondersPicked = false;
+	
 
 	while (p_game->window.pollEvent(event))
 	{
@@ -56,7 +60,39 @@ void WonderPickerState::handleInput()
 				{
 					if (p_game->inputManager.isObjectClicked(mWonderRects[i], event.mouseButton.button, p_game->window) == true)
 					{
-						mWonderRects[i].setPosition(-1000, 0);
+							clickCount += 1;
+							//need to figure out how to move the actual object to the players position
+							//player 1 picks 2 wonders and sent to player 1 position
+							if (clickCount == 1 )
+							{
+								mWonderRects[i].setScale(0.50f, 0.50f);
+								mWonderRects[i].setPosition(700.0f, 10.0f);
+								mWonderPlayer1.push_back[i];
+							}
+
+							if (clickCount == 4)
+							{
+								mWonderRects[i].setScale(0.50f, 0.50f);
+								mWonderRects[i].setPosition(950.0f, 10.0f);
+								wondersPicked = true;
+								mWonderPlayer1.push_back[i];
+							}
+
+							//player 2 picks 2 wonders and sent to player 2  position
+							if (clickCount == 2)
+							{
+								mWonderRects[i].setScale(0.500f, 0.50f);
+								mWonderRects[i].setPosition(700.0f, 500.0f);
+								mWonderPlayer2.push_back[i];
+							}
+
+							if (clickCount == 3)
+							{
+								mWonderRects[i].setScale(0.50f, 0.50f);
+								mWonderRects[i].setPosition(950.0f, 500.0f);
+								mWonderPlayer2.push_back[i];
+							}
+						
 					};
 				
 				}
@@ -67,12 +103,13 @@ void WonderPickerState::handleInput()
 		}
 	}
 	if (poppingState == true) p_game->popState(); // pop state here, outside while loop
+	if (wondersPicked == true) p_game->pushState(new GamePlayingState(p_game, this)); // push card picker state
 }
 
 WonderPickerState::WonderPickerState(Game * game)
 {
 	p_game = game;
-
+	
 
 	for (int i = 0; i < 4; ++i)
 	{

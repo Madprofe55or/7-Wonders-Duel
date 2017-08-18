@@ -43,7 +43,10 @@ void GameStateStart::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
+					
 					p_game->pushState(new WonderPickerState(p_game));
+					
+					
 				}
 			}
 			

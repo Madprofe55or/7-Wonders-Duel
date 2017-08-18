@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "GameState.h"
+#include "GameStateStart.h"
 
 class WonderPickerState : public GameState
 {
@@ -41,14 +42,20 @@ public:
 		mWonderCard1, mWonderCard2,
 		mWonderCard3, mWonderCard4, mWonderCard5,
 		mWonderCard6, mWonderCard7, mWonderCard8, mWonderCard9,
-		mWonderCard10, mWonderCard11, mWonderCard12 }; 
+		mWonderCard10, mWonderCard11, mWonderCard12 };
+
+	std::vector <sf::Sprite*> mWonderPlayer1 = {};
+	std::vector <sf::Sprite*> mWonderPlayer2 = {};
 
 
 	// will be used by update() to determine which location vector to use when positioning cards
 	int mCurrentAge;
 
+	//used to count clicks to see if player 1 or player 2 chose the card...
+	int clickCount = 0;
+
 	// constants here should go into the game logic...I think...
-	sf::Vector2f const CARD_SIZE = { Seven_Wonders::CARD_SIZE[0], Seven_Wonders::CARD_SIZE[1] };
+	sf::Vector2f const WONDER_SIZE = { Seven_Wonders::WONDER_SIZE[0], Seven_Wonders::WONDER_SIZE[1] };
 	sf::Vector2f const PLAYER_GUI_SIZE = { 1600,75 };
 	sf::Vector2f const GAME_BOARD_SIZE = { 150, 750 };
 	sf::Vector2f const WONDER_GUI_SIZE = { 150, 750 };

@@ -4,10 +4,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameState.h"
+#include "Game.h"
+#include "World.h"
 
 class GameStateStart : public GameState
 {
 public:
+
+
 	// Sprites
 	sf::Sprite background;
 	sf::Sprite title;
