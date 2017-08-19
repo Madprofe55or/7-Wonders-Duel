@@ -23,6 +23,10 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
+	bool mRotating = false;
+
+	int mRotatingSpeed = 1;
+
 	GameStateStart(Game * game);
 	// destructor not needed
 	~GameStateStart() {};

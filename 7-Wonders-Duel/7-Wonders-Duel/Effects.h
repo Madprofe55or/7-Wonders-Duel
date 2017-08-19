@@ -17,7 +17,7 @@ namespace Seven_Wonders {
 		~Effects();
 
 		// Age 1 Cards
-		static void lumberYard(Player & currentPlayer);
+		static void lumberYard(Player * currentPlayer);
 		static void loggingCamp(Player & currentPlayer);
 		static void clayPool(Player & currentPlayer);
 		static void clayPit(Player & currentPlayer);

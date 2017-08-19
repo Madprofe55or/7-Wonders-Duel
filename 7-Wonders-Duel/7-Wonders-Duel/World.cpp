@@ -117,6 +117,20 @@ namespace Seven_Wonders {
 		cardTheTempleOfArtemis(84)
 	{}
 
+		int World::getAge()
+		{
+			return mAge;
+		}
+
+		void World::setAge(int age)
+		{
+			mAge = age;
+		}
+
+		void World::buildCard(Card & card, Player & currentplayer)
+		{
+		}
+
 	void World::Setup()
 		{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
@@ -206,9 +220,23 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(age1Deck.begin(), age1Deck.end());
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			age1Deck.pop_back();
+		}
+		for (int i = 0; i < 20; i++)
+		{
+			age1Deck[i].setPosition(AGE_1_POSITIONS[i]);
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+			{
+				age1Deck[i].setFaceup(false);
+				age1Deck[i].setExposed(false);
+			}
+
+			if (i != 14 && i != 15 && i != 16 && i != 17 && i != 18 && i != 19)
+			{
+				age1Deck[i].setExposed(false);
+			}
 
 		}
 		// end age1 card deck, shuffling, and selection
@@ -245,10 +273,23 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(age2Deck.begin(), age2Deck.end());
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			age2Deck.pop_back();
+		}
+		for (int i = 0; i < 20; i++)
+		{
+			age2Deck[i].setPosition(AGE_2_POSITIONS[i]);
+			if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				age2Deck[i].setFaceup(false);
+				age2Deck[i].setExposed(false);
+			}
 
+			if (i != 18 && i != 19)
+			{
+				age2Deck[i].setExposed(false);
+			}
 		}
 		// end age2 card deck, shuffling, and selection
 
@@ -286,6 +327,7 @@ namespace Seven_Wonders {
 		guildDeck.push_back(cardMagistratesGuild);
 		guildDeck.push_back(cardMoneylendersGuild);
 		guildDeck.push_back(cardTacticiansGuild);
+		guildDeck.push_back(cardScientistsGuild);
 
 		//shuffle age 3 deck
 		srand((unsigned)time(NULL));
@@ -302,18 +344,57 @@ namespace Seven_Wonders {
 
 		for (int i = 0; i < 3; i++) //show the guild deck cards added to Age 3 deck
 		{
+			age3Deck.push_back(guildDeck.back()); //add three guild cards to age 3 final deck
 			guildDeck.pop_back();
-			age3Deck.push_back(guildDeck[i]); //add three guild cards to age 3 final deck
 		}
 
 		//reshuffle age 3 deck
 		srand((unsigned)time(NULL));
 		random_shuffle(age3Deck.begin(), age3Deck.end());
 
-		for (int i = 0; i < 17; i++) //show all age 3 cards dealt to the board including the 3 guild cards
+		// setting positions and starting faceup and exposed properties
+		for (int i = 0; i < 20; i++)
 		{
-			age3Deck.pop_back();
+			age3Deck[i].setPosition(AGE_3_POSITIONS[i]);
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				age3Deck[i].setFaceup(false);
+				age3Deck[i].setExposed(false);
+			}
+
+			if (i != 18 && i != 19)
+			{
+				age3Deck[i].setExposed(false);
+			}
 		}
+
+		// transferring deck to the current board array (need an array to be able to pick cards properly)
+		if (mAge == 1)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age1Deck[i]);
+			}
+			age1Deck.clear();
+		}
+		else if (mAge == 2)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age2Deck[i]);
+			}
+			age2Deck.clear();
+		}
+		else if (mAge == 3)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				currentBoardDeck.push_back(age3Deck[i]);
+			}
+			age3Deck.clear();
+		}
+
+		currentPlayer = &player2;
 	}
 
 	void World::Shutdown()
@@ -343,4 +424,6 @@ namespace Seven_Wonders {
 	}
 
 }
+
+
 
