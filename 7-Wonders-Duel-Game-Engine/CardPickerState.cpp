@@ -75,6 +75,24 @@ void CardPickerState::handleInput()
 				{
 					poppingState = true;
 				}
+				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true)
+				{
+					p_game->world.currentPlayer->playerCity.push_back(p_game->world.board[p_GamePlayingState->clickedCardIndex]);
+					Effects::doEffect(p_game->world.currentPlayer, p_game->world.board[p_GamePlayingState->clickedCardIndex]);
+					p_GamePlayingState->mCardSprites[p_GamePlayingState->clickedCardIndex].setPosition(-400.0f, -400.0f);
+					p_game->world.board[p_GamePlayingState->clickedCardIndex] = nullptr;
+					poppingState = true;
+					if (p_game->world.currentPlayer == &p_game->world.player1) p_game->world.currentPlayer = &p_game->world.player2;
+					else if (p_game->world.currentPlayer == &p_game->world.player2) p_game->world.currentPlayer = &p_game->world.player1;
+				}
+				else if (p_game->inputManager.isObjectClicked(discardRectangle, event.mouseButton.button, p_game->window) == true)
+				{
+
+				}
+				else if (p_game->inputManager.isObjectClicked(buildWonderRectangle, event.mouseButton.button, p_game->window) == true)
+				{
+
+				}
 			}
 		}
 		case sf::Event::MouseMoved:

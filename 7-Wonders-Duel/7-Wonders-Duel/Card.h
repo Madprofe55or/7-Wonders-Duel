@@ -43,7 +43,6 @@ namespace Seven_Wonders {
 		void setExposed(bool exposed);
 		vector<float> getPosition();
 		void setPosition(vector<float> position);
-		void DoEffect();
 
 	private:
 		int mOwner;

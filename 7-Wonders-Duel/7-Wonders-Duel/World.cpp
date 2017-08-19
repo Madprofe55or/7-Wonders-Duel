@@ -368,33 +368,57 @@ namespace Seven_Wonders {
 			}
 		}
 
-		// transferring deck to the current board array (need an array to be able to pick cards properly)
+		//// assigning cards to the board deck to be displayed
+		//if (mAge == 1)
+		//{
+		//	for (int i = 0; i < 20; i++)
+		//	{
+		//		currentBoardDeck.push_back(age1Deck[i]);
+		//	}
+		//	age1Deck.clear();
+		//}
+		//else if (mAge == 2)
+		//{
+		//	for (int i = 0; i < 20; i++)
+		//	{
+		//		currentBoardDeck.push_back(age2Deck[i]);
+		//	}
+		//	age2Deck.clear();
+		//}
+		//else if (mAge == 3)
+		//{
+		//	for (int i = 0; i < 20; i++)
+		//	{
+		//		currentBoardDeck.push_back(age3Deck[i]);
+		//	}
+		//	age3Deck.clear();
+		//}
+
 		if (mAge == 1)
 		{
 			for (int i = 0; i < 20; i++)
 			{
-				currentBoardDeck.push_back(age1Deck[i]);
+				board[i] = &age1Deck[i];
 			}
-			age1Deck.clear();
 		}
+
 		else if (mAge == 2)
 		{
 			for (int i = 0; i < 20; i++)
 			{
-				currentBoardDeck.push_back(age2Deck[i]);
+				board[i] = &age2Deck[i];
 			}
-			age2Deck.clear();
 		}
+
 		else if (mAge == 3)
 		{
 			for (int i = 0; i < 20; i++)
 			{
-				currentBoardDeck.push_back(age3Deck[i]);
+				board[i] = &age3Deck[i];
 			}
-			age3Deck.clear();
 		}
 
-		currentPlayer = &player2;
+		currentPlayer = &player1;
 	}
 
 	void World::Shutdown()

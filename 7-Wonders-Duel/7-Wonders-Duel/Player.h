@@ -5,6 +5,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Game_Constants.h"
+#include "Card.h"
 #include <map>
 #include <vector>
 using namespace std;
@@ -38,7 +39,7 @@ namespace Seven_Wonders {
 		void setTradeFlag(string resourceType, bool flagSetting);
 		bool getStrategyFlag();
 		void setStrategyFlag(bool flagSetting);
-		//vector<Card> playerCity;
+		vector<Card*> playerCity;
 
 
 	private:

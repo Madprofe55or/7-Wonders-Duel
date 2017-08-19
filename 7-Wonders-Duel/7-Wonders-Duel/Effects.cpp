@@ -12,6 +12,95 @@ namespace Seven_Wonders {
 	Effects::Effects() {}
 	Effects::~Effects() {}
 
+	void Effects::doEffect(Player * currentPlayer, Card * card)
+	{
+		if (card->getType() == GREEN_CARD)
+		{
+			// need to add green symbols to cards
+			//currentPlayer->setNumOfScienceSymbols(card->getGreenSymbol(), 1);
+		}
+		else if (card->getType() == RED_CARD)
+		{
+			//int cardIndex = redCard.getIndex();
+			////int numOfShields = redCard.getMilitarySymbol();
+
+			//// checking for strategy token flag
+			//int strategyFlagAddition = 0;
+			//if (currentPlayer.getStrategyFlag()) strategyFlagAddition = 1;
+
+			//// checking player number to determine direction of conflict pawn movement
+			//int direction;
+			//if (currentPlayer.getPlayerNumber() == PLAYER_1) direction = 1;
+			//else if (currentPlayer.getPlayerNumber() == PLAYER_2) direction = -1;
+		}
+		else if (card->getType() == BLUE_CARD)
+		{
+			// do stuff //
+		}
+		else if (card->getType() == BROWN_CARD)
+		{
+			switch (card->getIndex()) 
+			{
+			case 0: // lumber yard
+				currentPlayer->setWood(1);
+				break;
+			case 1: // logging camp
+				currentPlayer->setWood(1);
+				break;
+			case 2: // clay pool
+				currentPlayer->setClay(1);
+				break;
+			case 3: // clay pit
+				currentPlayer->setClay(1);
+				break;
+			case 4: // quarry
+				currentPlayer->setStone(1);
+				break;
+			case 5: // stone pit
+				currentPlayer->setStone(1);
+				break;
+			case 23: // saw mill
+				currentPlayer->setWood(2);
+				break;
+			case 24: // brickyard
+				currentPlayer->setClay(2);
+				break;
+			case 25: // shelf quarry
+				currentPlayer->setStone(2);
+				break;
+			}
+		}
+		else if (card->getType() == GRAY_CARD)
+		{
+			switch (card->getIndex())
+			{
+			case 6: // glassworks
+				currentPlayer->setGlass(1);
+				break;
+			case 7: // press
+				currentPlayer->setPapyrus(1);
+				break;
+			case 26: // glassblower
+				currentPlayer->setGlass(1);
+				break;
+			case 27: // drying room
+				currentPlayer->setPapyrus(1);
+				break;
+			}
+		}
+		else if (card->getType() == YELLOW_CARD)
+		{
+
+		}
+		else if (card->getType() == WONDER_CARD)
+		{
+
+		}
+	}
+
+	
+	
+	
 	// Age 1 Cards
 	void Effects::lumberYard(Player * currentPlayer)
 	{

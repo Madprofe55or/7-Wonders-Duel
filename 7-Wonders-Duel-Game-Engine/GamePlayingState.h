@@ -68,7 +68,7 @@ public:
 	sf::Sprite mCard19;
 	sf::Sprite mCard20;
 
-	std::vector <sf::Sprite> mCardSprites = {
+	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,
 		mCard3, mCard4, mCard5,
 		mCard6, mCard7, mCard8, mCard9,
@@ -92,6 +92,7 @@ public:
 	//int const CARD_VERTICAL_SPACING = 30;
 	//int const CARD_HORIZONTAL_SPACING = 98;
 
+	int clickedCardIndex;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

@@ -163,10 +163,4 @@ namespace Seven_Wonders {
 	{
 		mPosition = position;
 	}
-
-	void Card::DoEffect()
-	{
-
-	}
-
 }

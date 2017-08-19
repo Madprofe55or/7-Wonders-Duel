@@ -31,6 +31,9 @@ namespace Seven_Wonders {
 		vector<Card> guildDeck;
 		vector<Card> discardDeck;
 		vector<Card> currentBoardDeck;
+
+		Card * board[20];
+
 		void Setup();
 		int mCurrentPlayer;
 
@@ -143,9 +146,6 @@ namespace Seven_Wonders {
 		Card cardTheSphinx;
 		Card cardTheStatueOfZeus;
 		Card cardTheTempleOfArtemis;
-
-		Effects effects;
-
 
 	private:
 

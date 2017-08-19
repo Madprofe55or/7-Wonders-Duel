@@ -7,8 +7,25 @@ void GamePlayingState::draw(const float dt)
 
 	for (int i = 0; i < 20; ++i)
 	{
-		p_game->window.draw(mCardSprites[i]);
+		if (p_game->world.board[i] != nullptr)
+		{
+			p_game->window.draw(mCardSprites[i]);
+		}
 	}
+
+	player1Coins.setString("Coins:  " + to_string(p_game->world.player1.getCoins()));
+	player1Wood.setString("Wood:  " + to_string(p_game->world.player1.getWood()));
+	player1Stone.setString("Stone:  " + to_string(p_game->world.player1.getStone()));
+	player1Clay.setString("Clay:  " + to_string(p_game->world.player1.getClay()));
+	player1Papyrus.setString("Papyrus:  " + to_string(p_game->world.player1.getPapyrus()));
+	player1Glass.setString("Glass:  " + to_string(p_game->world.player1.getGlass()));
+
+	player2Coins.setString("Coins:  " + to_string(p_game->world.player2.getCoins()));
+	player2Wood.setString("Wood:  " + to_string(p_game->world.player2.getWood()));
+	player2Stone.setString("Stone:  " + to_string(p_game->world.player2.getStone()));
+	player2Clay.setString("Clay:  " + to_string(p_game->world.player2.getClay()));
+	player2Papyrus.setString("Papyrus:  " + to_string(p_game->world.player2.getPapyrus()));
+	player2Glass.setString("Glass:  " + to_string(p_game->world.player2.getGlass()));
 
 	p_game->window.draw(mPlayer1GUI);
 	p_game->window.draw(mPlayer2GUI);
@@ -55,7 +72,7 @@ void GamePlayingState::handleInput()
 	sf::Event event;
 	bool poppingState = false;
 	bool cardPickState = false;
-	Card * clickedCard;
+	Card ** clickedCard;
 
 	while (p_game->window.pollEvent(event))
 	{
@@ -81,9 +98,10 @@ void GamePlayingState::handleInput()
 				for (int i = 0; i < 20; i++)
 				{
 					if (p_game->inputManager.isObjectClicked(mCardSprites[i], event.mouseButton.button, p_game->window) == true &&
-						p_game->world.currentBoardDeck[i].getFaceup() == true)
+						p_game->world.board[i]->getFaceup() == true)
 					{						
-						clickedCard = &p_game->world.currentBoardDeck[i];
+						clickedCard = &p_game->world.board[i];
+						clickedCardIndex = i;
 						cardPickState = true;
 					}
 				}
@@ -98,7 +116,7 @@ void GamePlayingState::handleInput()
 		rectPickingCard.setFillColor(sf::Color(0,0,0,126));
 		rectPickingCard.setPosition(0, 0);
 		rectPickingCard.setSize(rectPickingCardSize);
-		p_game->pushState(new CardPickerState(p_game, this, clickedCard)); // push card picker state
+		p_game->pushState(new CardPickerState(p_game, this, *clickedCard)); // push card picker state
 	}
 }
 
@@ -109,62 +127,121 @@ GamePlayingState::GamePlayingState(Game * game)
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
 
-	for (int i = 0; i < 20; ++i)
-	{		
-		if (p_game->world.getAge() == 1)
+	//for (int i = 0; i < 20; ++i)
+	//{		
+	//	if (p_game->world.getAge() == 1)
+	//	{
+	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
+
+	//		mCardSprites[i].setScale(0.5f, 0.5f);
+
+	//		if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+	//		{
+	//			mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+	//			//mCardSprites[i].setColor(sf::Color(255, 255, 255, 200)); // for transparency, if desired
+	//		}
+	//		else 
+	//		{
+	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
+	//		}
+	//	}
+
+	//	if (p_game->world.getAge() == 2)
+	//	{
+	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
+
+	//		mCardSprites[i].setScale(0.5f, 0.5f);
+
+	//		if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+	//		{
+	//			mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
+	//		}
+	//		else
+	//		{
+	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
+	//		}
+	//	}
+	//	if (p_game->world.getAge() == 3)
+	//	{
+	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
+
+	//		mCardSprites[i].setScale(0.5f, 0.5f);
+
+	//		if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+	//		{
+	//			if (p_game->world.currentBoardDeck[i].getAge() == AGE_GUILD)
+	//			{
+	//				mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
+	//			}
+	//			else 
+	//			{
+	//				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+	//			}
+	//		}
+	//		else
+	//		{
+	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
+	//		}
+	//	}
+
+
+		for (int i = 0; i < 20; ++i)
 		{
-			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
-
-			mCardSprites[i].setScale(0.5f, 0.5f);
-
-			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+			if (p_game->world.getAge() == 1)
 			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
-				//mCardSprites[i].setColor(sf::Color(255, 255, 255, 200)); // for transparency, if desired
-			}
-			else 
-			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
-			}
-		}
+				mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
 
-		if (p_game->world.getAge() == 2)
-		{
-			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
+				mCardSprites[i].setScale(0.5f, 0.5f);
 
-			mCardSprites[i].setScale(0.5f, 0.5f);
-
-			if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
-			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
-			}
-			else
-			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
-			}
-		}
-		if (p_game->world.getAge() == 3)
-		{
-			mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
-
-			mCardSprites[i].setScale(0.5f, 0.5f);
-
-			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
-			{
-				if (p_game->world.currentBoardDeck[i].getAge() == AGE_GUILD)
+				if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
 				{
-					mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
+					mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+					//mCardSprites[i].setColor(sf::Color(255, 255, 255, 200)); // for transparency, if desired
 				}
-				else 
+				else
 				{
-					mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+					mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
 				}
 			}
-			else
+
+			if (p_game->world.getAge() == 2)
 			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
+				mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
+
+				mCardSprites[i].setScale(0.5f, 0.5f);
+
+				if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+				{
+					mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
+				}
+				else
+				{
+					mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
+				}
 			}
-		}
+			if (p_game->world.getAge() == 3)
+			{
+				mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
+
+				mCardSprites[i].setScale(0.5f, 0.5f);
+
+				if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+				{
+					if (p_game->world.board[i]->getAge() == AGE_GUILD)
+					{
+						mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
+					}
+					else
+					{
+						mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+					}
+				}
+				else
+				{
+					mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
+				}
+			}
+
 	}
 
 	mPlayer1GUI.setPosition(0.0f, 0.0f);
