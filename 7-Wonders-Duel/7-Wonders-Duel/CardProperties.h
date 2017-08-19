@@ -517,7 +517,7 @@ namespace Seven_Wonders {
 		0, // port
 		2, // armory
 		1, // palace
-		4, // town hall
+		3, // town hall
 		2, // obelisk
 		2, // fortifications
 		0, // siege workshop

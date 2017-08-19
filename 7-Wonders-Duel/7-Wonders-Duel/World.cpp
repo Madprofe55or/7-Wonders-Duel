@@ -388,6 +388,8 @@ namespace Seven_Wonders {
 			age3Deck.clear();
 		}
 
+		mCurrentPlayer = 2;
+
 
 	}
 

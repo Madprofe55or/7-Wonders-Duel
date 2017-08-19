@@ -27,9 +27,26 @@ public:
 	sf::Text player2GUIText;
 	sf::Text gameBoardGUIText;
 	sf::Text wondersDisplayText;
+	sf::Text player1Turn;
+	sf::Text player2Turn;
+	sf::Text player1Coins;
+	sf::Text player1Wood;
+	sf::Text player1Stone;
+	sf::Text player1Clay;
+	sf::Text player1Papyrus;
+	sf::Text player1Glass;
+	sf::Text player2Coins;
+	sf::Text player2Wood;
+	sf::Text player2Stone;
+	sf::Text player2Clay;
+	sf::Text player2Papyrus;
+	sf::Text player2Glass;
 
+	// Shapes
+	sf::RectangleShape player1City;
+	sf::RectangleShape player2City;
 
-
+	// Sprite
 	sf::Sprite mCard1;
 	sf::Sprite mCard2;
 	sf::Sprite mCard3;

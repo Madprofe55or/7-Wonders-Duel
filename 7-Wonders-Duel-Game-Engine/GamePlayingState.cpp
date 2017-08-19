@@ -20,6 +20,16 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(gameBoardGUIText);
 	p_game->window.draw(wondersDisplayText);
 	p_game->window.draw(circleTestPawn);
+
+	if (p_game->world.mCurrentPlayer == 1)
+	{
+		p_game->window.draw(player1Turn);
+	}
+	else if (p_game->world.mCurrentPlayer == 2)
+	{
+		p_game->window.draw(player2Turn);
+	}
+
 }
 
 void GamePlayingState::update(const float dt)
@@ -138,7 +148,7 @@ GamePlayingState::GamePlayingState(Game * game)
 			}
 			else
 			{
-				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.age3Deck[i].getName()));
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
 			}
 		}
 	}
@@ -166,19 +176,9 @@ GamePlayingState::GamePlayingState(Game * game)
 	gameBoard.setScale(0.83f, 0.83f);
 	gameBoard.setPosition(10.0f, 75.0f);
 
-	//mGameBoard.setPosition(0.0f, 75.0f);
-	//mGameBoard.setSize(GAME_BOARD_SIZE);
-	//mGameBoard.setFillColor(sf::Color(41, 119, 43, 126));
 	mWondersDisplay.setPosition(1450.0f, 75.0f);
 	mWondersDisplay.setSize(WONDER_GUI_SIZE);
 	mWondersDisplay.setFillColor(sf::Color(54, 27, 153, 126));
-
-	/*gameBoardGUIText.setFont(game->fontManager.getRef("Menu Font"));
-	gameBoardGUIText.setString("Game Board GUI");
-	gameBoardGUIText.setCharacterSize(40);
-	gameBoardGUIText.setPosition(60.0f, 500.0f);
-	gameBoardGUIText.setFillColor(sf::Color::White);
-	gameBoardGUIText.rotate(90);*/
 
 	circleTestPawn.setFillColor(sf::Color::Red);
 	circleTestPawn.setRadius(25.0f);
@@ -191,6 +191,19 @@ GamePlayingState::GamePlayingState(Game * game)
 	wondersDisplayText.setPosition(1560.0f, 500.0f);
 	wondersDisplayText.setFillColor(sf::Color::White);
 	wondersDisplayText.rotate(90);
+
+	player1Turn.setFont(game->fontManager.getRef("Menu Font"));
+	player1Turn.setString("Player 1's Turn");
+	player1Turn.setCharacterSize(40);
+	player1Turn.setPosition(1200.0f, 75.0f);
+	player1Turn.setFillColor(sf::Color::White);
+
+	player2Turn.setFont(game->fontManager.getRef("Menu Font"));
+	player2Turn.setString("Player 2's Turn");
+	player2Turn.setCharacterSize(40);
+	player2Turn.setPosition(1200.0f, 75.0f);
+	player2Turn.setFillColor(sf::Color::White);
+
 
 }
 

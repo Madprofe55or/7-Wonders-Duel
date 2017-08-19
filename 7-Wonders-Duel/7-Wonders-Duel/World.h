@@ -31,13 +31,15 @@ namespace Seven_Wonders {
 		vector<Card> discardDeck;
 		vector<Card> currentBoardDeck;
 		void Setup();
+		int mCurrentPlayer;
+
 
 	private:
 
 		void Shutdown();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 2;
+		int mAge = 3;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
