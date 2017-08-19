@@ -13,9 +13,9 @@ namespace Seven_Wonders {
 	Effects::~Effects() {}
 
 	// Age 1 Cards
-	void Effects::lumberYard(Player & currentPlayer)
+	void Effects::lumberYard(Player * currentPlayer)
 	{
-		currentPlayer.setWood(1);
+		currentPlayer->setWood(1);
 	}
 	void Effects::loggingCamp(Player & currentPlayer)
 	{

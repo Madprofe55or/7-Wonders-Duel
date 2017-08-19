@@ -56,8 +56,8 @@ public:
 	CardPickerState(Game * game, GamePlayingState * gameplayingstate, Seven_Wonders::Card * card);
 
 	GamePlayingState * p_GamePlayingState;
-	
-	
+	Card * p_card;
+
 	
 	// Don't need destructor
 	~CardPickerState() {};

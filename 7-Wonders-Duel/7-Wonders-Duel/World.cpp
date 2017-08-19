@@ -127,6 +127,10 @@ namespace Seven_Wonders {
 			mAge = age;
 		}
 
+		void World::buildCard(Card & card, Player & currentplayer)
+		{
+		}
+
 	void World::Setup()
 		{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
@@ -348,6 +352,7 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(age3Deck.begin(), age3Deck.end());
 
+		// setting positions and starting faceup and exposed properties
 		for (int i = 0; i < 20; i++)
 		{
 			age3Deck[i].setPosition(AGE_3_POSITIONS[i]);
@@ -363,6 +368,7 @@ namespace Seven_Wonders {
 			}
 		}
 
+		// transferring deck to the current board array (need an array to be able to pick cards properly)
 		if (mAge == 1)
 		{
 			for (int i = 0; i < 20; i++)
@@ -388,9 +394,7 @@ namespace Seven_Wonders {
 			age3Deck.clear();
 		}
 
-		mCurrentPlayer = 2;
-
-
+		currentPlayer = &player2;
 	}
 
 	void World::Shutdown()
@@ -420,4 +424,6 @@ namespace Seven_Wonders {
 	}
 
 }
+
+
 

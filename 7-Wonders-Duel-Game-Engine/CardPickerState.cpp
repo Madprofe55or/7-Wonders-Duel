@@ -8,7 +8,7 @@ void CardPickerState::draw(const float dt)
 	p_GamePlayingState->draw(dt);
 	p_game->window.draw(p_GamePlayingState->rectPickingCard);
 
-	
+
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testRectangle2);
 	p_game->window.draw(cardToDisplay);
@@ -126,6 +126,7 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 {
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
+	p_card = card;
 	
 	testRectangle.setFillColor(sf::Color(132, 132, 18, 200));
 	testRectangle.setSize(CARD_GUI_SIZE);

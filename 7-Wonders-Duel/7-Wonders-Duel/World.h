@@ -23,6 +23,7 @@ namespace Seven_Wonders {
 		World();
 		int getAge();
 		void setAge(int age);
+		void buildCard(Card & card, Player & currentplayer);
 		vector<Card> age1Deck;
 		vector<Card> wonderCardDeck;
 		vector<Card> age2Deck;
@@ -34,12 +35,10 @@ namespace Seven_Wonders {
 		int mCurrentPlayer;
 
 
-	private:
-
 		void Shutdown();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 3;
+		int mAge = 1;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
@@ -144,6 +143,12 @@ namespace Seven_Wonders {
 		Card cardTheSphinx;
 		Card cardTheStatueOfZeus;
 		Card cardTheTempleOfArtemis;
+
+		Effects effects;
+
+
+	private:
+
 	};
 }
 

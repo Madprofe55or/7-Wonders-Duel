@@ -21,11 +21,25 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(wondersDisplayText);
 	p_game->window.draw(circleTestPawn);
 
-	if (p_game->world.mCurrentPlayer == 1)
+	p_game->window.draw(player1Coins);
+	p_game->window.draw(player1Wood);
+	p_game->window.draw(player1Stone);
+	p_game->window.draw(player1Clay);
+	p_game->window.draw(player1Papyrus);
+	p_game->window.draw(player1Glass);
+
+	p_game->window.draw(player2Coins);
+	p_game->window.draw(player2Wood);
+	p_game->window.draw(player2Stone);
+	p_game->window.draw(player2Clay);
+	p_game->window.draw(player2Papyrus);
+	p_game->window.draw(player2Glass);
+
+	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
 		p_game->window.draw(player1Turn);
 	}
-	else if (p_game->world.mCurrentPlayer == 2)
+	else if (p_game->world.currentPlayer == &p_game->world.player2)
 	{
 		p_game->window.draw(player2Turn);
 	}
@@ -203,6 +217,78 @@ GamePlayingState::GamePlayingState(Game * game)
 	player2Turn.setCharacterSize(40);
 	player2Turn.setPosition(1200.0f, 75.0f);
 	player2Turn.setFillColor(sf::Color::White);
+
+	player1Coins.setFont(game->fontManager.getRef("Menu Font"));
+	player1Coins.setString("Coins:  " + to_string(p_game->world.player1.getCoins()));
+	player1Coins.setCharacterSize(25);
+	player1Coins.setPosition(30.0f, 20.0f);
+	player1Coins.setFillColor(sf::Color::White);
+
+	player1Wood.setFont(game->fontManager.getRef("Menu Font"));
+	player1Wood.setString("Wood:  " + to_string(p_game->world.player1.getWood()));
+	player1Wood.setCharacterSize(25);
+	player1Wood.setPosition(130.0f, 20.0f);
+	player1Wood.setFillColor(sf::Color::White);
+
+	player1Stone.setFont(game->fontManager.getRef("Menu Font"));
+	player1Stone.setString("Stone:  " + to_string(p_game->world.player1.getStone()));
+	player1Stone.setCharacterSize(25);
+	player1Stone.setPosition(230.0f, 20.0f);
+	player1Stone.setFillColor(sf::Color::White);
+
+	player1Clay.setFont(game->fontManager.getRef("Menu Font"));
+	player1Clay.setString("Clay:  " + to_string(p_game->world.player1.getClay()));
+	player1Clay.setCharacterSize(25);
+	player1Clay.setPosition(330.0f, 20.0f);
+	player1Clay.setFillColor(sf::Color::White);
+
+	player1Papyrus.setFont(game->fontManager.getRef("Menu Font"));
+	player1Papyrus.setString("Papyrus:  " + to_string(p_game->world.player1.getPapyrus()));
+	player1Papyrus.setCharacterSize(25);
+	player1Papyrus.setPosition(430.0f, 20.0f);
+	player1Papyrus.setFillColor(sf::Color::White);
+
+	player1Glass.setFont(game->fontManager.getRef("Menu Font"));
+	player1Glass.setString("Glass:  " + to_string(p_game->world.player1.getGlass()));
+	player1Glass.setCharacterSize(25);
+	player1Glass.setPosition(570.0f, 20.0f);
+	player1Glass.setFillColor(sf::Color::White);
+
+	player2Coins.setFont(game->fontManager.getRef("Menu Font"));
+	player2Coins.setString("Coins:  " + to_string(p_game->world.player2.getCoins()));
+	player2Coins.setCharacterSize(25);
+	player2Coins.setPosition(30.0f, 845.0f);
+	player2Coins.setFillColor(sf::Color::White);
+
+	player2Wood.setFont(game->fontManager.getRef("Menu Font"));
+	player2Wood.setString("Wood:  " + to_string(p_game->world.player2.getWood()));
+	player2Wood.setCharacterSize(25);
+	player2Wood.setPosition(130.0f, 845.0f);
+	player2Wood.setFillColor(sf::Color::White);
+
+	player2Stone.setFont(game->fontManager.getRef("Menu Font"));
+	player2Stone.setString("Stone:  " + to_string(p_game->world.player2.getStone()));
+	player2Stone.setCharacterSize(25);
+	player2Stone.setPosition(230.0f, 845.0f);
+	player2Stone.setFillColor(sf::Color::White);
+
+	player2Clay.setFont(game->fontManager.getRef("Menu Font"));
+	player2Clay.setString("Clay:  " + to_string(p_game->world.player2.getClay()));
+	player2Clay.setCharacterSize(25);
+	player2Clay.setPosition(330.0f, 845.0f);
+	player2Clay.setFillColor(sf::Color::White);
+
+	player2Papyrus.setFont(game->fontManager.getRef("Menu Font"));
+	player2Papyrus.setString("Papyrus:  " + to_string(p_game->world.player2.getPapyrus()));
+	player2Papyrus.setCharacterSize(25);
+	player2Papyrus.setPosition(430.0f, 845.0f);
+	player2Papyrus.setFillColor(sf::Color::White);
+
+	player2Glass.setFont(game->fontManager.getRef("Menu Font"));
+	player2Glass.setString("Glass:  " + to_string(p_game->world.player2.getGlass()));
+	player2Glass.setCharacterSize(25);
+	player2Glass.setPosition(570.0f, 845.0f);
+	player2Glass.setFillColor(sf::Color::White);
 
 
 }
