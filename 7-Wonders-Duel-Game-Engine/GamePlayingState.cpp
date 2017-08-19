@@ -13,6 +13,17 @@ void GamePlayingState::draw(const float dt)
 		}
 	}
 
+	if (p_game->world.currentPlayer == &p_game->world.player1)
+	{
+		mPlayer1GUI.setFillColor(sf::Color(51, 204, 51, 126));
+		mPlayer2GUI.setFillColor(sf::Color(126, 126, 126, 126));
+	}
+	else if (p_game->world.currentPlayer == &p_game->world.player2)
+	{
+		mPlayer2GUI.setFillColor(sf::Color(51, 204, 51, 126));
+		mPlayer1GUI.setFillColor(sf::Color(126, 126, 126, 126));
+	}
+
 	player1Coins.setString("Coins:  " + to_string(p_game->world.player1.getCoins()));
 	player1Wood.setString("Wood:  " + to_string(p_game->world.player1.getWood()));
 	player1Stone.setString("Stone:  " + to_string(p_game->world.player1.getStone()));
@@ -51,16 +62,6 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(player2Clay);
 	p_game->window.draw(player2Papyrus);
 	p_game->window.draw(player2Glass);
-
-	if (p_game->world.currentPlayer == &p_game->world.player1)
-	{
-		p_game->window.draw(player1Turn);
-	}
-	else if (p_game->world.currentPlayer == &p_game->world.player2)
-	{
-		p_game->window.draw(player2Turn);
-	}
-
 }
 
 void GamePlayingState::update(const float dt)
@@ -126,64 +127,6 @@ GamePlayingState::GamePlayingState(Game * game)
 
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
-
-	//for (int i = 0; i < 20; ++i)
-	//{		
-	//	if (p_game->world.getAge() == 1)
-	//	{
-	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
-
-	//		mCardSprites[i].setScale(0.5f, 0.5f);
-
-	//		if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
-	//		{
-	//			mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
-	//			//mCardSprites[i].setColor(sf::Color(255, 255, 255, 200)); // for transparency, if desired
-	//		}
-	//		else 
-	//		{
-	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
-	//		}
-	//	}
-
-	//	if (p_game->world.getAge() == 2)
-	//	{
-	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
-
-	//		mCardSprites[i].setScale(0.5f, 0.5f);
-
-	//		if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
-	//		{
-	//			mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
-	//		}
-	//		else
-	//		{
-	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
-	//		}
-	//	}
-	//	if (p_game->world.getAge() == 3)
-	//	{
-	//		mCardSprites[i].setPosition(p_game->world.currentBoardDeck[i].getPosition()[0], p_game->world.currentBoardDeck[i].getPosition()[1]);
-
-	//		mCardSprites[i].setScale(0.5f, 0.5f);
-
-	//		if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
-	//		{
-	//			if (p_game->world.currentBoardDeck[i].getAge() == AGE_GUILD)
-	//			{
-	//				mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
-	//			}
-	//			else 
-	//			{
-	//				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
-	//			}
-	//		}
-	//		else
-	//		{
-	//			mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.currentBoardDeck[i].getName()));
-	//		}
-	//	}
-
 
 		for (int i = 0; i < 20; ++i)
 		{
@@ -252,15 +195,15 @@ GamePlayingState::GamePlayingState(Game * game)
 	mPlayer2GUI.setFillColor(sf::Color(126,126,126,126));
 
 	player1GUIText.setFont(game->fontManager.getRef("Menu Font"));
-	player1GUIText.setString("Player 1 GUI");
+	player1GUIText.setString("Player 1");
 	player1GUIText.setCharacterSize(40);
-	player1GUIText.setPosition(700.0f, 10.0f);
+	player1GUIText.setPosition(720.0f, 10.0f);
 	player1GUIText.setFillColor(sf::Color::White);
 
 	player2GUIText.setFont(game->fontManager.getRef("Menu Font"));
-	player2GUIText.setString("Player 2 GUI");
+	player2GUIText.setString("Player 2");
 	player2GUIText.setCharacterSize(40);
-	player2GUIText.setPosition(700.0f, 835.0f);
+	player2GUIText.setPosition(720.0f, 835.0f);
 	player2GUIText.setFillColor(sf::Color::White);
 
 	gameBoard.setTexture(game->textureManager.getRef("Game Board"));

@@ -6,6 +6,7 @@ void CardPickerState::draw(const float dt)
 {
 	// need to first draw the game playing state that's on the stack underneath
 	p_GamePlayingState->draw(dt);
+	// the following rectangle is for darkening the gameplaying state underneath
 	p_game->window.draw(p_GamePlayingState->rectPickingCard);
 
 
@@ -77,13 +78,22 @@ void CardPickerState::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true)
 				{
+					// REFACTORING: All of this below works, but it would be better to have it in the game logic instead of here
+
+					// copy pointer to card from board array to playercity vector
 					p_game->world.currentPlayer->playerCity.push_back(p_game->world.board[p_GamePlayingState->clickedCardIndex]);
+					// do the effect of the card
 					Effects::doEffect(p_game->world.currentPlayer, p_game->world.board[p_GamePlayingState->clickedCardIndex]);
+					// move the sprite for the card off the screen so that it can't be clicked again
 					p_GamePlayingState->mCardSprites[p_GamePlayingState->clickedCardIndex].setPosition(-400.0f, -400.0f);
+					// remove, now duplicate, pointer to the card from the board array
 					p_game->world.board[p_GamePlayingState->clickedCardIndex] = nullptr;
-					poppingState = true;
+					// switch player
 					if (p_game->world.currentPlayer == &p_game->world.player1) p_game->world.currentPlayer = &p_game->world.player2;
 					else if (p_game->world.currentPlayer == &p_game->world.player2) p_game->world.currentPlayer = &p_game->world.player1;
+
+					poppingState = true;
+
 				}
 				else if (p_game->inputManager.isObjectClicked(discardRectangle, event.mouseButton.button, p_game->window) == true)
 				{
