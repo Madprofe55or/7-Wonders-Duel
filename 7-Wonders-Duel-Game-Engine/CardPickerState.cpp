@@ -88,6 +88,8 @@ void CardPickerState::handleInput()
 					p_GamePlayingState->mCardSprites[p_GamePlayingState->clickedCardIndex].setPosition(-400.0f, -400.0f);
 					// remove, now duplicate, pointer to the card from the board array
 					p_game->world.board[p_GamePlayingState->clickedCardIndex] = nullptr;
+					// update faceup and exposed states for other cards
+					p_game->world.exposeCards();
 					// switch player
 					if (p_game->world.currentPlayer == &p_game->world.player1) p_game->world.currentPlayer = &p_game->world.player2;
 					else if (p_game->world.currentPlayer == &p_game->world.player2) p_game->world.currentPlayer = &p_game->world.player1;

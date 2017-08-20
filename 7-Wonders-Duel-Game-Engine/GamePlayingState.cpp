@@ -9,6 +9,11 @@ void GamePlayingState::draw(const float dt)
 	{
 		if (p_game->world.board[i] != nullptr)
 		{
+			if (p_game->world.board[i]->getFaceup() == true)
+			{
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
+			}
+
 			p_game->window.draw(mCardSprites[i]);
 		}
 	}
@@ -89,6 +94,7 @@ void GamePlayingState::handleInput()
 			if (event.key.code == sf::Keyboard::Escape)
 			{
 				poppingState = true; // can't popstate while in loop, since loop references this and popstate deletes this
+				p_game->world.ExitGame();
 				break;
 			}
 		}

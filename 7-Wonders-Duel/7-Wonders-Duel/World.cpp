@@ -131,6 +131,263 @@ namespace Seven_Wonders {
 		{
 		}
 
+		/* Algorithm for updating cards' exposure and faceup settings
+		   Run after each card is picked on each player's turn 
+		   REFACTORING: Not all cards need their faceup value updated, but it's written as such, 
+		   because some cards start faceup already. There are likely ways to 
+		   combine some of these conditional statements. */
+		void World::exposeCards()
+		{
+			if (mAge == 1)
+			{
+
+				for (int i = 0; i < 20; i++)
+				{
+					if ((i == 0 || i == 1) && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 5 || i == 6 || i == 7 || i == 8) && board[i] != nullptr)
+					{
+						if (board[i + 4] == nullptr && board[i + 5] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 9 || i == 10 || i == 11 || i == 12 || i == 13) && board[i] != nullptr)
+					{
+						if (board[i + 5] == nullptr && board[i + 6] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+
+				}
+			}
+
+			if (mAge == 2)
+			{
+				for (int i = 0; i < 20; i++)
+				{
+
+					if (i == 0 && board[i] != nullptr)
+					{
+						if (board[i + 6] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 1 || i == 2 || i == 3 || i ==4) && board[i] != nullptr)
+					{
+						if (board[i + 5] == nullptr && board[i + 6] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 5 && board[i] != nullptr)
+					{
+						if (board[i + 5] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 6 && board[i] != nullptr)
+					{
+						if (board[i + 5] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 7 || i == 8 || i == 9) && board[i] != nullptr)
+					{
+						if (board[i + 4] == nullptr && board[i + 5] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 10 && board[i] != nullptr)
+					{
+						if (board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 11 && board[i] != nullptr)
+					{
+						if (board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 12 || i == 13) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 14 && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 15 && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 16 && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if (i == 17 && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+				}
+			}
+
+			if (mAge == 3)
+			{
+				for (int i = 0; i < 20; i++)
+				{
+					if ((i == 0 || i == 1) && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 5 || i == 6) && board[i] != nullptr)
+					{
+						if (board[9] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 7 || i == 8) && board[i] != nullptr)
+					{
+						if (board[10] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 9) && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 10) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 11) && board[i] != nullptr)
+					{
+						if (board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 12 || i == 13) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 14) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 15) && board[i] != nullptr)
+					{
+						if (board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 16) && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+					if ((i == 17) && board[i] != nullptr)
+					{
+						if (board[i + 2] == nullptr)
+						{
+							board[i]->setFaceup(true);
+							board[i]->setExposed(true);
+						}
+					}
+				}
+
+			}
+		}
+
 	void World::Setup()
 		{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
@@ -421,8 +678,17 @@ namespace Seven_Wonders {
 		currentPlayer = &player1;
 	}
 
-	void World::Shutdown()
+	void World::ExitGame()
 	{
+		age1Deck.clear();
+		age2Deck.clear();
+		age3Deck.clear();
+		guildDeck.clear();
+		discardDeck.clear();
+		wonderCardDeck.clear();
+		player1.playerCity.clear();
+		player2.playerCity.clear();
+		for (int i = 0; i < 20; i++) board[i] = nullptr;
 	}
 
 	bool World::checkForScienceVictory(Player & currentPlayer)

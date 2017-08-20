@@ -16,7 +16,7 @@ using namespace std;
 using namespace Seven_Wonders;
 
 namespace Seven_Wonders {
-
+	
 	class World
 	{
 	public:
@@ -24,6 +24,7 @@ namespace Seven_Wonders {
 		int getAge();
 		void setAge(int age);
 		void buildCard(Card & card, Player & currentplayer);
+		void exposeCards();
 		vector<Card> age1Deck;
 		vector<Card> wonderCardDeck;
 		vector<Card> age2Deck;
@@ -38,10 +39,10 @@ namespace Seven_Wonders {
 		int mCurrentPlayer;
 
 
-		void Shutdown();
+		void ExitGame();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 1;
+		int mAge = 3;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
