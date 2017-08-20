@@ -23,15 +23,15 @@ namespace Seven_Wonders {
 		World();
 		int getAge();
 		void setAge(int age);
-		void buildCard(Card & card, Player & currentplayer);
+		void buildCard(int clickedCardIndex);
+		void discardCard(int clickedCardIndex);
 		void exposeCards();
 		vector<Card> age1Deck;
 		vector<Card> wonderCardDeck;
 		vector<Card> age2Deck;
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
-		vector<Card> discardDeck;
-		vector<Card> currentBoardDeck;
+		vector<Card*> discardDeck;
 
 		Card * board[20];
 
@@ -40,9 +40,11 @@ namespace Seven_Wonders {
 
 
 		void ExitGame();
+		bool checkForNewAge();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		int mAge = 3;
+		static void runCivilianVictory();
+		int mAge = 1;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;

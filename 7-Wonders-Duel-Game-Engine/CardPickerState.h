@@ -37,6 +37,7 @@ public:
 
 	sf::Text textBuild;
 	sf::Text textDiscard;
+	sf::Text textDiscardValue;
 	sf::Text textBuildWonder;
 
 

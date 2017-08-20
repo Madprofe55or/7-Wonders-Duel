@@ -127,8 +127,47 @@ namespace Seven_Wonders {
 			mAge = age;
 		}
 
-		void World::buildCard(Card & card, Player & currentplayer)
+		/* Run when a player picks the build card option
+		   The parameter passed in the cardpickerstate is the index of the card
+		   on the board. The corresponding board pointer
+		   is copied to the Player.playerCity vector and then the original board pointer
+		   is set to nullptr.  Effects::doEffect() is run. World::exposeCards() is then run to update the 
+		   exposed and faceup settings of each card on the board. Then the current player
+		   is switched to the opposing player. */
+		void World::buildCard(int clickedCardIndex)
 		{
+			currentPlayer->playerCity.push_back(board[clickedCardIndex]);
+
+			Effects::doEffect(currentPlayer, board[clickedCardIndex]);
+
+			board[clickedCardIndex] = nullptr;
+
+			exposeCards();
+
+			if (currentPlayer == &player1) currentPlayer = &player2;
+			else if (currentPlayer == &player2) currentPlayer = &player1;
+		}
+
+		/* Run when a player picks the discard card option
+		   The paramter passed inthe cardpickerstate is the index of the card
+		   on the board. The corresponding board pointer
+		   is copied to the World.discardDeck vector and then the original board pointer
+		   is set to nullptr. Current player gold is updated by counting the number of 
+		   yellow cards in Player.playerCity vector, then the current player is switched
+		   to the opposing player. */
+		void World::discardCard(int clickedCardIndex)
+		{
+			discardDeck.push_back(board[clickedCardIndex]);
+
+			currentPlayer->setCoins(currentPlayer->getDiscardGoldValue());
+
+			board[clickedCardIndex] = nullptr;
+
+			exposeCards();
+
+			if (currentPlayer == &player1) currentPlayer = &player2;
+			else if (currentPlayer == &player2) currentPlayer = &player1;
+
 		}
 
 		/* Algorithm for updating cards' exposure and faceup settings
@@ -625,54 +664,10 @@ namespace Seven_Wonders {
 			}
 		}
 
-		//// assigning cards to the board deck to be displayed
-		//if (mAge == 1)
-		//{
-		//	for (int i = 0; i < 20; i++)
-		//	{
-		//		currentBoardDeck.push_back(age1Deck[i]);
-		//	}
-		//	age1Deck.clear();
-		//}
-		//else if (mAge == 2)
-		//{
-		//	for (int i = 0; i < 20; i++)
-		//	{
-		//		currentBoardDeck.push_back(age2Deck[i]);
-		//	}
-		//	age2Deck.clear();
-		//}
-		//else if (mAge == 3)
-		//{
-		//	for (int i = 0; i < 20; i++)
-		//	{
-		//		currentBoardDeck.push_back(age3Deck[i]);
-		//	}
-		//	age3Deck.clear();
-		//}
-
-		if (mAge == 1)
+		// setting up board pointer array
+		for (int i = 0; i < 20; i++)
 		{
-			for (int i = 0; i < 20; i++)
-			{
-				board[i] = &age1Deck[i];
-			}
-		}
-
-		else if (mAge == 2)
-		{
-			for (int i = 0; i < 20; i++)
-			{
-				board[i] = &age2Deck[i];
-			}
-		}
-
-		else if (mAge == 3)
-		{
-			for (int i = 0; i < 20; i++)
-			{
-				board[i] = &age3Deck[i];
-			}
+			board[i] = &age1Deck[i];
 		}
 
 		currentPlayer = &player1;
@@ -689,6 +684,42 @@ namespace Seven_Wonders {
 		player1.playerCity.clear();
 		player2.playerCity.clear();
 		for (int i = 0; i < 20; i++) board[i] = nullptr;
+	}
+
+	bool World::checkForNewAge()
+	{
+		int emptyCount = 0;
+		for (int i = 0; i < 20; i++)
+		{
+			if (board[i] == nullptr) emptyCount++;
+		}
+		if (emptyCount == 20)
+		{
+			if (mAge == 1)
+			{
+				for (int i = 0; i < 20; i++)
+				{
+
+					board[i] = &age2Deck[i];
+				}
+				mAge = 2;
+				return true;
+			}
+			else if (mAge == 2)
+			{
+				for (int i = 0; i < 20; i++)
+				{
+					board[i] = &age3Deck[i];
+				}
+				mAge = 3;
+				return true;
+			}
+			else if (mAge == 3)
+			{
+				runCivilianVictory();
+			}
+		}
+		else return false;
 	}
 
 	bool World::checkForScienceVictory(Player & currentPlayer)
@@ -711,6 +742,10 @@ namespace Seven_Wonders {
 		if (playerNumber == PLAYER_1 && conflictPawn.getThreat() == 9) return PLAYER_1;
 		else if (playerNumber == PLAYER_2 && conflictPawn.getThreat() == -9) return PLAYER_2;
 		else return 0;
+	}
+
+	void World::runCivilianVictory()
+	{
 	}
 
 }

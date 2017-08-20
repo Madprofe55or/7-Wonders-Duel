@@ -130,6 +130,7 @@ void GamePlayingState::handleInput()
 GamePlayingState::GamePlayingState(Game * game)
 {
 	p_game = game;
+	emptyCount = 0;
 
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
@@ -317,6 +318,51 @@ GamePlayingState::GamePlayingState(Game * game)
 	player2Glass.setFillColor(sf::Color::White);
 
 
+}
+
+void GamePlayingState::resetSprites()
+{
+	for (int i = 0; i < 20; i++)
+	{
+		if (p_game->world.getAge() == 2)
+		{
+			mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
+
+			mCardSprites[i].setScale(0.5f, 0.5f);
+
+			if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
+			}
+			else
+			{
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
+			}
+		}
+		else if (p_game->world.getAge() == 3)
+		{
+			mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
+
+			mCardSprites[i].setScale(0.5f, 0.5f);
+
+			if (i == 2 || i == 3 || i == 4 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
+			{
+				if (p_game->world.board[i]->getAge() == AGE_GUILD)
+				{
+					mCardSprites[i].setTexture(p_game->textureManager.getRef("Guild Back"));
+				}
+				else
+				{
+					mCardSprites[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+				}
+			}
+			else
+			{
+				mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
+			}
+		}
+		
+	}
 }
 
 GamePlayingState::~GamePlayingState()

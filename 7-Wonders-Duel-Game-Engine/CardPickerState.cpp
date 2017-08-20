@@ -36,6 +36,7 @@ void CardPickerState::draw(const float dt)
 
 	p_game->window.draw(textBuild);
 	p_game->window.draw(textDiscard);
+	p_game->window.draw(textDiscardValue);
 	p_game->window.draw(textBuildWonder);
 
 
@@ -78,28 +79,25 @@ void CardPickerState::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true)
 				{
-					// REFACTORING: All of this below works, but it would be better to have it in the game logic instead of here
-
-					// copy pointer to card from board array to playercity vector
-					p_game->world.currentPlayer->playerCity.push_back(p_game->world.board[p_GamePlayingState->clickedCardIndex]);
-					// do the effect of the card
-					Effects::doEffect(p_game->world.currentPlayer, p_game->world.board[p_GamePlayingState->clickedCardIndex]);
+					// build the card
+					p_game->world.buildCard(p_GamePlayingState->clickedCardIndex);
 					// move the sprite for the card off the screen so that it can't be clicked again
 					p_GamePlayingState->mCardSprites[p_GamePlayingState->clickedCardIndex].setPosition(-400.0f, -400.0f);
-					// remove, now duplicate, pointer to the card from the board array
-					p_game->world.board[p_GamePlayingState->clickedCardIndex] = nullptr;
-					// update faceup and exposed states for other cards
-					p_game->world.exposeCards();
-					// switch player
-					if (p_game->world.currentPlayer == &p_game->world.player1) p_game->world.currentPlayer = &p_game->world.player2;
-					else if (p_game->world.currentPlayer == &p_game->world.player2) p_game->world.currentPlayer = &p_game->world.player1;
+					// checking if last card was built, thus triggering a new age
+					if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 
 					poppingState = true;
-
 				}
 				else if (p_game->inputManager.isObjectClicked(discardRectangle, event.mouseButton.button, p_game->window) == true)
 				{
+					// discard the card
+					p_game->world.discardCard(p_GamePlayingState->clickedCardIndex);
+					// move the sprite for the card off the screen so that it can't be clicked again
+					p_GamePlayingState->mCardSprites[p_GamePlayingState->clickedCardIndex].setPosition(-400.0f, -400.0f);
+					// checking if last card was built, thus triggering a new age
+					if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 
+					poppingState = true;
 				}
 				else if (p_game->inputManager.isObjectClicked(buildWonderRectangle, event.mouseButton.button, p_game->window) == true)
 				{
@@ -277,21 +275,27 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 
 		textBuild.setFont(p_game->fontManager.getRef("Menu Font"));
 		textBuild.setString("Build");
-		textBuild.setCharacterSize(30);
+		textBuild.setCharacterSize(25);
 		textBuild.setFillColor(sf::Color::White);
 		textBuild.setOrigin(textBuild.getGlobalBounds().width / 2.0f, textBuild.getGlobalBounds().height / 2.0f);
 		textBuild.setPosition(buildRectangle.getPosition());
 
 		textDiscard.setFont(p_game->fontManager.getRef("Menu Font"));
 		textDiscard.setString("Discard");
-		textDiscard.setCharacterSize(30);
+		textDiscard.setCharacterSize(25);
 		textDiscard.setFillColor(sf::Color::White);
 		textDiscard.setOrigin(textDiscard.getGlobalBounds().width / 2.0f, textDiscard.getGlobalBounds().height / 2.0f);
 		textDiscard.setPosition(discardRectangle.getPosition());
 
+		textDiscardValue.setFont(p_game->fontManager.getRef("Menu Font"));
+		textDiscardValue.setString(to_string(p_game->world.currentPlayer->getDiscardGoldValue()));
+		textDiscardValue.setCharacterSize(25);
+		textDiscardValue.setOrigin(textDiscardValue.getGlobalBounds().width / 2.0f, textDiscardValue.getGlobalBounds().height / 2.0f);
+		textDiscardValue.setPosition(discardRectangle.getPosition().x - 100, discardRectangle.getPosition().y);
+
 		textBuildWonder.setFont(p_game->fontManager.getRef("Menu Font"));
 		textBuildWonder.setString("BuildWonder");
-		textBuildWonder.setCharacterSize(30);
+		textBuildWonder.setCharacterSize(25);
 		textBuildWonder.setFillColor(sf::Color::White);
 		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());

@@ -93,12 +93,14 @@ public:
 	//int const CARD_HORIZONTAL_SPACING = 98;
 
 	int clickedCardIndex;
+	int emptyCount;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
 	virtual void handleInput();
 	
 	GamePlayingState(Game * game);
+	void resetSprites();
 	~GamePlayingState();
 };
 

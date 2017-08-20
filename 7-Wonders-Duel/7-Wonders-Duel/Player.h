@@ -39,6 +39,7 @@ namespace Seven_Wonders {
 		void setTradeFlag(string resourceType, bool flagSetting);
 		bool getStrategyFlag();
 		void setStrategyFlag(bool flagSetting);
+		int getDiscardGoldValue();
 		vector<Card*> playerCity;
 
 

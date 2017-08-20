@@ -166,6 +166,20 @@ namespace Seven_Wonders {
 		mStrategyFlag = flagSetting;
 	}
 
+	int Player::getDiscardGoldValue()
+	{
+		int yellowCardCount = 0;
+		if (!playerCity.empty()) // check if there are cards in the city yet
+		{
+			for (std::vector<Card*>::iterator it = playerCity.begin(); it != playerCity.end(); ++it)
+			{
+				if ((*it)->getType() == YELLOW_CARD) yellowCardCount++;
+			}
+			return yellowCardCount + 2; // 2 gold is the base and each yellow card adds one to the gold value
+		}
+		else return 2; // if there are no cards in the city yet, then just return the base gold value of 2
+	}
+
 }
 
 

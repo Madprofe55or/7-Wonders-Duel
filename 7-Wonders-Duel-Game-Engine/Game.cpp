@@ -165,7 +165,6 @@ void Game::loadTextures()
 	textureManager.loadTexture("Wood Reserve", "Resources/CardImages/woodreserve.jpg");
 	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
 
-	world.Setup();
 }
 
 void Game::loadFonts()
