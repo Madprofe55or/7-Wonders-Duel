@@ -180,6 +180,18 @@ namespace Seven_Wonders {
 		else return 2; // if there are no cards in the city yet, then just return the base gold value of 2
 	}
 
+	/* Will need to reset flags for special conditions eventually too.*/
+	void Player::resetResources()
+	{
+		mCoins = 7;
+		mWood = 0;
+		mStone = 0;
+		mClay = 0;
+		mPapyrus = 0;
+		mGlass = 0;
+
+	}
+
 }
 
 

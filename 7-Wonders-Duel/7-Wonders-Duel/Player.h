@@ -40,6 +40,7 @@ namespace Seven_Wonders {
 		bool getStrategyFlag();
 		void setStrategyFlag(bool flagSetting);
 		int getDiscardGoldValue();
+		void resetResources();
 		vector<Card*> playerCity;
 
 

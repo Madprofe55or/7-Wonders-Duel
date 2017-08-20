@@ -682,8 +682,11 @@ namespace Seven_Wonders {
 		discardDeck.clear();
 		wonderCardDeck.clear();
 		player1.playerCity.clear();
+		player1.resetResources();
 		player2.playerCity.clear();
+		player2.resetResources();
 		for (int i = 0; i < 20; i++) board[i] = nullptr;
+		mAge = 1;
 	}
 
 	bool World::checkForNewAge()
