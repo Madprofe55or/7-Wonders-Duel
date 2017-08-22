@@ -167,7 +167,7 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(wonderCardDeck.begin(), wonderCardDeck.end());
 
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			wonderCardDeck.pop_back();
 			//pop back to delete the wonders that have already 
@@ -314,6 +314,8 @@ namespace Seven_Wonders {
 		{
 			age3Deck.pop_back();
 		}
+
+		currentPlayer = &player1;
 	}
 
 	void World::Shutdown()

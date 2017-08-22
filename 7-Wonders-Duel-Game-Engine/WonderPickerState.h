@@ -5,6 +5,7 @@
 
 #include "GameState.h"
 #include "GameStateStart.h"
+#include "Card.h"
 
 class WonderPickerState : public GameState
 {
@@ -12,6 +13,19 @@ public:
 	// sprites
 	sf::Sprite background;
 	sf::Sprite gameBoard;
+
+	//array pointing to 8 wonder cards from setup
+	Card* wonderBoard[8];
+
+	//floatrects
+	sf::FloatRect wonderFloatRect1;
+	sf::FloatRect wonderFloatRect2;
+	sf::FloatRect wonderFloatRect3;
+	sf::FloatRect wonderFloatRect4;
+
+
+
+	std::vector < sf::FloatRect> vectorWonderFloatRects = { wonderFloatRect1, wonderFloatRect2, wonderFloatRect3, wonderFloatRect4};
 
 	// fonts
 	sf::Font font;
@@ -36,6 +50,10 @@ public:
 	sf::Sprite mWonderCard10;
 	sf::Sprite mWonderCard11;
 	sf::Sprite mWonderCard12;
+
+	//count picks made total 
+	int numOfPickedCards = 0;
+	bool pickedFourCards = false;
 	
 
 	std::vector <sf::Sprite> mWonderRects = {
@@ -44,8 +62,6 @@ public:
 		mWonderCard6, mWonderCard7, mWonderCard8, mWonderCard9,
 		mWonderCard10, mWonderCard11, mWonderCard12 };
 
-	std::vector <sf::Sprite*> mWonderPlayer1 = {};
-	std::vector <sf::Sprite*> mWonderPlayer2 = {};
 
 
 	// will be used by update() to determine which location vector to use when positioning cards

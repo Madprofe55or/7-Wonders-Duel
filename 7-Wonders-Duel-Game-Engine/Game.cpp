@@ -105,7 +105,6 @@ void Game::loadTextures()
 	textureManager.loadTexture("The Statue of Zeus", "Resources/WonderCards/Zeus.jpg");
 	textureManager.loadTexture("The Temple of Artemis", "Resources/WonderCards/TheTempleofArtemis.jpg");
 
-	world.Setup();
 }
 
 void Game::loadFonts()

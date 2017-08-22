@@ -28,13 +28,12 @@ namespace Seven_Wonders {
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
 		vector<Card> discardDeck;
-
-	private:
+		Player * currentPlayer = nullptr;
 		
 		void Shutdown();
 		static bool checkForScienceVictory(Player & currentPlayer);
 		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		Player * currentPlayer = nullptr;
+		
 		Player player1;
 		Player player2;
 		vector<ProgressToken> progressTokenDeck;
