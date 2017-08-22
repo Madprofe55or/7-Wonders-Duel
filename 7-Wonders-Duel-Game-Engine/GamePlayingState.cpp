@@ -1,5 +1,6 @@
 #include "GamePlayingState.h"
 #include "CardPickerState.h"
+#include "ViewingCityState.h"
 
 void GamePlayingState::draw(const float dt)
 {
@@ -78,6 +79,7 @@ void GamePlayingState::handleInput()
 	sf::Event event;
 	bool poppingState = false;
 	bool cardPickState = false;
+	bool viewCityState = false;
 	Card ** clickedCard;
 
 	while (p_game->window.pollEvent(event))
@@ -96,6 +98,10 @@ void GamePlayingState::handleInput()
 				poppingState = true; // can't popstate while in loop, since loop references this and popstate deletes this
 				p_game->world.ExitGame();
 				break;
+			}
+			if (event.key.code == sf::Keyboard::Space)
+			{
+				viewCityState = true;
 			}
 		}
 		case sf::Event::MouseButtonPressed:
@@ -124,6 +130,13 @@ void GamePlayingState::handleInput()
 		rectPickingCard.setPosition(0, 0);
 		rectPickingCard.setSize(rectPickingCardSize);
 		p_game->pushState(new CardPickerState(p_game, this, *clickedCard)); // push card picker state
+	}
+	if (viewCityState == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		p_game->pushState(new ViewingCityState(p_game, this));
 	}
 }
 
