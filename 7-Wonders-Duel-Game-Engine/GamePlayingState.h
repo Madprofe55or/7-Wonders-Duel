@@ -67,6 +67,14 @@ public:
 	sf::Sprite mCard18;
 	sf::Sprite mCard19;
 	sf::Sprite mCard20;
+	sf::Sprite mPlayer1Wonder1;
+	sf::Sprite mPlayer1Wonder2;
+	sf::Sprite mPlayer1Wonder3;
+	sf::Sprite mPlayer1Wonder4;	
+	sf::Sprite mPlayer2Wonder1;
+	sf::Sprite mPlayer2Wonder2;
+	sf::Sprite mPlayer2Wonder3;
+	sf::Sprite mPlayer2Wonder4;
 
 	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,
@@ -74,6 +82,24 @@ public:
 		mCard6, mCard7, mCard8, mCard9,
 		mCard10, mCard11, mCard12, mCard13, mCard14,
 		mCard15, mCard16, mCard17, mCard18, mCard19, mCard20 };
+
+	sf::Sprite mWonderSpritesP1[4] = { mPlayer1Wonder1, mPlayer1Wonder2, mPlayer1Wonder3, mPlayer1Wonder4 };
+	sf::Sprite mWonderSpritesP2[4] = { mPlayer2Wonder1, mPlayer2Wonder2, mPlayer2Wonder3, mPlayer2Wonder4 };
+
+	sf::Sprite mouseoverCard;
+
+	sf::FloatRect rectPlayer1Wonder1;
+	sf::FloatRect rectPlayer1Wonder2;
+	sf::FloatRect rectPlayer1Wonder3;
+	sf::FloatRect rectPlayer1Wonder4;
+	sf::FloatRect rectPlayer2Wonder1;
+	sf::FloatRect rectPlayer2Wonder2;
+	sf::FloatRect rectPlayer2Wonder3;
+	sf::FloatRect rectPlayer2Wonder4;
+
+	sf::FloatRect mRectWondersP1[4] = { rectPlayer1Wonder1, rectPlayer1Wonder2, rectPlayer1Wonder3, rectPlayer1Wonder4 };
+	sf::FloatRect mRectWondersP2[4] = { rectPlayer2Wonder1, rectPlayer2Wonder2, rectPlayer2Wonder3, rectPlayer2Wonder4 };
+
 
 	// placeholder gui stuff
 	sf::RectangleShape mPlayer1GUI;
@@ -86,6 +112,7 @@ public:
 	sf::Vector2f const PLAYER_GUI_SIZE = { 1600, 75 };
 	sf::Vector2f const GAME_BOARD_SIZE = { 150, 750 };
 	sf::Vector2f const WONDER_GUI_SIZE = { 150, 750 };
+	sf::Vector2f const WONDER_CARD_SIZE = { 139, 90 };
 
 
 	//int const CARD_STRUCTURE_VERT_CENTER = 770;
@@ -94,6 +121,7 @@ public:
 
 	int clickedCardIndex;
 	int emptyCount;
+	bool mouseover;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

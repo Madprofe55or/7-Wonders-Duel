@@ -42,6 +42,7 @@ namespace Seven_Wonders {
 		int getDiscardGoldValue();
 		void resetResources();
 		vector<Card*> playerCity;
+		vector<Card*> playerWonderDeck;
 
 
 	private:

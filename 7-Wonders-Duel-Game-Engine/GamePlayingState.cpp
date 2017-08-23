@@ -19,6 +19,17 @@ void GamePlayingState::draw(const float dt)
 		}
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		p_game->window.draw(mWonderSpritesP1[i]);
+		p_game->window.draw(mWonderSpritesP2[i]);
+	}
+
+	if (mouseover) mouseoverCard.setPosition(900.0f, 350.0f);
+	if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
+
+	p_game->window.draw(mouseoverCard);
+
 	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
 		mPlayer1GUI.setFillColor(sf::Color(51, 204, 51, 126));
@@ -120,6 +131,37 @@ void GamePlayingState::handleInput()
 				}
 			}
 		}
+		case sf::Event::MouseMoved:
+		{
+			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
+
+			int mouseoverVectorCount = 0;
+			mouseover = false;
+
+			for (int i = 0; i < 4; i++)
+			{
+				if (mRectWondersP1[i].contains(mouse))
+				{
+					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerWonderDeck[i]->getName()));
+					mouseover = true;
+					break;
+				}
+				mouseoverVectorCount++;
+			}
+
+			mouseoverVectorCount = 0;
+			for (int i = 0; i < 4; i++)
+			{
+				if (mRectWondersP2[i].contains(mouse))
+				{
+					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerWonderDeck[i]->getName()));
+					mouseover = true;
+					break;
+				}
+				mouseoverVectorCount++;
+			}
+
+		}
 		default: break;
 		}
 	}
@@ -148,7 +190,7 @@ GamePlayingState::GamePlayingState(Game * game)
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
 
-		for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 20; ++i)
 		{
 			if (p_game->world.getAge() == 1)
 			{
@@ -205,7 +247,36 @@ GamePlayingState::GamePlayingState(Game * game)
 				}
 			}
 
+		}
+
+	for (int i = 0; i < 4; i++)
+	{
+		mWonderSpritesP1[i].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerWonderDeck[i]->getName()));
+		mWonderSpritesP1[i].setOrigin(mWonderSpritesP1[i].getGlobalBounds().width, 0.0f);
+		mWonderSpritesP1[i].setScale(0.2769f, 0.2769f);
+		mWonderSpritesP1[i].setPosition(1600.0f, 75.0f + (mWonderSpritesP1[i].getGlobalBounds().height * i));
 	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		mWonderSpritesP2[i].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerWonderDeck[i]->getName()));
+		mWonderSpritesP2[i].setOrigin(mWonderSpritesP2[i].getGlobalBounds().width, 0.0f);
+		mWonderSpritesP2[i].setScale(0.2769f, 0.2769f);
+		mWonderSpritesP2[i].setPosition(1600.0f, 475.0f + (mWonderSpritesP2[i].getGlobalBounds().height * i));
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		mRectWondersP1[i] = mWonderSpritesP1[i].getGlobalBounds();
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		mRectWondersP2[i] = mWonderSpritesP2[i].getGlobalBounds();
+	}
+
+	mouseoverCard.setTexture(p_game->textureManager.getRef("Piraeus"));
+	mouseoverCard.setPosition(-400.0f, -400.0f);
 
 	mPlayer1GUI.setPosition(0.0f, 0.0f);
 	mPlayer1GUI.setSize(PLAYER_GUI_SIZE);
@@ -230,21 +301,10 @@ GamePlayingState::GamePlayingState(Game * game)
 	gameBoard.setScale(0.83f, 0.83f);
 	gameBoard.setPosition(10.0f, 75.0f);
 
-	mWondersDisplay.setPosition(1450.0f, 75.0f);
-	mWondersDisplay.setSize(WONDER_GUI_SIZE);
-	mWondersDisplay.setFillColor(sf::Color(54, 27, 153, 126));
-
 	circleTestPawn.setFillColor(sf::Color::Red);
 	circleTestPawn.setRadius(25.0f);
 	circleTestPawn.setScale(1.0f, 0.50f);
 	circleTestPawn.setPosition(108.0f, 427.0f);
-
-	wondersDisplayText.setFont(game->fontManager.getRef("Menu Font"));
-	wondersDisplayText.setString("Wonders GUI");
-	wondersDisplayText.setCharacterSize(40);
-	wondersDisplayText.setPosition(1560.0f, 500.0f);
-	wondersDisplayText.setFillColor(sf::Color::White);
-	wondersDisplayText.rotate(90);
 
 	player1Turn.setFont(game->fontManager.getRef("Menu Font"));
 	player1Turn.setString("Player 1's Turn");

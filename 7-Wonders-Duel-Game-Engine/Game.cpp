@@ -83,6 +83,18 @@ void Game::loadTextures()
 	   However, for efficiency, only textures needed for a specific game state should be loaded unless 
 	   states are stil stacked.  We can keep doing it this way for now, until we run into problems, if any. 
 	   Textures should be defined in the game logic, in some type of container (likely a map). */
+	textureManager.loadTexture("The Appian Way", "Resources/WonderCards/TheAppianWay.jpg");
+	textureManager.loadTexture("Circus Maximus", "Resources/WonderCards/CircusMaximus.jpg");
+	textureManager.loadTexture("The Colossus", "Resources/WonderCards/TheColossus.jpg");
+	textureManager.loadTexture("The Great Library", "Resources/WonderCards/TheGreatLibrary.jpg");
+	textureManager.loadTexture("The Great Lighthouse", "Resources/WonderCards/TheGreatLighthouse.jpg");
+	textureManager.loadTexture("The Hanging Gardens", "Resources/WonderCards/TheHangingGardens.jpg");
+	textureManager.loadTexture("The Mausoleum", "Resources/WonderCards/TheMausoleum.jpg");
+	textureManager.loadTexture("Piraeus", "Resources/WonderCards/Piraeus.jpg");
+	textureManager.loadTexture("The Pyramids", "Resources/WonderCards/ThePyramids.jpg");
+	textureManager.loadTexture("The Sphinx", "Resources/WonderCards/TheSphinx.jpg");
+	textureManager.loadTexture("The Statue of Zeus", "Resources/WonderCards/Zeus.jpg");
+	textureManager.loadTexture("The Temple of Artemis", "Resources/WonderCards/TheTempleofArtemis.jpg");
 	textureManager.loadTexture("Game Board", "Resources/BoardItems/gameboard.png");
 	textureManager.loadTexture("GameStateStart Background", "Resources/Backgrounds/gamestartbackground.jpg");
 	textureManager.loadTexture("GameStateStart Title", "Resources/Backgrounds/gamestarttitle.png");
@@ -164,6 +176,8 @@ void Game::loadTextures()
 	textureManager.loadTexture("Walls", "Resources/CardImages/walls.jpg");
 	textureManager.loadTexture("Wood Reserve", "Resources/CardImages/woodreserve.jpg");
 	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
+
+
 
 }
 
