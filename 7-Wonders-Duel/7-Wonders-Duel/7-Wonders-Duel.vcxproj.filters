@@ -24,9 +24,6 @@
     <ClCompile Include="Card.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="ConflictPawn.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
     <ClCompile Include="MilitaryToken.cpp">
       <Filter>Class Definitions</Filter>
     </ClCompile>
@@ -45,11 +42,14 @@
     <ClCompile Include="DecksCreator_DEP.h">
       <Filter>Deprecated</Filter>
     </ClCompile>
-    <ClCompile Include="Effects.cpp">
-      <Filter>Class Definitions</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Class Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects_DEP.cpp">
+      <Filter>Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="ConflictPawn_DEP.cpp">
+      <Filter>Deprecated</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,9 +57,6 @@
       <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="CardProperties.h">
-      <Filter>Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConflictPawn.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Game_Constants.h">
@@ -74,17 +71,17 @@
     <ClInclude Include="ProgressToken.h">
       <Filter>Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="WonderDeck_DEP.h">
       <Filter>Deprecated</Filter>
     </ClInclude>
-    <ClInclude Include="Effects.h">
-      <Filter>Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects_DEP.h">
+      <Filter>Deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="ConflictPawn_DEP.h">
+      <Filter>Deprecated</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

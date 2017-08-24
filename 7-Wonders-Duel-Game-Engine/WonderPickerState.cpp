@@ -142,14 +142,14 @@ WonderPickerState::WonderPickerState(Game * game)
 	p_game = game;
 	for (int i = 0; i < 8; i++)
 	{
-		wonderBoard[i] = &p_game->world.wonderCardDeck[i];
+		wonderBoard[i] = p_game->world.wonderCardDeck[i];
 	}
 
 
 
 	for (int i = 0; i < 8; ++i)
 	{
-		mWonderRects[i].setTexture(p_game->textureManager.getRef(p_game->world.wonderCardDeck[i].getName()));
+		mWonderRects[i].setTexture(p_game->textureManager.getRef(p_game->world.wonderCardDeck[i]->getName()));
 		if (i >= 4)
 		{
 			mWonderRects[i].setPosition(Seven_Wonders::WONDER_POSITIONS_1[i - 4][0], Seven_Wonders::WONDER_POSITIONS_1[i - 4][1]);

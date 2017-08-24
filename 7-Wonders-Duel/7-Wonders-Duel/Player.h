@@ -33,22 +33,50 @@ namespace Seven_Wonders {
 		void setPapyrus(int changeInPapyrus);
 		int getGlass();
 		void setGlass(int changeInGlass);
-		int getNumOfScienceSymbols(string symbolType);
-		void setNumOfScienceSymbols(string symbolType, int changeInSymbols);
-		bool getTradeFlag(string resourceType);
-		void setTradeFlag(string resourceType, bool flagSetting);
-		bool getStrategyFlag();
-		void setStrategyFlag(bool flagSetting);
 		int getDiscardGoldValue();
 		void resetResources();
 		vector<Card*> playerCity;
 		vector<Card*> playerWonderDeck;
 
+		struct scienceSymbols
+		{
+			int globe = 0;
+			int balance = 0;
+			int tablet = 0;
+			int mortar = 0;
+			int arch = 0;
+			int quill = 0;
+			int wheel = 0;
+		};
+
+		struct flags
+		{
+			bool woodTradeFlag = false;
+			bool stoneTradeFlag = false;
+			bool clayTradeFlag = false;
+			bool papyrusTradeFlag = false;
+			bool glassTradeFlag = false;
+			bool architecturePTFlag = false;
+			bool economyPTFlag = false;
+			bool masonryPTFlag = false;
+			bool mathematicsPTFlag = false;
+			bool philsophyPTFlag = false;
+			bool strategyPTFlag = false;
+			bool theologyPTFlag = false;
+			bool ubanismPTFlag = false;
+			bool forumResourcesFlag = false;
+			bool caravenseryResourcesFlag = false;
+			bool theGreatLighthouseResourcesFlag = false;
+			bool piraeusResourcesFlag = false;
+		};
+
+		scienceSymbols scienceSymbols;
+		flags flags;
 
 	private:
 		int mPlayerNumber;
 		bool mGoesFirst;
-		int mCoins = 0;
+		int mCoins = 7;
 		int mWood = 0;
 		int mStone = 0;
 		int mClay = 0;
@@ -57,11 +85,6 @@ namespace Seven_Wonders {
 		bool mStrategyFlag = false;
 		static const int STARTING_COINS = 7;
 		static const int STARTING_ALL_OTHERS = 0;
-
-
-		map<string, int> scienceSymbolsMap = { {"Arch", 1}, {"Wheel", 1}, {"Quill", 1}, {"Mortar", 1}, {"Balance", 1}, {"Tablet", 0}, {"Globe", 1} };
-		map<string, bool> tradeFlagsMap = { {"Wood", false}, {"Stone", false}, {"Clay", false}, {"Papyrus", false}, {"Glass", false} };
-
 
 	};
 

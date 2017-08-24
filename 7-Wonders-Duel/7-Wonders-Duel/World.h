@@ -5,13 +5,12 @@
 #ifndef WORLD_H
 #define WORLD_H
 #include <string>
-// #include "Player.h" // included in Effects.h
-// #include "ConflictPawn.h" // included in Effeccts.h
+#include "Player.h"
 #include "MilitaryToken.h"
 #include "ProgressToken.h"
-// #include "Card.h" // included in Effects.h
+#include "Card.h"
 #include "Game_Constants.h"
-#include "Effects.h"
+
 using namespace std;
 using namespace Seven_Wonders;
 
@@ -27,7 +26,7 @@ namespace Seven_Wonders {
 		void discardCard(int clickedCardIndex);
 		void exposeCards();
 		vector<Card> age1Deck;
-		vector<Card> wonderCardDeck;
+		vector<Card*> wonderCardDeck;
 		vector<Card> age2Deck;
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
@@ -41,15 +40,15 @@ namespace Seven_Wonders {
 
 		void ExitGame();
 		bool checkForNewAge();
-		static bool checkForScienceVictory(Player & currentPlayer);
-		static int checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn);
-		static void runCivilianVictory();
+		bool checkForScienceVictory(Player & currentPlayer);
+		void runCivilianVictory();
+		void doEffect(Player & currentPlayer, Card & card);
 		int mAge = 1;
+		int mConflict = 0;
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
-		vector<ProgressToken> progressTokenDeck;
-		ConflictPawn conflictPawn;
+		vector<ProgressToken*> progressTokenDeck;
 		MilitaryToken militaryTokenP12;
 		MilitaryToken militaryTokenP15;
 		MilitaryToken militaryTokenP22;

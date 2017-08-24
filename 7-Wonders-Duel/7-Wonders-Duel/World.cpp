@@ -15,7 +15,6 @@ namespace Seven_Wonders {
 	World::World()
 		:
 		player1(1), player2(2),
-		conflictPawn(),
 		militaryTokenP12(),
 		militaryTokenP15(),
 		militaryTokenP22(),
@@ -138,7 +137,7 @@ namespace Seven_Wonders {
 		{
 			currentPlayer->playerCity.push_back(board[clickedCardIndex]);
 
-			Effects::doEffect(currentPlayer, board[clickedCardIndex]);
+			doEffect(*currentPlayer, *board[clickedCardIndex]);
 
 			board[clickedCardIndex] = nullptr;
 
@@ -438,16 +437,16 @@ namespace Seven_Wonders {
 		// 5. Deal Age 1 cards
 
 		// Progress token deck and shuffling
-		progressTokenDeck.push_back(progressTokenAgriculture);
-		progressTokenDeck.push_back(progressTokenArchitecture);
-		progressTokenDeck.push_back(progressTokenEconomy);
-		progressTokenDeck.push_back(progressTokenLaw);
-		progressTokenDeck.push_back(progressTokenMasonry);
-		progressTokenDeck.push_back(progressTokenMathematics);
-		progressTokenDeck.push_back(progressTokenPhilosophy);
-		progressTokenDeck.push_back(progressTokenStrategy);
-		progressTokenDeck.push_back(progressTokenTheology);
-		progressTokenDeck.push_back(progressTokenUrbanism);
+		progressTokenDeck.push_back(&progressTokenAgriculture);
+		progressTokenDeck.push_back(&progressTokenArchitecture);
+		progressTokenDeck.push_back(&progressTokenEconomy);
+		progressTokenDeck.push_back(&progressTokenLaw);
+		progressTokenDeck.push_back(&progressTokenMasonry);
+		progressTokenDeck.push_back(&progressTokenMathematics);
+		progressTokenDeck.push_back(&progressTokenPhilosophy);
+		progressTokenDeck.push_back(&progressTokenStrategy);
+		progressTokenDeck.push_back(&progressTokenTheology);
+		progressTokenDeck.push_back(&progressTokenUrbanism);
 
 		srand((unsigned)time(NULL));
 		random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
@@ -461,18 +460,18 @@ namespace Seven_Wonders {
 		// Wonder deck and shuffling
 		//Choose Eight Wonder Cards from Deck to be chosen by player 1 and player 2
 		//fill wonder deck (vector) with wonder cards
-		wonderCardDeck.push_back(cardTheAppianWay);
-		wonderCardDeck.push_back(cardCircusMaximus);
-		wonderCardDeck.push_back(cardTheColossus);
-		wonderCardDeck.push_back(cardTheGreatLibrary);
-		wonderCardDeck.push_back(cardTheGreatLighthouse);
-		wonderCardDeck.push_back(cardTheHangingGardens);
-		wonderCardDeck.push_back(cardTheMausoleum);
-		wonderCardDeck.push_back(cardThePyramids);
-		wonderCardDeck.push_back(cardPiraeus);
-		wonderCardDeck.push_back(cardTheSphinx);
-		wonderCardDeck.push_back(cardTheStatueOfZeus);
-		wonderCardDeck.push_back(cardTheTempleOfArtemis);
+		wonderCardDeck.push_back(&cardTheAppianWay);
+		wonderCardDeck.push_back(&cardCircusMaximus);
+		wonderCardDeck.push_back(&cardTheColossus);
+		wonderCardDeck.push_back(&cardTheGreatLibrary);
+		wonderCardDeck.push_back(&cardTheGreatLighthouse);
+		wonderCardDeck.push_back(&cardTheHangingGardens);
+		wonderCardDeck.push_back(&cardTheMausoleum);
+		wonderCardDeck.push_back(&cardThePyramids);
+		wonderCardDeck.push_back(&cardPiraeus);
+		wonderCardDeck.push_back(&cardTheSphinx);
+		wonderCardDeck.push_back(&cardTheStatueOfZeus);
+		wonderCardDeck.push_back(&cardTheTempleOfArtemis);
 
 		srand((unsigned)time(NULL));
 		random_shuffle(wonderCardDeck.begin(), wonderCardDeck.end());
@@ -480,8 +479,6 @@ namespace Seven_Wonders {
 		for (int i = 0; i < 4; i++)
 		{
 			wonderCardDeck.pop_back();
-			//pop back to delete the wonders that have already 
-			//been chosen to remove from deck
 		}
 		// End Wonder Card Deck, shuffling, and selection
 
@@ -720,6 +717,7 @@ namespace Seven_Wonders {
 			else if (mAge == 3)
 			{
 				runCivilianVictory();
+				return false;
 			}
 		}
 		else return false;
@@ -727,29 +725,139 @@ namespace Seven_Wonders {
 
 	bool World::checkForScienceVictory(Player & currentPlayer)
 	{
-		int numOfUniqueSymbols = 0;
-		if (currentPlayer.getNumOfScienceSymbols("Arch") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Wheel") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Quill") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Mortar") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Balance") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Tablet") > 0) numOfUniqueSymbols++;
-		if (currentPlayer.getNumOfScienceSymbols("Globe") > 0) numOfUniqueSymbols++;
+		int symbolCounter = 0;
+		if (currentPlayer.scienceSymbols.arch >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.balance >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.globe >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.mortar >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.tablet >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.wheel >= 1) symbolCounter++;
+		if (currentPlayer.scienceSymbols.quill >= 1) symbolCounter++;
 
-		if (numOfUniqueSymbols >= 6) return true;
+		if (symbolCounter >= 6) return true;
 		else return false;
-	}
-	// need to pass currentPlayer.getPlayerNumber() to function
-	int World::checkForMilitaryVictory(int playerNumber, ConflictPawn & conflictPawn)
-	{
-		if (playerNumber == PLAYER_1 && conflictPawn.getThreat() == 9) return PLAYER_1;
-		else if (playerNumber == PLAYER_2 && conflictPawn.getThreat() == -9) return PLAYER_2;
-		else return 0;
 	}
 
 	void World::runCivilianVictory()
 	{
+		int player1Points = 0;
+		int player2Points = 0;
+
+		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+		{
+			player1Points += (*it)->getVictoryPoints();
+		}
+
+		for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+		{
+			player2Points += (*it)->getVictoryPoints();
+		}
+
+
 	}
+
+	void World::doEffect(Player & currentPlayer, Card & card)
+	{
+		if (card.getType() == GREEN_CARD)
+		{
+			switch (card.getScienceSymbol())
+			{
+			case SCIENCE_SYMBOL_GLOBE:
+				currentPlayer.scienceSymbols.globe++;
+				break;
+			case SCIENCE_SYMBOL_TABLET:
+				currentPlayer.scienceSymbols.tablet++;
+				break;
+			case SCIENCE_SYMBOL_MORTAR:
+				currentPlayer.scienceSymbols.mortar++;
+				break;
+			case SCIENCE_SYMBOL_ARCH:
+				currentPlayer.scienceSymbols.arch++;
+				break;
+			case SCIENCE_SYMBOL_QUILL:
+				currentPlayer.scienceSymbols.quill++;
+				break;
+			case SCIENCE_SYMBOL_WHEEL:
+				currentPlayer.scienceSymbols.wheel++;
+				break;
+			}
+		}
+		else if (card.getType() == RED_CARD)
+		{
+			if (currentPlayer.getPlayerNumber() == PLAYER_1)
+			{
+				mConflict += (card.getShields() + ((currentPlayer.flags.strategyPTFlag) ? (1) : (0)));
+			}
+			else if (currentPlayer.getPlayerNumber() == PLAYER_2)
+			{
+				mConflict -= (card.getShields() + ((currentPlayer.flags.strategyPTFlag) ? (1) : (0)));
+			}
+		}
+		else if (card.getType() == BLUE_CARD)
+		{
+			// do stuff //
+		}
+		else if (card.getType() == BROWN_CARD)
+		{
+			switch (card.getIndex())
+			{
+			case 0: // lumber yard
+				currentPlayer.setWood(1);
+				break;
+			case 1: // logging camp
+				currentPlayer.setWood(1);
+				break;
+			case 2: // clay pool
+				currentPlayer.setClay(1);
+				break;
+			case 3: // clay pit
+				currentPlayer.setClay(1);
+				break;
+			case 4: // quarry
+				currentPlayer.setStone(1);
+				break;
+			case 5: // stone pit
+				currentPlayer.setStone(1);
+				break;
+			case 23: // saw mill
+				currentPlayer.setWood(2);
+				break;
+			case 24: // brickyard
+				currentPlayer.setClay(2);
+				break;
+			case 25: // shelf quarry
+				currentPlayer.setStone(2);
+				break;
+			}
+		}
+		else if (card.getType() == GRAY_CARD)
+		{
+			switch (card.getIndex())
+			{
+			case 6: // glassworks
+				currentPlayer.setGlass(1);
+				break;
+			case 7: // press
+				currentPlayer.setPapyrus(1);
+				break;
+			case 26: // glassblower
+				currentPlayer.setGlass(1);
+				break;
+			case 27: // drying room
+				currentPlayer.setPapyrus(1);
+				break;
+			}
+		}
+		else if (card.getType() == YELLOW_CARD)
+		{
+
+		}
+		else if (card.getType() == WONDER_CARD)
+		{
+
+		}
+	}
+
 
 }
 

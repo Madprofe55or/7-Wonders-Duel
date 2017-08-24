@@ -41,6 +41,12 @@ namespace Seven_Wonders {
 		void setFaceup(bool faceup);
 		bool getExposed();
 		void setExposed(bool exposed);
+		int getVictoryPoints();
+		int setVictoryPoints(int cardIndexNumber);
+		int getScienceSymbol();
+		int setScienceSymbol(int cardIndexNumber);
+		int setShields(int cardIndexNumber);
+		int getShields();
 		vector<float> getPosition();
 		void setPosition(vector<float> position);
 
@@ -56,6 +62,9 @@ namespace Seven_Wonders {
 		int mClayCost;
 		int mPapyrusCost;
 		int mGlassCost;
+		int mVictoryPoints;
+		int mScienceSymbol;
+		int mShields;
 		bool mFaceup = true;
 		bool mExposed = true;
 		std::vector<float> mPosition = START_POSITION; // needs to be an x,y position, and float to be able to pass to vector2f in SFML

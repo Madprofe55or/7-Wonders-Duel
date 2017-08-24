@@ -23,29 +23,6 @@ namespace Seven_Wonders {
 			setGoesFirst(false);
 		}
 
-		int * p_startingResources; // pointer to integer array for starting resources
-		p_startingResources = new (nothrow) int[6]; // pointer to integer array for starting resources
-		if (p_startingResources == nullptr) // error-handling
-		{
-			cout << "Could not allocate memory for player creation...exiting..." << endl;
-			system("pause");
-			EXIT_FAILURE;
-		}
-		p_startingResources[0] = STARTING_COINS; // starting gold
-		for (int i = 0; i < 5; i++) // assigning zero to each other resource
-		{
-			p_startingResources[1 + i] = STARTING_ALL_OTHERS;
-		}
-
-		setCoins(p_startingResources[0]);
-		setWood(p_startingResources[1]);
-		setStone(p_startingResources[2]);
-		setClay(p_startingResources[3]);
-		setPapyrus(p_startingResources[4]);
-		setGlass(p_startingResources[5]);
-
-		delete[] p_startingResources;
-		p_startingResources = nullptr;
 	}
 
 	Player::~Player()
@@ -136,34 +113,6 @@ namespace Seven_Wonders {
 	void Player::setGlass(int changeInGlass)
 	{
 		mGlass = mGlass + changeInGlass;
-	}
-
-	int Player::getNumOfScienceSymbols(string symbolType)
-	{
-		return scienceSymbolsMap[symbolType];
-	}
-	void Player::setNumOfScienceSymbols(string symbolType, int changeInSymbols)
-	{
-		scienceSymbolsMap[symbolType] = scienceSymbolsMap[symbolType] + changeInSymbols;
-	}
-
-	bool Player::getTradeFlag(string resourceType)
-	{
-		return tradeFlagsMap[resourceType];
-	}
-	void Player::setTradeFlag(string resourceType, bool flagSetting)
-	{
-		tradeFlagsMap[resourceType] = flagSetting;
-	}
-
-	bool Player::getStrategyFlag()
-	{
-		return mStrategyFlag;
-	}
-
-	void Player::setStrategyFlag(bool flagSetting)
-	{
-		mStrategyFlag = flagSetting;
 	}
 
 	int Player::getDiscardGoldValue()

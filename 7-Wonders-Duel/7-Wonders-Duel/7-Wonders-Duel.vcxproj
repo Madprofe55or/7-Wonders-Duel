@@ -144,9 +144,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="ConflictPawn.cpp" />
+    <ClCompile Include="ConflictPawn_DEP.cpp" />
     <ClCompile Include="DecksCreator_DEP.h" />
-    <ClCompile Include="Effects.cpp" />
+    <ClCompile Include="Effects_DEP.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Initialization_DEP.cpp" />
     <ClCompile Include="MilitaryToken.cpp" />
@@ -155,11 +155,10 @@
     <ClCompile Include="Wonders_DEP.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardProperties.h" />
-    <ClInclude Include="ConflictPawn.h" />
-    <ClInclude Include="Effects.h" />
+    <ClInclude Include="ConflictPawn_DEP.h" />
+    <ClInclude Include="Effects_DEP.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Game_Constants.h" />
     <ClInclude Include="WonderDeck_DEP.h" />

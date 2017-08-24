@@ -149,7 +149,7 @@ ViewingCityState::ViewingCityState(Game * game, GamePlayingState * gameplayingst
 	mouseoverCard.setTexture(p_game->textureManager.getRef("Clay Reserve"));
 	mouseoverCard.setPosition(-400.0f, -400.0f);
 	mouseoverCard.setOrigin(mouseoverCard.getGlobalBounds().width, 0.0f);
-	mouseoverCard.setColor(sf::Color(255, 255, 255, 190));
+	//mouseoverCard.setColor(sf::Color(255, 255, 255, 190)); // for transparency, if desired
 
 	cityViewTitle.setFont(p_game->fontManager.getRef("Menu Font"));
 	cityViewTitle.setString("Player " + to_string(p_game->world.currentPlayer->getPlayerNumber()) + "\'s" + " City");
