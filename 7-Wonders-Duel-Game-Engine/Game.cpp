@@ -176,6 +176,7 @@ void Game::loadTextures()
 	textureManager.loadTexture("Walls", "Resources/CardImages/walls.jpg");
 	textureManager.loadTexture("Wood Reserve", "Resources/CardImages/woodreserve.jpg");
 	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
+	textureManager.loadTexture("Conflict Pawn", "Resources/BoardItems/conflictpawn.png");
 
 
 

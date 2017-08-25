@@ -254,6 +254,29 @@ namespace Seven_Wonders {
 
 	};
 
+	const std::vector<std::vector<float>> CONFLICT_PAWN_POSITIONS = {
+		{ 108, 104 }, // -9 (player 2 wins)
+		{ 108, 140 },
+		{ 108, 176 },
+		{ 108, 212 },
+		{ 108, 248 },
+		{ 108, 284 },
+		{ 108, 320 },
+		{ 108, 356 },
+		{ 108, 392 },
+		{ 108, 428 }, // start position
+		{ 108, 464 },
+		{ 108, 500 },
+		{ 108, 536 },
+		{ 108, 572 },
+		{ 108, 608 },
+		{ 108, 644 },
+		{ 108, 680 },
+		{ 108, 716 },
+		{ 108, 752 }, // +9 (player 1 wins)
+
+	};
+
 	// Game Textures
 
 

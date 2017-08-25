@@ -738,6 +738,74 @@ namespace Seven_Wonders {
 		else return false;
 	}
 
+	bool World::canBuild(Player & currentPlayer, Card & card)
+	{
+		// need to assign the opposing player
+		Player * opposingPlayer;
+		if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
+		else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
+		
+		// need to assign the differences between what the card costs and what the player has
+		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
+		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
+		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
+		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
+		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
+
+		//// need to assign the differences between what the current player has and what the opposing player has
+		//int woodPlayerDiff = opposingPlayer->getWood() - currentPlayer.getWood();
+		//int stonePlayerDiff = opposingPlayer->getStone() - currentPlayer.getStone();
+		//int clayPlayerDiff = opposingPlayer->getClay() - currentPlayer.getClay();
+		//int papyrusPlayerDiff = opposingPlayer->getPapyrus() - currentPlayer.getPapyrus();
+		//int glassPlayerDiff = opposingPlayer->getGlass() - currentPlayer.getGlass();
+		
+		// need to assign the cost of trading for resources that are needed
+		int woodTradeCost = 0;
+		int clayTradeCost = 0;
+		int stoneTradeCost = 0;
+		int papyrusTradeCost = 0;
+		int glassTradeCost = 0;
+		if (woodCardDiff > 0) woodTradeCost += (2 + opposingPlayer->getWood()) * woodCardDiff;
+		if (stoneCardDiff > 0) stoneTradeCost += (2 + opposingPlayer->getStone()) * stoneCardDiff;
+		if (clayCardDiff > 0) clayTradeCost += (2 + opposingPlayer->getClay()) * clayCardDiff;
+		if (papyrusCardDiff > 0) papyrusTradeCost += (2 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
+		if (glassCardDiff > 0) glassTradeCost += (2 + opposingPlayer->getGlass()) * glassCardDiff;
+
+		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
+
+		// first condition just checks if the player can afford outright
+		if (currentPlayer.getCoins() >= card.getCoinCost() &&
+			woodTradeCost <= 0 &&
+			stoneTradeCost <= 0 &&
+			clayTradeCost <= 0 &&
+			papyrusTradeCost <= 0 &&
+			glassTradeCost <= 0)
+		{
+			return true;
+		}
+		// second condition checks if the player has the resources but not enough coins
+		else if (currentPlayer.getCoins() < card.getCoinCost() &&
+			woodTradeCost <= 0 &&
+			stoneTradeCost <= 0 &&
+			clayTradeCost <= 0 &&
+			papyrusTradeCost <= 0 &&
+			glassTradeCost <= 0)
+		{
+			return false;
+		}
+		// third condition checks if the player doesn't have the resources but can afford the cost for trading
+		else if (totalCoinsNeeded > 0 && currentPlayer.getCoins() >= totalCoinsNeeded)
+		{
+			return true;
+		}
+		// fourth condition checks if the player doesn't have the resources and CAN'T afford the cost for trading
+		else if (totalCoinsNeeded > 0 && currentPlayer.getCoins() < totalCoinsNeeded)
+		{
+			return false;
+		}
+		else return false;
+	}
+
 	void World::runCivilianVictory()
 	{
 		int player1Points = 0;
@@ -758,6 +826,8 @@ namespace Seven_Wonders {
 
 	void World::doEffect(Player & currentPlayer, Card & card)
 	{
+		int goldAdded = 0;
+		
 		if (card.getType() == GREEN_CARD)
 		{
 			switch (card.getScienceSymbol())
@@ -792,6 +862,10 @@ namespace Seven_Wonders {
 			{
 				mConflict -= (card.getShields() + ((currentPlayer.flags.strategyPTFlag) ? (1) : (0)));
 			}
+			// need to set conflict to -9 or 9 in order to avoid out of range for conflict pawn vector positions
+			// if someone plays a card that puts them past the exact win condition they win anyway and it will still be flagged as a win
+			if (mConflict < -9) mConflict = -9;
+			if (mConflict > 9) mConflict = 9;
 		}
 		else if (card.getType() == BLUE_CARD)
 		{
@@ -850,6 +924,70 @@ namespace Seven_Wonders {
 		}
 		else if (card.getType() == YELLOW_CARD)
 		{
+			switch (card.getIndex())
+			{
+			case 11: // stone reserve
+				currentPlayer.flags.stoneTradeFlag = true;
+				break;
+			case 12: // clay reserve
+				currentPlayer.flags.clayTradeFlag = true;
+				break;
+			case 13: // wood reserve
+				currentPlayer.flags.woodTradeFlag = true;
+				break;
+			case 22: // tavern
+				currentPlayer.setCoins(4);
+				break;
+			case 29: // forum
+				currentPlayer.flags.forumResourcesFlag = true;
+				break;
+			case 30: // caravansery
+				currentPlayer.flags.caravenseryResourcesFlag = true;
+				break;
+			case 31: // customs house
+				currentPlayer.flags.papyrusTradeFlag = true;
+				currentPlayer.flags.glassTradeFlag = true;
+				break;
+			case 45: // brewery
+				currentPlayer.setCoins(6);
+				break;
+			case 50: // chamber of commerce
+				for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == GRAY_CARD) goldAdded += 3;
+				}
+				currentPlayer.setCoins(goldAdded);
+				break;
+			case 51: // port
+				for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == BROWN_CARD) goldAdded += 2;
+				}
+				currentPlayer.setCoins(goldAdded);
+				break;
+			case 52: // armory
+				for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == RED_CARD) goldAdded += 1;
+				}
+				currentPlayer.setCoins(goldAdded);
+				break;
+			case 64: // lighthouse
+				goldAdded++; // need to add 1 coin for this card to be counted also
+				for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == YELLOW_CARD) goldAdded += 1;
+				}
+				currentPlayer.setCoins(goldAdded);
+				break;
+			case 65: // arena
+				for (vector<Card*>::iterator it = currentPlayer.playerWonderDeck.begin(); it != currentPlayer.playerWonderDeck.end(); ++it)
+				{
+					if ((*it)->builtWonder) goldAdded += 2;
+				}
+				currentPlayer.setCoins(goldAdded);
+				break;
+			}
 
 		}
 		else if (card.getType() == WONDER_CARD)

@@ -47,6 +47,7 @@ public:
 	sf::RectangleShape player2City;
 
 	// Sprite
+	sf::Sprite mConflictPawn;
 	sf::Sprite mCard1;
 	sf::Sprite mCard2;
 	sf::Sprite mCard3;

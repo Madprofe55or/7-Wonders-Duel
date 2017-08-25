@@ -58,6 +58,7 @@ public:
 
 	GamePlayingState * p_GamePlayingState;
 	Card * p_card;
+	bool canBuildCard;
 
 	
 	// Don't need destructor

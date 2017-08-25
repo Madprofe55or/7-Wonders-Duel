@@ -64,7 +64,9 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(mWondersDisplay);
 	p_game->window.draw(gameBoardGUIText);
 	p_game->window.draw(wondersDisplayText);
-	p_game->window.draw(circleTestPawn);
+
+	mConflictPawn.setPosition(CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][0], CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][1]);
+	p_game->window.draw(mConflictPawn);
 
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
@@ -301,10 +303,10 @@ GamePlayingState::GamePlayingState(Game * game)
 	gameBoard.setScale(0.83f, 0.83f);
 	gameBoard.setPosition(10.0f, 75.0f);
 
-	circleTestPawn.setFillColor(sf::Color::Red);
-	circleTestPawn.setRadius(25.0f);
-	circleTestPawn.setScale(1.0f, 0.50f);
-	circleTestPawn.setPosition(108.0f, 427.0f);
+	mConflictPawn.setTexture(p_game->textureManager.getRef("Conflict Pawn"));
+	mConflictPawn.setScale(0.30f, 0.30f);
+	mConflictPawn.setOrigin(mConflictPawn.getGlobalBounds().width / 2, mConflictPawn.getGlobalBounds().height / 2);
+	mConflictPawn.setPosition(108.0f, 392.0f);
 
 	player1Turn.setFont(game->fontManager.getRef("Menu Font"));
 	player1Turn.setString("Player 1's Turn");
