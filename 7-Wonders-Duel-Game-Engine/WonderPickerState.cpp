@@ -4,9 +4,23 @@
 void WonderPickerState::draw(const float dt)
 {
 	p_game->window.draw(background);
+	
+	
 
-
-	if (!pickedFourCards)
+	if (progressTokensChosen==false)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			p_game->window.draw(progressTokens[i]);
+			progressTokenCounter++;
+				if (progressTokenCounter == 5)
+			{
+				progressTokensChosen = true;
+			}
+			
+		}
+	}
+	if (!pickedFourCards && progressTokensChosen==true)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -140,11 +154,22 @@ void WonderPickerState::handleInput()
 WonderPickerState::WonderPickerState(Game * game)
 {
 	p_game = game;
+
+	for (int i = 0; i < 5; i++)
+	{
+		progressTokenBoard[i]= p_game->world.progressTokenDeck[i];
+	}
 	for (int i = 0; i < 8; i++)
 	{
 		wonderBoard[i] = p_game->world.wonderCardDeck[i];
 	}
 
+
+	for (int i = 0; i < 5; i++)
+	{
+		progressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+		progressTokens[i].setPosition(Seven_Wonders::PROGRESS_TOKEN_POSITIONS[i][0], Seven_Wonders::PROGRESS_TOKEN_POSITIONS[i][1]);
+	}
 
 
 	for (int i = 0; i < 8; ++i)
