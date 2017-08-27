@@ -81,6 +81,11 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(player2Clay);
 	p_game->window.draw(player2Papyrus);
 	p_game->window.draw(player2Glass);
+
+	p_game->window.draw(player1City);
+	p_game->window.draw(player2City);
+	p_game->window.draw(txtPlayer1City);
+	p_game->window.draw(txtPlayer2City);
 }
 
 void GamePlayingState::update(const float dt)
@@ -92,7 +97,8 @@ void GamePlayingState::handleInput()
 	sf::Event event;
 	bool poppingState = false;
 	bool cardPickState = false;
-	bool viewCityState = false;
+	bool viewP1City = false;
+	bool viewP2City = false;
 	Card ** clickedCard;
 
 	while (p_game->window.pollEvent(event))
@@ -112,15 +118,19 @@ void GamePlayingState::handleInput()
 				p_game->world.ExitGame();
 				break;
 			}
-			if (event.key.code == sf::Keyboard::Space)
-			{
-				viewCityState = true;
-			}
 		}
 		case sf::Event::MouseButtonPressed:
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
+				if (p_game->inputManager.isObjectClicked(player1City, event.mouseButton.button, p_game->window) == true)
+				{
+					viewP1City = true;
+				}
+				if (p_game->inputManager.isObjectClicked(player2City, event.mouseButton.button, p_game->window) == true)
+				{
+					viewP2City = true;
+				}
 				for (int i = 0; i < 20; i++)
 				{
 					if (p_game->inputManager.isObjectClicked(mCardSprites[i], event.mouseButton.button, p_game->window) == true &&
@@ -163,6 +173,18 @@ void GamePlayingState::handleInput()
 				mouseoverVectorCount++;
 			}
 
+			if (rectPlayer1City.contains(mouse))
+			{
+				player1City.setFillColor(sf::Color(51, 53, 255));
+			}
+			else player1City.setFillColor(sf::Color(54, 204, 51));
+			
+			if (rectPlayer2City.contains(mouse))
+			{
+				player2City.setFillColor(sf::Color(51, 53, 255));
+			}
+			else player2City.setFillColor(sf::Color(54, 204, 51));
+
 		}
 		default: break;
 		}
@@ -175,12 +197,21 @@ void GamePlayingState::handleInput()
 		rectPickingCard.setSize(rectPickingCardSize);
 		p_game->pushState(new CardPickerState(p_game, this, *clickedCard)); // push card picker state
 	}
-	if (viewCityState == true)
+	if (viewP1City == true)
 	{
 		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
 		rectPickingCard.setPosition(0, 0);
 		rectPickingCard.setSize(rectPickingCardSize);
-		p_game->pushState(new ViewingCityState(p_game, this));
+		player1City.setFillColor(sf::Color(54, 204, 51));
+		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player1));
+	}
+	else if (viewP2City == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		player2City.setFillColor(sf::Color(54, 204, 51));
+		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
 	}
 }
 
@@ -391,6 +422,34 @@ GamePlayingState::GamePlayingState(Game * game)
 	player2Glass.setCharacterSize(25);
 	player2Glass.setPosition(570.0f, 845.0f);
 	player2Glass.setFillColor(sf::Color::White);
+
+	player2City.setFillColor(sf::Color(54, 204, 51));
+	player2City.setSize(BUTTON_SIZE);
+	player2City.setPosition(950.0f, 850.0f);
+	player2City.setOrigin(player2City.getGlobalBounds().width / 2, player2City.getGlobalBounds().height / 2);
+
+	player1City.setFillColor(sf::Color(54, 204, 51));
+	player1City.setSize(BUTTON_SIZE);
+	player1City.setPosition(950.0f, 35.0f);
+	player1City.setOrigin(player1City.getGlobalBounds().width / 2, player1City.getGlobalBounds().height / 2);
+
+	txtPlayer2City.setFont(game->fontManager.getRef("Menu Font"));
+	txtPlayer2City.setString("View City");
+	txtPlayer2City.setCharacterSize(35);
+	txtPlayer2City.setFillColor(sf::Color::White);
+	txtPlayer2City.setOrigin(txtPlayer2City.getGlobalBounds().width / 2, txtPlayer2City.getGlobalBounds().height / 2);
+	txtPlayer2City.setPosition(player2City.getPosition());
+	
+	txtPlayer1City.setFont(game->fontManager.getRef("Menu Font"));
+	txtPlayer1City.setString("View City");
+	txtPlayer1City.setCharacterSize(35);
+	txtPlayer1City.setFillColor(sf::Color::White);
+	txtPlayer1City.setOrigin(txtPlayer1City.getGlobalBounds().width / 2, txtPlayer1City.getGlobalBounds().height / 2);
+	txtPlayer1City.setPosition(player1City.getPosition());
+
+	rectPlayer1City = player1City.getGlobalBounds();
+	rectPlayer2City = player2City.getGlobalBounds();
+	
 
 
 }

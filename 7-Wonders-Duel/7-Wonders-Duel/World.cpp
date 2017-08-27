@@ -116,318 +116,320 @@ namespace Seven_Wonders {
 		cardTheTempleOfArtemis(84)
 	{}
 
-		int World::getAge()
+	int World::getAge()
+	{
+		return mAge;
+	}
+
+	void World::setAge(int age)
+	{
+		mAge = age;
+	}
+
+	/* Run when a player picks the build card option
+	   The parameter passed in the cardpickerstate is the index of the card
+	   on the board. The corresponding board pointer
+	   is copied to the Player.playerCity vector and then the original board pointer
+	   is set to nullptr.  Effects::doEffect() is run. World::exposeCards() is then run to update the
+	   exposed and faceup settings of each card on the board. Then the current player
+	   is switched to the opposing player. */
+	void World::buildCard(int clickedCardIndex)
+	{
+		currentPlayer->playerCity.push_back(board[clickedCardIndex]);
+
+		doEffect(*currentPlayer, *board[clickedCardIndex]);
+
+		currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
+
+		board[clickedCardIndex] = nullptr;
+
+		exposeCards();
+
+		if (currentPlayer == &player1) currentPlayer = &player2;
+		else if (currentPlayer == &player2) currentPlayer = &player1;
+	}
+
+	/* Run when a player picks the discard card option
+	   The paramter passed inthe cardpickerstate is the index of the card
+	   on the board. The corresponding board pointer
+	   is copied to the World.discardDeck vector and then the original board pointer
+	   is set to nullptr. Current player gold is updated by counting the number of
+	   yellow cards in Player.playerCity vector, then the current player is switched
+	   to the opposing player. */
+	void World::discardCard(int clickedCardIndex)
+	{
+		discardDeck.push_back(board[clickedCardIndex]);
+
+		currentPlayer->setCoins(currentPlayer->getDiscardGoldValue());
+
+		board[clickedCardIndex] = nullptr;
+
+		exposeCards();
+
+		if (currentPlayer == &player1) currentPlayer = &player2;
+		else if (currentPlayer == &player2) currentPlayer = &player1;
+
+	}
+
+	/* Algorithm for updating cards' exposure and faceup settings
+	   Run after each card is picked on each player's turn
+	   REFACTORING: Not all cards need their faceup value updated, but it's written as such,
+	   because some cards start faceup already. There are likely ways to
+	   combine some of these conditional statements. */
+	void World::exposeCards()
+	{
+		if (mAge == 1)
 		{
-			return mAge;
-		}
 
-		void World::setAge(int age)
-		{
-			mAge = age;
-		}
-
-		/* Run when a player picks the build card option
-		   The parameter passed in the cardpickerstate is the index of the card
-		   on the board. The corresponding board pointer
-		   is copied to the Player.playerCity vector and then the original board pointer
-		   is set to nullptr.  Effects::doEffect() is run. World::exposeCards() is then run to update the 
-		   exposed and faceup settings of each card on the board. Then the current player
-		   is switched to the opposing player. */
-		void World::buildCard(int clickedCardIndex)
-		{
-			currentPlayer->playerCity.push_back(board[clickedCardIndex]);
-
-			doEffect(*currentPlayer, *board[clickedCardIndex]);
-
-			board[clickedCardIndex] = nullptr;
-
-			exposeCards();
-
-			if (currentPlayer == &player1) currentPlayer = &player2;
-			else if (currentPlayer == &player2) currentPlayer = &player1;
-		}
-
-		/* Run when a player picks the discard card option
-		   The paramter passed inthe cardpickerstate is the index of the card
-		   on the board. The corresponding board pointer
-		   is copied to the World.discardDeck vector and then the original board pointer
-		   is set to nullptr. Current player gold is updated by counting the number of 
-		   yellow cards in Player.playerCity vector, then the current player is switched
-		   to the opposing player. */
-		void World::discardCard(int clickedCardIndex)
-		{
-			discardDeck.push_back(board[clickedCardIndex]);
-
-			currentPlayer->setCoins(currentPlayer->getDiscardGoldValue());
-
-			board[clickedCardIndex] = nullptr;
-
-			exposeCards();
-
-			if (currentPlayer == &player1) currentPlayer = &player2;
-			else if (currentPlayer == &player2) currentPlayer = &player1;
-
-		}
-
-		/* Algorithm for updating cards' exposure and faceup settings
-		   Run after each card is picked on each player's turn 
-		   REFACTORING: Not all cards need their faceup value updated, but it's written as such, 
-		   because some cards start faceup already. There are likely ways to 
-		   combine some of these conditional statements. */
-		void World::exposeCards()
-		{
-			if (mAge == 1)
+			for (int i = 0; i < 20; i++)
 			{
-
-				for (int i = 0; i < 20; i++)
+				if ((i == 0 || i == 1) && board[i] != nullptr)
 				{
-					if ((i == 0 || i == 1) && board[i] != nullptr)
+					if (board[i + 2] == nullptr && board[i + 3] == nullptr)
 					{
-						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 5 || i == 6 || i == 7 || i == 8) && board[i] != nullptr)
-					{
-						if (board[i + 4] == nullptr && board[i + 5] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 9 || i == 10 || i == 11 || i == 12 || i == 13) && board[i] != nullptr)
-					{
-						if (board[i + 5] == nullptr && board[i + 6] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-
-				}
-			}
-
-			if (mAge == 2)
-			{
-				for (int i = 0; i < 20; i++)
-				{
-
-					if (i == 0 && board[i] != nullptr)
-					{
-						if (board[i + 6] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 1 || i == 2 || i == 3 || i ==4) && board[i] != nullptr)
-					{
-						if (board[i + 5] == nullptr && board[i + 6] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 5 && board[i] != nullptr)
-					{
-						if (board[i + 5] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 6 && board[i] != nullptr)
-					{
-						if (board[i + 5] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 7 || i == 8 || i == 9) && board[i] != nullptr)
-					{
-						if (board[i + 4] == nullptr && board[i + 5] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 10 && board[i] != nullptr)
-					{
-						if (board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 11 && board[i] != nullptr)
-					{
-						if (board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 12 || i == 13) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 14 && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 15 && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 16 && board[i] != nullptr)
-					{
-						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if (i == 17 && board[i] != nullptr)
-					{
-						if (board[i + 2] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
 					}
 				}
-			}
-
-			if (mAge == 3)
-			{
-				for (int i = 0; i < 20; i++)
+				if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
 				{
-					if ((i == 0 || i == 1) && board[i] != nullptr)
+					if (board[i + 3] == nullptr && board[i + 4] == nullptr)
 					{
-						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
 					}
-					if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
+				}
+				if ((i == 5 || i == 6 || i == 7 || i == 8) && board[i] != nullptr)
+				{
+					if (board[i + 4] == nullptr && board[i + 5] == nullptr)
 					{
-						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
 					}
-					if ((i == 5 || i == 6) && board[i] != nullptr)
+				}
+				if ((i == 9 || i == 10 || i == 11 || i == 12 || i == 13) && board[i] != nullptr)
+				{
+					if (board[i + 5] == nullptr && board[i + 6] == nullptr)
 					{
-						if (board[9] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 7 || i == 8) && board[i] != nullptr)
-					{
-						if (board[10] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 9) && board[i] != nullptr)
-					{
-						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 10) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 11) && board[i] != nullptr)
-					{
-						if (board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 12 || i == 13) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr && board[i + 4] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 14) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 15) && board[i] != nullptr)
-					{
-						if (board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 16) && board[i] != nullptr)
-					{
-						if (board[i + 2] == nullptr && board[i + 3] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
-					}
-					if ((i == 17) && board[i] != nullptr)
-					{
-						if (board[i + 2] == nullptr)
-						{
-							board[i]->setFaceup(true);
-							board[i]->setExposed(true);
-						}
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
 					}
 				}
 
 			}
 		}
+
+		if (mAge == 2)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+
+				if (i == 0 && board[i] != nullptr)
+				{
+					if (board[i + 6] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 1 || i == 2 || i == 3 || i == 4) && board[i] != nullptr)
+				{
+					if (board[i + 5] == nullptr && board[i + 6] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 5 && board[i] != nullptr)
+				{
+					if (board[i + 5] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 6 && board[i] != nullptr)
+				{
+					if (board[i + 5] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 7 || i == 8 || i == 9) && board[i] != nullptr)
+				{
+					if (board[i + 4] == nullptr && board[i + 5] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 10 && board[i] != nullptr)
+				{
+					if (board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 11 && board[i] != nullptr)
+				{
+					if (board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 12 || i == 13) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 14 && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 15 && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 16 && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if (i == 17 && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+			}
+		}
+
+		if (mAge == 3)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				if ((i == 0 || i == 1) && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 2 || i == 3 || i == 4) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 5 || i == 6) && board[i] != nullptr)
+				{
+					if (board[9] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 7 || i == 8) && board[i] != nullptr)
+				{
+					if (board[10] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 9) && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 10) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 11) && board[i] != nullptr)
+				{
+					if (board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 12 || i == 13) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr && board[i + 4] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 14) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 15) && board[i] != nullptr)
+				{
+					if (board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 16) && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr && board[i + 3] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+				if ((i == 17) && board[i] != nullptr)
+				{
+					if (board[i + 2] == nullptr)
+					{
+						board[i]->setFaceup(true);
+						board[i]->setExposed(true);
+					}
+				}
+			}
+
+		}
+	}
 
 	void World::Setup()
-		{
+	{
 		// 1. Create vectors for Wonders, Progress Tokens, Age 1, Age 2, Age 3, Guilds -- and shuffle
 		//       a.  Age 1 and 2 have 3 cards removed
 		//       b.  Guild deck has 3 cards moved to Age 3 deck
@@ -509,7 +511,7 @@ namespace Seven_Wonders {
 		age1Deck.push_back(cardAltar);
 		age1Deck.push_back(cardBaths);
 		age1Deck.push_back(cardTavern);
-		
+
 		srand((unsigned)time(NULL));
 		random_shuffle(age1Deck.begin(), age1Deck.end());
 
@@ -562,7 +564,7 @@ namespace Seven_Wonders {
 		age2Deck.push_back(cardAqueduct);
 		age2Deck.push_back(cardRostrum);
 		age2Deck.push_back(cardBrewery);
-		
+
 		srand((unsigned)time(NULL));
 		random_shuffle(age2Deck.begin(), age2Deck.end());
 
@@ -611,7 +613,7 @@ namespace Seven_Wonders {
 		age3Deck.push_back(cardLighthouse);
 		age3Deck.push_back(cardArena);
 		// end age3 card deck, shuffling, and selection
-		
+
 		// Guild deck and shuffling
 		//create Guild Deck and remove three cards to add to Age 3 deck
 		guildDeck.push_back(cardMerchantsGuild);    //will need to seperate the guilds deck
@@ -744,7 +746,7 @@ namespace Seven_Wonders {
 		Player * opposingPlayer;
 		if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
 		else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
-		
+
 		// need to assign the differences between what the card costs and what the player has
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
 		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
@@ -758,18 +760,28 @@ namespace Seven_Wonders {
 		//int clayPlayerDiff = opposingPlayer->getClay() - currentPlayer.getClay();
 		//int papyrusPlayerDiff = opposingPlayer->getPapyrus() - currentPlayer.getPapyrus();
 		//int glassPlayerDiff = opposingPlayer->getGlass() - currentPlayer.getGlass();
-		
+
 		// need to assign the cost of trading for resources that are needed
 		int woodTradeCost = 0;
 		int clayTradeCost = 0;
 		int stoneTradeCost = 0;
 		int papyrusTradeCost = 0;
 		int glassTradeCost = 0;
-		if (woodCardDiff > 0) woodTradeCost += (2 + opposingPlayer->getWood()) * woodCardDiff;
-		if (stoneCardDiff > 0) stoneTradeCost += (2 + opposingPlayer->getStone()) * stoneCardDiff;
-		if (clayCardDiff > 0) clayTradeCost += (2 + opposingPlayer->getClay()) * clayCardDiff;
-		if (papyrusCardDiff > 0) papyrusTradeCost += (2 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
-		if (glassCardDiff > 0) glassTradeCost += (2 + opposingPlayer->getGlass()) * glassCardDiff;
+
+		if (woodCardDiff > 0 && currentPlayer.flags.woodTradeFlag == false) woodTradeCost += (2 + opposingPlayer->getWood()) * woodCardDiff;
+		else if (woodCardDiff > 0 && currentPlayer.flags.woodTradeFlag == true) woodTradeCost += (1 + opposingPlayer->getWood()) * woodCardDiff;
+
+		if (stoneCardDiff > 0 && currentPlayer.flags.stoneTradeFlag == false) stoneTradeCost += (2 + opposingPlayer->getStone()) * stoneCardDiff;
+		else if (stoneCardDiff > 0 && currentPlayer.flags.stoneTradeFlag == true) stoneTradeCost += (1 + opposingPlayer->getStone()) * stoneCardDiff;
+
+		if (clayCardDiff > 0 && currentPlayer.flags.clayTradeFlag == false) clayTradeCost += (2 + opposingPlayer->getClay()) * clayCardDiff;
+		else if (clayCardDiff > 0 && currentPlayer.flags.clayTradeFlag == true) clayTradeCost += (1 + opposingPlayer->getClay()) * clayCardDiff;
+
+		if (papyrusCardDiff > 0 && currentPlayer.flags.papyrusTradeFlag == false) papyrusTradeCost += (2 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
+		else if (papyrusCardDiff > 0 && currentPlayer.flags.papyrusTradeFlag == true) papyrusTradeCost += (1 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
+
+		if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == false) glassTradeCost += (2 + opposingPlayer->getGlass()) * glassCardDiff;
+		else if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == true) glassTradeCost += (1 + opposingPlayer->getGlass()) * glassCardDiff;
 
 		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
 
@@ -827,7 +839,7 @@ namespace Seven_Wonders {
 	void World::doEffect(Player & currentPlayer, Card & card)
 	{
 		int goldAdded = 0;
-		
+
 		if (card.getType() == GREEN_CARD)
 		{
 			switch (card.getScienceSymbol())
@@ -996,6 +1008,46 @@ namespace Seven_Wonders {
 		}
 	}
 
+	int World::goldCost(Player & currentPlayer, Card & card)
+	{
+		// need to assign the opposing player
+		Player * opposingPlayer;
+		if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
+		else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
+
+		// need to assign the differences between what the card costs and what the player has
+		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
+		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
+		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
+		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
+		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
+
+		// need to assign the cost of trading for resources that are needed
+		int woodTradeCost = 0;
+		int clayTradeCost = 0;
+		int stoneTradeCost = 0;
+		int papyrusTradeCost = 0;
+		int glassTradeCost = 0;
+
+		if (woodCardDiff > 0 && currentPlayer.flags.woodTradeFlag == false) woodTradeCost += (2 + opposingPlayer->getWood()) * woodCardDiff;
+		else if (woodCardDiff > 0 && currentPlayer.flags.woodTradeFlag == true) woodTradeCost += (1 + opposingPlayer->getWood()) * woodCardDiff;
+
+		if (stoneCardDiff > 0 && currentPlayer.flags.stoneTradeFlag == false) stoneTradeCost += (2 + opposingPlayer->getStone()) * stoneCardDiff;
+		else if (stoneCardDiff > 0 && currentPlayer.flags.stoneTradeFlag == true) stoneTradeCost += (1 + opposingPlayer->getStone()) * stoneCardDiff;
+
+		if (clayCardDiff > 0 && currentPlayer.flags.clayTradeFlag == false) clayTradeCost += (2 + opposingPlayer->getClay()) * clayCardDiff;
+		else if (clayCardDiff > 0 && currentPlayer.flags.clayTradeFlag == true) clayTradeCost += (1 + opposingPlayer->getClay()) * clayCardDiff;
+
+		if (papyrusCardDiff > 0 && currentPlayer.flags.papyrusTradeFlag == false) papyrusTradeCost += (2 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
+		else if (papyrusCardDiff > 0 && currentPlayer.flags.papyrusTradeFlag == true) papyrusTradeCost += (1 + opposingPlayer->getPapyrus()) * papyrusCardDiff;
+
+		if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == false) glassTradeCost += (2 + opposingPlayer->getGlass()) * glassCardDiff;
+		else if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == true) glassTradeCost += (1 + opposingPlayer->getGlass()) * glassCardDiff;
+
+		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
+		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());
+		if (totalCoinsNeeded > 0) return -(totalCoinsNeeded + card.getCoinCost());
+	}
 
 }
 

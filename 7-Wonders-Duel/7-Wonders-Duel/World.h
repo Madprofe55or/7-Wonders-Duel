@@ -44,6 +44,7 @@ namespace Seven_Wonders {
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
+		int goldCost(Player & currentPlayer, Card & card);
 
 
 		int mAge = 1;

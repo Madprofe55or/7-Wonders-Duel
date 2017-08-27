@@ -29,8 +29,9 @@ public:
 	sf::Vector2f MAIN_AREA_SIZE = { 800, 450 };
 
 	bool mouseover = false;
+	Player * p_player;
 
-	ViewingCityState(Game * game, GamePlayingState * gameplayingstate);
+	ViewingCityState(Game * game, GamePlayingState * gameplayingstate, Player * player);
 	// destructor not needed
 	~ViewingCityState() {};
 };
