@@ -40,6 +40,13 @@ public:
 	sf::FloatRect wonderFloatRect6;
 	sf::FloatRect wonderFloatRect7;
 	sf::FloatRect wonderFloatRect8;
+
+
+
+
+	//WonderTextFloatRect
+
+	sf::FloatRect chooseWonderTextRect;
 	
 	std::vector < sf::FloatRect> vectorWonderFloatRects = { wonderFloatRect1, wonderFloatRect2, wonderFloatRect3, wonderFloatRect4,
 															wonderFloatRect5, wonderFloatRect6, wonderFloatRect7, wonderFloatRect8 };
@@ -52,6 +59,7 @@ public:
 	sf::Text player2GUIText;
 	sf::Text gameBoardGUIText;
 	sf::Text wondersDisplayText;
+	sf::Text chooseWonders;
 
 
 	//create the sprite objects for the tavern 

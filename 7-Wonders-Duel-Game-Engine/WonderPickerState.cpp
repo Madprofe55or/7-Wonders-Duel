@@ -4,22 +4,17 @@
 void WonderPickerState::draw(const float dt)
 {
 	p_game->window.draw(background);
+	p_game->window.draw(chooseWonders);
 	
-	
-
-	if (progressTokensChosen==false)
+	if (!progressTokensChosen)
 	{
 		for (int i = 0; i < 5; i++)
 		{
 			p_game->window.draw(progressTokens[i]);
-			progressTokenCounter++;
-				if (progressTokenCounter == 5)
-			{
-				progressTokensChosen = true;
-			}
-			
+
 		}
 	}
+	
 	if (!pickedFourCards && progressTokensChosen==true)
 	{
 		for (int i = 0; i < 4; i++)
@@ -58,6 +53,7 @@ void WonderPickerState::handleInput()
 	bool wondersPicked = false;
 
 
+
 	while (p_game->window.pollEvent(event))
 	{
 		switch (event.type)
@@ -76,73 +72,100 @@ void WonderPickerState::handleInput()
 			}
 		}
 
+		case sf::Event::MouseMoved:
+		{
+			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
+
+			if (chooseWonderTextRect.contains(mouse))
+			{
+				chooseWonders.setFillColor(sf::Color::Green);
+			}
+
+			else
+			{
+				chooseWonders.setFillColor(sf::Color::White);
+			}
+		}
+			
+
 		case sf::Event::MouseButtonPressed:
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 				sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
 
-
-				if (!pickedFourCards)
+				if (chooseWonderTextRect.contains(mouse))
 				{
-					for (int i = 0; i < 4; i++)
+					chooseWonders.setPosition(-1000, -1000);
+					for (int i = 0; i < 5; i++)
 					{
-						if (vectorWonderFloatRects[i].contains(mouse))
+						progressTokens[i].setPosition(-1000, -1000);
+					}
+
+					progressTokensChosen = true;
+
+				}
+
+				if (!pickedFourCards && progressTokensChosen == true)
+					{
+						for (int i = 0; i < 4; i++)
 						{
-							if (i == 0 || i == 3)
+							if (vectorWonderFloatRects[i].contains(mouse))
 							{
-								p_game->world.player1.playerWonderDeck.push_back(wonderBoard[i]);
-								wonderBoard[i] = nullptr;
-								mWonderRects[i].setPosition(-400, -400);
-								vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
-								numOfPickedCards++;
-								if (numOfPickedCards == 4) pickedFourCards = true;
-								break;
+								if (i == 0 || i == 3)
+								{
+									p_game->world.player1.playerWonderDeck.push_back(wonderBoard[i]);
+									wonderBoard[i] = nullptr;
+									mWonderRects[i].setPosition(-400, -400);
+									vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
+									numOfPickedCards++;
+									if (numOfPickedCards == 4) pickedFourCards = true;
+									break;
+								}
+								else if (i == 1 || i == 2)
+								{
+									p_game->world.player2.playerWonderDeck.push_back(wonderBoard[i]);
+									wonderBoard[i] = nullptr;
+									mWonderRects[i].setPosition(-400, -400);
+									vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
+									numOfPickedCards++;
+									if (numOfPickedCards == 4) pickedFourCards = true;
+									break;
+								}
 							}
-							else if (i == 1 || i == 2)
+						}
+					}
+
+					else if (pickedFourCards)
+					{
+						for (int i = 4; i < 8; i++)
+						{
+							if (vectorWonderFloatRects[i].contains(mouse))
 							{
-								p_game->world.player2.playerWonderDeck.push_back(wonderBoard[i]);
-								wonderBoard[i] = nullptr;
-								mWonderRects[i].setPosition(-400, -400);
-								vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
-								numOfPickedCards++;
-								if (numOfPickedCards == 4) pickedFourCards = true;
-								break;
+								if (i == 4 || i == 7)
+								{
+									p_game->world.player2.playerWonderDeck.push_back(wonderBoard[i]);
+									wonderBoard[i] = nullptr;
+									mWonderRects[i].setPosition(-400, -400);
+									vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
+									numOfPickedCards++;
+									if (numOfPickedCards == 8) wondersPicked = true;
+									break;
+								}
+								else if (i == 5 || i == 6)
+								{
+									p_game->world.player1.playerWonderDeck.push_back(wonderBoard[i]);
+									wonderBoard[i] = nullptr;
+									mWonderRects[i].setPosition(-400, -400);
+									vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
+									numOfPickedCards++;
+									if (numOfPickedCards == 8) wondersPicked = true;
+									break;
+								}
 							}
 						}
 					}
 				}
-
-				else if (pickedFourCards)
-				{
-					for (int i = 4; i < 8; i++)
-					{
-						if (vectorWonderFloatRects[i].contains(mouse))
-						{
-							if (i == 4 || i == 7)
-							{
-								p_game->world.player2.playerWonderDeck.push_back(wonderBoard[i]);
-								wonderBoard[i] = nullptr;
-								mWonderRects[i].setPosition(-400, -400);
-								vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
-								numOfPickedCards++;
-								if (numOfPickedCards == 8) wondersPicked = true;
-								break;
-							}
-							else if (i == 5 || i == 6)
-							{
-								p_game->world.player1.playerWonderDeck.push_back(wonderBoard[i]);
-								wonderBoard[i] = nullptr;
-								mWonderRects[i].setPosition(-400, -400);
-								vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
-								numOfPickedCards++;
-								if (numOfPickedCards == 8) wondersPicked = true;
-								break;
-							}
-						}
-					}
-				}
-			}
 		}
 		default: break;
 		}
@@ -185,6 +208,15 @@ WonderPickerState::WonderPickerState(Game * game)
 		}
 		vectorWonderFloatRects[i] = mWonderRects[i].getGlobalBounds();
 	}
+
+	//Set Text for the Wonders 
+	chooseWonders.setFont(p_game->fontManager.getRef("Menu Font"));
+	chooseWonders.setCharacterSize(50);
+	chooseWonders.setFillColor(sf::Color::White);
+	chooseWonders.setString("Choose Wonders ->");
+	chooseWonders.setPosition(900, 700);
+
+	chooseWonderTextRect = chooseWonders.getGlobalBounds();
 
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));

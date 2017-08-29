@@ -75,6 +75,11 @@ public:
 	sf::Sprite mPlayer2Wonder2;
 	sf::Sprite mPlayer2Wonder3;
 	sf::Sprite mPlayer2Wonder4;
+	sf::Sprite mProgressToken1;
+	sf::Sprite mProgressToken2;
+	sf::Sprite mProgressToken3;
+	sf::Sprite mProgressToken4;
+	sf::Sprite mProgressToken5;
 
 	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,
@@ -85,6 +90,8 @@ public:
 
 	sf::Sprite mWonderSpritesP1[4] = { mPlayer1Wonder1, mPlayer1Wonder2, mPlayer1Wonder3, mPlayer1Wonder4 };
 	sf::Sprite mWonderSpritesP2[4] = { mPlayer2Wonder1, mPlayer2Wonder2, mPlayer2Wonder3, mPlayer2Wonder4 };
+
+	sf::Sprite mProgressTokens[5] = { mProgressToken1, mProgressToken2, mProgressToken3, mProgressToken4 ,mProgressToken5 };
 
 	sf::Sprite mouseoverCard;
 
@@ -97,9 +104,17 @@ public:
 	sf::FloatRect rectPlayer2Wonder3;
 	sf::FloatRect rectPlayer2Wonder4;
 
+	sf::FloatRect progressTokenRect1;
+	sf::FloatRect progressTokenRect2;
+	sf::FloatRect progressTokenRect3;
+	sf::FloatRect progressTokenRect4;
+	sf::FloatRect progressTokenRect5;
+
 	sf::FloatRect mRectWondersP1[4] = { rectPlayer1Wonder1, rectPlayer1Wonder2, rectPlayer1Wonder3, rectPlayer1Wonder4 };
 	sf::FloatRect mRectWondersP2[4] = { rectPlayer2Wonder1, rectPlayer2Wonder2, rectPlayer2Wonder3, rectPlayer2Wonder4 };
 
+	sf::FloatRect mProgressTokenRects[5] = { progressTokenRect1, progressTokenRect2, progressTokenRect3, progressTokenRect4,
+											progressTokenRect5 };
 
 	// placeholder gui stuff
 	sf::RectangleShape mPlayer1GUI;

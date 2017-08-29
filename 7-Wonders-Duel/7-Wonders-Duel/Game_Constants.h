@@ -163,12 +163,12 @@ namespace Seven_Wonders {
 
 	//Progress Tokens Positioning
 	const std::vector<std::vector<int>> PROGRESS_TOKEN_POSITIONS = {
-		{ 200, 80 }, 
-		{ 500, 80 },
-		{ 800, 80 },
+		{ 400, 200 }, 
+		{ 600, 200 },
+		{ 800, 200 },
 
-		{ 200, 450 },
-		{ 800, 450 },
+		{ 500, 450 },
+		{ 700, 450 },
 
 	};
 
