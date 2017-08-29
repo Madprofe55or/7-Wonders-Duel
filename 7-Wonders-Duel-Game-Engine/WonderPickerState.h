@@ -5,6 +5,7 @@
 
 #include "GamePlayingState.h"
 #include "GameState.h"
+#include "Game_Constants.h"
 
 class WonderPickerState : public GameState
 {
@@ -16,6 +17,20 @@ public:
 	//array pointing to 8 wonder cards from setup
 	Card* wonderBoard[8];
 
+	//array pointing to 5 progress tokens chose in setup
+	ProgressToken* progressTokenBoard[5];
+
+	//circle shapes for progress tokens chosen at world setup
+	sf::Sprite progressToken1;
+	sf::Sprite progressToken2;
+	sf::Sprite progressToken3;
+	sf::Sprite progressToken4;
+	sf::Sprite progressToken5;
+
+	int progressTokenCounter=0;
+
+	std::vector <sf::Sprite> progressTokens = { progressToken1, progressToken2, progressToken3, progressToken4, progressToken5 };
+
 	//floatrects
 	sf::FloatRect wonderFloatRect1;
 	sf::FloatRect wonderFloatRect2;
@@ -25,6 +40,13 @@ public:
 	sf::FloatRect wonderFloatRect6;
 	sf::FloatRect wonderFloatRect7;
 	sf::FloatRect wonderFloatRect8;
+
+
+
+
+	//WonderTextFloatRect
+
+	sf::FloatRect chooseWonderTextRect;
 	
 	std::vector < sf::FloatRect> vectorWonderFloatRects = { wonderFloatRect1, wonderFloatRect2, wonderFloatRect3, wonderFloatRect4,
 															wonderFloatRect5, wonderFloatRect6, wonderFloatRect7, wonderFloatRect8 };
@@ -37,6 +59,7 @@ public:
 	sf::Text player2GUIText;
 	sf::Text gameBoardGUIText;
 	sf::Text wondersDisplayText;
+	sf::Text chooseWonders;
 
 
 	//create the sprite objects for the tavern 
@@ -56,6 +79,7 @@ public:
 	//count picks made total 
 	int numOfPickedCards = 0;
 	bool pickedFourCards = false;
+	bool progressTokensChosen= false;
 
 
 	std::vector <sf::Sprite> mWonderRects = {

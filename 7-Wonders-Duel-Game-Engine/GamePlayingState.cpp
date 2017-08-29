@@ -30,6 +30,7 @@ void GamePlayingState::draw(const float dt)
 
 	p_game->window.draw(mouseoverCard);
 
+	
 	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
 		mPlayer1GUI.setFillColor(sf::Color(51, 204, 51, 126));
@@ -67,6 +68,12 @@ void GamePlayingState::draw(const float dt)
 
 	mConflictPawn.setPosition(CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][0], CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][1]);
 	p_game->window.draw(mConflictPawn);
+
+	for (int i = 0; i<5; i++)
+	{
+		p_game->window.draw(mProgressTokens[i]);
+	}
+
 
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
@@ -173,6 +180,16 @@ void GamePlayingState::handleInput()
 				mouseoverVectorCount++;
 			}
 
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (mProgressTokenRects[i].contains(mouse))
+				{
+					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+					mouseover = true;
+					break;
+				}
+			}
 			if (rectPlayer1City.contains(mouse))
 			{
 				player1City.setFillColor(sf::Color(51, 53, 255));
@@ -296,6 +313,20 @@ GamePlayingState::GamePlayingState(Game * game)
 		mWonderSpritesP2[i].setOrigin(mWonderSpritesP2[i].getGlobalBounds().width, 0.0f);
 		mWonderSpritesP2[i].setScale(0.2769f, 0.2769f);
 		mWonderSpritesP2[i].setPosition(1600.0f, 475.0f + (mWonderSpritesP2[i].getGlobalBounds().height * i));
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		mProgressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+		mProgressTokens[i].setScale(0.6f, 0.6f);
+		mProgressTokens[i].setOrigin(mProgressTokens[i].getGlobalBounds().width / 2.0, mProgressTokens[i].getGlobalBounds().height/ 2.0);
+		mProgressTokens[i].setRotation(270);
+		mProgressTokens[i].setPosition(100.0f, 200.0f + (100 * i));
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		mProgressTokenRects[i] = mProgressTokens[i].getGlobalBounds();
 	}
 
 	for (int i = 0; i < 4; i++)

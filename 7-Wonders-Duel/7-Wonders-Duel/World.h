@@ -31,6 +31,7 @@ namespace Seven_Wonders {
 		vector<Card> age3Deck;
 		vector<Card> guildDeck;
 		vector<Card*> discardDeck;
+		vector<ProgressToken*> progressTokenDeck;
 
 		Card * board[20];
 
@@ -52,7 +53,7 @@ namespace Seven_Wonders {
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
-		vector<ProgressToken*> progressTokenDeck;
+		
 		MilitaryToken militaryTokenP12;
 		MilitaryToken militaryTokenP15;
 		MilitaryToken militaryTokenP22;
