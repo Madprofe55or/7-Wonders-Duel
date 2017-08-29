@@ -740,7 +740,7 @@ namespace Seven_Wonders {
 		0, // press
 		0, // guard tower
 		0, // workshop
-		0, // apothecary
+		1, // apothecary
 		0, // stone reserve
 		0, // clay reserve
 		0, // wood reserve

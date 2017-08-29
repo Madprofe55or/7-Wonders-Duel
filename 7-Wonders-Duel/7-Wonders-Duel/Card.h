@@ -49,6 +49,7 @@ namespace Seven_Wonders {
 		int getShields();
 		vector<float> getPosition();
 		void setPosition(vector<float> position);
+		bool builtWonder = false;
 
 	private:
 		int mOwner;
@@ -67,6 +68,7 @@ namespace Seven_Wonders {
 		int mShields;
 		bool mFaceup = true;
 		bool mExposed = true;
+
 		std::vector<float> mPosition = START_POSITION; // needs to be an x,y position, and float to be able to pass to vector2f in SFML
 	};
 

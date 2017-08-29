@@ -77,7 +77,7 @@ void CardPickerState::handleInput()
 				{
 					poppingState = true;
 				}
-				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true)
+				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true && canBuildCard == true)
 				{
 					// build the card
 					p_game->world.buildCard(p_GamePlayingState->clickedCardIndex);
@@ -114,14 +114,18 @@ void CardPickerState::handleInput()
 
 			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
 
-			if (buildRect.contains(mouse))
+			if (canBuildCard)
 			{
-				buildRectangle.setFillColor(sf::Color(51, 153, 255));
+				if (buildRect.contains(mouse))
+				{
+					buildRectangle.setFillColor(sf::Color(51, 153, 255));
+				}
+				else
+				{
+					buildRectangle.setFillColor(sf::Color(0, 204, 51));
+				}
 			}
-			else
-			{
-				buildRectangle.setFillColor(sf::Color(0, 204, 51));
-			}
+
 			if (discardRect.contains(mouse))
 			{
 				discardRectangle.setFillColor(sf::Color(51, 153, 255));
@@ -252,10 +256,20 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	textGlassCostNum.setFillColor(sf::Color::White);
 	textGlassCostNum.setPosition(850, 550);
 
+	if (p_game->world.canBuild(*p_game->world.currentPlayer, *p_card)) canBuildCard = true;
+	else canBuildCard = false;
+
 	if (card->getExposed())
 	{
 
-		buildRectangle.setFillColor(sf::Color(0, 204, 51));
+		if (canBuildCard)
+		{
+			buildRectangle.setFillColor(sf::Color(0, 204, 51));
+		}
+		else
+		{
+			buildRectangle.setFillColor(sf::Color(133, 142, 155));
+		}
 		buildRectangle.setSize(BUTTON_SIZE);
 		buildRectangle.setOrigin(buildRectangle.getGlobalBounds().width / 2.0f, buildRectangle.getGlobalBounds().height / 2.0f);
 		buildRectangle.setPosition(1025, 400);

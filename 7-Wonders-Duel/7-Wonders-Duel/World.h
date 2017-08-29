@@ -42,8 +42,12 @@ namespace Seven_Wonders {
 		void ExitGame();
 		bool checkForNewAge();
 		bool checkForScienceVictory(Player & currentPlayer);
+		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
+		int goldCost(Player & currentPlayer, Card & card);
+
+
 		int mAge = 1;
 		int mConflict = 0;
 		Player * currentPlayer = nullptr;

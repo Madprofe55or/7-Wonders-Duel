@@ -25,6 +25,7 @@ namespace Seven_Wonders {
 		setGlassCost(cardIndexNumber);
 		mVictoryPoints = setVictoryPoints(cardIndexNumber);
 		mScienceSymbol = setScienceSymbol(cardIndexNumber);
+		mShields = setShields(cardIndexNumber);
 
 	}
 

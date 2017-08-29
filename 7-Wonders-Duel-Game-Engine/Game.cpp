@@ -176,6 +176,7 @@ void Game::loadTextures()
 	textureManager.loadTexture("Walls", "Resources/CardImages/walls.jpg");
 	textureManager.loadTexture("Wood Reserve", "Resources/CardImages/woodreserve.jpg");
 	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
+
 	//load Progress Token textures
 	textureManager.loadTexture("Agriculture", "Resources/ProgressTokens/theology.jpg");
 	textureManager.loadTexture("Architecture", "Resources/ProgressTokens/theology.jpg");
@@ -188,6 +189,11 @@ void Game::loadTextures()
 	textureManager.loadTexture("Theology", "Resources/ProgressTokens/theology.jpg");
 	textureManager.loadTexture("Urbanism", "Resources/ProgressTokens/theology.jpg");
 	
+
+	textureManager.loadTexture("Conflict Pawn", "Resources/BoardItems/conflictpawn.png");
+
+
+
 
 }
 

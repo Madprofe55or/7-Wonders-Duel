@@ -42,11 +42,8 @@ public:
 	sf::Text player2Papyrus;
 	sf::Text player2Glass;
 
-	// Shapes
-	sf::RectangleShape player1City;
-	sf::RectangleShape player2City;
-
 	// Sprite
+	sf::Sprite mConflictPawn;
 	sf::Sprite mCard1;
 	sf::Sprite mCard2;
 	sf::Sprite mCard3;
@@ -113,8 +110,18 @@ public:
 	sf::FloatRect mRectWondersP1[4] = { rectPlayer1Wonder1, rectPlayer1Wonder2, rectPlayer1Wonder3, rectPlayer1Wonder4 };
 	sf::FloatRect mRectWondersP2[4] = { rectPlayer2Wonder1, rectPlayer2Wonder2, rectPlayer2Wonder3, rectPlayer2Wonder4 };
 
+
 	sf::FloatRect mProgressTokenRects[5] = { progressTokenRect1, progressTokenRect2, progressTokenRect3, progressTokenRect4,
 											progressTokenRect5 };
+	// view city buttons
+	sf::RectangleShape player1City;
+	sf::RectangleShape player2City;
+	sf::FloatRect rectPlayer1City;
+	sf::FloatRect rectPlayer2City;
+	sf::Text txtPlayer1City;
+	sf::Text txtPlayer2City;
+	sf::Vector2f const BUTTON_SIZE = { 150, 50 };
+
 
 	// placeholder gui stuff
 	sf::RectangleShape mPlayer1GUI;
