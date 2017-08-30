@@ -30,6 +30,11 @@ void GamePlayingState::draw(const float dt)
 
 	p_game->window.draw(mouseoverCard);
 
+	p_game->window.draw(mouseOverProgressToken);
+
+	if (mouseOverToken) mouseOverProgressToken.setPosition(300.0f, 350.0f);
+	if (!mouseOverToken) mouseOverProgressToken.setPosition(-400.0f, -400.0f);
+
 	
 	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
@@ -156,6 +161,7 @@ void GamePlayingState::handleInput()
 
 			int mouseoverVectorCount = 0;
 			mouseover = false;
+			mouseOverToken = false;
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -185,8 +191,8 @@ void GamePlayingState::handleInput()
 			{
 				if (mProgressTokenRects[i].contains(mouse))
 				{
-					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
-					mouseover = true;
+					mouseOverProgressToken.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+					mouseOverToken = true;
 					break;
 				}
 			}
@@ -321,7 +327,7 @@ GamePlayingState::GamePlayingState(Game * game)
 		mProgressTokens[i].setScale(0.6f, 0.6f);
 		mProgressTokens[i].setOrigin(mProgressTokens[i].getGlobalBounds().width / 2.0, mProgressTokens[i].getGlobalBounds().height/ 2.0);
 		mProgressTokens[i].setRotation(270);
-		mProgressTokens[i].setPosition(100.0f, 200.0f + (100 * i));
+		mProgressTokens[i].setPosition(40.0f, 300.0f + (77.0 * i));
 	}
 
 	for (int i = 0; i < 5; i++)
@@ -477,6 +483,9 @@ GamePlayingState::GamePlayingState(Game * game)
 	txtPlayer1City.setFillColor(sf::Color::White);
 	txtPlayer1City.setOrigin(txtPlayer1City.getGlobalBounds().width / 2, txtPlayer1City.getGlobalBounds().height / 2);
 	txtPlayer1City.setPosition(player1City.getPosition());
+
+
+
 
 	rectPlayer1City = player1City.getGlobalBounds();
 	rectPlayer2City = player2City.getGlobalBounds();

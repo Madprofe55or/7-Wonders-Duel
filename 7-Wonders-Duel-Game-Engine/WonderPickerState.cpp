@@ -11,11 +11,11 @@ void WonderPickerState::draw(const float dt)
 		for (int i = 0; i < 5; i++)
 		{
 			p_game->window.draw(progressTokens[i]);
-
 		}
 	}
-	
-	if (!pickedFourCards && progressTokensChosen==true)
+
+
+	if (!pickedFourCards)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -106,7 +106,7 @@ void WonderPickerState::handleInput()
 
 				}
 
-				if (!pickedFourCards && progressTokensChosen == true)
+				if (!pickedFourCards)
 					{
 						for (int i = 0; i < 4; i++)
 						{
@@ -214,7 +214,7 @@ WonderPickerState::WonderPickerState(Game * game)
 	chooseWonders.setCharacterSize(50);
 	chooseWonders.setFillColor(sf::Color::White);
 	chooseWonders.setString("Choose Wonders ->");
-	chooseWonders.setPosition(900, 700);
+	chooseWonders.setPosition(1200, 700);
 
 	chooseWonderTextRect = chooseWonders.getGlobalBounds();
 

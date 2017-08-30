@@ -455,8 +455,10 @@ namespace Seven_Wonders {
 
 		for (int i = 0; i < 5; i++)
 		{
+			progressTokenDiscardDeck.push_back(progressTokenDeck[i]);
 			progressTokenDeck.pop_back();
 		}
+
 		// End progress token deck, shuffling, and selection
 
 		// Wonder deck and shuffling

@@ -32,6 +32,7 @@ namespace Seven_Wonders {
 		vector<Card> guildDeck;
 		vector<Card*> discardDeck;
 		vector<ProgressToken*> progressTokenDeck;
+		vector <ProgressToken*> progressTokenDiscardDeck;
 
 		Card * board[20];
 
