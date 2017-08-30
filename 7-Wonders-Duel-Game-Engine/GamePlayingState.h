@@ -41,6 +41,12 @@ public:
 	sf::Text player2Clay;
 	sf::Text player2Papyrus;
 	sf::Text player2Glass;
+	sf::Text progressTokenText1;
+	sf::Text progressTokenText2;
+	sf::Text progressTokenText3;
+	sf::Text progressTokenText4;
+	sf::Text progressTokenText5;
+
 
 	// Sprite
 	sf::Sprite mConflictPawn;
@@ -91,6 +97,8 @@ public:
 	sf::Sprite mProgressTokens[5] = { mProgressToken1, mProgressToken2, mProgressToken3, mProgressToken4 ,mProgressToken5 };
 
 	sf::Sprite mouseoverCard;
+
+	sf::Sprite mouseOverProgressToken;
 
 	sf::FloatRect rectPlayer1Wonder1;
 	sf::FloatRect rectPlayer1Wonder2;
@@ -144,6 +152,7 @@ public:
 	int clickedCardIndex;
 	int emptyCount;
 	bool mouseover;
+	bool mouseOverToken;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
