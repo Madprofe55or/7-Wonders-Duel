@@ -11,3 +11,4 @@ FUNCTIONALITY STILL NEEDED:
     a. All guilds
     b. All wonders
     c. All progress tokens (see #2 above)
+5. Code for handling special trading flags
