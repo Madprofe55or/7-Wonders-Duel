@@ -4,6 +4,14 @@
 void WonderPickerState::draw(const float dt)
 {
 	p_game->window.draw(background);
+
+	if (numOfPickedCards == 1) chooseWonders.setString("Player 2: Choose First Wonder");
+	else if (numOfPickedCards == 2) chooseWonders.setString("Player 2: Choose Second Wonder");
+	else if (numOfPickedCards == 3) chooseWonders.setString("Player 1: Choose Second Wonder");
+	else if (numOfPickedCards == 4) chooseWonders.setString("Player 2: Choose Third Wonder");
+	else if (numOfPickedCards == 5) chooseWonders.setString("Player 1: Choose Third Wonder");
+	else if (numOfPickedCards == 6) chooseWonders.setString("Player 1: Choose Fourth Wonder");
+	else if (numOfPickedCards == 7) chooseWonders.setString("Player 2: Choose Fourth Wonder");
 	p_game->window.draw(chooseWonders);
 	
 	if (!progressTokensChosen)
@@ -124,6 +132,7 @@ void WonderPickerState::handleInput()
 								}
 								else if (i == 1 || i == 2)
 								{
+
 									p_game->world.player2.playerWonderDeck.push_back(wonderBoard[i]);
 									wonderBoard[i] = nullptr;
 									mWonderRects[i].setPosition(-400, -400);
@@ -191,6 +200,8 @@ WonderPickerState::WonderPickerState(Game * game)
 	for (int i = 0; i < 5; i++)
 	{
 		progressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+		progressTokens[i].setScale(0.35f, 0.35f);
+		progressTokens[i].setOrigin(progressTokens[i].getGlobalBounds().width / 2.0f, progressTokens[i].getGlobalBounds().height / 2.0f);
 		progressTokens[i].setPosition(Seven_Wonders::PROGRESS_TOKEN_POSITIONS[i][0], Seven_Wonders::PROGRESS_TOKEN_POSITIONS[i][1]);
 	}
 
@@ -213,8 +224,9 @@ WonderPickerState::WonderPickerState(Game * game)
 	chooseWonders.setFont(p_game->fontManager.getRef("Menu Font"));
 	chooseWonders.setCharacterSize(50);
 	chooseWonders.setFillColor(sf::Color::White);
-	chooseWonders.setString("Choose Wonders ->");
-	chooseWonders.setPosition(1200, 700);
+	chooseWonders.setString("Player 1: Choose First Wonder");
+	chooseWonders.setOrigin((chooseWonders.getGlobalBounds().left + chooseWonders.getGlobalBounds().width) / 2.0f, (chooseWonders.getGlobalBounds().top + chooseWonders.getGlobalBounds().height) / 2.0f);
+	chooseWonders.setPosition(800, 25);
 
 	chooseWonderTextRect = chooseWonders.getGlobalBounds();
 

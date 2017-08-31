@@ -25,15 +25,10 @@ void GamePlayingState::draw(const float dt)
 		p_game->window.draw(mWonderSpritesP2[i]);
 	}
 
+	// drawing mouseover card
 	if (mouseover) mouseoverCard.setPosition(900.0f, 350.0f);
 	if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
-
 	p_game->window.draw(mouseoverCard);
-
-	p_game->window.draw(mouseOverProgressToken);
-
-	if (mouseOverToken) mouseOverProgressToken.setPosition(300.0f, 350.0f);
-	if (!mouseOverToken) mouseOverProgressToken.setPosition(-400.0f, -400.0f);
 
 	
 	if (p_game->world.currentPlayer == &p_game->world.player1)
@@ -74,10 +69,15 @@ void GamePlayingState::draw(const float dt)
 	mConflictPawn.setPosition(CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][0], CONFLICT_PAWN_POSITIONS[9 + p_game->world.mConflict][1]);
 	p_game->window.draw(mConflictPawn);
 
-	for (int i = 0; i<5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		p_game->window.draw(mProgressTokens[i]);
+		if (p_game->world.progressTokenDeck[i] != nullptr) p_game->window.draw(mProgressTokens[i]);
 	}
+
+	// drawing mouseover progresstoken
+	if (mouseOverToken) mouseOverProgressToken.setPosition(150.0f, 350.0f);
+	if (!mouseOverToken) mouseOverProgressToken.setPosition(-400.0f, -400.0f);
+	p_game->window.draw(mouseOverProgressToken);
 
 
 	p_game->window.draw(player1Coins);
@@ -192,6 +192,7 @@ void GamePlayingState::handleInput()
 				if (mProgressTokenRects[i].contains(mouse))
 				{
 					mouseOverProgressToken.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
+					mouseOverProgressToken.setScale(0.5f, 0.5f);
 					mouseOverToken = true;
 					break;
 				}
@@ -324,10 +325,9 @@ GamePlayingState::GamePlayingState(Game * game)
 	for (int i = 0; i < 5; i++)
 	{
 		mProgressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
-		mProgressTokens[i].setScale(0.6f, 0.6f);
+		mProgressTokens[i].setScale(0.20f, 0.20f);
 		mProgressTokens[i].setOrigin(mProgressTokens[i].getGlobalBounds().width / 2.0, mProgressTokens[i].getGlobalBounds().height/ 2.0);
-		mProgressTokens[i].setRotation(270);
-		mProgressTokens[i].setPosition(40.0f, 300.0f + (77.0 * i));
+		mProgressTokens[i].setPosition(25.0f, 260.0f + (77.0 * i));
 	}
 
 	for (int i = 0; i < 5; i++)

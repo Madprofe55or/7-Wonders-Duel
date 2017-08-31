@@ -178,16 +178,16 @@ void Game::loadTextures()
 	textureManager.loadTexture("Workshop", "Resources/CardImages/workshop.jpg");
 
 	//load Progress Token textures
-	textureManager.loadTexture("Agriculture", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Architecture", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Economy", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Law", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Masonry", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Mathematics", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Philosphy", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Strategy", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Theology", "Resources/ProgressTokens/theology.jpg");
-	textureManager.loadTexture("Urbanism", "Resources/ProgressTokens/theology.jpg");
+	textureManager.loadTexture("Agriculture", "Resources/ProgressTokens/agriculture.png");
+	textureManager.loadTexture("Architecture", "Resources/ProgressTokens/architecture.png");
+	textureManager.loadTexture("Economy", "Resources/ProgressTokens/economy.png");
+	textureManager.loadTexture("Law", "Resources/ProgressTokens/law.png");
+	textureManager.loadTexture("Masonry", "Resources/ProgressTokens/masonry.png");
+	textureManager.loadTexture("Mathematics", "Resources/ProgressTokens/mathematics.png");
+	textureManager.loadTexture("Philosophy", "Resources/ProgressTokens/philosophy.png");
+	textureManager.loadTexture("Strategy", "Resources/ProgressTokens/strategy.png");
+	textureManager.loadTexture("Theology", "Resources/ProgressTokens/theology.png");
+	textureManager.loadTexture("Urbanism", "Resources/ProgressTokens/urbanism.png");
 	
 
 	textureManager.loadTexture("Conflict Pawn", "Resources/BoardItems/conflictpawn.png");
