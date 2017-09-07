@@ -83,6 +83,14 @@ public:
 	sf::Sprite mProgressToken3;
 	sf::Sprite mProgressToken4;
 	sf::Sprite mProgressToken5;
+	sf::Sprite mPlayer1Wonder1Built;
+	sf::Sprite mPlayer1Wonder2Built;
+	sf::Sprite mPlayer1Wonder3Built;
+	sf::Sprite mPlayer1Wonder4Built;
+	sf::Sprite mPlayer2Wonder1Built;
+	sf::Sprite mPlayer2Wonder2Built;
+	sf::Sprite mPlayer2Wonder3Built;
+	sf::Sprite mPlayer2Wonder4Built;
 
 	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,
@@ -93,6 +101,9 @@ public:
 
 	sf::Sprite mWonderSpritesP1[4] = { mPlayer1Wonder1, mPlayer1Wonder2, mPlayer1Wonder3, mPlayer1Wonder4 };
 	sf::Sprite mWonderSpritesP2[4] = { mPlayer2Wonder1, mPlayer2Wonder2, mPlayer2Wonder3, mPlayer2Wonder4 };
+
+	sf::Sprite mWonderBuiltSpritesP1[4] = { mPlayer1Wonder1Built, mPlayer1Wonder2Built, mPlayer1Wonder3Built, mPlayer1Wonder4Built };
+	sf::Sprite mWonderBuiltSpritesP2[4] = { mPlayer2Wonder1Built, mPlayer2Wonder2Built, mPlayer2Wonder3Built, mPlayer2Wonder4Built };
 
 	sf::Sprite mProgressTokens[5] = { mProgressToken1, mProgressToken2, mProgressToken3, mProgressToken4 ,mProgressToken5 };
 
@@ -157,6 +168,8 @@ public:
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
 	virtual void handleInput();
+
+	void setBuiltSprites();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

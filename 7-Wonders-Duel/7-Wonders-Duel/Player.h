@@ -68,6 +68,13 @@ namespace Seven_Wonders {
 			bool caravenseryResourcesFlag = false;
 			bool theGreatLighthouseResourcesFlag = false;
 			bool piraeusResourcesFlag = false;
+			bool merchantsGuildFlag = false;
+			bool shipownersGuildFlag = false;
+			bool buildersGuildFlag = false;
+			bool magistratesGuildFlag = false;
+			bool scientistsGuildFlag = false;
+			bool moneylendersGuildFlag = false;
+			bool tacticiansGuildFlag = false;
 		};
 
 		scienceSymbols scienceSymbols;

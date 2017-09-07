@@ -50,6 +50,7 @@ namespace Seven_Wonders {
 		vector<float> getPosition();
 		void setPosition(vector<float> position);
 		bool builtWonder = false;
+		int builtInAge = 0;
 
 	private:
 		int mOwner;

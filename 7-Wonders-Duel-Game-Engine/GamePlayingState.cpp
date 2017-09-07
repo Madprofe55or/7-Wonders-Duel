@@ -21,6 +21,12 @@ void GamePlayingState::draw(const float dt)
 
 	for (int i = 0; i < 4; i++)
 	{
+		if (p_game->world.player1.playerWonderDeck[i]->builtWonder == true) p_game->window.draw(mWonderBuiltSpritesP1[i]);
+		if (p_game->world.player2.playerWonderDeck[i]->builtWonder == true) p_game->window.draw(mWonderBuiltSpritesP2[i]);
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
 		p_game->window.draw(mWonderSpritesP1[i]);
 		p_game->window.draw(mWonderSpritesP2[i]);
 	}
@@ -319,7 +325,7 @@ GamePlayingState::GamePlayingState(Game * game)
 		mWonderSpritesP2[i].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerWonderDeck[i]->getName()));
 		mWonderSpritesP2[i].setOrigin(mWonderSpritesP2[i].getGlobalBounds().width, 0.0f);
 		mWonderSpritesP2[i].setScale(0.2769f, 0.2769f);
-		mWonderSpritesP2[i].setPosition(1600.0f, 475.0f + (mWonderSpritesP2[i].getGlobalBounds().height * i));
+		mWonderSpritesP2[i].setPosition(1600.0f, 465.0f + (mWonderSpritesP2[i].getGlobalBounds().height * i));
 	}
 
 	for (int i = 0; i < 5; i++)
@@ -485,13 +491,22 @@ GamePlayingState::GamePlayingState(Game * game)
 	txtPlayer1City.setPosition(player1City.getPosition());
 
 
+	// built wonder sprites
+	for (int i = 0; i < 4; i++)
+	{
+		mWonderBuiltSpritesP1[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+		mWonderBuiltSpritesP1[i].setRotation(90);
+		mWonderBuiltSpritesP1[i].setScale(0.35f, 0.35f);
+		mWonderBuiltSpritesP1[i].setPosition(mWonderSpritesP1[i].getGlobalBounds().left + 90, mWonderSpritesP1[i].getGlobalBounds().top + 5);
 
+		mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+		mWonderBuiltSpritesP2[i].setRotation(90);
+		mWonderBuiltSpritesP2[i].setScale(0.35f, 0.35f);
+		mWonderBuiltSpritesP2[i].setPosition(mWonderSpritesP2[i].getGlobalBounds().left + 90, mWonderSpritesP2[i].getGlobalBounds().top + 5);
+	}
 
 	rectPlayer1City = player1City.getGlobalBounds();
 	rectPlayer2City = player2City.getGlobalBounds();
-	
-
-
 }
 
 void GamePlayingState::resetSprites()
@@ -537,8 +552,31 @@ void GamePlayingState::resetSprites()
 		}
 		
 	}
+
+
+}
+
+void GamePlayingState::setBuiltSprites()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (p_game->world.player1.playerWonderDeck[i]->builtWonder == true)
+		{
+			if (p_game->world.player1.playerWonderDeck[i]->builtInAge == 1) mWonderBuiltSpritesP1[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+			else if (p_game->world.player1.playerWonderDeck[i]->builtInAge == 2) mWonderBuiltSpritesP1[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
+			else if (p_game->world.player1.playerWonderDeck[i]->builtInAge == 3) mWonderBuiltSpritesP1[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+		}
+		if (p_game->world.player2.playerWonderDeck[i]->builtWonder == true)
+		{
+			if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 1) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 1 Back"));
+			else if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 2) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 2 Back"));
+			else if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 3) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
+		}
+	}
 }
 
 GamePlayingState::~GamePlayingState()
 {
 }
+
+

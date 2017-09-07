@@ -161,6 +161,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ViewingCityState.h" />
+    <ClInclude Include="WonderBuildingState.h" />
     <ClInclude Include="WonderPickerState.h" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ViewingCityState.cpp" />
+    <ClCompile Include="WonderBuildingState.cpp" />
     <ClCompile Include="WonderPickerState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

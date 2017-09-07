@@ -171,6 +171,26 @@ namespace Seven_Wonders {
 
 	}
 
+	void World::buildWonder(int wonderNumber, int clickedCardIndex)
+	{
+		currentPlayer->playerWonderDeck[wonderNumber - 1]->builtWonder = true;
+		currentPlayer->playerWonderDeck[wonderNumber - 1]->builtInAge = getAge();
+
+		doEffect(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]);
+
+		currentPlayer->setCoins(goldCost(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]));
+
+		board[clickedCardIndex] = nullptr;
+
+		exposeCards();
+
+		if (currentPlayer == &player1 && repeatTurn == false) currentPlayer = &player2;
+		else if (currentPlayer == &player2 && repeatTurn == false) currentPlayer = &player1;
+		else if (repeatTurn == true) {} //  this won't change the currentplayer pointer so whoever built the card that flagged repeatTurn should get another turn
+
+		if (repeatTurn == true) repeatTurn = false; // re-setting the repeatturn flag
+	}
+
 	/* Algorithm for updating cards' exposure and faceup settings
 	   Run after each card is picked on each player's turn
 	   REFACTORING: Not all cards need their faceup value updated, but it's written as such,
@@ -883,7 +903,7 @@ namespace Seven_Wonders {
 		}
 		else if (card.getType() == BLUE_CARD)
 		{
-			// do stuff //
+			// these have no immediate effects //
 		}
 		else if (card.getType() == BROWN_CARD)
 		{
@@ -1002,11 +1022,176 @@ namespace Seven_Wonders {
 				currentPlayer.setCoins(goldAdded);
 				break;
 			}
+		}
+		else if (card.getType() == GUILD_CARD)
+		{
+			int player1Worth = 0;
+			int player2Worth = 0;
+			
+			switch (card.getIndex())
+			{
+			case 66: // merchants guild
+				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == YELLOW_CARD) player1Worth++;
+				}
+				for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == YELLOW_CARD) player2Worth++;
+				}
 
+				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
+				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
+				
+				currentPlayer.flags.magistratesGuildFlag = true;
+				break;
+			case 67: // shipowners guild
+				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == BROWN_CARD || (*it)->getType() == GRAY_CARD) player1Worth++;
+				}
+				for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == BROWN_CARD || (*it)->getType() == GRAY_CARD) player2Worth++;
+				}
+
+				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
+				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
+
+				currentPlayer.flags.shipownersGuildFlag = true;
+				break;
+			case 68: // builders guild
+				currentPlayer.flags.buildersGuildFlag = true;
+				break;
+			case 69: // magistrates guild
+				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == BLUE_CARD) player1Worth++;
+				}
+				for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == BLUE_CARD) player2Worth++;
+				}
+
+				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
+				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
+
+				currentPlayer.flags.magistratesGuildFlag = true;
+				break;
+			case 70: // scientists guild
+				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == GREEN_CARD) player1Worth++;
+				}
+				for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == GREEN_CARD) player2Worth++;
+				}
+
+				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
+				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
+
+				currentPlayer.flags.scientistsGuildFlag = true;
+				break;
+			case 71: // moneylenders guild
+				currentPlayer.flags.moneylendersGuildFlag = true;
+				break;
+			case 72: // tacticians guild
+				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == RED_CARD) player1Worth++;
+				}
+				for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+				{
+					if ((*it)->getType() == RED_CARD) player2Worth++;
+				}
+
+				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
+				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
+
+				currentPlayer.flags.tacticiansGuildFlag = true;
+				break;
+			}
 		}
 		else if (card.getType() == WONDER_CARD)
 		{
+			Player * opposingPlayer;
 
+			if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
+			else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
+			
+			switch (card.getIndex())
+			{
+			case 73: // the appian way
+				currentPlayer.setCoins(3);
+				
+				// need to reset coins to zero if they go below zero when subtracting the three coins
+				// setCoins() changes the amount of coins, it doesn't actually set it (likely should be part of refactoring at some point)
+				opposingPlayer->setCoins(-3);
+				if (0 - opposingPlayer->getCoins() == -3) opposingPlayer->setCoins(3);
+				else if (0 - opposingPlayer->getCoins() == -2) opposingPlayer->setCoins(2);
+				else if (0 - opposingPlayer->getCoins() == -1) opposingPlayer->setCoins(1);
+				else {}
+
+				// set the repeat turn flag on
+				repeatTurn = true;
+
+				break;
+			case 74: // circus maximus
+				// need code here to handle destroying opposing player's card
+
+				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
+				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
+				
+				break;
+			case 75: // the colossus
+				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict += 2;
+				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict -= 2;
+				
+				break;
+			case 76: // the great library
+				// need code here to be able to randomly select three un-drawn progress tokens
+				
+				break;
+			case 77: // the great lighthouse
+				currentPlayer.flags.theGreatLighthouseResourcesFlag = true;
+							
+				break;
+			case 78: // the hanging gardens
+				currentPlayer.setCoins(6);
+				repeatTurn = true;
+				
+				break;
+			case 79: // the mausoleum
+				// need code here to be able to build a discarded card
+				
+				break;
+			case 80: // piraeus
+				currentPlayer.flags.piraeusResourcesFlag = true;
+				repeatTurn = true;
+				
+				break;
+			case 81: // the pyramides
+				// no immediate effect //
+				
+				break;
+			case 82: // the sphinx
+				repeatTurn = true;
+				
+				break;
+			case 83: // the statue of zeus
+				// need code here to handle destroying opposing player's card
+
+				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
+				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
+				
+				break;
+			case 84: // the temple of artemis
+				currentPlayer.setCoins(12);
+				repeatTurn = true;
+				
+				break;
+			}
 		}
 	}
 
