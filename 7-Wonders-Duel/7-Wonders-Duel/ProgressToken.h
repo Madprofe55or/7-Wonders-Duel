@@ -32,7 +32,7 @@ namespace Seven_Wonders {
 										  "Law",
 										  "Masonry",
 										  "Mathematics",
-										  "Philosphy",
+										  "Philosophy",
 										  "Strategy",
 										  "Theology",
 										  "Urbanism" };

@@ -45,6 +45,9 @@
     <ClInclude Include="WonderPickerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WonderBuildingState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WonderPickerState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WonderBuildingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

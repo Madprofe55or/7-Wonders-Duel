@@ -24,6 +24,7 @@ namespace Seven_Wonders {
 		void setAge(int age);
 		void buildCard(int clickedCardIndex);
 		void discardCard(int clickedCardIndex);
+		void buildWonder(int wonderNumber, int clickCardIndex);
 		void exposeCards();
 		vector<Card> age1Deck;
 		vector<Card*> wonderCardDeck;
@@ -47,6 +48,8 @@ namespace Seven_Wonders {
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
 		int goldCost(Player & currentPlayer, Card & card);
+
+		bool repeatTurn = false;
 
 
 		int mAge = 1;

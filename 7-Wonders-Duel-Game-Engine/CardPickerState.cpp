@@ -1,4 +1,5 @@
 #include "CardPickerState.h"
+#include "WonderBuildingState.h"
 #include <string>
 
 
@@ -45,12 +46,14 @@ void CardPickerState::draw(const float dt)
 
 void CardPickerState::update(const float dt)
 {
+	removeStateAfterWonderBuild();
 }
 
 void CardPickerState::handleInput()
 {
 	sf::Event event;
 	bool poppingState = false;
+	bool wonderBuildState = false;
 
 	while (p_game->window.pollEvent(event))
 	{
@@ -101,13 +104,14 @@ void CardPickerState::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(buildWonderRectangle, event.mouseButton.button, p_game->window) == true)
 				{
-
+					wonderBuildState = true;
 				}
 			}
 		}
 		case sf::Event::MouseMoved:
 		{
 			// These sf::IntRect objects are needed to be able to use .contains() below
+			// REFACTORING: These rectangles can be defined as members in this class, instead of instatiating them here with each mouse movement
 			sf::FloatRect buildRect = buildRectangle.getGlobalBounds();
 			sf::FloatRect discardRect = discardRectangle.getGlobalBounds();
 			sf::FloatRect buildWonderRect = buildWonderRectangle.getGlobalBounds();
@@ -148,8 +152,13 @@ void CardPickerState::handleInput()
 		default: break;
 		}
 	}
+
+	if (wonderBuildState == true)
+	{
+		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
+	}
 	if (poppingState == true)
-	{		
+	{
 		p_game->popState(); // state is popped here since there is no while loop to return to at this point
 	}
 }
@@ -315,4 +324,9 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());
 	}
 
+}
+
+void CardPickerState::removeStateAfterWonderBuild()
+{
+	if (builtWonder) p_game->popState();
 }

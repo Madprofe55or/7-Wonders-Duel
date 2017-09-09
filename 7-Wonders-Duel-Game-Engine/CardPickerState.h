@@ -5,6 +5,7 @@
 
 #include "GameState.h"
 #include "GamePlayingState.h"
+//#include "WonderBuildingState.h"
 
 class CardPickerState : public GameState
 {
@@ -56,9 +57,12 @@ public:
 
 	CardPickerState(Game * game, GamePlayingState * gameplayingstate, Seven_Wonders::Card * card);
 
+	void removeStateAfterWonderBuild();
+
 	GamePlayingState * p_GamePlayingState;
 	Card * p_card;
 	bool canBuildCard;
+	bool builtWonder = false;
 
 	
 	// Don't need destructor

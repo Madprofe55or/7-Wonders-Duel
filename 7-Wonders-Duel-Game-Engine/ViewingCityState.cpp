@@ -16,8 +16,17 @@ void ViewingCityState::draw(const float dt)
 		}
 	}
 
-	if (mouseover) mouseoverCard.setPosition(800.0f, 450.0f);
-	else if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
+	if (p_player == &p_game->world.player1)
+	{
+		if (mouseover) mouseoverCard.setPosition(800.0f, 100.0f);
+		else if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
+	}
+	else if (p_player == &p_game->world.player2)
+	{
+		if (mouseover) mouseoverCard.setPosition(800.0f, 450.0f);
+		else if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
+	}
+
 
 	p_game->window.draw(mouseoverCard);
 	p_game->window.draw(cityViewTitle);
