@@ -7,6 +7,7 @@
 #include "Game_Constants.h"
 #include "Card.h"
 #include <map>
+#include "ProgressToken.h"
 #include <vector>
 using namespace std;
 
@@ -37,6 +38,7 @@ namespace Seven_Wonders {
 		void resetResources();
 		vector<Card*> playerCity;
 		vector<Card*> playerWonderDeck;
+		vector<ProgressToken*> playerProgressTokenDeck;
 
 		struct scienceSymbols
 		{
@@ -89,6 +91,7 @@ namespace Seven_Wonders {
 		int mClay = 0;
 		int mPapyrus = 0;
 		int mGlass = 0;
+		int mScienceSymbols = 0;
 		bool mStrategyFlag = false;
 		static const int STARTING_COINS = 7;
 		static const int STARTING_ALL_OTHERS = 0;

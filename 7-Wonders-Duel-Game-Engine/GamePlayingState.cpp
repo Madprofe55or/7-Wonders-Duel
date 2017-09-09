@@ -1,6 +1,7 @@
 #include "GamePlayingState.h"
 #include "CardPickerState.h"
 #include "ViewingCityState.h"
+#include "ProgressTokenBuildingState.h"
 
 void GamePlayingState::draw(const float dt)
 {
@@ -157,6 +158,7 @@ void GamePlayingState::handleInput()
 						clickedCard = &p_game->world.board[i];
 						clickedCardIndex = i;
 						cardPickState = true;
+						p_game->world.BuildProgressToken(p_game->world.player1);
 					}
 				}
 			}
@@ -243,6 +245,9 @@ void GamePlayingState::handleInput()
 		player2City.setFillColor(sf::Color(54, 204, 51));
 		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
 	}
+
+	if(p_game->world.progressTokenState==true) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
+
 }
 
 GamePlayingState::GamePlayingState(Game * game)
