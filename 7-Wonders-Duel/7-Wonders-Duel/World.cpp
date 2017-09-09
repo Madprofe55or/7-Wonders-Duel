@@ -758,8 +758,8 @@ namespace Seven_Wonders {
 				runCivilianVictory();
 				return false;
 			}
+			else return false;
 		}
-		else return false;
 	}
 
 	bool World::checkForScienceVictory(Player & currentPlayer)
@@ -775,6 +775,17 @@ namespace Seven_Wonders {
 
 		if (symbolCounter >= 6) return true;
 		else return false;
+	}
+
+	//check to see if progress token in player city is greater or equal to 2
+	//allow to build wonder if true
+	void World::BuildProgressToken(Player & currentPlayer)
+	{
+		if (currentPlayer.scienceSymbols.arch == 2 || currentPlayer.scienceSymbols.balance == 2 || currentPlayer.scienceSymbols.globe == 2 || currentPlayer.scienceSymbols.mortar == 2 || currentPlayer.scienceSymbols.tablet == 2 || currentPlayer.scienceSymbols.wheel == 2 ||
+			currentPlayer.scienceSymbols.quill == 2)
+		{
+			progressTokenState = true;
+		}
 	}
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
@@ -1216,6 +1227,11 @@ namespace Seven_Wonders {
 		}
 	}
 
+	void World::progressTokenEffect(Player &currentPlayer, ProgressToken &progressToken)
+	{
+
+	}
+
 	int World::goldCost(Player & currentPlayer, Card & card)
 	{
 		// need to assign the opposing player
@@ -1255,6 +1271,7 @@ namespace Seven_Wonders {
 		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
 		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());
 		if (totalCoinsNeeded > 0) return -(totalCoinsNeeded + card.getCoinCost());
+
 	}
 
 
