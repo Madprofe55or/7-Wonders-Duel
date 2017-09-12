@@ -45,7 +45,7 @@ namespace Seven_Wonders {
 		void ExitGame();
 		bool checkForNewAge();
 		bool checkForScienceVictory(Player & currentPlayer);
-		void BuildProgressToken(Player & currentPlayer);
+		bool canBuildToken = false;
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
