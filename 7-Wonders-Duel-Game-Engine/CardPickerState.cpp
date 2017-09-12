@@ -1,5 +1,6 @@
 #include "CardPickerState.h"
 #include "WonderBuildingState.h"
+#include "ProgressTokenBuildingState.h"
 #include <string>
 
 
@@ -54,6 +55,7 @@ void CardPickerState::handleInput()
 	sf::Event event;
 	bool poppingState = false;
 	bool wonderBuildState = false;
+	bool progressTokenBuildState = false;
 
 	while (p_game->window.pollEvent(event))
 	{
@@ -157,6 +159,12 @@ void CardPickerState::handleInput()
 	{
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
 	}
+
+	if (p_game->world.canBuildToken == false)
+	{
+		p_game->pushState(new ProgressTokenBuildingState(p_game, this, p_GamePlayingState));
+	}
+
 	if (poppingState == true)
 	{
 		p_game->popState(); // state is popped here since there is no while loop to return to at this point
@@ -322,6 +330,7 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		textBuildWonder.setFillColor(sf::Color::White);
 		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());
+
 	}
 
 }

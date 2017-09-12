@@ -9,9 +9,10 @@ void ProgressTokenBuildingState::draw(const float dt)
 	p_game->window.draw(mainArea);
 	p_game->window.draw(progressTokenText);
 	p_game->window.draw(progressToken1);
-	p_game->window.draw(progressToken1);
-	p_game->window.draw(progressToken1);
-	p_game->window.draw(progressToken1);
+	p_game->window.draw(progressToken2);
+	p_game->window.draw(progressToken3);
+	p_game->window.draw(progressToken4);
+	p_game->window.draw(progressToken5);
 	p_game->window.draw(buttonToken1);
 	p_game->window.draw(buttonToken2);
 	p_game->window.draw(buttonToken3);
@@ -58,27 +59,6 @@ void ProgressTokenBuildingState::handleInput()
 		case sf::Event::MouseMoved:
 		{
 			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
-
-			if (canBuildToken1 && rectButtonToken1.contains(mouse)) buttonToken1.setFillColor(sf::Color(51, 153, 255));
-			else if (canBuildToken1 && !rectButtonToken1.contains(mouse)) buttonToken1.setFillColor(sf::Color(242, 198, 55));
-			else buttonToken1.setFillColor(sf::Color(133, 142, 155));
-
-			if (canBuildToken2 && rectButtonToken2.contains(mouse)) buttonToken2.setFillColor(sf::Color(51, 153, 255));
-			else if (canBuildToken2 && !rectButtonToken2.contains(mouse)) buttonToken2.setFillColor(sf::Color(242, 198, 55));
-			else buttonToken2.setFillColor(sf::Color(133, 142, 155));
-
-			if (canBuildToken3 && rectButtonToken3.contains(mouse)) buttonToken3.setFillColor(sf::Color(51, 153, 255));
-			else if (canBuildToken3 && !rectButtonToken3.contains(mouse)) buttonToken3.setFillColor(sf::Color(242, 198, 55));
-			else buttonToken3.setFillColor(sf::Color(133, 142, 155));
-
-			if (canBuildToken4 && rectButtonToken4.contains(mouse)) buttonToken4.setFillColor(sf::Color(51, 153, 255));
-			else if (canBuildToken4 && !rectButtonToken4.contains(mouse)) buttonToken4.setFillColor(sf::Color(242, 198, 55));
-			else buttonToken4.setFillColor(sf::Color(133, 142, 155));
-
-			if (canBuildToken5 && rectButtonToken4.contains(mouse)) buttonToken5.setFillColor(sf::Color(51, 153, 255));
-			else if (canBuildToken5 && !rectButtonToken5.contains(mouse)) buttonToken5.setFillColor(sf::Color(242, 198, 55));
-			else buttonToken4.setFillColor(sf::Color(133, 142, 155));
-
 			break;
 		}
 
@@ -90,10 +70,11 @@ void ProgressTokenBuildingState::handleInput()
 	}
 }
 
-ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, GamePlayingState * gameplayingstate)
+ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, CardPickerState * cardpickerstate, GamePlayingState * gameplayingstate)
 {
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
+	p_CardPickerState = cardpickerstate;
 	p_player = p_game->world.currentPlayer;
 
 
@@ -118,52 +99,51 @@ ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, GamePlayingS
 	progressTokenText.setCharacterSize(40);
 	progressTokenText.setPosition(550, 70);
 
-
-	if (canBuildToken1) buttonToken1.setFillColor(sf::Color(242, 198, 55));
-	else buttonToken1.setFillColor(sf::Color(133, 142, 155));
+	buttonToken1.setFillColor(sf::Color(133, 142, 155));
 	buttonToken1.setSize(BUTTON_SIZE);
 	buttonToken1.setPosition(700, 200);
 
-	if (canBuildToken2) buttonToken2.setFillColor(sf::Color(242, 198, 55));
-	else buttonToken2.setFillColor(sf::Color(133, 142, 155));
+	buttonToken2.setFillColor(sf::Color(133, 142, 155));
 	buttonToken2.setSize(BUTTON_SIZE);
-	buttonToken2.setPosition(700, 370);
+	buttonToken2.setPosition(700, 325);
 
-	if (canBuildToken3) buttonToken3.setFillColor(sf::Color(242, 198, 55));
-	else buttonToken3.setFillColor(sf::Color(133, 142, 155));
+	buttonToken3.setFillColor(sf::Color(133, 142, 155));
 	buttonToken3.setSize(BUTTON_SIZE);
-	buttonToken3.setPosition(700, 545);
+	buttonToken3.setPosition(700, 450);
 
-	if (canBuildToken4) buttonToken4.setFillColor(sf::Color(242, 198, 55));
-	else buttonToken4.setFillColor(sf::Color(133, 142, 155));
+	buttonToken4.setFillColor(sf::Color(133, 142, 155));
 	buttonToken4.setSize(BUTTON_SIZE);
-	buttonToken4.setPosition(700, 725);
+	buttonToken4.setPosition(700, 575);
+
+	buttonToken5.setFillColor(sf::Color(133, 142, 155));
+	buttonToken5.setSize(BUTTON_SIZE);
+	buttonToken5.setPosition(700, 700);
 
 	rectButtonToken1 = buttonToken1.getGlobalBounds();
 	rectButtonToken2 = buttonToken2.getGlobalBounds();
 	rectButtonToken3 = buttonToken3.getGlobalBounds();
 	rectButtonToken4 = buttonToken4.getGlobalBounds();
-	rectButtonToken5 = buttonToken4.getGlobalBounds();
+	rectButtonToken5 = buttonToken5.getGlobalBounds();
 
 
-	progressToken1.setScale(0.52f, 0.52f);
+	progressToken1.setScale(0.35f, 0.35f);
 	progressToken1.setOrigin(progressToken1.getGlobalBounds().width, progressToken1.getGlobalBounds().top);
-	progressToken1.setPosition(975, 125);
+	progressToken1.setPosition(975, 150);
 
-	progressToken2.setScale(0.52f, 0.52f);
+	progressToken2.setScale(0.35f, 0.35f);
 	progressToken2.setOrigin(progressToken2.getGlobalBounds().width, progressToken2.getGlobalBounds().top);
-	progressToken2.setPosition(975, 302.5f);
+	progressToken2.setPosition(975, 275);
 
-	progressToken3.setScale(0.52f, 0.52f);
+	progressToken3.setScale(0.35f, 0.35f);
 	progressToken3.setOrigin(progressToken3.getGlobalBounds().width, progressToken3.getGlobalBounds().top);
-	progressToken3.setPosition(975, 475);
+	progressToken3.setPosition(975, 400);
 
-	progressToken4.setScale(0.52f, 0.52f);
+	progressToken4.setScale(0.35f, 0.35f);
 	progressToken4.setOrigin(progressToken4.getGlobalBounds().width, progressToken4.getGlobalBounds().top);
-	progressToken4.setPosition(975, 652.5f);
+	progressToken4.setPosition(975, 525);
 
-	progressToken5.setScale(0.52f, 0.52f);
-	progressToken5.setOrigin(progressToken4.getGlobalBounds().width, progressToken4.getGlobalBounds().top);
-	progressToken5.setPosition(975, 652.5f); 
+	progressToken5.setScale(0.35f, 0.35f);
+	progressToken5.setOrigin(progressToken5.getGlobalBounds().width, progressToken5.getGlobalBounds().top);
+	progressToken5.setPosition(975, 650); 
 
 }

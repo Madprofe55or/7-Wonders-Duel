@@ -52,7 +52,7 @@ public:
 
 	// Vectors for sizes
 	const sf::Vector2f MAIN_AREA_SIZE = { 600.0f, 750.0f };
-	const sf::Vector2f BUTTON_SIZE = { 75.0f, 40.0f };
+	const sf::Vector2f BUTTON_SIZE = { 100.0f, 40.0f };
 
 	void draw(const float dt);
 
@@ -60,7 +60,7 @@ public:
 
 	void handleInput();
 
-	ProgressTokenBuildingState(Game * game, GamePlayingState * gameplayingstate);
+	ProgressTokenBuildingState(Game * game, CardPickerState * cardpickerstate, GamePlayingState * gameplayingstate);
 	// custom destructor not needed
 	ProgressTokenBuildingState() {};
 
