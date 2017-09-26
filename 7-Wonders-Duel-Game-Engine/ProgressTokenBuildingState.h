@@ -11,7 +11,6 @@ class ProgressTokenBuildingState : public GameState
 {
 public:
 
-	CardPickerState * p_CardPickerState;
 	GamePlayingState * p_GamePlayingState;
 	Player * p_player;
 
@@ -58,10 +57,9 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	ProgressTokenBuildingState(Game * game, CardPickerState * cardpickerstate, GamePlayingState * gameplayingstate);
+	ProgressTokenBuildingState(Game * game, GamePlayingState * gameplayingstate);
 	// custom destructor not needed
-	~ProgressTokenBuildingState() {};
-
+	~ProgressTokenBuildingState();
 };
 
 

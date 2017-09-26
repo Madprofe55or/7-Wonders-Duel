@@ -145,6 +145,21 @@ namespace Seven_Wonders {
 
 		exposeCards();
 
+		if (!progressTokenState)
+		{
+			if (currentPlayer == &player1) currentPlayer = &player2;
+			else if (currentPlayer == &player2) currentPlayer = &player1;
+		}
+	}
+
+	void World::buildProgressToken(int progressTokenNumber)
+	{
+		currentPlayer->playerPTDeck.push_back(progressTokenDeck[progressTokenNumber]);
+
+		//doEffect(*currentPlayer, *board[clickedCardIndex]);
+
+		progressTokenDeck[progressTokenNumber] = nullptr;
+
 		if (currentPlayer == &player1) currentPlayer = &player2;
 		else if (currentPlayer == &player2) currentPlayer = &player1;
 	}
@@ -868,21 +883,27 @@ namespace Seven_Wonders {
 			{
 			case SCIENCE_SYMBOL_GLOBE:
 				currentPlayer.scienceSymbols.globe++;
+				if (currentPlayer.scienceSymbols.globe == 2) progressTokenState = true;
 				break;
 			case SCIENCE_SYMBOL_TABLET:
 				currentPlayer.scienceSymbols.tablet++;
+				if (currentPlayer.scienceSymbols.tablet == 2) progressTokenState = true;
 				break;
 			case SCIENCE_SYMBOL_MORTAR:
 				currentPlayer.scienceSymbols.mortar++;
+				if (currentPlayer.scienceSymbols.mortar == 2) progressTokenState = true;
 				break;
 			case SCIENCE_SYMBOL_ARCH:
 				currentPlayer.scienceSymbols.arch++;
+				if (currentPlayer.scienceSymbols.arch == 2) progressTokenState = true;
 				break;
 			case SCIENCE_SYMBOL_QUILL:
 				currentPlayer.scienceSymbols.quill++;
+				if (currentPlayer.scienceSymbols.quill == 2) progressTokenState = true;
 				break;
 			case SCIENCE_SYMBOL_WHEEL:
 				currentPlayer.scienceSymbols.wheel++;
+				if (currentPlayer.scienceSymbols.wheel == 2) progressTokenState = true;
 				break;
 			}
 		}
@@ -1235,6 +1256,7 @@ namespace Seven_Wonders {
 		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());
 		if (totalCoinsNeeded > 0) return -(totalCoinsNeeded + card.getCoinCost());
 	}
+
 
 }
 

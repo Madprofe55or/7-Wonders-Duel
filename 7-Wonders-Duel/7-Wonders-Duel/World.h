@@ -23,6 +23,7 @@ namespace Seven_Wonders {
 		int getAge();
 		void setAge(int age);
 		void buildCard(int clickedCardIndex);
+		void buildProgressToken(int progressTokenNumber);
 		void discardCard(int clickedCardIndex);
 		void buildWonder(int wonderNumber, int clickCardIndex);
 		void exposeCards();
@@ -50,6 +51,7 @@ namespace Seven_Wonders {
 		int goldCost(Player & currentPlayer, Card & card);
 
 		bool repeatTurn = false;
+		bool progressTokenState = false;
 
 
 		int mAge = 1;

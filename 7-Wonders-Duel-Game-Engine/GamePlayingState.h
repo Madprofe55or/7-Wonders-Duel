@@ -174,6 +174,7 @@ public:
 	void setBuiltSprites();
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
+	void checkForPTBuildState();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

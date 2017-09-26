@@ -2,6 +2,7 @@
 #include "CardPickerState.h"
 #include "ViewingCityState.h"
 #include "CardDestroyerState.h"
+#include "ProgressTokenBuildingState.h"
 
 void GamePlayingState::draw(const float dt)
 {
@@ -111,6 +112,7 @@ void GamePlayingState::update(const float dt)
 {
 	checkForDestroyingBrownCard();
 	checkForDestroyingGrayCard();
+	checkForPTBuildState();
 }
 
 void GamePlayingState::handleInput()
@@ -198,7 +200,7 @@ void GamePlayingState::handleInput()
 
 			for (int i = 0; i < 5; i++)
 			{
-				if (mProgressTokenRects[i].contains(mouse))
+				if (mProgressTokenRects[i].contains(mouse) && p_game->world.progressTokenDeck[i] != nullptr)
 				{
 					mouseOverProgressToken.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[i]->getName()));
 					mouseOverProgressToken.setScale(0.5f, 0.5f);
@@ -586,6 +588,11 @@ void GamePlayingState::checkForDestroyingBrownCard()
 void GamePlayingState::checkForDestroyingGrayCard()
 {
 	if (destroyGrayCard) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+}
+
+void GamePlayingState::checkForPTBuildState()
+{
+	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
 
 GamePlayingState::~GamePlayingState()

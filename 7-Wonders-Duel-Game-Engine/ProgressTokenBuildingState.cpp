@@ -4,7 +4,6 @@
 void ProgressTokenBuildingState::draw(const float dt)
 {
 	p_GamePlayingState->draw(dt);
-	p_CardPickerState->draw(dt);
 
 	p_game->window.draw(mainArea);
 	p_game->window.draw(progressTokenText);
@@ -56,89 +55,49 @@ void ProgressTokenBuildingState::handleInput()
 
 			if (p_game->inputManager.isObjectClicked(buttonToken1, event.mouseButton.button, p_game->window) == true)
 			{
-
-
-				// checking if last card was built, thus triggering a new age
-				if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
-				progressToken1.setPosition(-1000, -1000);
+				p_game->world.buildProgressToken(0);
 				poppingState = true;
-				p_CardPickerState->builtToken = true;
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken2, event.mouseButton.button, p_game->window) == true)
 			{
-
-
-
-
-				// checking if last card was built, thus triggering a new age
-
-				progressToken2.setPosition(-1000, -1000);
+				p_game->world.buildProgressToken(1);
 				poppingState = true;
-				p_CardPickerState->builtToken = true;
-				if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken3, event.mouseButton.button, p_game->window) == true)
 			{
-
-
-
-
-				// checking if last card was built, thus triggering a new age
-
-				progressToken3.setPosition(-1000, -1000);
+				p_game->world.buildProgressToken(2);
 				poppingState = true;
-				p_CardPickerState->builtToken = true;
-				if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
-
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken4, event.mouseButton.button, p_game->window) == true)
 			{
-
-
-
-
-				// checking if last card was built, thus triggering a new age
-
-				progressToken4.setPosition(-1000, -1000);
+				p_game->world.buildProgressToken(3);
 				poppingState = true;
-				p_CardPickerState->builtToken = true;
-				if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken5, event.mouseButton.button, p_game->window) == true)
 			{
-
-
-
-
-				// checking if last card was built, thus triggering a new age
-
-				progressToken5.setPosition(-1000, -1000);
+				p_game->world.buildProgressToken(4);
 				poppingState = true;
-				p_CardPickerState->builtToken = true;
-				if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 			}
-			break;
 		}
-
-		}
-		if (poppingState == true)
-		{
-			p_game->popState(); // state is popped here since there is no while loop to return to at this point
-		}
+		default: break;
+		} // end of switch
+	} // end of while
+	if (poppingState == true)
+	{
+		p_game->world.progressTokenState = false;
+		p_game->popState(); // state is popped here since there is no while loop to return to at this point
 	}
 }
 
-ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, CardPickerState * cardpickerstate, GamePlayingState * gameplayingstate)
+ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, GamePlayingState * gameplayingstate)
 {
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
-	p_CardPickerState = cardpickerstate;
 	p_player = p_game->world.currentPlayer;
-
 
 	progressToken1.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[0]->getName()));
 	progressToken2.setTexture(p_game->textureManager.getRef(p_game->world.progressTokenDeck[1]->getName()));
@@ -208,4 +167,8 @@ ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, CardPickerSt
 	progressToken5.setOrigin(progressToken5.getGlobalBounds().width, progressToken5.getGlobalBounds().top);
 	progressToken5.setPosition(975, 650);
 
+}
+
+ProgressTokenBuildingState::~ProgressTokenBuildingState()
+{
 }

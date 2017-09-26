@@ -150,8 +150,8 @@ void CardPickerState::handleInput()
 
 		}
 		default: break;
-		}
-	}
+		} // end of switch
+	} // end of while
 
 	if (wonderBuildState == true)
 	{
