@@ -11,6 +11,11 @@ void CardPickerState::draw(const float dt)
 	// the following rectangle is for darkening the gameplaying state underneath
 	p_game->window.draw(p_GamePlayingState->rectPickingCard);
 
+	
+	
+	
+
+	
 
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testRectangle2);
@@ -31,7 +36,8 @@ void CardPickerState::draw(const float dt)
 	p_game->window.draw(textClayCostNum);
 	p_game->window.draw(textPapyrusCostNum);
 	p_game->window.draw(textGlassCostNum);
-
+	p_game->window.draw(textBuildToken);
+	p_game->window.draw(buildTokenRectangle);
 	p_game->window.draw(buildRectangle);
 	p_game->window.draw(discardRectangle);
 	p_game->window.draw(buildWonderRectangle);
@@ -43,11 +49,13 @@ void CardPickerState::draw(const float dt)
 
 
 
+
 }
 
 void CardPickerState::update(const float dt)
 {
 	removeStateAfterWonderBuild();
+	removeStateAfterTokenBuild();
 }
 
 void CardPickerState::handleInput()
@@ -108,6 +116,11 @@ void CardPickerState::handleInput()
 				{
 					wonderBuildState = true;
 				}
+
+				else if (p_game->inputManager.isObjectClicked(buildTokenRectangle, event.mouseButton.button, p_game->window) == true)
+				{
+					progressTokenBuildState = true;
+				}
 			}
 		}
 		case sf::Event::MouseMoved:
@@ -117,6 +130,7 @@ void CardPickerState::handleInput()
 			sf::FloatRect buildRect = buildRectangle.getGlobalBounds();
 			sf::FloatRect discardRect = discardRectangle.getGlobalBounds();
 			sf::FloatRect buildWonderRect = buildWonderRectangle.getGlobalBounds();
+			sf::FloatRect buildTokenRect = buildTokenRectangle.getGlobalBounds();
 
 			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
 
@@ -149,6 +163,15 @@ void CardPickerState::handleInput()
 				buildWonderRectangle.setFillColor(sf::Color(0, 204, 51));
 			}
 
+			if (buildTokenRect.contains(mouse))
+			{
+				buildTokenRectangle.setFillColor(sf::Color(51, 153, 255));
+			}
+			else
+			{
+				buildTokenRectangle.setFillColor(sf::Color(0, 204, 51));
+			}
+
 
 		}
 		default: break;
@@ -160,7 +183,8 @@ void CardPickerState::handleInput()
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
 	}
 
-	if (p_game->world.canBuildToken == false)
+
+	if (progressTokenBuildState==true)
 	{
 		p_game->pushState(new ProgressTokenBuildingState(p_game, this, p_GamePlayingState));
 	}
@@ -303,6 +327,11 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		buildWonderRectangle.setOrigin(buildWonderRectangle.getGlobalBounds().width / 2.0f, buildWonderRectangle.getGlobalBounds().height / 2.0f);
 		buildWonderRectangle.setPosition(1025, 550);
 
+		buildTokenRectangle.setFillColor(sf::Color(0, 204, 51));
+		buildTokenRectangle.setSize(BUTTON_SIZE);
+		buildTokenRectangle.setOrigin(buildTokenRectangle.getGlobalBounds().width / 2.0f, buildTokenRectangle.getGlobalBounds().height / 2.0f);
+		buildTokenRectangle.setPosition(1025, 600);
+
 
 		textBuild.setFont(p_game->fontManager.getRef("Menu Font"));
 		textBuild.setString("Build");
@@ -331,6 +360,13 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());
 
+		textBuildWonder.setFont(p_game->fontManager.getRef("Menu Font"));
+		textBuildWonder.setString("Build Token");
+		textBuildWonder.setCharacterSize(25);
+		textBuildWonder.setFillColor(sf::Color::White);
+		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
+		textBuildWonder.setPosition(buildTokenRectangle.getPosition());
+
 	}
 
 }
@@ -338,4 +374,9 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 void CardPickerState::removeStateAfterWonderBuild()
 {
 	if (builtWonder) p_game->popState();
+}
+
+void CardPickerState::removeStateAfterTokenBuild()
+{
+	if (builtToken) p_game->popState();
 }
