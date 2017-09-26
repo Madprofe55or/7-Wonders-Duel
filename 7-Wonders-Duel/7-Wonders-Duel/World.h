@@ -54,10 +54,11 @@ namespace Seven_Wonders {
 
 		int mAge = 1;
 		int mConflict = 0;
+
+		// All game objects
 		Player * currentPlayer = nullptr;
 		Player player1;
 		Player player2;
-		
 		MilitaryToken militaryTokenP12;
 		MilitaryToken militaryTokenP15;
 		MilitaryToken militaryTokenP22;

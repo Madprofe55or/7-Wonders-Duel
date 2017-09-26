@@ -152,26 +152,34 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CardDestroyerState.h" />
     <ClInclude Include="CardPickerState.h" />
+    <ClInclude Include="DiscardedCardPickerState.h" />
+    <ClInclude Include="DiscardedPTPickerState.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GamePlayingState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStateStart.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ProgressTokenBuildingState.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ViewingCityState.h" />
     <ClInclude Include="WonderBuildingState.h" />
     <ClInclude Include="WonderPickerState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CardDestroyerState.cpp" />
     <ClCompile Include="CardPickerState.cpp" />
+    <ClCompile Include="DiscardedCardPickerState.cpp" />
+    <ClCompile Include="DiscardedPTPickerState.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamePlayingState.cpp" />
     <ClCompile Include="GameStateStart.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ProgressTokenBuildingState.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ViewingCityState.cpp" />
     <ClCompile Include="WonderBuildingState.cpp" />

@@ -1,6 +1,7 @@
 #include "GamePlayingState.h"
 #include "CardPickerState.h"
 #include "ViewingCityState.h"
+#include "CardDestroyerState.h"
 
 void GamePlayingState::draw(const float dt)
 {
@@ -108,6 +109,8 @@ void GamePlayingState::draw(const float dt)
 
 void GamePlayingState::update(const float dt)
 {
+	checkForDestroyingBrownCard();
+	checkForDestroyingGrayCard();
 }
 
 void GamePlayingState::handleInput()
@@ -573,6 +576,16 @@ void GamePlayingState::setBuiltSprites()
 			else if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 3) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
 		}
 	}
+}
+
+void GamePlayingState::checkForDestroyingBrownCard()
+{
+	if (destroyBrownCard) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+}
+
+void GamePlayingState::checkForDestroyingGrayCard()
+{
+	if (destroyGrayCard) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
 }
 
 GamePlayingState::~GamePlayingState()

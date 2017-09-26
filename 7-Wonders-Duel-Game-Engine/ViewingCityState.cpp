@@ -246,7 +246,4 @@ void ViewingCityState::deleteSprites()
 		mCityCardSprites.clear();
 
 	}
-	
-
-
 }

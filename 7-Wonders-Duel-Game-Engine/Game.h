@@ -21,11 +21,13 @@ public:
 	// game state stack
 	std::stack<GameState*> states;
 
+	// SFML objects
 	sf::RenderWindow window;
 	TextureManager textureManager;
 	FontManager fontManager;
 	InputManager inputManager;
 	
+	// 7 Wonders game world object (see 7_Wonders::World.h for interface)
 	World world;
 
 	// State manager functions
@@ -34,6 +36,7 @@ public:
 	void changeState(GameState * state);
 	GameState* peekState();
 
+	// Game loop function
 	void gameLoop();
 
 	Game();
