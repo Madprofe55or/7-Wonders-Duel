@@ -743,8 +743,8 @@ namespace Seven_Wonders {
 				runCivilianVictory();
 				return false;
 			}
+			else return false;
 		}
-		else return false;
 	}
 
 	bool World::checkForScienceVictory(Player & currentPlayer)
@@ -761,6 +761,7 @@ namespace Seven_Wonders {
 		if (symbolCounter >= 6) return true;
 		else return false;
 	}
+
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
 	{
@@ -861,7 +862,6 @@ namespace Seven_Wonders {
 	void World::doEffect(Player & currentPlayer, Card & card)
 	{
 		int goldAdded = 0;
-
 		if (card.getType() == GREEN_CARD)
 		{
 			switch (card.getScienceSymbol())
@@ -886,6 +886,8 @@ namespace Seven_Wonders {
 				break;
 			}
 		}
+
+
 		else if (card.getType() == RED_CARD)
 		{
 			if (currentPlayer.getPlayerNumber() == PLAYER_1)
@@ -1195,6 +1197,11 @@ namespace Seven_Wonders {
 		}
 	}
 
+	void World::progressTokenEffect(Player &currentPlayer, ProgressToken &progressToken)
+	{
+
+	}
+
 	int World::goldCost(Player & currentPlayer, Card & card)
 	{
 		// need to assign the opposing player
@@ -1234,6 +1241,7 @@ namespace Seven_Wonders {
 		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
 		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());
 		if (totalCoinsNeeded > 0) return -(totalCoinsNeeded + card.getCoinCost());
+
 	}
 
 }

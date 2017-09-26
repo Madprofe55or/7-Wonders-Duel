@@ -243,6 +243,8 @@ void GamePlayingState::handleInput()
 		player2City.setFillColor(sf::Color(54, 204, 51));
 		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
 	}
+
+
 }
 
 GamePlayingState::GamePlayingState(Game * game)

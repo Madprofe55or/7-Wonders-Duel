@@ -48,6 +48,9 @@
     <ClInclude Include="WonderBuildingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProgressTokenBuildingState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -81,6 +84,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WonderBuildingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressTokenBuildingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
