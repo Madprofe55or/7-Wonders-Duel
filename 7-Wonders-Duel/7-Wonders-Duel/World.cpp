@@ -868,45 +868,21 @@ namespace Seven_Wonders {
 			{
 			case SCIENCE_SYMBOL_GLOBE:
 				currentPlayer.scienceSymbols.globe++;
-				if (currentPlayer.scienceSymbols.globe == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			case SCIENCE_SYMBOL_TABLET:
 				currentPlayer.scienceSymbols.tablet++;
-				if (currentPlayer.scienceSymbols.tablet == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			case SCIENCE_SYMBOL_MORTAR:
 				currentPlayer.scienceSymbols.mortar++;
-				if (currentPlayer.scienceSymbols.mortar == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			case SCIENCE_SYMBOL_ARCH:
 				currentPlayer.scienceSymbols.arch++;
-				if (currentPlayer.scienceSymbols.arch == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			case SCIENCE_SYMBOL_QUILL:
 				currentPlayer.scienceSymbols.quill++;
-				if (currentPlayer.scienceSymbols.quill == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			case SCIENCE_SYMBOL_WHEEL:
 				currentPlayer.scienceSymbols.wheel++;
-				if (currentPlayer.scienceSymbols.wheel == 2)
-				{
-					canBuildToken = true;
-				}
 				break;
 			}
 		}
