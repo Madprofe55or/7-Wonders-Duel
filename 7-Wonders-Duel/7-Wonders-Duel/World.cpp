@@ -779,14 +779,7 @@ namespace Seven_Wonders {
 
 	//check to see if progress token in player city is greater or equal to 2
 	//allow to build wonder if true
-	void World::BuildProgressToken(Player & currentPlayer)
-	{
-		if (currentPlayer.scienceSymbols.arch == 2 || currentPlayer.scienceSymbols.balance == 2 || currentPlayer.scienceSymbols.globe == 2 || currentPlayer.scienceSymbols.mortar == 2 || currentPlayer.scienceSymbols.tablet == 2 || currentPlayer.scienceSymbols.wheel == 2 ||
-			currentPlayer.scienceSymbols.quill == 2)
-		{
-			progressTokenState = true;
-		}
-	}
+
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
 	{

@@ -57,7 +57,7 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	ProgressTokenBuildingState(Game * game, CardPickerState * cardpickerstate, GamePlayingState * gameplayingstate);
+	ProgressTokenBuildingState(Game * game, GamePlayingState * gameplayingstate);
 	// custom destructor not needed
 	~ProgressTokenBuildingState();
 };
