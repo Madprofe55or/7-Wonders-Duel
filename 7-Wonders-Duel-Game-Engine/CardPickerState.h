@@ -16,7 +16,6 @@ public:
 	sf::RectangleShape buildRectangle;
 	sf::RectangleShape discardRectangle;
 	sf::RectangleShape buildWonderRectangle;
-	sf::RectangleShape buildTokenRectangle;
 
 
 	// Texts
@@ -41,7 +40,6 @@ public:
 	sf::Text textDiscard;
 	sf::Text textDiscardValue;
 	sf::Text textBuildWonder;
-	sf::Text textBuildToken;
 
 
 	// Sprites
@@ -61,13 +59,11 @@ public:
 
 	void removeStateAfterWonderBuild();
 
-	void removeStateAfterTokenBuild();
 
 	GamePlayingState * p_GamePlayingState;
 	Card * p_card;
 	bool canBuildCard;
 	bool builtWonder = false;
-	bool builtToken = false;
 
 	
 	// Don't need destructor

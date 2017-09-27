@@ -1,6 +1,5 @@
 #include "CardPickerState.h"
 #include "WonderBuildingState.h"
-#include "ProgressTokenBuildingState.h"
 #include <string>
 
 

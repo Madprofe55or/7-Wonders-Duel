@@ -758,7 +758,6 @@ namespace Seven_Wonders {
 				runCivilianVictory();
 				return false;
 			}
-			else return false;
 		}
 	}
 
@@ -1218,11 +1217,6 @@ namespace Seven_Wonders {
 				break;
 			}
 		}
-	}
-
-	void World::progressTokenEffect(Player &currentPlayer, ProgressToken &progressToken)
-	{
-
 	}
 
 	int World::goldCost(Player & currentPlayer, Card & card)
