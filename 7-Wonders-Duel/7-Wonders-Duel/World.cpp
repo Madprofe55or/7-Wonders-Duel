@@ -155,7 +155,7 @@ namespace Seven_Wonders {
 	void World::buildProgressToken(int progressTokenNumber)
 	{
 		currentPlayer->playerPTDeck.push_back(progressTokenDeck[progressTokenNumber]);
-
+		currentPlayer->playerPTDeck[progressTokenNumber]->builtProgressToken == true;
 		//doEffect(*currentPlayer, *board[clickedCardIndex]);
 
 		progressTokenDeck[progressTokenNumber] = nullptr;

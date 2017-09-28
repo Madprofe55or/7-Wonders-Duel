@@ -33,6 +33,23 @@ void GamePlayingState::draw(const float dt)
 		p_game->window.draw(mWonderSpritesP2[i]);
 	}
 
+	
+	for (int i = 0; i < p_game->world.player1.playerPTDeck.size(); i++)
+	{
+		if (p_game->world.player1.playerPTDeck[i]->builtProgressToken == true)
+		{
+			p_game->window.draw(player1ProgressTokens[i]);
+		}
+
+	}
+	for (int i = 0; i < p_game->world.player2.playerPTDeck.size(); i++)
+	{
+		if (p_game->world.player2.playerPTDeck[i]->builtProgressToken == true)
+		{
+			p_game->window.draw(player2ProgressTokens[i]);
+		}
+	}
+
 	// drawing mouseover card
 	if (mouseover) mouseoverCard.setPosition(900.0f, 350.0f);
 	if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
@@ -106,6 +123,10 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(player2City);
 	p_game->window.draw(txtPlayer1City);
 	p_game->window.draw(txtPlayer2City);
+
+	p_game->window.draw(player1ProgressTokens[0]);
+
+	
 }
 
 void GamePlayingState::update(const float dt)
@@ -342,6 +363,8 @@ GamePlayingState::GamePlayingState(Game * game)
 		mProgressTokens[i].setOrigin(mProgressTokens[i].getGlobalBounds().width / 2.0, mProgressTokens[i].getGlobalBounds().height/ 2.0);
 		mProgressTokens[i].setPosition(25.0f, 260.0f + (77.0 * i));
 	}
+
+		
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -580,6 +603,33 @@ void GamePlayingState::setBuiltSprites()
 			else if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 3) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
 		}
 	}
+
+	if (p_game->world.player1.playerPTDeck.size() == 1)
+	{
+		player1ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[0]->getName()));
+		player1ProgressTokens[0].setOrigin(player1ProgressTokens[0].getGlobalBounds().width / 2, player1ProgressTokens[0].getGlobalBounds().height / 2);
+		player1ProgressTokens[0].setScale(0.22f, 0.22f);
+		player1ProgressTokens[0].setPosition(1080.0f + (0*75.0f), 40.0f);
+	}
+		for (int i = 0; i < p_game->world.player1.playerPTDeck.size(); i++)
+		{
+			if (p_game->world.player1.playerPTDeck[i]->builtProgressToken == true)
+			{
+				player1ProgressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[i]->getName()));
+				player1ProgressTokens[i].setOrigin(player1ProgressTokens[i].getGlobalBounds().width / 2, player1ProgressTokens[i].getGlobalBounds().height / 2);
+				player1ProgressTokens[i].setPosition(720.0f + (i*75.0f), 10.0f);
+
+			}
+		}	
+	for (int i = 0; i < p_game->world.player2.playerPTDeck.size(); i++)
+	{ 
+		if (p_game->world.player2.playerPTDeck[i]->builtProgressToken == true)
+		{
+				player2ProgressTokens[i].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[i]->getName()));
+				player2ProgressTokens[i].setOrigin(player2ProgressTokens[i].getGlobalBounds().width / 2, player2ProgressTokens[i].getGlobalBounds().height / 2);
+				player2ProgressTokens[i].setPosition(720.0f + (i*75.0f), 835.0f);
+		}
+	}
 }
 
 void GamePlayingState::checkForDestroyingBrownCard()
@@ -596,6 +646,7 @@ void GamePlayingState::checkForPTBuildState()
 {
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
+
 
 GamePlayingState::~GamePlayingState()
 {

@@ -20,6 +20,7 @@ namespace Seven_Wonders {
 		int getOwner();
 		void setOwner(int playerNumber);
 		void doEffect();
+		bool builtProgressToken = false;
 
 	private:
 		string mName;

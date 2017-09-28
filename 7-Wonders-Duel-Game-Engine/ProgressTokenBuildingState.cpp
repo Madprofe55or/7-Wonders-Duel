@@ -56,30 +56,35 @@ void ProgressTokenBuildingState::handleInput()
 			if (p_game->inputManager.isObjectClicked(buttonToken1, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(0);
+				p_GamePlayingState->setBuiltSprites();
 				poppingState = true;
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken2, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(1);
+				p_GamePlayingState->setBuiltSprites();
 				poppingState = true;
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken3, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(2);
+				p_GamePlayingState->setBuiltSprites();
 				poppingState = true;
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken4, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(3);
+				p_GamePlayingState->setBuiltSprites();
 				poppingState = true;
 			}
 
 			else if (p_game->inputManager.isObjectClicked(buttonToken5, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(4);
+				p_GamePlayingState->setBuiltSprites();
 				poppingState = true;
 			}
 		}
