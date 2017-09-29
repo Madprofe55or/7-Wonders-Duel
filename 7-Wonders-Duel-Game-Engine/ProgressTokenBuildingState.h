@@ -21,6 +21,8 @@ public:
 	sf::Sprite progressToken4;
 	sf::Sprite progressToken5;
 
+	std::vector <sf::Sprite> spriteProgressTokens = { progressToken1, progressToken2, progressToken3, progressToken4, progressToken5 };
+
 	//Text
 	sf::Text progressTokenText;
 
@@ -42,6 +44,8 @@ public:
 	sf::RectangleShape buttonToken4;
 	sf::RectangleShape buttonToken5;
 
+	std::vector <sf::RectangleShape> buttonTokens = {buttonToken1, buttonToken2, buttonToken3, buttonToken4, buttonToken5};
+
 	// Float rects for click functionality
 	sf::FloatRect rectButtonToken1;
 	sf::FloatRect rectButtonToken2;
@@ -49,6 +53,13 @@ public:
 	sf::FloatRect rectButtonToken4;
 	sf::FloatRect rectButtonToken5;
 
+	sf::Text buttonTokenText1;
+	sf::Text buttonTokenText2;
+	sf::Text buttonTokenText3;
+	sf::Text buttonTokenText4;
+	sf::Text buttonTokenText5;
+
+	std::vector <sf::Text> buttonTokenTexts = { buttonTokenText1, buttonTokenText2, buttonTokenText3, buttonTokenText4, buttonTokenText5 };
 	// Vectors for sizes
 	const sf::Vector2f MAIN_AREA_SIZE = { 600.0f, 750.0f };
 	const sf::Vector2f BUTTON_SIZE = { 100.0f, 40.0f };
