@@ -42,6 +42,9 @@ namespace Seven_Wonders {
 		int mCurrentPlayer;
 
 
+		int player1CountPT = 0;
+		int player2CountPT = 0;
+
 		void ExitGame();
 		bool checkForNewAge();
 		bool checkForScienceVictory(Player & currentPlayer);

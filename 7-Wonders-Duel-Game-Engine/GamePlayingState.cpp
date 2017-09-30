@@ -89,6 +89,14 @@ void GamePlayingState::draw(const float dt)
 	if (!mouseOverToken) mouseOverProgressToken.setPosition(-400.0f, -400.0f);
 	p_game->window.draw(mouseOverProgressToken);
 
+	if (mouseOverP1Token) mouseOverPlayer1PT.setPosition(1200.0f, 350.0f);
+	if (!mouseOverP1Token) mouseOverPlayer1PT.setPosition(-400.0f, -400.0f);
+	p_game->window.draw(mouseOverPlayer1PT);
+
+	if (mouseOverP2Token) mouseOverPlayer2PT.setPosition(1200.0f, 350.0f);
+	if (!mouseOverP2Token) mouseOverPlayer2PT.setPosition(-400.0f, -400.0f);
+	p_game->window.draw(mouseOverPlayer2PT);
+
 
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
@@ -110,21 +118,49 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(txtPlayer2City);
 
 
-	for (int i = 0; i < p_game->world.player1.playerPTDeck.size(); i++)
-	{
-		if (p_game->world.player1.playerPTDeck[i] != nullptr)
-		{
-			p_game->window.draw(player1ProgressTokens[i]);
-		}
-	}
 
-	for (int i = 0; i < p_game->world.player2.playerPTDeck.size(); i++)
-	{
-		if (p_game->world.player2.playerPTDeck[i] != nullptr)
+
+			p_game->window.draw(player1ProgressTokens[0]);
+
+
+			p_game->window.draw(player1ProgressTokens[1]);
+		
+
+
+			p_game->window.draw(player1ProgressTokens[2]);
+		
+
+			p_game->window.draw(player1ProgressTokens[3]);
+
+
+			p_game->window.draw(player1ProgressTokens[4]);
+		
+
+		if (p_game->world.player2.playerPT1 != nullptr)
 		{
-			p_game->window.draw(player2ProgressTokens[i]);
+			p_game->window.draw(player2ProgressTokens[0]);
 		}
-	}
+
+		if (p_game->world.player2.playerPT2 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[1]);
+		}
+
+		if (p_game->world.player2.playerPT3 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[2]);
+		}
+
+		if (p_game->world.player2.playerPT4 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[3]);
+		}
+
+		if (p_game->world.player2.playerPT5 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[4]);
+		}
+
 }
 
 void GamePlayingState::update(const float dt)
@@ -192,6 +228,8 @@ void GamePlayingState::handleInput()
 			int mouseoverVectorCount = 0;
 			mouseover = false;
 			mouseOverToken = false;
+			mouseOverP1Token=false;
+			mouseOverP2Token=false;
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -227,6 +265,89 @@ void GamePlayingState::handleInput()
 					break;
 				}
 			}
+
+
+			if (player1TokenRect1.contains(mouse) && p_game->world.player1.playerPT1 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT1->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect2.contains(mouse) && p_game->world.player1.playerPT2 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT2->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect3.contains(mouse) && p_game->world.player1.playerPT3 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT3->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect4.contains(mouse) && p_game->world.player1.playerPT4 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT4->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect5.contains(mouse) && p_game->world.player1.playerPT5 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT5->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player2TokenRect1.contains(mouse) && p_game->world.player2.playerPT1 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT1->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect2.contains(mouse) && p_game->world.player2.playerPT2 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT2->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect3.contains(mouse) && p_game->world.player2.playerPT3 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT3->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect4.contains(mouse) && p_game->world.player2.playerPT4 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT4->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect5.contains(mouse) && p_game->world.player2.playerPT5 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT5->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+
 			if (rectPlayer1City.contains(mouse))
 			{
 				player1City.setFillColor(sf::Color(51, 53, 255));
@@ -603,84 +724,85 @@ void GamePlayingState::setBuiltSprites()
 	}
 
 
-		if (p_game->world.player1.playerPTDeck[0] != nullptr)
+		if (p_game->world.player1.playerPT1 != nullptr)
 		{
-			player1ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[0]->getName()));
-			player1ProgressTokens[0].setOrigin(player1ProgressTokens[0].getGlobalBounds().width / 2, player1ProgressTokens[0].getGlobalBounds().height / 2);
+			player1ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT1->getName()));
 			player1ProgressTokens[0].setScale(0.22f, 0.22f);
-			player1ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 40.0f);
+			player1ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 0.0f);
+			player1TokenRect1 = player1ProgressTokens[0].getGlobalBounds();
 		}
 
-		if (p_game->world.player1.playerPTDeck[1] != nullptr)
+		if (p_game->world.player1.playerPT2 != nullptr)
 		{
-			player1ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[1]->getName()));
-			player1ProgressTokens[1].setOrigin(player1ProgressTokens[1].getGlobalBounds().width / 2, player1ProgressTokens[1].getGlobalBounds().height / 2);
+			player1ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT2->getName()));
 			player1ProgressTokens[1].setScale(0.22f, 0.22f);
-			player1ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 40.0f);
+			player1ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 0.0f);
+			player1TokenRect2 = player1ProgressTokens[1].getGlobalBounds();
 		}
 
-		if (p_game->world.player1.playerPTDeck[2] != nullptr)
+		if (p_game->world.player1.playerPT3 != nullptr)
 		{
-			player1ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[2]->getName()));
-			player1ProgressTokens[2].setOrigin(player1ProgressTokens[2].getGlobalBounds().width / 2, player1ProgressTokens[2].getGlobalBounds().height / 2);
+			player1ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT3->getName()));
 			player1ProgressTokens[2].setScale(0.22f, 0.22f);
-			player1ProgressTokens[2].setPosition(1080.0f + (2 * 75.0f), 40.0f);
+			player1ProgressTokens[2].setPosition(1080.0f + (2 *75.0f), 0.0f);
+			player1TokenRect3 = player1ProgressTokens[2].getGlobalBounds();
 		}
 
-		if (p_game->world.player1.playerPTDeck[3] != nullptr)
+		if (p_game->world.player1.playerPT4 != nullptr)
 		{
-			player1ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[3]->getName()));
-			player1ProgressTokens[3].setOrigin(player1ProgressTokens[3].getGlobalBounds().width / 2, player1ProgressTokens[3].getGlobalBounds().height / 2);
+			player1ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT4->getName()));
 			player1ProgressTokens[3].setScale(0.22f, 0.22f);
-			player1ProgressTokens[3].setPosition(1080.0f + (3 * 75.0f), 40.0f);
+			player1ProgressTokens[3].setPosition(1080.0f + (3 *75.0f), 0.0f);
+			player1TokenRect4 = player1ProgressTokens[3].getGlobalBounds();
+
 		}
 
-		if (p_game->world.player1.playerPTDeck[4] != nullptr)
+		if (p_game->world.player1.playerPT5 != nullptr)
 		{
-			player1ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPTDeck[4]->getName()));
-			player1ProgressTokens[4].setOrigin(player1ProgressTokens[4].getGlobalBounds().width / 2, player1ProgressTokens[4].getGlobalBounds().height / 2);
+			player1ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT5->getName()));
 			player1ProgressTokens[4].setScale(0.22f, 0.22f);
-			player1ProgressTokens[4].setPosition(1080.0f + (4 * 75.0f), 40.0f);
+			player1ProgressTokens[4].setPosition(1080.0f + (4 *75.0f), 0.0f);
+			player1TokenRect5 = player1ProgressTokens[4].getGlobalBounds();
 		}
 
-		if (p_game->world.player2.playerPTDeck[0] != nullptr)
+		if (p_game->world.player2.playerPT1 != nullptr)
 		{
-			player2ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[0]->getName()));
-			player2ProgressTokens[0].setOrigin(player2ProgressTokens[0].getGlobalBounds().width / 2, player2ProgressTokens[0].getGlobalBounds().height / 2);
+			player2ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT1->getName()));
 			player2ProgressTokens[0].setScale(0.22f, 0.22f);
-			player2ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 40.0f);
+			player2ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 825.0f);
+			player2TokenRect1 = player2ProgressTokens[0].getGlobalBounds();
 		}
 
-		if (p_game->world.player2.playerPTDeck[1] != nullptr)
+		if (p_game->world.player2.playerPT2 != nullptr)
 		{
-			player2ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[1]->getName()));
-			player2ProgressTokens[1].setOrigin(player2ProgressTokens[1].getGlobalBounds().width / 2, player2ProgressTokens[1].getGlobalBounds().height / 2);
+			player2ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT2->getName()));
 			player2ProgressTokens[1].setScale(0.22f, 0.22f);
-			player2ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 40.0f);
+			player2ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 825.0f);
+			player2TokenRect2 = player2ProgressTokens[1].getGlobalBounds();
 		}
 
-		if (p_game->world.player2.playerPTDeck[2] != nullptr)
+		if (p_game->world.player2.playerPT3 != nullptr)
 		{
-			player2ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[2]->getName()));
-			player2ProgressTokens[2].setOrigin(player2ProgressTokens[2].getGlobalBounds().width / 2, player2ProgressTokens[2].getGlobalBounds().height / 2);
+			player2ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT3->getName()));
 			player2ProgressTokens[2].setScale(0.22f, 0.22f);
-			player2ProgressTokens[2].setPosition(1080.0f + (2 * 75.0f), 40.0f);
+			player2ProgressTokens[2].setPosition(1080.0f + (2 * 75.0f), 825.0f);
+			player2TokenRect3 = player2ProgressTokens[2].getGlobalBounds();
 		}
 
-		if (p_game->world.player2.playerPTDeck[3] != nullptr)
+		if (p_game->world.player2.playerPT4 != nullptr)
 		{
-			player2ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[3]->getName()));
-			player2ProgressTokens[3].setOrigin(player2ProgressTokens[3].getGlobalBounds().width / 2, player2ProgressTokens[3].getGlobalBounds().height / 2);
+			player2ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT4->getName()));
 			player2ProgressTokens[3].setScale(0.22f, 0.22f);
-			player2ProgressTokens[3].setPosition(1080.0f + (3 * 75.0f), 40.0f);
+			player2ProgressTokens[3].setPosition(1080.0f + (3 * 75.0f), 825.0f);
+			player2TokenRect4 = player2ProgressTokens[3].getGlobalBounds();
 		}
 
-		if (p_game->world.player2.playerPTDeck[4] != nullptr)
+		if (p_game->world.player2.playerPT5 != nullptr)
 		{
-			player2ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPTDeck[4]->getName()));
-			player2ProgressTokens[4].setOrigin(player2ProgressTokens[4].getGlobalBounds().width / 2, player2ProgressTokens[4].getGlobalBounds().height / 2);
+			player2ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT5->getName()));
 			player2ProgressTokens[4].setScale(0.22f, 0.22f);
-			player2ProgressTokens[4].setPosition(1080.0f + (4 * 75.0f), 40.0f);
+			player2ProgressTokens[4].setPosition(1080.0f + (4 * 75.0f), 825.0f);
+			player2TokenRect5 = player2ProgressTokens[4].getGlobalBounds();
 		}
 }
 

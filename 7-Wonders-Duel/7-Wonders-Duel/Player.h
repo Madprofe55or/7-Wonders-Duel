@@ -38,7 +38,12 @@ namespace Seven_Wonders {
 		void resetResources();
 		vector<Card*> playerCity;
 		vector<Card*> playerWonderDeck;
-		vector<ProgressToken*> playerPTDeck;
+		//vector<ProgressToken*> playerPTDeck;
+		ProgressToken* playerPT1=nullptr;
+		ProgressToken* playerPT2=nullptr;
+		ProgressToken* playerPT3=nullptr;
+		ProgressToken* playerPT4=nullptr;
+		ProgressToken* playerPT5=nullptr;
 
 		struct scienceSymbols
 		{

@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "GamePlayingState.h"
 #include "CardPickerState.h"
+#include "Player.h"
 
 class ProgressTokenBuildingState : public GameState
 {
@@ -62,7 +63,7 @@ public:
 	std::vector <sf::Text> buttonTokenTexts = { buttonTokenText1, buttonTokenText2, buttonTokenText3, buttonTokenText4, buttonTokenText5 };
 	// Vectors for sizes
 	const sf::Vector2f MAIN_AREA_SIZE = { 600.0f, 750.0f };
-	const sf::Vector2f BUTTON_SIZE = { 100.0f, 40.0f };
+	const sf::Vector2f BUTTON_SIZE = { 175.0f, 60.0f };
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

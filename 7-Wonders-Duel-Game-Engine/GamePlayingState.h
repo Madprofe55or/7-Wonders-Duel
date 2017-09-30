@@ -120,9 +120,23 @@ public:
 	sf::Sprite player1ProgressTokens[5] = { player1Token1, player1Token2,  player1Token3, player1Token4, player1Token5  };
 	sf::Sprite player2ProgressTokens[5] = { player2Token1, player2Token2, player2Token3,  player2Token4, player2Token5 };
 
+	sf::FloatRect player1TokenRect1;
+	sf::FloatRect player1TokenRect2;
+	sf::FloatRect player1TokenRect3;
+	sf::FloatRect player1TokenRect4;
+	sf::FloatRect player1TokenRect5;
+	sf::FloatRect player2TokenRect1;
+	sf::FloatRect player2TokenRect2;
+	sf::FloatRect player2TokenRect3;
+	sf::FloatRect player2TokenRect4;
+	sf::FloatRect player2TokenRect5;
+
 	sf::Sprite mouseoverCard;
 
 	sf::Sprite mouseOverProgressToken;
+
+	sf::Sprite mouseOverPlayer1PT;
+	sf::Sprite mouseOverPlayer2PT;
 
 	sf::FloatRect rectPlayer1Wonder1;
 	sf::FloatRect rectPlayer1Wonder2;
@@ -177,6 +191,8 @@ public:
 	int emptyCount;
 	bool mouseover;
 	bool mouseOverToken;
+	bool mouseOverP1Token;
+	bool mouseOverP2Token;
 	bool destroyBrownCard = false;
 	bool destroyGrayCard = false;
 
@@ -188,8 +204,6 @@ public:
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
 	void checkForPTBuildState();
-
-	void checkForPTBuilt();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

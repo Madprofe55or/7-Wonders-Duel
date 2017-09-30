@@ -154,8 +154,66 @@ namespace Seven_Wonders {
 
 	void World::buildProgressToken(int progressTokenNumber)
 	{
-		currentPlayer->playerPTDeck.push_back(progressTokenDeck[progressTokenNumber]);
-		currentPlayer->playerPTDeck[progressTokenNumber]->builtProgressToken == true;
+		if (currentPlayer == &player1)
+		{
+			if (player1CountPT == 0)
+			{
+				currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player1CountPT == 1)
+			{
+				currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player1CountPT == 2)
+			{
+				currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player1CountPT == 3)
+			{
+				currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player1CountPT == 4)
+			{
+				currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
+			}
+
+		}
+
+		if (currentPlayer == &player2)
+		{
+			if (player2CountPT == 0)
+			{
+				currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player2CountPT == 1)
+			{
+				currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player2CountPT == 2)
+			{
+				currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player2CountPT == 3)
+			{
+				currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
+			}
+
+			if (player2CountPT == 4)
+			{
+				currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
+			}
+
+		}
+
+		//currentPlayer->playerPTDeck.push_back(progressTokenDeck[progressTokenNumber]);
+		//currentPlayer->playerPTDeck[progressTokenNumber]->builtProgressToken == true;
 		//doEffect(*currentPlayer, *board[clickedCardIndex]);
 
 		progressTokenDeck[progressTokenNumber] = nullptr;
