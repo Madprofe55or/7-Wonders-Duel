@@ -18,7 +18,7 @@ FUNCTIONALITY STILL NEEDED:
         iv.  The Statue of Zeus, which allows player to destroy opponent's brown card
     c. All progress tokens (see #2 above)
 5. Code for handling special/trading flags
-6. Show progress tokens in players' cities or header
+6. Show progress tokens in players' cities or header--DONE
 7. Determining who goes first at beginning of Ages 2 and 3
 
 
