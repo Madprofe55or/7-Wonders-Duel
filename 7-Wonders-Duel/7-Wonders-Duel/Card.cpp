@@ -287,6 +287,9 @@ namespace Seven_Wonders {
 		case 83: // the statue of zeus
 			return 3;
 			break;
+		case 0: //used to set victory points for Agriculture progress Token
+			return 4;
+			break;
 		default:
 			return 0;
 		}

@@ -51,6 +51,7 @@ namespace Seven_Wonders {
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
+		void doEffect(Player & currentPlayer, ProgressToken & progressToken); //overloaded function for doEffect for Progress Token
 		int goldCost(Player & currentPlayer, Card & card);
 
 		bool repeatTurn = false;

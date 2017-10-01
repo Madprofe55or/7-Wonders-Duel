@@ -44,6 +44,7 @@ namespace Seven_Wonders {
 		ProgressToken* playerPT3=nullptr;
 		ProgressToken* playerPT4=nullptr;
 		ProgressToken* playerPT5=nullptr;
+		vector <ProgressToken*> playerPT = { playerPT1, playerPT2, playerPT3, playerPT4, playerPT5 };
 
 		struct scienceSymbols
 		{

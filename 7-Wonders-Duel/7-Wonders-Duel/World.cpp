@@ -212,14 +212,32 @@ namespace Seven_Wonders {
 
 		}
 
-		//currentPlayer->playerPTDeck.push_back(progressTokenDeck[progressTokenNumber]);
-		//currentPlayer->playerPTDeck[progressTokenNumber]->builtProgressToken == true;
-		//doEffect(*currentPlayer, *board[clickedCardIndex]);
+		doEffect(*currentPlayer, *progressTokenDeck[progressTokenNumber]);
+
+		if (progressTokenDeck[progressTokenNumber]->getName() != "Theology")
+		{
+			if (currentPlayer == &player1) currentPlayer = &player2;
+			else if (currentPlayer == &player2) currentPlayer = &player1;
+		}
+
+		else
+		{
+			if (currentPlayer == &player1)
+			{
+				currentPlayer = &player1;
+				player1CountPT++;
+			}
+
+			else if (currentPlayer == &player2)
+			{
+				currentPlayer = &player2;
+				player2CountPT++;
+			}
+		}
 
 		progressTokenDeck[progressTokenNumber] = nullptr;
 
-		if (currentPlayer == &player1) currentPlayer = &player2;
-		else if (currentPlayer == &player2) currentPlayer = &player1;
+		
 	}
 
 	/* Run when a player picks the discard card option
@@ -840,6 +858,62 @@ namespace Seven_Wonders {
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
 	{
+		
+		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
+		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
+
+		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		{
+			architectureDiscount = 2;
+		}
+
+
+
 		// need to assign the opposing player
 		Player * opposingPlayer;
 		if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
@@ -847,10 +921,12 @@ namespace Seven_Wonders {
 
 		// need to assign the differences between what the card costs and what the player has
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
-		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
-		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
+		int stoneCardDiff =( card.getStoneCost()-masonryDiscount) - currentPlayer.getStone();
+		int clayCardDiff = (card.getClayCost()-architectureDiscount) - currentPlayer.getClay();
 		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
 		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
+
+
 
 		//// need to assign the differences between what the current player has and what the opposing player has
 		//int woodPlayerDiff = opposingPlayer->getWood() - currentPlayer.getWood();
@@ -906,6 +982,31 @@ namespace Seven_Wonders {
 		// third condition checks if the player doesn't have the resources but can afford the cost for trading
 		else if (totalCoinsNeeded > 0 && currentPlayer.getCoins() >= totalCoinsNeeded)
 		{
+			if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+			{
+				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
+			}
+
+			if (opposingPlayer->playerPT2 != nullptr && opposingPlayer->playerPT2->getName() == "Economy")
+			{
+				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
+			}
+
+			if (opposingPlayer->playerPT3 != nullptr && opposingPlayer->playerPT3->getName() == "Economy")
+			{
+				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
+			}
+
+			if (opposingPlayer->playerPT4 != nullptr &&opposingPlayer->playerPT4->getName() == "Economy")
+			{
+				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
+			}
+
+			if (opposingPlayer->playerPT5 != nullptr && opposingPlayer->playerPT5->getName() == "Economy")
+			{
+				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
+			}
+			
 			return true;
 		}
 		// fourth condition checks if the player doesn't have the resources and CAN'T afford the cost for trading
@@ -921,9 +1022,171 @@ namespace Seven_Wonders {
 		int player1Points = 0;
 		int player2Points = 0;
 
+		if (player1.playerPT1 != nullptr && player1.playerPT1->getName() == "Agriculture")
+		{
+			player1Points = 4;
+		}
+
+		if (player1.playerPT2 != nullptr && player1.playerPT2->getName() == "Agriculture")
+		{
+			player1Points = 4;
+		}
+
+		if (player1.playerPT3 != nullptr && player1.playerPT3->getName() == "Agriculture")
+		{
+			player1Points = 4;
+		}
+
+		if (player1.playerPT4 != nullptr &&player1.playerPT4->getName() == "Agriculture")
+		{
+			player1Points = 4;
+		}
+
+		if (player1.playerPT5 != nullptr && player1.playerPT5->getName() == "Agriculture")
+		{
+			player1Points = 4;
+		}
+
+		if (player2.playerPT1 != nullptr && player2.playerPT1->getName() == "Agriculture")
+		{
+			player2Points = 4;
+		}
+
+		if (player2.playerPT2 != nullptr && player2.playerPT2->getName() == "Agriculture")
+		{
+			player2Points = 4;
+		}
+
+		if (player2.playerPT3 != nullptr && player2.playerPT3->getName() == "Agriculture")
+		{
+			player2Points = 4;
+		}
+
+		if (player2.playerPT4 != nullptr &&player2.playerPT4->getName() == "Agriculture")
+		{
+			player2Points = 4;
+		}
+
+		if (player2.playerPT5 != nullptr && player2.playerPT5->getName() == "Agriculture")
+		{
+			player2Points = 4;
+		}
+
+
+
+
+
+
+
+		if (player1.playerPT1 != nullptr && player1.playerPT1->getName() == "Philosophy")
+		{
+			player1Points = 7;
+		}
+
+		if (player1.playerPT2 != nullptr && player1.playerPT2->getName() == "Philosophy")
+		{
+			player1Points = 7;
+		}
+
+		if (player1.playerPT3 != nullptr && player1.playerPT3->getName() == "Philosophy")
+		{
+			player1Points = 7;
+		}
+
+		if (player1.playerPT4 != nullptr &&player1.playerPT4->getName() == "Philosophy")
+		{
+			player1Points = 7;
+		}
+
+		if (player1.playerPT5 != nullptr && player1.playerPT5->getName() == "Philosophy")
+		{
+			player1Points = 7;
+		}
+
+		if (player2.playerPT1 != nullptr && player2.playerPT1->getName() == "Philosophy")
+		{
+			player2Points = 7;
+		}
+
+		if (player2.playerPT2 != nullptr && player2.playerPT2->getName() == "Philosophy")
+		{
+			player2Points = 7;
+		}
+
+		if (player2.playerPT3 != nullptr && player2.playerPT3->getName() == "Philosophy")
+		{
+			player2Points = 7;
+		}
+
+		if (player2.playerPT4 != nullptr &&player2.playerPT4->getName() == "Philosophy")
+		{
+			player2Points = 7;
+		}
+
+		if (player2.playerPT5 != nullptr && player2.playerPT5->getName() == "Philosophy")
+		{
+			player2Points = 7;
+		}
+
+
+
+
+
+
+		if (player1.playerPT1 != nullptr && player1.playerPT1->getName() == "Mathematics")
+		{
+			player1Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player1.playerPT2 != nullptr && player1.playerPT2->getName() == "Mathematics")
+		{
+			player1Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player1.playerPT3 != nullptr && player1.playerPT3->getName() == "Mathematics")
+		{
+			player1Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player1.playerPT4 != nullptr &&player1.playerPT4->getName() == "Mathematics")
+		{
+			player1Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player1.playerPT5 != nullptr && player1.playerPT5->getName() == "Mathematics")
+		{
+			player1Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player2.playerPT1 != nullptr && player2.playerPT1->getName() == "Mathematics")
+		{
+			player2Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player2.playerPT2 != nullptr && player2.playerPT2->getName() == "Mathematics")
+		{
+			player2Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player2.playerPT3 != nullptr && player2.playerPT3->getName() == "Mathematics")
+		{
+			player2Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player2.playerPT4 != nullptr &&player2.playerPT4->getName() == "Mathematics")
+		{
+			player2Points = 3 * (currentPlayer->playerPT.size());
+		}
+
+		if (player2.playerPT5 != nullptr && player2.playerPT5->getName() == "Mathematics")
+		{
+			player2Points = 3 * (currentPlayer->playerPT.size());
+		}
+
 		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
 		{
 			player1Points += (*it)->getVictoryPoints();
+
 		}
 
 		for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
@@ -972,10 +1235,60 @@ namespace Seven_Wonders {
 		{
 			if (currentPlayer.getPlayerNumber() == PLAYER_1)
 			{
+				if (player1.playerPT1 != nullptr && player1.playerPT1->getName() == "Strategy")
+				{
+					mConflict ++;
+				}
+
+				if (player1.playerPT2 != nullptr && player1.playerPT2->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player1.playerPT3 != nullptr && player1.playerPT3->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player1.playerPT4 != nullptr &&player1.playerPT4->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player1.playerPT5 != nullptr && player1.playerPT5->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				
 				mConflict += (card.getShields() + ((currentPlayer.flags.strategyPTFlag) ? (1) : (0)));
 			}
 			else if (currentPlayer.getPlayerNumber() == PLAYER_2)
 			{
+				if (player2.playerPT1 != nullptr && player2.playerPT1->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player2.playerPT2 != nullptr && player2.playerPT2->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player2.playerPT3 != nullptr && player2.playerPT3->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player2.playerPT4 != nullptr &&player2.playerPT4->getName() == "Strategy")
+				{
+					mConflict++;
+				}
+
+				if (player2.playerPT5 != nullptr && player2.playerPT5->getName() == "Strategy")
+				{ 
+					mConflict++;
+				}
 				mConflict -= (card.getShields() + ((currentPlayer.flags.strategyPTFlag) ? (1) : (0)));
 			}
 			// need to set conflict to -9 or 9 in order to avoid out of range for conflict pawn vector positions
@@ -1275,6 +1588,26 @@ namespace Seven_Wonders {
 				break;
 			}
 		}
+	}
+
+	void World::doEffect(Player & currentPlayer, ProgressToken & progressToken)
+	{
+		if (progressToken.getName()=="Agriculture")
+		{
+			currentPlayer.setCoins(6);
+		}
+
+		if (progressToken.getName() == "Urbanism")
+		{
+			currentPlayer.setCoins(6);
+		}
+
+		if (progressToken.getName() == "Law")
+		{
+			currentPlayer.scienceSymbols.balance++;
+		}
+
+
 	}
 
 	int World::goldCost(Player & currentPlayer, Card & card)

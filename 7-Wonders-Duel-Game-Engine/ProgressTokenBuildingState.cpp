@@ -82,6 +82,7 @@ void ProgressTokenBuildingState::handleInput()
 			if (p_game->inputManager.isObjectClicked(buttonToken1, event.mouseButton.button, p_game->window) == true)
 			{
 				p_game->world.buildProgressToken(0);
+
 				if (p_game->world.currentPlayer->getPlayerNumber()!=PLAYER_1) //opposite logic due to change in progress Token build call
 				{
 					p_game->world.player1CountPT++;

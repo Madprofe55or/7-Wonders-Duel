@@ -34,9 +34,6 @@ namespace Seven_Wonders {
 		mOwner = playerNumber;
 	}
 
-	void ProgressToken::doEffect()
-	{
 
-	}
 
 }
