@@ -152,6 +152,19 @@ namespace Seven_Wonders {
 		}
 	}
 
+	void World::ChoosePlayer()
+	{
+		if (player1Chosen)
+		{
+			currentPlayer == &player1;
+		}
+
+		if (player2Chosen)
+		{
+			currentPlayer = &player2;
+		}
+	}
+
 	void World::buildProgressToken(int progressTokenNumber)
 	{
 		if (currentPlayer == &player1)
@@ -803,6 +816,7 @@ namespace Seven_Wonders {
 
 	bool World::checkForNewAge()
 	{
+		
 		int emptyCount = 0;
 		for (int i = 0; i < 20; i++)
 		{
@@ -817,6 +831,7 @@ namespace Seven_Wonders {
 
 					board[i] = &age2Deck[i];
 				}
+				checkForChoosePlayer = true;
 				mAge = 2;
 				return true;
 			}
@@ -826,6 +841,7 @@ namespace Seven_Wonders {
 				{
 					board[i] = &age3Deck[i];
 				}
+				checkForChoosePlayer = true;
 				mAge = 3;
 				return true;
 			}

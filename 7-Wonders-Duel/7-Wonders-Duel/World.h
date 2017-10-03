@@ -23,6 +23,7 @@ namespace Seven_Wonders {
 		int getAge();
 		void setAge(int age);
 		void buildCard(int clickedCardIndex);
+		void ChoosePlayer();
 		void buildProgressToken(int progressTokenNumber);
 		void discardCard(int clickedCardIndex);
 		void buildWonder(int wonderNumber, int clickCardIndex);
@@ -41,12 +42,15 @@ namespace Seven_Wonders {
 		void Setup();
 		int mCurrentPlayer;
 
-
+		bool checkForChoosePlayer = false;
 		int player1CountPT = 0;
 		int player2CountPT = 0;
 
 		void ExitGame();
 		bool checkForNewAge();
+		bool player1Chosen = false;
+		bool player2Chosen = false;
+
 		bool checkForScienceVictory(Player & currentPlayer);
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();

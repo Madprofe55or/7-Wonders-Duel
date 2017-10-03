@@ -3,7 +3,7 @@
 #include "ViewingCityState.h"
 #include "CardDestroyerState.h"
 #include "ProgressTokenBuildingState.h"
-
+#include "NewAgeChoosePlayerState.h"
 void GamePlayingState::draw(const float dt)
 {
 	p_game->window.draw(background);
@@ -820,6 +820,7 @@ void GamePlayingState::checkForPTBuildState()
 {
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
+
 
 
 GamePlayingState::~GamePlayingState()

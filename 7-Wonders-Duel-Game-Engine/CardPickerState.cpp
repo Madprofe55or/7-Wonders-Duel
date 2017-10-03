@@ -1,5 +1,6 @@
 #include "CardPickerState.h"
 #include "WonderBuildingState.h"
+#include "NewAgeChoosePlayerState.h"
 #include <string>
 
 
@@ -48,6 +49,8 @@ void CardPickerState::draw(const float dt)
 void CardPickerState::update(const float dt)
 {
 	removeStateAfterWonderBuild();
+	removeStateAfterAgePlayerPick();
+	
 }
 
 void CardPickerState::handleInput()
@@ -157,6 +160,11 @@ void CardPickerState::handleInput()
 	if (wonderBuildState == true)
 	{
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
+	}
+
+	if (p_game->world.checkForChoosePlayer == true)
+	{
+		p_game->pushState(new NewAgeChoosePlayerState(p_game, this, p_GamePlayingState));
 	}
 
 
@@ -335,4 +343,11 @@ void CardPickerState::removeStateAfterWonderBuild()
 {
 	if (builtWonder) p_game->popState();
 }
+
+void CardPickerState::removeStateAfterAgePlayerPick()
+{
+	if (playerChosen) p_game->popState();
+}
+
+
 

@@ -162,6 +162,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStateStart.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="NewAgeChoosePlayerState.h" />
     <ClInclude Include="ProgressTokenBuildingState.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ViewingCityState.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="GameStateStart.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NewAgeChoosePlayerState.cpp" />
     <ClCompile Include="ProgressTokenBuildingState.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ViewingCityState.cpp" />
