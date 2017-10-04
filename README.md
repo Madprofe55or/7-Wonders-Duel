@@ -1,7 +1,7 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 26-Sep-2017
+README updated on 03-Oct-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Building wonders, and applying their effects--DONE
