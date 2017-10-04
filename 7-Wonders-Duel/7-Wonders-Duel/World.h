@@ -58,6 +58,8 @@ namespace Seven_Wonders {
 		void doEffect(Player & currentPlayer, ProgressToken & progressToken); //overloaded function for doEffect for Progress Token
 		int goldCost(Player & currentPlayer, Card & card);
 
+		bool compareMilitary();
+
 		bool repeatTurn = false;
 		bool progressTokenState = false;
 

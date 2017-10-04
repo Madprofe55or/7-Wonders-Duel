@@ -12,6 +12,16 @@ void NewAgeChoosePlayerState::draw(const float dt)
 	p_game->window.draw(player2Text);
 	p_game->window.draw(player1Button);
 	p_game->window.draw(player2Button);
+
+	if (p_game->world.compareMilitary())
+	{
+		p_game->window.draw(player1ChooseText);
+	}
+
+	else
+	{ 
+		p_game->window.draw(player1ChooseText);
+	}
 }
 
 void NewAgeChoosePlayerState::update(const float dt)
@@ -100,6 +110,8 @@ void NewAgeChoosePlayerState::handleInput()
 		if (poppingState == true)
 		{
 			p_game->world.checkForChoosePlayer = false;
+			p_game->world.player1Chosen = false;
+			p_game->world.player2Chosen = false;
 			p_game->popState(); // state is popped here since there is no while loop to return to at this point
 			
 		}
@@ -116,7 +128,7 @@ NewAgeChoosePlayerState::NewAgeChoosePlayerState(Game * game, CardPickerState* c
 	mainArea.setPosition(500, 75);
 	mainArea.setFillColor(sf::Color(51, 153, 255, 200));
 
-	instructions.setString("Please Choose Who Will Go First in Age " + to_string(p_game->world.getAge()));
+	instructions.setString(" Choose Who Will Go First in Age " + to_string(p_game->world.getAge()));
 	instructions.setPosition(600, 150);
 	instructions.setFont(p_game->fontManager.getRef("Menu Font"));
 	instructions.setCharacterSize(20);
@@ -144,13 +156,19 @@ NewAgeChoosePlayerState::NewAgeChoosePlayerState(Game * game, CardPickerState* c
 	player2Button.setFillColor(sf::Color(51, 153, 255, 0));
 	player2ButtonRect = player2Button.getGlobalBounds();
 
+	player1ChooseText.setString("Player 1");
+	player1ChooseText.setPosition(535, 150);
+	player1ChooseText.setFont(p_game->fontManager.getRef("Menu Font"));
+	player1ChooseText.setCharacterSize(20);
+	player1ChooseText.setFillColor(sf::Color::White);
 
+	player2ChooseText.setString("Player 2");
+	player2ChooseText.setPosition(535, 150);
+	player2ChooseText.setFont(p_game->fontManager.getRef("Menu Font"));
+	player2ChooseText.setCharacterSize(20);
+	player2ChooseText.setFillColor(sf::Color::White);
 
 
 
 }
 
-//void NewAgeChoosePlayerState::DeterminePicker()
-//{
-//	if(p_game->world.player1.)
-//}

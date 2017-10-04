@@ -19,6 +19,8 @@ public:
 	sf::Text instructions;
 	sf::Text player1Text;
 	sf::Text player2Text;
+	sf::Text player1ChooseText;
+	sf::Text player2ChooseText;
 
 	sf::RectangleShape player1Button;
 	sf::RectangleShape player2Button;
@@ -33,12 +35,11 @@ public:
 
 	NewAgeChoosePlayerState(Game * game, CardPickerState* cardpickerstate, GamePlayingState * gameplayingstate);
 
-	void DeterminePicker();
 
 	
 	Player* p_player;
 
-	const sf::Vector2f MAIN_AREA_SIZE = { 800.0f, 800.0f };
+	const sf::Vector2f MAIN_AREA_SIZE = { 400.0f, 400.0f };
 	const sf::Vector2f BUTTON_SIZE = { 25.0f, 25.0f };
 
 };

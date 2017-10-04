@@ -87,7 +87,6 @@ namespace Seven_Wonders {
 
 		scienceSymbols scienceSymbols;
 		flags flags;
-
 	private:
 		int mPlayerNumber;
 		bool mGoesFirst;
@@ -98,6 +97,7 @@ namespace Seven_Wonders {
 		int mPapyrus = 0;
 		int mGlass = 0;
 		bool mStrategyFlag = false;
+		
 		static const int STARTING_COINS = 7;
 		static const int STARTING_ALL_OTHERS = 0;
 

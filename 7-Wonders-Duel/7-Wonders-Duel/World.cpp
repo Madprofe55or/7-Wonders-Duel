@@ -156,7 +156,7 @@ namespace Seven_Wonders {
 	{
 		if (player1Chosen)
 		{
-			currentPlayer == &player1;
+			currentPlayer = &player1;
 		}
 
 		if (player2Chosen)
@@ -1666,6 +1666,33 @@ namespace Seven_Wonders {
 		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());
 		if (totalCoinsNeeded > 0) return -(totalCoinsNeeded + card.getCoinCost());
 
+	}
+
+	bool World::compareMilitary()
+	{
+
+		int player1ConflictPoints = 0;
+		int player2ConflictPoints = 0;
+
+		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
+		{
+			player1ConflictPoints += (*it)->getShields();
+
+		}
+
+		for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
+		{
+			player2ConflictPoints += (*it)->getShields();
+		}
+
+		if (player1ConflictPoints < player2ConflictPoints)
+		{
+			return true;
+		}
+
+		else {
+			return false;
+		}
 	}
 
 

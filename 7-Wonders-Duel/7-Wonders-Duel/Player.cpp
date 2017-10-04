@@ -110,6 +110,7 @@ namespace Seven_Wonders {
 		return mGlass;
 	}
 
+
 	void Player::setGlass(int changeInGlass)
 	{
 		mGlass = mGlass + changeInGlass;
