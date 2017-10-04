@@ -16,10 +16,10 @@ FUNCTIONALITY STILL NEEDED:
         ii.  The Great Library, which allows player to immediately gain a progress token from three random unused ones
         iii. The Mausoleum, which allows player to build a discarded card of choice
         iv.  The Statue of Zeus, which allows player to destroy opponent's brown card
-    c. All progress tokens (see #2 above)-DONE (in Pizza Fork--Arhchitecture and Masonry simplified to discount on clay and stone       respectfully)
+    c. All progress tokens (see #2 above)-DONE (in Pizza Fork--Arhchitecture and Masonry (eachy by 2) simplified to discount on clay and stone       respectfully)
 5. Code for handling special/trading flags
 6. Show progress tokens in players' cities or header--DONE (in Pizza Fork)
-7. Determining who goes first at beginning of Ages 2 and 3
+7. Determining who goes first at beginning of Ages 2 and 3--DONE (in Pizza Fork 03 Oct 2017)
 
 
 REFACTORING PLAN:
