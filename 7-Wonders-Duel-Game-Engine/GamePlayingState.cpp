@@ -4,6 +4,9 @@
 #include "CardDestroyerState.h"
 #include "ProgressTokenBuildingState.h"
 #include "NewAgeChoosePlayerState.h"
+#include "EndGameState.h"
+
+
 void GamePlayingState::draw(const float dt)
 {
 	p_game->window.draw(background);
@@ -387,6 +390,42 @@ void GamePlayingState::handleInput()
 		rectPickingCard.setSize(rectPickingCardSize);
 		player2City.setFillColor(sf::Color(54, 204, 51));
 		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
+	}
+
+	if (p_game->world.player1ScienceVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2ScienceVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game,this ));
+	}
+
+	if (p_game->world.player1MilitaryVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2MilitaryVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player1CivilianVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2CivlianVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 

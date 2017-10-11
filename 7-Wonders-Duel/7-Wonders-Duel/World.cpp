@@ -855,6 +855,7 @@ namespace Seven_Wonders {
 
 	bool World::checkForScienceVictory(Player & currentPlayer)
 	{
+	
 		int symbolCounter = 0;
 		if (currentPlayer.scienceSymbols.arch >= 1) symbolCounter++;
 		if (currentPlayer.scienceSymbols.balance >= 1) symbolCounter++;
@@ -864,9 +865,20 @@ namespace Seven_Wonders {
 		if (currentPlayer.scienceSymbols.wheel >= 1) symbolCounter++;
 		if (currentPlayer.scienceSymbols.quill >= 1) symbolCounter++;
 
-		if (symbolCounter >= 6) return true;
+		if (symbolCounter >= 6 && currentPlayer.getPlayerNumber() == PLAYER_1) 
+		{ 
+			player1ScienceVictory = true; 
+			return true; 
+		}
+
+		if (symbolCounter >= 6 && currentPlayer.getPlayerNumber() == PLAYER_2) 
+		{
+			player2ScienceVictory = true;
+			return true;
+		}
 		else return false;
 	}
+
 
 	//check to see if progress token in player city is greater or equal to 2
 	//allow to build wonder if true
@@ -1210,6 +1222,15 @@ namespace Seven_Wonders {
 			player2Points += (*it)->getVictoryPoints();
 		}
 
+		if (player1Points > player2Points)
+		{
+			player1CivilianVictory == true;
+		}
+
+		else
+		{
+			player2CivlianVictory == true;
+		}
 
 	}
 
@@ -1311,6 +1332,16 @@ namespace Seven_Wonders {
 			// if someone plays a card that puts them past the exact win condition they win anyway and it will still be flagged as a win
 			if (mConflict < -9) mConflict = -9;
 			if (mConflict > 9) mConflict = 9;
+
+			if (mConflict == -9)
+			{
+				player2MilitaryVictory = true;
+			}
+
+			if (mConflict == 9)
+			{
+				player1MilitaryVictory = true;
+			}
 		}
 		else if (card.getType() == BLUE_CARD)
 		{
@@ -1604,6 +1635,7 @@ namespace Seven_Wonders {
 				break;
 			}
 		}
+
 	}
 
 	void World::doEffect(Player & currentPlayer, ProgressToken & progressToken)
@@ -1668,7 +1700,7 @@ namespace Seven_Wonders {
 
 	}
 
-	bool World::compareMilitary()
+	bool World::compareMilitary() //function to determine who has the weaker military to determine whom will pick the turn order
 	{
 
 		int player1ConflictPoints = 0;

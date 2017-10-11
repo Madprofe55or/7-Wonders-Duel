@@ -192,6 +192,10 @@ void Game::loadTextures()
 
 	textureManager.loadTexture("Conflict Pawn", "Resources/BoardItems/conflictpawn.png");
 
+	textureManager.loadTexture("Victory Background", "Resources/Backgrounds/victoryBackground.jpg");
+	textureManager.loadTexture("Science Background", "Resources/Backgrounds/scienceBackground.jpg");
+	textureManager.loadTexture("Civilian Background", "Resources/Backgrounds/civilianBackground.jpg");
+
 
 
 

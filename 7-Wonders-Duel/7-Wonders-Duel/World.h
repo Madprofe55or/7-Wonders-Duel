@@ -52,6 +52,7 @@ namespace Seven_Wonders {
 		bool player2Chosen = false;
 
 		bool checkForScienceVictory(Player & currentPlayer);
+	
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
@@ -60,8 +61,18 @@ namespace Seven_Wonders {
 
 		bool compareMilitary();
 
+		bool player1MilitaryVictory = false;
+		bool player2MilitaryVictory = false;
+
+		bool player1ScienceVictory = false;
+		bool player2ScienceVictory = false;
+
+		bool player1CivilianVictory = false;
+		bool player2CivlianVictory = false;
+
 		bool repeatTurn = false;
 		bool progressTokenState = false;
+
 
 
 		int mAge = 1;
