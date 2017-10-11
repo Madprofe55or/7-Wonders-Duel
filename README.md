@@ -6,7 +6,7 @@ README updated on 03-Oct-2017
 FUNCTIONALITY STILL NEEDED:
 1. Building wonders, and applying their effects--DONE
 2. Choosing progress tokens when getting a pair of science symbols--DONE (in Pizza Fork)
-3. Game end state
+3. Game end state-80% DONE in pizza Fork-need to implement the HandleInput of EndGameState.cpp
     a. Military victory
     b. Science victory
     c. Civilian (default) victory
