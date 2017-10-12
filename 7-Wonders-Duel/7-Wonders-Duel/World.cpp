@@ -561,7 +561,15 @@ namespace Seven_Wonders {
 		// 3. Show first 4 wonders, player 1 picks 1, player 2 picks 2, then player 1 gets last one
 		// 4. Show next 4 wonders, player 2 picks 1, player 1 picks 2, then player 2 gets last one, discard remaining 4, destroy the vector
 		// 5. Deal Age 1 cards
+		playAgain = false;
+		bool player1MilitaryVictory = false;
+		bool player2MilitaryVictory = false;
 
+		bool player1ScienceVictory = false;
+		bool player2ScienceVictory = false;
+
+		bool player1CivilianVictory = false;
+		bool player2CivlianVictory = false;
 		// Progress token deck and shuffling
 		progressTokenDeck.push_back(&progressTokenAgriculture);
 		progressTokenDeck.push_back(&progressTokenArchitecture);

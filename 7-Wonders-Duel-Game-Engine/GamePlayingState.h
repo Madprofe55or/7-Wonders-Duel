@@ -204,6 +204,8 @@ public:
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
 	void checkForPTBuildState();
+
+	void checkForPlayAgain();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

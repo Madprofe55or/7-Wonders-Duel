@@ -52,6 +52,8 @@ namespace Seven_Wonders {
 		bool player2Chosen = false;
 
 		bool checkForScienceVictory(Player & currentPlayer);
+
+		bool playAgain = false;
 	
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();

@@ -171,6 +171,7 @@ void GamePlayingState::update(const float dt)
 	checkForDestroyingBrownCard();
 	checkForDestroyingGrayCard();
 	checkForPTBuildState();
+	checkForPlayAgain();
 }
 
 void GamePlayingState::handleInput()
@@ -427,6 +428,7 @@ void GamePlayingState::handleInput()
 		//p_game->popState();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
+
 
 
 }
@@ -858,6 +860,15 @@ void GamePlayingState::checkForDestroyingGrayCard()
 void GamePlayingState::checkForPTBuildState()
 {
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
+}
+
+void GamePlayingState::checkForPlayAgain()
+{
+	if (p_game->world.playAgain==true)
+	{
+		p_game->popState();
+
+	}
 }
 
 

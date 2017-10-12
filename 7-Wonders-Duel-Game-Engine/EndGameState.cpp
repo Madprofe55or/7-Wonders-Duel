@@ -118,7 +118,7 @@ void EndGameState::update(const float dt)
 
 void EndGameState::handleInput()
 {
-
+	bool poppingState = false;
 	sf::Event event;
 
 	while (p_game->window.pollEvent(event))
@@ -139,8 +139,63 @@ void EndGameState::handleInput()
 			}
 		}
 
+		case sf::Event::MouseButtonPressed:
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (p_game->inputManager.isObjectClicked(exit, event.mouseButton.button, p_game->window) == true)
+				{
+					p_game->window.close();
+					break;
+				}
+				if (p_game->inputManager.isObjectClicked(playAgain, event.mouseButton.button, p_game->window) == true)
+				{
+					poppingState = true;
+					p_game->world.playAgain=true;
+					p_game->world.ExitGame();
+					break;
+
+				}
+			}
+		}
+
+		case sf::Event::MouseMoved:
+		{
+			// These sf::IntRect objects are needed to be able to use .contains() below
+			sf::FloatRect playAgainRect = playAgain.getGlobalBounds();
+			sf::FloatRect exitRect = exit.getGlobalBounds();
+
+			sf::Vector2f mouse = p_game->window.mapPixelToCoords(sf::Mouse::getPosition(p_game->window));
+
+			if (exitRect.contains(mouse))
+			{
+				exit.setFillColor(sf::Color::Red);
+			}
+			else
+			{
+				exit.setFillColor(sf::Color::White);
+			}
+			if (playAgainRect.contains(mouse))
+			{
+				playAgain.setFillColor(sf::Color::Green);
+			}
+			else
+			{
+				playAgain.setFillColor(sf::Color::White);
+			}
+		}
+
+		default: break;
+
+	
 		}
 	}
+
+	if (poppingState == true)
+	{
+		p_game->popState();
+	}
+
 }
 
 
