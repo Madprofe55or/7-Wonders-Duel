@@ -27,6 +27,7 @@ namespace Seven_Wonders {
 		void buildProgressToken(int progressTokenNumber);
 		void discardCard(int clickedCardIndex);
 		void buildWonder(int wonderNumber, int clickCardIndex);
+		void destroyCard(int cardIndex, Player & player);
 		void exposeCards();
 		vector<Card> age1Deck;
 		vector<Card*> wonderCardDeck;
@@ -74,7 +75,8 @@ namespace Seven_Wonders {
 
 		bool repeatTurn = false;
 		bool progressTokenState = false;
-
+		bool destroyBrownCard = false;
+		bool destroyGrayCard = false;
 
 
 		int mAge = 1;

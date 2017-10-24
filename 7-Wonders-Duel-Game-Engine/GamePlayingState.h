@@ -191,10 +191,12 @@ public:
 	int emptyCount;
 	bool mouseover;
 	bool mouseOverToken;
+
 	bool mouseOverP1Token;
 	bool mouseOverP2Token;
 	bool destroyBrownCard = false;
 	bool destroyGrayCard = false;
+
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
