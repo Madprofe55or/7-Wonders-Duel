@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -155,7 +155,6 @@
     <ClInclude Include="CardDestroyerState.h" />
     <ClInclude Include="CardPickerState.h" />
     <ClInclude Include="DiscardedCardPickerState.h" />
-    <ClInclude Include="DiscardedPTPickerState.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GamePlayingState.h" />
     <ClInclude Include="GameState.h" />
@@ -172,7 +171,6 @@
     <ClCompile Include="CardDestroyerState.cpp" />
     <ClCompile Include="CardPickerState.cpp" />
     <ClCompile Include="DiscardedCardPickerState.cpp" />
-    <ClCompile Include="DiscardedPTPickerState.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamePlayingState.cpp" />
