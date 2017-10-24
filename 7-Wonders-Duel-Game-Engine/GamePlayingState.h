@@ -164,8 +164,6 @@ public:
 	int emptyCount;
 	bool mouseover;
 	bool mouseOverToken;
-	bool destroyBrownCard = false;
-	bool destroyGrayCard = false;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
