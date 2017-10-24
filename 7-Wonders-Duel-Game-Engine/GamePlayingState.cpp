@@ -3,6 +3,9 @@
 #include "ViewingCityState.h"
 #include "CardDestroyerState.h"
 #include "ProgressTokenBuildingState.h"
+#include "NewAgeChoosePlayerState.h"
+#include "EndGameState.h"
+
 
 void GamePlayingState::draw(const float dt)
 {
@@ -33,12 +36,14 @@ void GamePlayingState::draw(const float dt)
 		p_game->window.draw(mWonderSpritesP2[i]);
 	}
 
+
+
 	// drawing mouseover card
 	if (mouseover) mouseoverCard.setPosition(900.0f, 350.0f);
 	if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
 	p_game->window.draw(mouseoverCard);
 
-	
+
 	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
 		mPlayer1GUI.setFillColor(sf::Color(51, 204, 51, 126));
@@ -87,6 +92,14 @@ void GamePlayingState::draw(const float dt)
 	if (!mouseOverToken) mouseOverProgressToken.setPosition(-400.0f, -400.0f);
 	p_game->window.draw(mouseOverProgressToken);
 
+	if (mouseOverP1Token) mouseOverPlayer1PT.setPosition(1200.0f, 350.0f);
+	if (!mouseOverP1Token) mouseOverPlayer1PT.setPosition(-400.0f, -400.0f);
+	p_game->window.draw(mouseOverPlayer1PT);
+
+	if (mouseOverP2Token) mouseOverPlayer2PT.setPosition(1200.0f, 350.0f);
+	if (!mouseOverP2Token) mouseOverPlayer2PT.setPosition(-400.0f, -400.0f);
+	p_game->window.draw(mouseOverPlayer2PT);
+
 
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
@@ -106,6 +119,51 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(player2City);
 	p_game->window.draw(txtPlayer1City);
 	p_game->window.draw(txtPlayer2City);
+
+
+
+
+			p_game->window.draw(player1ProgressTokens[0]);
+
+
+			p_game->window.draw(player1ProgressTokens[1]);
+		
+
+
+			p_game->window.draw(player1ProgressTokens[2]);
+		
+
+			p_game->window.draw(player1ProgressTokens[3]);
+
+
+			p_game->window.draw(player1ProgressTokens[4]);
+		
+
+		if (p_game->world.player2.playerPT1 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[0]);
+		}
+
+		if (p_game->world.player2.playerPT2 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[1]);
+		}
+
+		if (p_game->world.player2.playerPT3 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[2]);
+		}
+
+		if (p_game->world.player2.playerPT4 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[3]);
+		}
+
+		if (p_game->world.player2.playerPT5 != nullptr)
+		{
+			p_game->window.draw(player2ProgressTokens[4]);
+		}
+
 }
 
 void GamePlayingState::update(const float dt)
@@ -113,6 +171,7 @@ void GamePlayingState::update(const float dt)
 	checkForDestroyingBrownCard();
 	checkForDestroyingGrayCard();
 	checkForPTBuildState();
+	checkForPlayAgain();
 }
 
 void GamePlayingState::handleInput()
@@ -183,6 +242,8 @@ void GamePlayingState::handleInput()
 			int mouseoverVectorCount = 0;
 			mouseover = false;
 			mouseOverToken = false;
+			mouseOverP1Token=false;
+			mouseOverP2Token=false;
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -218,6 +279,89 @@ void GamePlayingState::handleInput()
 					break;
 				}
 			}
+
+
+			if (player1TokenRect1.contains(mouse) && p_game->world.player1.playerPT1 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT1->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect2.contains(mouse) && p_game->world.player1.playerPT2 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT2->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect3.contains(mouse) && p_game->world.player1.playerPT3 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT3->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect4.contains(mouse) && p_game->world.player1.playerPT4 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT4->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player1TokenRect5.contains(mouse) && p_game->world.player1.playerPT5 != nullptr)
+			{
+				mouseOverPlayer1PT.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT5->getName()));
+				mouseOverPlayer1PT.setScale(0.5f, 0.5f);
+				mouseOverP1Token = true;
+				break;
+			}
+
+			if (player2TokenRect1.contains(mouse) && p_game->world.player2.playerPT1 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT1->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect2.contains(mouse) && p_game->world.player2.playerPT2 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT2->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect3.contains(mouse) && p_game->world.player2.playerPT3 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT3->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect4.contains(mouse) && p_game->world.player2.playerPT4 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT4->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+			if (player2TokenRect5.contains(mouse) && p_game->world.player2.playerPT5 != nullptr)
+			{
+				mouseOverPlayer2PT.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT5->getName()));
+				mouseOverPlayer2PT.setScale(0.5f, 0.5f);
+				mouseOverP2Token = true;
+				break;
+			}
+
+
 			if (rectPlayer1City.contains(mouse))
 			{
 				player1City.setFillColor(sf::Color(51, 53, 255));
@@ -258,6 +402,45 @@ void GamePlayingState::handleInput()
 		player2City.setFillColor(sf::Color(54, 204, 51));
 		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
 	}
+
+	if (p_game->world.player1ScienceVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2ScienceVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game,this ));
+	}
+
+	if (p_game->world.player1MilitaryVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2MilitaryVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player1CivilianVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+	if (p_game->world.player2CivlianVictory == true)
+	{
+		//p_game->popState();
+		p_game->pushState(new EndGameState(p_game, this));
+	}
+
+
+
 }
 
 GamePlayingState::GamePlayingState(Game * game)
@@ -350,6 +533,8 @@ GamePlayingState::GamePlayingState(Game * game)
 		mProgressTokens[i].setOrigin(mProgressTokens[i].getGlobalBounds().width / 2.0, mProgressTokens[i].getGlobalBounds().height/ 2.0);
 		mProgressTokens[i].setPosition(25.0f, 260.0f + (77.0 * i));
 	}
+
+		
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -588,6 +773,88 @@ void GamePlayingState::setBuiltSprites()
 			else if (p_game->world.player2.playerWonderDeck[i]->builtInAge == 3) mWonderBuiltSpritesP2[i].setTexture(p_game->textureManager.getRef("Age 3 Back"));
 		}
 	}
+
+
+		if (p_game->world.player1.playerPT1 != nullptr)
+		{
+			player1ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT1->getName()));
+			player1ProgressTokens[0].setScale(0.22f, 0.22f);
+			player1ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 0.0f);
+			player1TokenRect1 = player1ProgressTokens[0].getGlobalBounds();
+		}
+
+		if (p_game->world.player1.playerPT2 != nullptr)
+		{
+			player1ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT2->getName()));
+			player1ProgressTokens[1].setScale(0.22f, 0.22f);
+			player1ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 0.0f);
+			player1TokenRect2 = player1ProgressTokens[1].getGlobalBounds();
+		}
+
+		if (p_game->world.player1.playerPT3 != nullptr)
+		{
+			player1ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT3->getName()));
+			player1ProgressTokens[2].setScale(0.22f, 0.22f);
+			player1ProgressTokens[2].setPosition(1080.0f + (2 *75.0f), 0.0f);
+			player1TokenRect3 = player1ProgressTokens[2].getGlobalBounds();
+		}
+
+		if (p_game->world.player1.playerPT4 != nullptr)
+		{
+			player1ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT4->getName()));
+			player1ProgressTokens[3].setScale(0.22f, 0.22f);
+			player1ProgressTokens[3].setPosition(1080.0f + (3 *75.0f), 0.0f);
+			player1TokenRect4 = player1ProgressTokens[3].getGlobalBounds();
+
+		}
+
+		if (p_game->world.player1.playerPT5 != nullptr)
+		{
+			player1ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player1.playerPT5->getName()));
+			player1ProgressTokens[4].setScale(0.22f, 0.22f);
+			player1ProgressTokens[4].setPosition(1080.0f + (4 *75.0f), 0.0f);
+			player1TokenRect5 = player1ProgressTokens[4].getGlobalBounds();
+		}
+
+		if (p_game->world.player2.playerPT1 != nullptr)
+		{
+			player2ProgressTokens[0].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT1->getName()));
+			player2ProgressTokens[0].setScale(0.22f, 0.22f);
+			player2ProgressTokens[0].setPosition(1080.0f + (0 * 75.0f), 825.0f);
+			player2TokenRect1 = player2ProgressTokens[0].getGlobalBounds();
+		}
+
+		if (p_game->world.player2.playerPT2 != nullptr)
+		{
+			player2ProgressTokens[1].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT2->getName()));
+			player2ProgressTokens[1].setScale(0.22f, 0.22f);
+			player2ProgressTokens[1].setPosition(1080.0f + (1 * 75.0f), 825.0f);
+			player2TokenRect2 = player2ProgressTokens[1].getGlobalBounds();
+		}
+
+		if (p_game->world.player2.playerPT3 != nullptr)
+		{
+			player2ProgressTokens[2].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT3->getName()));
+			player2ProgressTokens[2].setScale(0.22f, 0.22f);
+			player2ProgressTokens[2].setPosition(1080.0f + (2 * 75.0f), 825.0f);
+			player2TokenRect3 = player2ProgressTokens[2].getGlobalBounds();
+		}
+
+		if (p_game->world.player2.playerPT4 != nullptr)
+		{
+			player2ProgressTokens[3].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT4->getName()));
+			player2ProgressTokens[3].setScale(0.22f, 0.22f);
+			player2ProgressTokens[3].setPosition(1080.0f + (3 * 75.0f), 825.0f);
+			player2TokenRect4 = player2ProgressTokens[3].getGlobalBounds();
+		}
+
+		if (p_game->world.player2.playerPT5 != nullptr)
+		{
+			player2ProgressTokens[4].setTexture(p_game->textureManager.getRef(p_game->world.player2.playerPT5->getName()));
+			player2ProgressTokens[4].setScale(0.22f, 0.22f);
+			player2ProgressTokens[4].setPosition(1080.0f + (4 * 75.0f), 825.0f);
+			player2TokenRect5 = player2ProgressTokens[4].getGlobalBounds();
+		}
 }
 
 void GamePlayingState::checkForDestroyingBrownCard()
@@ -604,6 +871,17 @@ void GamePlayingState::checkForPTBuildState()
 {
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
+
+void GamePlayingState::checkForPlayAgain()
+{
+	if (p_game->world.playAgain==true)
+	{
+		p_game->popState();
+
+	}
+}
+
+
 
 GamePlayingState::~GamePlayingState()
 {

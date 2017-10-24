@@ -38,7 +38,13 @@ namespace Seven_Wonders {
 		void resetResources();
 		vector<Card*> playerCity;
 		vector<Card*> playerWonderDeck;
-		vector<ProgressToken*> playerPTDeck;
+		//vector<ProgressToken*> playerPTDeck;
+		ProgressToken* playerPT1=nullptr;
+		ProgressToken* playerPT2=nullptr;
+		ProgressToken* playerPT3=nullptr;
+		ProgressToken* playerPT4=nullptr;
+		ProgressToken* playerPT5=nullptr;
+		vector <ProgressToken*> playerPT = { playerPT1, playerPT2, playerPT3, playerPT4, playerPT5 };
 
 		struct scienceSymbols
 		{
@@ -81,7 +87,6 @@ namespace Seven_Wonders {
 
 		scienceSymbols scienceSymbols;
 		flags flags;
-
 	private:
 		int mPlayerNumber;
 		bool mGoesFirst;
@@ -92,6 +97,7 @@ namespace Seven_Wonders {
 		int mPapyrus = 0;
 		int mGlass = 0;
 		bool mStrategyFlag = false;
+		
 		static const int STARTING_COINS = 7;
 		static const int STARTING_ALL_OTHERS = 0;
 

@@ -5,6 +5,7 @@
 
 #include "GameState.h"
 #include "GamePlayingState.h"
+//#include "NewAgeChoosePlayerState.h"
 //#include "WonderBuildingState.h"
 
 class CardPickerState : public GameState
@@ -59,10 +60,14 @@ public:
 
 	void removeStateAfterWonderBuild();
 
+	void removeStateAfterAgePlayerPick();
+
+
 	GamePlayingState * p_GamePlayingState;
 	Card * p_card;
 	bool canBuildCard;
 	bool builtWonder = false;
+	bool playerChosen = false;
 
 	
 	// Don't need destructor

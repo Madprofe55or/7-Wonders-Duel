@@ -91,6 +91,16 @@ public:
 	sf::Sprite mPlayer2Wonder2Built;
 	sf::Sprite mPlayer2Wonder3Built;
 	sf::Sprite mPlayer2Wonder4Built;
+	sf::Sprite player1Token1;
+	sf::Sprite player1Token2;
+	sf::Sprite player1Token3;
+	sf::Sprite player1Token4;
+	sf::Sprite player1Token5; 
+	sf::Sprite player2Token1;
+	sf::Sprite player2Token2;
+	sf::Sprite player2Token3;
+	sf::Sprite player2Token4;
+	sf::Sprite player2Token5;
 
 	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,
@@ -107,9 +117,26 @@ public:
 
 	sf::Sprite mProgressTokens[5] = { mProgressToken1, mProgressToken2, mProgressToken3, mProgressToken4 ,mProgressToken5 };
 
+	sf::Sprite player1ProgressTokens[5] = { player1Token1, player1Token2,  player1Token3, player1Token4, player1Token5  };
+	sf::Sprite player2ProgressTokens[5] = { player2Token1, player2Token2, player2Token3,  player2Token4, player2Token5 };
+
+	sf::FloatRect player1TokenRect1;
+	sf::FloatRect player1TokenRect2;
+	sf::FloatRect player1TokenRect3;
+	sf::FloatRect player1TokenRect4;
+	sf::FloatRect player1TokenRect5;
+	sf::FloatRect player2TokenRect1;
+	sf::FloatRect player2TokenRect2;
+	sf::FloatRect player2TokenRect3;
+	sf::FloatRect player2TokenRect4;
+	sf::FloatRect player2TokenRect5;
+
 	sf::Sprite mouseoverCard;
 
 	sf::Sprite mouseOverProgressToken;
+
+	sf::Sprite mouseOverPlayer1PT;
+	sf::Sprite mouseOverPlayer2PT;
 
 	sf::FloatRect rectPlayer1Wonder1;
 	sf::FloatRect rectPlayer1Wonder2;
@@ -165,6 +192,12 @@ public:
 	bool mouseover;
 	bool mouseOverToken;
 
+	bool mouseOverP1Token;
+	bool mouseOverP2Token;
+	bool destroyBrownCard = false;
+	bool destroyGrayCard = false;
+
+
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
 	virtual void handleInput();
@@ -173,6 +206,8 @@ public:
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
 	void checkForPTBuildState();
+
+	void checkForPlayAgain();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

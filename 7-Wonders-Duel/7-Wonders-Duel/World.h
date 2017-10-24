@@ -23,6 +23,7 @@ namespace Seven_Wonders {
 		int getAge();
 		void setAge(int age);
 		void buildCard(int clickedCardIndex);
+		void ChoosePlayer();
 		void buildProgressToken(int progressTokenNumber);
 		void discardCard(int clickedCardIndex);
 		void buildWonder(int wonderNumber, int clickCardIndex);
@@ -42,19 +43,41 @@ namespace Seven_Wonders {
 		void Setup();
 		int mCurrentPlayer;
 
+		bool checkForChoosePlayer = false;
+		int player1CountPT = 0;
+		int player2CountPT = 0;
 
 		void ExitGame();
 		bool checkForNewAge();
+		bool player1Chosen = false;
+		bool player2Chosen = false;
+
 		bool checkForScienceVictory(Player & currentPlayer);
+
+		bool playAgain = false;
+	
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
 		void doEffect(Player & currentPlayer, Card & card);
+		void doEffect(Player & currentPlayer, ProgressToken & progressToken); //overloaded function for doEffect for Progress Token
 		int goldCost(Player & currentPlayer, Card & card);
+
+		bool compareMilitary();
+
+		bool player1MilitaryVictory = false;
+		bool player2MilitaryVictory = false;
+
+		bool player1ScienceVictory = false;
+		bool player2ScienceVictory = false;
+
+		bool player1CivilianVictory = false;
+		bool player2CivlianVictory = false;
 
 		bool repeatTurn = false;
 		bool progressTokenState = false;
 		bool destroyBrownCard = false;
 		bool destroyGrayCard = false;
+
 
 		int mAge = 1;
 		int mConflict = 0;

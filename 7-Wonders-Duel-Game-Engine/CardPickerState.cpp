@@ -1,5 +1,6 @@
 #include "CardPickerState.h"
 #include "WonderBuildingState.h"
+#include "NewAgeChoosePlayerState.h"
 #include <string>
 
 
@@ -10,7 +11,9 @@ void CardPickerState::draw(const float dt)
 	// the following rectangle is for darkening the gameplaying state underneath
 	p_game->window.draw(p_GamePlayingState->rectPickingCard);
 
-
+	
+	
+	
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testRectangle2);
 	p_game->window.draw(cardToDisplay);
@@ -30,15 +33,14 @@ void CardPickerState::draw(const float dt)
 	p_game->window.draw(textClayCostNum);
 	p_game->window.draw(textPapyrusCostNum);
 	p_game->window.draw(textGlassCostNum);
-
 	p_game->window.draw(buildRectangle);
 	p_game->window.draw(discardRectangle);
 	p_game->window.draw(buildWonderRectangle);
-
 	p_game->window.draw(textBuild);
 	p_game->window.draw(textDiscard);
 	p_game->window.draw(textDiscardValue);
 	p_game->window.draw(textBuildWonder);
+
 
 
 
@@ -47,6 +49,8 @@ void CardPickerState::draw(const float dt)
 void CardPickerState::update(const float dt)
 {
 	removeStateAfterWonderBuild();
+	removeStateAfterAgePlayerPick();
+	
 }
 
 void CardPickerState::handleInput()
@@ -157,6 +161,13 @@ void CardPickerState::handleInput()
 	{
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
 	}
+
+	if (p_game->world.checkForChoosePlayer == true)
+	{
+		p_game->pushState(new NewAgeChoosePlayerState(p_game, this, p_GamePlayingState));
+	}
+
+
 	if (poppingState == true)
 	{
 		p_game->popState(); // state is popped here since there is no while loop to return to at this point
@@ -296,6 +307,7 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		buildWonderRectangle.setPosition(1025, 550);
 
 
+
 		textBuild.setFont(p_game->fontManager.getRef("Menu Font"));
 		textBuild.setString("Build");
 		textBuild.setCharacterSize(25);
@@ -322,6 +334,7 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		textBuildWonder.setFillColor(sf::Color::White);
 		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());
+
 	}
 
 }
@@ -330,3 +343,11 @@ void CardPickerState::removeStateAfterWonderBuild()
 {
 	if (builtWonder) p_game->popState();
 }
+
+void CardPickerState::removeStateAfterAgePlayerPick()
+{
+	if (playerChosen) p_game->popState();
+}
+
+
+
