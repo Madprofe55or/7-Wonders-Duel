@@ -54,9 +54,6 @@
     <ClInclude Include="DiscardedCardPickerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DiscardedPTPickerState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ProgressTokenBuildingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -99,9 +96,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DiscardedCardPickerState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DiscardedPTPickerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProgressTokenBuildingState.cpp">
