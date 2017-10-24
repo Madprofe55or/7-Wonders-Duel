@@ -206,6 +206,67 @@ namespace Seven_Wonders {
 		if (repeatTurn == true) repeatTurn = false; // re-setting the repeatturn flag
 	}
 
+	void World::destroyCard(int cardIndex, Player & targetplayer)
+	{
+		for (vector<Card*>::iterator it = targetplayer.playerCity.begin(); it != targetplayer.playerCity.end(); ++it)
+		{
+			if (cardIndex = (*it)->getIndex())
+			{
+				// adjusting player resources
+				switch ((*it)->getIndex())
+				{
+				// brown cards
+				case 0: // lumber yard
+					targetplayer.setWood(-1);
+					break;
+				case 1: // logging camp
+					targetplayer.setWood(-1);
+					break;
+				case 2: // clay pool
+					targetplayer.setClay(-1);
+					break;
+				case 3: // clay pit
+					targetplayer.setClay(-1);
+					break;
+				case 4: // quarry
+					targetplayer.setStone(-1);
+					break;
+				case 5: // stone pit
+					targetplayer.setStone(-1);
+					break;
+				case 23: // saw mill
+					targetplayer.setWood(-2);
+					break;
+				case 24: // brickyard
+					targetplayer.setClay(-2);
+					break;
+				case 25: // shelf quarry
+					targetplayer.setStone(-2);
+					break;
+				// gray cards
+				case 6: // glassworks
+					targetplayer.setGlass(-1);
+					break;
+				case 7: // press
+					targetplayer.setPapyrus(-1);
+					break;
+				case 26: // glassblower
+					targetplayer.setGlass(-1);
+					break;
+				case 27: // drying room
+					targetplayer.setPapyrus(-1);
+					break;
+				}
+				// moving card to discard pile
+				discardDeck.push_back((*it));
+				targetplayer.playerCity.erase(it);
+				break;
+			}
+		}
+		if (destroyBrownCard) destroyBrownCard == false;
+		if (destroyGrayCard) destroyGrayCard == false;
+	}
+
 	/* Algorithm for updating cards' exposure and faceup settings
 	   Run after each card is picked on each player's turn
 	   REFACTORING: Not all cards need their faceup value updated, but it's written as such,
@@ -1159,7 +1220,7 @@ namespace Seven_Wonders {
 
 				break;
 			case 74: // circus maximus
-				// need code here to handle destroying opposing player's card
+				destroyGrayCard = true;
 
 				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
 				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
@@ -1201,7 +1262,7 @@ namespace Seven_Wonders {
 				
 				break;
 			case 83: // the statue of zeus
-				// need code here to handle destroying opposing player's card
+				destroyGrayCard = true;
 
 				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
 				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
