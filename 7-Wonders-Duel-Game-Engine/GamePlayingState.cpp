@@ -141,6 +141,16 @@ void GamePlayingState::handleInput()
 				p_game->world.ExitGame();
 				break;
 			}
+			// F6 and F7 are for testing the CardDestroyerState
+			else if (event.key.code == sf::Keyboard::F6)
+			{
+				p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+			}
+			else if (event.key.code == sf::Keyboard::F7)
+			{
+				p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+			}
+			// end testing code...REMOVE LATER
 		}
 		case sf::Event::MouseButtonPressed:
 		{
@@ -582,12 +592,12 @@ void GamePlayingState::setBuiltSprites()
 
 void GamePlayingState::checkForDestroyingBrownCard()
 {
-	if (destroyBrownCard) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+	if (p_game->world.destroyBrownCard == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
 }
 
 void GamePlayingState::checkForDestroyingGrayCard()
 {
-	if (destroyGrayCard) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+	if (p_game->world.destroyGrayCard == true) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
 }
 
 void GamePlayingState::checkForPTBuildState()
