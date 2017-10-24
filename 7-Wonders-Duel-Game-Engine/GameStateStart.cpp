@@ -31,11 +31,16 @@ void GameStateStart::handleInput()
 		case sf::Event::Closed:
 		{
 			p_game->window.close();
+			menuMusic.stop();
 			break;
 		}
 		case sf::Event::KeyPressed:
 		{
-			if (event.key.code == sf::Keyboard::Escape) p_game->window.close();
+			if (event.key.code == sf::Keyboard::Escape)
+			{
+				p_game->window.close();
+				menuMusic.stop();
+			}
 			else if (event.key.code == sf::Keyboard::R)
 			{
 				if (mRotating == false) mRotating = true;
@@ -53,11 +58,13 @@ void GameStateStart::handleInput()
 				if (p_game->inputManager.isObjectClicked(exitGameText, event.mouseButton.button, p_game->window) == true)
 				{
 					p_game->window.close();
+					menuMusic.stop();
 				}
 				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
 					p_game->world.Setup();
 					p_game->pushState(new WonderPickerState(p_game));
+					menuMusic.stop();
 				}
 			}
 			
@@ -123,6 +130,9 @@ GameStateStart::GameStateStart(Game * game)
 
 	//startGameText.setPosition(800 - 0.5 * startGameText.getGlobalBounds().width, 400);
 	//exitGameText.setPosition(800 - 0.5 * exitGameText.getGlobalBounds().width, 500);
+
+	menuMusic.openFromFile("Resources/Sounds/menumusic.ogg");
+	menuMusic.play();
 	
 }
 

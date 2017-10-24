@@ -875,6 +875,8 @@ namespace Seven_Wonders {
 		guildDeck.clear();
 		discardDeck.clear();
 		wonderCardDeck.clear();
+		progressTokenDeck.clear();
+		progressTokenDiscardDeck.clear();
 		player1.playerCity.clear();
 		player1.resetResources();
 		player2.playerCity.clear();

@@ -46,6 +46,9 @@ public:
 	// Sprites
 	sf::Sprite cardToDisplay;
 
+	// Sounds
+	sf::Sound discardCardSound;
+
 
 
 	sf::Vector2f const CARD_GUI_SIZE = { 600, 400 };

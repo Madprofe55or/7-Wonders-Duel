@@ -378,31 +378,7 @@ void GamePlayingState::handleInput()
 		default: break;
 		}
 	}
-	if (poppingState == true) p_game->popState(); // pop state here, outside while loop
-	if (cardPickState == true)
-	{
-		rectPickingCard.setFillColor(sf::Color(0,0,0,126));
-		rectPickingCard.setPosition(0, 0);
-		rectPickingCard.setSize(rectPickingCardSize);
-		p_game->pushState(new CardPickerState(p_game, this, *clickedCard)); // push card picker state
-	}
-	if (viewP1City == true)
-	{
-		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
-		rectPickingCard.setPosition(0, 0);
-		rectPickingCard.setSize(rectPickingCardSize);
-		player1City.setFillColor(sf::Color(54, 204, 51));
-		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player1));
-	}
-	else if (viewP2City == true)
-	{
-		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
-		rectPickingCard.setPosition(0, 0);
-		rectPickingCard.setSize(rectPickingCardSize);
-		player2City.setFillColor(sf::Color(54, 204, 51));
-		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
-	}
-
+	
 	if (p_game->world.player1ScienceVictory == true)
 	{
 		//p_game->popState();
@@ -412,7 +388,7 @@ void GamePlayingState::handleInput()
 	if (p_game->world.player2ScienceVictory == true)
 	{
 		//p_game->popState();
-		p_game->pushState(new EndGameState(p_game,this ));
+		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player1MilitaryVictory == true)
@@ -438,9 +414,33 @@ void GamePlayingState::handleInput()
 		//p_game->popState();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
-
-
-
+	
+	
+	
+	if (poppingState == true) p_game->popState(); // pop state here, outside while loop
+	if (cardPickState == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0,0,0,126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		p_game->pushState(new CardPickerState(p_game, this, *clickedCard)); // push card picker state
+	}
+	if (viewP1City == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		player1City.setFillColor(sf::Color(54, 204, 51));
+		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player1));
+	}
+	else if (viewP2City == true)
+	{
+		rectPickingCard.setFillColor(sf::Color(0, 0, 0, 126));
+		rectPickingCard.setPosition(0, 0);
+		rectPickingCard.setSize(rectPickingCardSize);
+		player2City.setFillColor(sf::Color(54, 204, 51));
+		p_game->pushState(new ViewingCityState(p_game, this, &p_game->world.player2));
+	}
 }
 
 GamePlayingState::GamePlayingState(Game * game)

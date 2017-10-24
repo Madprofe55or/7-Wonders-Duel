@@ -64,6 +64,9 @@ Game::Game()
 	
 	// Loading fonts
 	loadFonts();
+
+	// Loading sounds
+	loadSounds();
 	
 	// Creating the window, with no resizing option
 	window.create(sf::VideoMode(Seven_Wonders::GAME_WINDOW_WIDTH, Seven_Wonders::GAME_WINDOW_HEIGHT), "7 Wonders Duel", sf::Style::Titlebar | sf::Style::Close);
@@ -195,16 +198,25 @@ void Game::loadTextures()
 	textureManager.loadTexture("Victory Background", "Resources/Backgrounds/victoryBackground.jpg");
 	textureManager.loadTexture("Science Background", "Resources/Backgrounds/scienceBackground.jpg");
 	textureManager.loadTexture("Civilian Background", "Resources/Backgrounds/civilianBackground.jpg");
-
-
-
-
 }
 
 void Game::loadFonts()
 {
 	/* It will be fine loading fonts at game creation since only a few will be needed. */
 	fontManager.loadFont("Menu Font", "Resources/Fonts/americancaptain.ttf");
+}
+
+void Game::loadSounds()
+{
+	//soundManager.loadSound("Build Card", "Resources/Sounds/buildcard.ogg");
+	soundManager.loadSound("Discard Card", "Resources/Sounds/discardcard.ogg");
+	//soundManager.loadSound("Age 2", "Resources/Sounds/age2.ogg");
+	//soundManager.loadSound("Age 3", "Resources/Sounds/age3.ogg");
+	//soundManager.loadSound("Build Wonder", "Resources/Sounds/buildwonder.ogg");
+	//soundManager.loadSound("Build Progress Token", "Resources/Sounds/buildprogresstoken.ogg");
+	//soundManager.loadSound("Science Victory", "Resources/Sounds/sciencevictory.ogg");
+	//soundManager.loadSound("Civilian Victory", "Resources/Sounds/civilianvictory.ogg");
+	//soundManager.loadSound("Military Victory", "Resources/Sounds/militaryvictory.ogg");
 }
 
 

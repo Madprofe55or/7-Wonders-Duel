@@ -182,7 +182,6 @@ public:
 	sf::Vector2f const WONDER_GUI_SIZE = { 150, 750 };
 	sf::Vector2f const WONDER_CARD_SIZE = { 139, 90 };
 
-
 	//int const CARD_STRUCTURE_VERT_CENTER = 770;
 	//int const CARD_VERTICAL_SPACING = 30;
 	//int const CARD_HORIZONTAL_SPACING = 98;
