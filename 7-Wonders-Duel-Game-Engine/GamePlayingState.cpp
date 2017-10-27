@@ -874,6 +874,7 @@ void GamePlayingState::checkForDestroyingBrownCard()
 				}
 			}
 			if (hasBrownCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+			else p_game->world.destroyBrownCard = 0;
 		}
 		if (p_game->world.destroyBrownCard == PLAYER_2)
 		{
@@ -887,6 +888,7 @@ void GamePlayingState::checkForDestroyingBrownCard()
 				}
 			}
 			if (hasBrownCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+			else p_game->world.destroyBrownCard = 0;
 		}
 	}
 }
@@ -907,6 +909,7 @@ void GamePlayingState::checkForDestroyingGrayCard()
 				}
 			}
 			if (hasGrayCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+			else p_game->world.destroyGrayCard = 0;
 		}
 		if (p_game->world.destroyGrayCard == PLAYER_2)
 		{
@@ -920,6 +923,7 @@ void GamePlayingState::checkForDestroyingGrayCard()
 				}
 			}
 			if (hasGrayCards == true) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+			else p_game->world.destroyGrayCard = 0;
 		}
 	}
 }

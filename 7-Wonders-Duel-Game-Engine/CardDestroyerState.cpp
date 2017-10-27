@@ -83,9 +83,9 @@ void CardDestroyerState::handleInput()
 						if (*mCardIndices[pos] = (*it)->getIndex())
 						{
 							p_game->world.destroyCard((*it)->getIndex(), *p_player);
-							poppingState = true;
 							p_game->world.destroyBrownCard = 0;
 							p_game->world.destroyGrayCard = 0;
+							poppingState = true;
 							break;
 						}
 					}
