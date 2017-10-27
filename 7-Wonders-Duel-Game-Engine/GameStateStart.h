@@ -2,6 +2,7 @@
 #define GAMESTATESTART_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "GameState.h"
 
@@ -18,6 +19,9 @@ public:
 	// Texts
 	sf::Text startGameText;
 	sf::Text exitGameText;
+
+	// Music
+	sf::Music menuMusic;
 	
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

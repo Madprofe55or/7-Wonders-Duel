@@ -140,55 +140,55 @@ ViewingCityState::ViewingCityState(Game * game, GamePlayingState * gameplayingst
 			{
 				if (player->getPlayerNumber() == PLAYER_1)
 				{
-					mCityCardSprites[vectorCount]->setPosition(950.0f, 50.0f + (50 * vectorCount - 5));
+					mCityCardSprites[vectorCount]->setPosition(950.0f, 50.0f + (50 * (vectorCount - 5)));
 				}
 				else if (player->getPlayerNumber() == PLAYER_2)
 				{
-					mCityCardSprites[vectorCount]->setPosition(950.0f, 500.0f + (50 * vectorCount - 5));
+					mCityCardSprites[vectorCount]->setPosition(950.0f, 500.0f + (50 * (vectorCount - 5)));
 				}
 			}
 			else if (vectorCount >= 10 && vectorCount < 15) // third column
 			{
 				if (player->getPlayerNumber() == PLAYER_1)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1050.0f, 50.0f + (50 * vectorCount - 10));
+					mCityCardSprites[vectorCount]->setPosition(1050.0f, 50.0f + (50 * (vectorCount - 10)));
 				}
 				else if (player->getPlayerNumber() == PLAYER_2)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1050.0f, 500.0f + (50 * vectorCount - 10));
+					mCityCardSprites[vectorCount]->setPosition(1050.0f, 500.0f + (50 * (vectorCount - 10)));
 				}
 			}
 			else if (vectorCount >= 15 && vectorCount < 20) // fourth column
 			{
 				if (player->getPlayerNumber() == PLAYER_1)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1150.0f, 50.0f + (50 * vectorCount - 15));
+					mCityCardSprites[vectorCount]->setPosition(1150.0f, 50.0f + (50 * (vectorCount - 15)));
 				}
 				else if (player->getPlayerNumber() == PLAYER_2)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1150.0f, 500.0f + (50 * vectorCount - 15));
+					mCityCardSprites[vectorCount]->setPosition(1150.0f, 500.0f + (50 * (vectorCount - 15)));
 				}
 			}
 			else if (vectorCount >= 20 && vectorCount < 25) // fifth column
 			{
 				if (player->getPlayerNumber() == PLAYER_1)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1250.0f, 50.0f + (50 * vectorCount - 20));
+					mCityCardSprites[vectorCount]->setPosition(1250.0f, 50.0f + (50 * (vectorCount - 20)));
 				}
 				else if (player->getPlayerNumber() == PLAYER_2)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1250.0f, 500.0f + (50 * vectorCount - 20));
+					mCityCardSprites[vectorCount]->setPosition(1250.0f, 500.0f + (50 * (vectorCount - 20)));
 				}
 			}
 			else if (vectorCount >= 25 && vectorCount < 30) // fifth column
 			{
 				if (player->getPlayerNumber() == PLAYER_1)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1350.0f, 50.0f + (50 * vectorCount - 25));
+					mCityCardSprites[vectorCount]->setPosition(1350.0f, 50.0f + (50 * (vectorCount - 25)));
 				}
 				else if (player->getPlayerNumber() == PLAYER_2)
 				{
-					mCityCardSprites[vectorCount]->setPosition(1350.0f, 500.0f + (50 * vectorCount - 25));
+					mCityCardSprites[vectorCount]->setPosition(1350.0f, 500.0f + (50 * (vectorCount - 25)));
 				}
 			}
 

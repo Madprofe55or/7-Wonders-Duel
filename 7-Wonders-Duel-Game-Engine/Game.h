@@ -7,6 +7,7 @@
 #include "TextureManager.h"
 #include "FontManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 #include "Game_Constants.h"
 #include "World.h"
 
@@ -26,6 +27,7 @@ public:
 	TextureManager textureManager;
 	FontManager fontManager;
 	InputManager inputManager;
+	SoundManager soundManager;
 	
 	// 7 Wonders game world object (see 7_Wonders::World.h for interface)
 	World world;
@@ -44,6 +46,7 @@ public:
 private:
 	void loadTextures();
 	void loadFonts();
+	void loadSounds();
 };
 
 #endif // GAME_H

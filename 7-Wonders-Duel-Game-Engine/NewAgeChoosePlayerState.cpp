@@ -4,7 +4,6 @@ void NewAgeChoosePlayerState::draw(const float dt)
 {
 
 	p_GamePlayingState->draw(dt);
-	p_CardPickerState->draw(dt);
 
 	p_game->window.draw(mainArea);
 	p_game->window.draw(instructions);
@@ -20,7 +19,7 @@ void NewAgeChoosePlayerState::draw(const float dt)
 
 	else
 	{ 
-		p_game->window.draw(player1ChooseText);
+		p_game->window.draw(player2ChooseText);
 	}
 }
 
@@ -65,14 +64,12 @@ void NewAgeChoosePlayerState::handleInput()
 					{
 						p_game->world.player1Chosen = true;
 						p_game->world.ChoosePlayer();
-						p_CardPickerState->playerChosen= true;
 						poppingState = true;
 					}
 					if (p_game->inputManager.isObjectClicked(player2Button, event.mouseButton.button, p_game->window) == true)
 					{
 						p_game->world.player2Chosen = true;
 						p_game->world.ChoosePlayer();
-						p_CardPickerState->playerChosen = true;
 						poppingState = true;
 					}
 				}
@@ -117,11 +114,10 @@ void NewAgeChoosePlayerState::handleInput()
 		}
 	}
 
-NewAgeChoosePlayerState::NewAgeChoosePlayerState(Game * game, CardPickerState* cardpickerstate, GamePlayingState * gameplayingstate)
+NewAgeChoosePlayerState::NewAgeChoosePlayerState(Game * game, GamePlayingState * gameplayingstate)
 {
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
-	p_CardPickerState = cardpickerstate;
 	p_player = p_game->world.currentPlayer;
 
 	mainArea.setSize(MAIN_AREA_SIZE);

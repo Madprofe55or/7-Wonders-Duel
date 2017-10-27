@@ -33,10 +33,8 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	NewAgeChoosePlayerState(Game * game, CardPickerState* cardpickerstate, GamePlayingState * gameplayingstate);
+	NewAgeChoosePlayerState(Game * game, GamePlayingState * gameplayingstate);
 
-
-	
 	Player* p_player;
 
 	const sf::Vector2f MAIN_AREA_SIZE = { 400.0f, 400.0f };

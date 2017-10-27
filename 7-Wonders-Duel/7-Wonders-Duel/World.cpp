@@ -875,10 +875,14 @@ namespace Seven_Wonders {
 		guildDeck.clear();
 		discardDeck.clear();
 		wonderCardDeck.clear();
+		progressTokenDeck.clear();
+		progressTokenDiscardDeck.clear();
 		player1.playerCity.clear();
 		player1.resetResources();
+		player1.playerWonderDeck.clear();
 		player2.playerCity.clear();
 		player2.resetResources();
+		player2.playerWonderDeck.clear();
 		for (int i = 0; i < 20; i++) board[i] = nullptr;
 		mAge = 1;
 	}
@@ -984,32 +988,30 @@ namespace Seven_Wonders {
 			masonryDiscount = 2;
 		}
 
-		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
+		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Architecture")
 		{
 			architectureDiscount = 2;
 		}
 
-		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Architecture")
 		{
 			architectureDiscount = 2;
 		}
 
-		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Architecture")
 		{
 			architectureDiscount = 2;
 		}
 
-		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Architecture")
 		{
 			architectureDiscount = 2;
 		}
 
-		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Architecture")
 		{
 			architectureDiscount = 2;
 		}
-
-
 
 		// need to assign the opposing player
 		Player * opposingPlayer;
@@ -1020,17 +1022,111 @@ namespace Seven_Wonders {
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
 		int stoneCardDiff =( card.getStoneCost()-masonryDiscount) - currentPlayer.getStone();
 		int clayCardDiff = (card.getClayCost()-architectureDiscount) - currentPlayer.getClay();
+		
 		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
 		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
 
+		// need to account for forum resources flag
+		if (currentPlayer.flags.forumResourcesFlag == true)
+		{
+			if (papyrusCardDiff > 0 && glassCardDiff <= 0) papyrusCardDiff--;
+			else if (papyrusCardDiff <= 0 && glassCardDiff > 0) glassCardDiff--;
+			// if they're both above 0, then subtract one from the larger of the two
+			else if (papyrusCardDiff > 0 && glassCardDiff > 0)
+			{
+				if (papyrusCardDiff > glassCardDiff) papyrusCardDiff--;
+				else if (papyrusCardDiff < glassCardDiff) glassCardDiff--;
+				else papyrusCardDiff--;
+			}
+		}
 
+		// need to account for caravensery resources flag
+		if (currentPlayer.flags.caravenseryResourcesFlag == true)
+		{
+			if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff <= 0) woodCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff <= 0) stoneCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff > 0) clayCardDiff--;
+			// wood and stone above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff <= 0)
+			{
+				if (woodCardDiff > stoneCardDiff) woodCardDiff--;
+				else if (woodCardDiff < stoneCardDiff) stoneCardDiff--;
+				else woodCardDiff--;
+			}
+			// wood and clay above 0
+			else if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (woodCardDiff < clayCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+			// stone and clay above 0
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (stoneCardDiff < clayCardDiff) clayCardDiff--;
+				else stoneCardDiff--;
+			}
+			// all three above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > stoneCardDiff && woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (stoneCardDiff > woodCardDiff && stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (clayCardDiff > woodCardDiff && clayCardDiff > stoneCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+		}
 
-		//// need to assign the differences between what the current player has and what the opposing player has
-		//int woodPlayerDiff = opposingPlayer->getWood() - currentPlayer.getWood();
-		//int stonePlayerDiff = opposingPlayer->getStone() - currentPlayer.getStone();
-		//int clayPlayerDiff = opposingPlayer->getClay() - currentPlayer.getClay();
-		//int papyrusPlayerDiff = opposingPlayer->getPapyrus() - currentPlayer.getPapyrus();
-		//int glassPlayerDiff = opposingPlayer->getGlass() - currentPlayer.getGlass();
+		// need to account for piraeus resources flag
+		if (currentPlayer.flags.piraeusResourcesFlag == true)
+		{
+			if (papyrusCardDiff > 0 && glassCardDiff <= 0) papyrusCardDiff--;
+			else if (papyrusCardDiff <= 0 && glassCardDiff > 0) glassCardDiff--;
+			// if they're both above 0, then subtract one from the larger of the two
+			else if (papyrusCardDiff > 0 && glassCardDiff > 0)
+			{
+				if (papyrusCardDiff > glassCardDiff) papyrusCardDiff--;
+				else if (papyrusCardDiff < glassCardDiff) glassCardDiff--;
+				else papyrusCardDiff--;
+			}
+		}
+
+		// need to account for the great lighthouse resources flag
+		if (currentPlayer.flags.theGreatLighthouseResourcesFlag == true)
+		{
+			if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff <= 0) woodCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff <= 0) stoneCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff > 0) clayCardDiff--;
+			// wood and stone above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff <= 0)
+			{
+				if (woodCardDiff > stoneCardDiff) woodCardDiff--;
+				else if (woodCardDiff < stoneCardDiff) stoneCardDiff--;
+				else woodCardDiff--;
+			}
+			// wood and clay above 0
+			else if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (woodCardDiff < clayCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+			// stone and clay above 0
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (stoneCardDiff < clayCardDiff) clayCardDiff--;
+				else stoneCardDiff--;
+			}
+			// all three above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > stoneCardDiff && woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (stoneCardDiff > woodCardDiff && stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (clayCardDiff > woodCardDiff && clayCardDiff > stoneCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+		}
 
 		// need to assign the cost of trading for resources that are needed
 		int woodTradeCost = 0;
@@ -1649,7 +1745,8 @@ namespace Seven_Wonders {
 
 				break;
 			case 74: // circus maximus
-				destroyGrayCard = true;
+				if (currentPlayer.getPlayerNumber() == PLAYER_1) destroyGrayCard = 1;
+				else if (currentPlayer.getPlayerNumber() == PLAYER_2) destroyGrayCard = 2;
 
 				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
 				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
@@ -1691,7 +1788,8 @@ namespace Seven_Wonders {
 				
 				break;
 			case 83: // the statue of zeus
-				destroyGrayCard = true;
+				if (currentPlayer.getPlayerNumber() == PLAYER_1) destroyBrownCard = 1;
+				else if (currentPlayer.getPlayerNumber() == PLAYER_2) destroyBrownCard = 2;
 
 				if (currentPlayer.getPlayerNumber() == PLAYER_1) mConflict++;
 				else if (currentPlayer.getPlayerNumber() == PLAYER_2) mConflict--;
@@ -1729,6 +1827,59 @@ namespace Seven_Wonders {
 
 	int World::goldCost(Player & currentPlayer, Card & card)
 	{
+		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
+		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
+
+		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		{
+			masonryDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Architecture")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Architecture")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Architecture")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Architecture")
+		{
+			architectureDiscount = 2;
+		}
+
+		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Architecture")
+		{
+			architectureDiscount = 2;
+		}
+
 		// need to assign the opposing player
 		Player * opposingPlayer;
 		if (currentPlayer.getPlayerNumber() == PLAYER_1) opposingPlayer = &player2;
@@ -1736,10 +1887,113 @@ namespace Seven_Wonders {
 
 		// need to assign the differences between what the card costs and what the player has
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
-		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
-		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
+		int stoneCardDiff =( card.getStoneCost()-masonryDiscount) - currentPlayer.getStone();
+		int clayCardDiff = (card.getClayCost()-architectureDiscount) - currentPlayer.getClay();
+		
 		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
 		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
+
+		// need to account for forum resources flag
+		if (currentPlayer.flags.forumResourcesFlag == true)
+		{
+			if (papyrusCardDiff > 0 && glassCardDiff <= 0) papyrusCardDiff--;
+			else if (papyrusCardDiff <= 0 && glassCardDiff > 0) glassCardDiff--;
+			// if they're both above 0, then subtract one from the larger of the two
+			else if (papyrusCardDiff > 0 && glassCardDiff > 0)
+			{
+				if (papyrusCardDiff > glassCardDiff) papyrusCardDiff--;
+				else if (papyrusCardDiff < glassCardDiff) glassCardDiff--;
+				else papyrusCardDiff--;
+			}
+		}
+
+		// need to account for caravensery resources flag
+		if (currentPlayer.flags.caravenseryResourcesFlag == true)
+		{
+			if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff <= 0) woodCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff <= 0) stoneCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff > 0) clayCardDiff--;
+			// wood and stone above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff <= 0)
+			{
+				if (woodCardDiff > stoneCardDiff) woodCardDiff--;
+				else if (woodCardDiff < stoneCardDiff) stoneCardDiff--;
+				else woodCardDiff--;
+			}
+			// wood and clay above 0
+			else if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (woodCardDiff < clayCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+			// stone and clay above 0
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (stoneCardDiff < clayCardDiff) clayCardDiff--;
+				else stoneCardDiff--;
+			}
+			// all three above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > stoneCardDiff && woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (stoneCardDiff > woodCardDiff && stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (clayCardDiff > woodCardDiff && clayCardDiff > stoneCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+		}
+
+		// need to account for piraeus resources flag
+		if (currentPlayer.flags.piraeusResourcesFlag == true)
+		{
+			if (papyrusCardDiff > 0 && glassCardDiff <= 0) papyrusCardDiff--;
+			else if (papyrusCardDiff <= 0 && glassCardDiff > 0) glassCardDiff--;
+			// if they're both above 0, then subtract one from the larger of the two
+			else if (papyrusCardDiff > 0 && glassCardDiff > 0)
+			{
+				if (papyrusCardDiff > glassCardDiff) papyrusCardDiff--;
+				else if (papyrusCardDiff < glassCardDiff) glassCardDiff--;
+				else papyrusCardDiff--;
+			}
+		}
+
+		// need to account for the great lighthouse resources flag
+		if (currentPlayer.flags.theGreatLighthouseResourcesFlag == true)
+		{
+			if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff <= 0) woodCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff <= 0) stoneCardDiff--;
+			else if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff > 0) clayCardDiff--;
+			// wood and stone above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff <= 0)
+			{
+				if (woodCardDiff > stoneCardDiff) woodCardDiff--;
+				else if (woodCardDiff < stoneCardDiff) stoneCardDiff--;
+				else woodCardDiff--;
+			}
+			// wood and clay above 0
+			else if (woodCardDiff > 0 && stoneCardDiff <= 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (woodCardDiff < clayCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+			// stone and clay above 0
+			else if (woodCardDiff <= 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (stoneCardDiff < clayCardDiff) clayCardDiff--;
+				else stoneCardDiff--;
+			}
+			// all three above 0
+			else if (woodCardDiff > 0 && stoneCardDiff > 0 && clayCardDiff > 0)
+			{
+				if (woodCardDiff > stoneCardDiff && woodCardDiff > clayCardDiff) woodCardDiff--;
+				else if (stoneCardDiff > woodCardDiff && stoneCardDiff > clayCardDiff) stoneCardDiff--;
+				else if (clayCardDiff > woodCardDiff && clayCardDiff > stoneCardDiff) clayCardDiff--;
+				else woodCardDiff--;
+			}
+		}
 
 		// need to assign the cost of trading for resources that are needed
 		int woodTradeCost = 0;
@@ -1762,6 +2016,7 @@ namespace Seven_Wonders {
 
 		if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == false) glassTradeCost += (2 + opposingPlayer->getGlass()) * glassCardDiff;
 		else if (glassCardDiff > 0 && currentPlayer.flags.glassTradeFlag == true) glassTradeCost += (1 + opposingPlayer->getGlass()) * glassCardDiff;
+
 
 		int totalCoinsNeeded = woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost;
 		if (totalCoinsNeeded <= 0) return -(card.getCoinCost());

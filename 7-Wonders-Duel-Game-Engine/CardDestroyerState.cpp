@@ -71,7 +71,7 @@ void CardDestroyerState::handleInput()
 
 			for (vector<sf::Sprite*>::iterator it = mCardSprites.begin(); it != mCardSprites.end(); ++it)
 			{
-				if (p_game->inputManager.isObjectClicked(**it, event.mouseButton.button, p_game->window));
+				if (p_game->inputManager.isObjectClicked(**it, event.mouseButton.button, p_game->window) == true)
 				{
 					// getting position of the sprites vector
 					int pos = (it - mCardSprites.begin());
@@ -83,6 +83,8 @@ void CardDestroyerState::handleInput()
 						if (*mCardIndices[pos] = (*it)->getIndex())
 						{
 							p_game->world.destroyCard((*it)->getIndex(), *p_player);
+							p_game->world.destroyBrownCard = 0;
+							p_game->world.destroyGrayCard = 0;
 							poppingState = true;
 							break;
 						}
@@ -102,9 +104,8 @@ CardDestroyerState::CardDestroyerState(Game * game, GamePlayingState * gameplayi
 	p_gameplayingstate = gameplayingstate;
 	int numOfCards = 0;
 
-	if (p_game->world.currentPlayer == &p_game->world.player1) p_player = &p_game->world.player2;
-	else if (p_game->world.currentPlayer == &p_game->world.player2) p_player = &p_game->world.player1;
-
+	if (p_game->world.destroyBrownCard == PLAYER_1 || p_game->world.destroyGrayCard == PLAYER_1) p_player = &p_game->world.player2;
+	else if (p_game->world.destroyBrownCard == PLAYER_2 || p_game->world.destroyGrayCard == PLAYER_2) p_player = &p_game->world.player1;
 	
 	/* 
 	Will iterate through player's city cards and push a new sprite to the sprites vector
@@ -158,4 +159,5 @@ CardDestroyerState::~CardDestroyerState()
 		delete (*it);
 		*it = nullptr;
 	}
+
 }

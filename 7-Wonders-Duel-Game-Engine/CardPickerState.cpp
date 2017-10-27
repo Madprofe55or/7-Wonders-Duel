@@ -11,9 +11,6 @@ void CardPickerState::draw(const float dt)
 	// the following rectangle is for darkening the gameplaying state underneath
 	p_game->window.draw(p_GamePlayingState->rectPickingCard);
 
-	
-	
-	
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testRectangle2);
 	p_game->window.draw(cardToDisplay);
@@ -104,6 +101,8 @@ void CardPickerState::handleInput()
 					// checking if last card was built, thus triggering a new age
 					if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 
+					discardCardSound.play();
+
 					poppingState = true;
 				}
 				else if (p_game->inputManager.isObjectClicked(buildWonderRectangle, event.mouseButton.button, p_game->window) == true)
@@ -162,12 +161,6 @@ void CardPickerState::handleInput()
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
 	}
 
-	if (p_game->world.checkForChoosePlayer == true)
-	{
-		p_game->pushState(new NewAgeChoosePlayerState(p_game, this, p_GamePlayingState));
-	}
-
-
 	if (poppingState == true)
 	{
 		p_game->popState(); // state is popped here since there is no while loop to return to at this point
@@ -179,6 +172,8 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
 	p_card = card;
+
+	discardCardSound.setBuffer(p_game->soundManager.soundMap.at("Discard Card"));
 	
 	testRectangle.setFillColor(sf::Color(132, 132, 18, 200));
 	testRectangle.setSize(CARD_GUI_SIZE);
@@ -341,12 +336,12 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 
 void CardPickerState::removeStateAfterWonderBuild()
 {
-	if (builtWonder) p_game->popState();
+	if (builtWonder == true) p_game->popState();
 }
 
 void CardPickerState::removeStateAfterAgePlayerPick()
 {
-	if (playerChosen) p_game->popState();
+	if (playerChosen == true) p_game->popState();
 }
 
 

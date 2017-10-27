@@ -69,6 +69,7 @@ void WonderPickerState::handleInput()
 		case sf::Event::Closed:
 		{
 			p_game->window.close();
+			p_game->world.ExitGame();
 			break;
 		}
 		case sf::Event::KeyPressed:
@@ -183,9 +184,12 @@ void WonderPickerState::handleInput()
 	if (wondersPicked == true) p_game->changeState(new GamePlayingState(p_game)); // push card picker state
 }
 
-WonderPickerState::WonderPickerState(Game * game)
+WonderPickerState::WonderPickerState(Game * game, GameStateStart * gamestatestart)
 {
 	p_game = game;
+	p_GameStateStart = gamestatestart;
+
+	p_GameStateStart->menuMusic.setVolume(25);
 
 	for (int i = 0; i < 5; i++)
 	{
