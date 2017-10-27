@@ -75,8 +75,8 @@ namespace Seven_Wonders {
 
 		bool repeatTurn = false;
 		bool progressTokenState = false;
-		bool destroyBrownCard = false;
-		bool destroyGrayCard = false;
+		int destroyBrownCard = 0;
+		int destroyGrayCard = 0;
 
 
 		int mAge = 1;

@@ -58,13 +58,11 @@ void GameStateStart::handleInput()
 				if (p_game->inputManager.isObjectClicked(exitGameText, event.mouseButton.button, p_game->window) == true)
 				{
 					p_game->window.close();
-					menuMusic.stop();
 				}
 				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
 					p_game->world.Setup();
-					p_game->pushState(new WonderPickerState(p_game));
-					menuMusic.stop();
+					p_game->pushState(new WonderPickerState(p_game, this));
 				}
 			}
 			

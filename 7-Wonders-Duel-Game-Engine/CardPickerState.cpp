@@ -161,12 +161,6 @@ void CardPickerState::handleInput()
 		p_game->pushState(new WonderBuildingState(p_game, this, p_GamePlayingState));
 	}
 
-	if (p_game->world.checkForChoosePlayer == true)
-	{
-		p_game->pushState(new NewAgeChoosePlayerState(p_game, this, p_GamePlayingState));
-	}
-
-
 	if (poppingState == true)
 	{
 		p_game->popState(); // state is popped here since there is no while loop to return to at this point
@@ -342,12 +336,12 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 
 void CardPickerState::removeStateAfterWonderBuild()
 {
-	if (builtWonder) p_game->popState();
+	if (builtWonder == true) p_game->popState();
 }
 
 void CardPickerState::removeStateAfterAgePlayerPick()
 {
-	if (playerChosen) p_game->popState();
+	if (playerChosen == true) p_game->popState();
 }
 
 

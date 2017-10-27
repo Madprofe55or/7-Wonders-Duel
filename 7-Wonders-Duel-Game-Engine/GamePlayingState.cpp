@@ -172,6 +172,7 @@ void GamePlayingState::update(const float dt)
 	checkForDestroyingGrayCard();
 	checkForPTBuildState();
 	checkForPlayAgain();
+	checkForNewAge();
 }
 
 void GamePlayingState::handleInput()
@@ -859,12 +860,68 @@ void GamePlayingState::setBuiltSprites()
 
 void GamePlayingState::checkForDestroyingBrownCard()
 {
-	if (p_game->world.destroyBrownCard == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+	if (p_game->world.destroyBrownCard > 0)
+	{
+		if (p_game->world.destroyBrownCard == PLAYER_1)
+		{
+			bool hasBrownCards = false;
+			for (vector<Card*>::iterator it = p_game->world.player2.playerCity.begin(); it != p_game->world.player2.playerCity.end(); ++it)
+			{
+				if ((*it)->getType() == BROWN_CARD)
+				{
+					hasBrownCards = true;
+					break;
+				}
+			}
+			if (hasBrownCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+		}
+		if (p_game->world.destroyBrownCard == PLAYER_2)
+		{
+			bool hasBrownCards = false;
+			for (vector<Card*>::iterator it = p_game->world.player1.playerCity.begin(); it != p_game->world.player1.playerCity.end(); ++it)
+			{
+				if ((*it)->getType() == BROWN_CARD)
+				{
+					hasBrownCards = true;
+					break;
+				}
+			}
+			if (hasBrownCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+		}
+	}
 }
 
 void GamePlayingState::checkForDestroyingGrayCard()
 {
-	if (p_game->world.destroyGrayCard == true) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+	if (p_game->world.destroyGrayCard > 0)
+	{
+		if (p_game->world.destroyGrayCard == PLAYER_1)
+		{
+			bool hasGrayCards = false;
+			for (vector<Card*>::iterator it = p_game->world.player2.playerCity.begin(); it != p_game->world.player2.playerCity.end(); ++it)
+			{
+				if ((*it)->getType() == GRAY_CARD)
+				{
+					hasGrayCards = true;
+					break;
+				}
+			}
+			if (hasGrayCards == true) p_game->pushState(new CardDestroyerState(p_game, this, BROWN_CARD));
+		}
+		if (p_game->world.destroyGrayCard == PLAYER_2)
+		{
+			bool hasGrayCards = false;
+			for (vector<Card*>::iterator it = p_game->world.player1.playerCity.begin(); it != p_game->world.player1.playerCity.end(); ++it)
+			{
+				if ((*it)->getType() == GRAY_CARD)
+				{
+					hasGrayCards = true;
+					break;
+				}
+			}
+			if (hasGrayCards == true) p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+		}
+	}
 }
 
 void GamePlayingState::checkForPTBuildState()
@@ -874,12 +931,21 @@ void GamePlayingState::checkForPTBuildState()
 
 void GamePlayingState::checkForPlayAgain()
 {
-	if (p_game->world.playAgain==true)
+	if (p_game->world.playAgain == true)
 	{
+		p_game->world.ExitGame();
 		p_game->popState();
-
 	}
 }
+
+void GamePlayingState::checkForNewAge()
+{
+	if (p_game->world.checkForChoosePlayer == true)
+	{
+		p_game->pushState(new NewAgeChoosePlayerState(p_game, this));
+	}
+}
+
 
 
 

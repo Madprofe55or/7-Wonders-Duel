@@ -205,6 +205,7 @@ public:
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
 	void checkForPTBuildState();
+	void checkForNewAge();
 
 	void checkForPlayAgain();
 	
