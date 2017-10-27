@@ -31,9 +31,13 @@ FIXED BUGS:
 4. All cards were being destroyed in a player's city when picking a card to destroy - errant semicolon caused following if block to run for each card in the player city vector instead of just the one that was clicked on
 5. Being prompted for card destruction at a new age - was caused by the variables governing this not properly being set back to non-destruction state when building a wonder that allowed card destruction, when the opposing player had no cards of that type to destroy
 6. Civilian victory not displaying at end of Age 3
-    Fix: Had == not = when changing the bool value for the Player1CivilianVictory and  Player2CivilianVictory. SMFH.
+    Fix: Had == not = when changing the bool value for the Player1CivilianVictory and  Player2CivilianVictory. JP.
+7. Player Choose State would close without choosing the player for the next age. 
+    Fix: Removed event handler for mouse click outside of the main area to pop state. (similar to the function that exists in 
+    card picker state, etc.)
 
 CURRENT BUG LIST:
 
 1. Could build Statue of Zeus w/o papyrus or enough coins for trade
+2. Play Again? Crashed Program on click after civilian victory.
 
