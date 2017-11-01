@@ -135,15 +135,36 @@ namespace Seven_Wonders {
 	   is switched to the opposing player. */
 	void World::buildCard(int clickedCardIndex)
 	{
-		currentPlayer->playerCity.push_back(board[clickedCardIndex]);
+		if (buildFromDiscard == true)
+		{
+			int pos = 0;
+			for (vector<Card*>::iterator it = discardDeck.begin(); it != discardDeck.end(); ++it)
+			{
+				if (clickedCardIndex == (*it)->getIndex())
+				{
+					currentPlayer->playerCity.push_back((*it));
+					doEffect(*currentPlayer, (**it));
+					(*it) = nullptr;
+					discardDeck.erase(discardDeck.begin() + pos);
+					buildFromDiscard = false;
+					break;
+				}
+				pos++;
+			}
 
-		doEffect(*currentPlayer, *board[clickedCardIndex]);
+		}
+		else if (buildFromDiscard == false)
+		{
+			currentPlayer->playerCity.push_back(board[clickedCardIndex]);
 
-		currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
+			doEffect(*currentPlayer, *board[clickedCardIndex]);
 
-		board[clickedCardIndex] = nullptr;
+			currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
 
-		exposeCards();
+			board[clickedCardIndex] = nullptr;
+
+			exposeCards();
+		}
 
 		if (!progressTokenState)
 		{
@@ -167,88 +188,181 @@ namespace Seven_Wonders {
 
 	void World::buildProgressToken(int progressTokenNumber)
 	{
-		if (currentPlayer == &player1)
-		{
-			if (player1CountPT == 0)
-			{
-				currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player1CountPT == 1)
-			{
-				currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player1CountPT == 2)
-			{
-				currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player1CountPT == 3)
-			{
-				currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player1CountPT == 4)
-			{
-				currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
-			}
-
-		}
-
-		if (currentPlayer == &player2)
-		{
-			if (player2CountPT == 0)
-			{
-				currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player2CountPT == 1)
-			{
-				currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player2CountPT == 2)
-			{
-				currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player2CountPT == 3)
-			{
-				currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
-			}
-
-			if (player2CountPT == 4)
-			{
-				currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
-			}
-
-		}
-
-		doEffect(*currentPlayer, *progressTokenDeck[progressTokenNumber]);
-
-		if (progressTokenDeck[progressTokenNumber]->getName() != "Theology")
-		{
-			if (currentPlayer == &player1) currentPlayer = &player2;
-			else if (currentPlayer == &player2) currentPlayer = &player1;
-		}
-
-		else
+		if (buildPTFromDiscard == false)
 		{
 			if (currentPlayer == &player1)
 			{
-				currentPlayer = &player1;
-				player1CountPT++;
+				if (player1CountPT == 0)
+				{
+					currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 1)
+				{
+					currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 2)
+				{
+					currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 3)
+				{
+					currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 4)
+				{
+					currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
+				}
+
 			}
 
-			else if (currentPlayer == &player2)
+			if (currentPlayer == &player2)
 			{
-				currentPlayer = &player2;
-				player2CountPT++;
-			}
-		}
+				if (player2CountPT == 0)
+				{
+					currentPlayer->playerPT1 = progressTokenDeck[progressTokenNumber];
+				}
 
-		progressTokenDeck[progressTokenNumber] = nullptr;
+				if (player2CountPT == 1)
+				{
+					currentPlayer->playerPT2 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 2)
+				{
+					currentPlayer->playerPT3 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 3)
+				{
+					currentPlayer->playerPT4 = progressTokenDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 4)
+				{
+					currentPlayer->playerPT5 = progressTokenDeck[progressTokenNumber];
+				}
+
+			}
+
+			doEffect(*currentPlayer, *progressTokenDeck[progressTokenNumber]);
+
+			// This is incorrect. Theology doesn't cause another turn, it just gives that effect to all
+			// future wonder builds...functionality that we need to implement
+			if (progressTokenDeck[progressTokenNumber]->getName() != "Theology")
+			{
+				if (currentPlayer == &player1) currentPlayer = &player2;
+				else if (currentPlayer == &player2) currentPlayer = &player1;
+			}
+
+			else
+			{
+				if (currentPlayer == &player1)
+				{
+					currentPlayer = &player1;
+					player1CountPT++;
+				}
+
+				else if (currentPlayer == &player2)
+				{
+					currentPlayer = &player2;
+					player2CountPT++;
+				}
+			}
+
+			progressTokenDeck[progressTokenNumber] = nullptr;
+		}
+		else if (buildPTFromDiscard == true)
+		{
+			if (currentPlayer == &player1)
+			{
+				if (player1CountPT == 0)
+				{
+					currentPlayer->playerPT1 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 1)
+				{
+					currentPlayer->playerPT2 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 2)
+				{
+					currentPlayer->playerPT3 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 3)
+				{
+					currentPlayer->playerPT4 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player1CountPT == 4)
+				{
+					currentPlayer->playerPT5 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+			}
+
+			if (currentPlayer == &player2)
+			{
+				if (player2CountPT == 0)
+				{
+					currentPlayer->playerPT1 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 1)
+				{
+					currentPlayer->playerPT2 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 2)
+				{
+					currentPlayer->playerPT3 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 3)
+				{
+					currentPlayer->playerPT4 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+				if (player2CountPT == 4)
+				{
+					currentPlayer->playerPT5 = progressTokenDiscardDeck[progressTokenNumber];
+				}
+
+			}
+
+			doEffect(*currentPlayer, *progressTokenDiscardDeck[progressTokenNumber]);
+
+			// This is incorrect. Theology doesn't cause another turn, it just gives that effect to all
+			// future wonder builds...functionality that we need to implement
+			if (progressTokenDiscardDeck[progressTokenNumber]->getName() != "Theology")
+			{
+				if (currentPlayer == &player1) currentPlayer = &player2;
+				else if (currentPlayer == &player2) currentPlayer = &player1;
+			}
+
+			else
+			{
+				if (currentPlayer == &player1)
+				{
+					currentPlayer = &player1;
+					player1CountPT++;
+				}
+
+				else if (currentPlayer == &player2)
+				{
+					currentPlayer = &player2;
+					player2CountPT++;
+				}
+			}
+
+			progressTokenDiscardDeck[progressTokenNumber] = nullptr;
+			buildPTFromDiscard = false;
+		}
 
 		
 	}
@@ -287,10 +401,13 @@ namespace Seven_Wonders {
 		board[clickedCardIndex] = nullptr;
 
 		exposeCards();
-
-		if (currentPlayer == &player1 && repeatTurn == false) currentPlayer = &player2;
-		else if (currentPlayer == &player2 && repeatTurn == false) currentPlayer = &player1;
-		else if (repeatTurn == true) {} //  this won't change the currentplayer pointer so whoever built the card that flagged repeatTurn should get another turn
+		if (buildFromDiscard == false && buildPTFromDiscard == false)
+		{
+			if (currentPlayer == &player1 && repeatTurn == false) currentPlayer = &player2;
+			else if (currentPlayer == &player2 && repeatTurn == false) currentPlayer = &player1;
+			else if (repeatTurn == true) {} //  this won't change the currentplayer pointer so whoever built the card that flagged repeatTurn should get another turn
+		}
+		else if (buildFromDiscard == true || buildPTFromDiscard == true) {} // the player turn will be switched in another function
 
 		if (repeatTurn == true) repeatTurn = false; // re-setting the repeatturn flag
 	}
@@ -352,8 +469,8 @@ namespace Seven_Wonders {
 				break;
 			}
 		}
-		if (destroyBrownCard) destroyBrownCard == false;
-		if (destroyGrayCard) destroyGrayCard == false;
+		if (destroyBrownCard) destroyBrownCard = false;
+		if (destroyGrayCard) destroyGrayCard = false;
 	}
 
 	/* Algorithm for updating cards' exposure and faceup settings
@@ -646,7 +763,7 @@ namespace Seven_Wonders {
 		srand((unsigned)time(NULL));
 		random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 9; i > 4; i--)
 		{
 			progressTokenDiscardDeck.push_back(progressTokenDeck[i]);
 			progressTokenDeck.pop_back();
@@ -1389,12 +1506,12 @@ namespace Seven_Wonders {
 
 		if (player1Points > player2Points)
 		{
-			player1CivilianVictory == true;
+			player1CivilianVictory = true;
 		}
 
 		else
 		{
-			player2CivlianVictory == true;
+			player2CivlianVictory = true;
 		}
 
 	}
@@ -1758,7 +1875,7 @@ namespace Seven_Wonders {
 				
 				break;
 			case 76: // the great library
-				// need code here to be able to randomly select three un-drawn progress tokens
+				buildPTFromDiscard = true;
 				
 				break;
 			case 77: // the great lighthouse
@@ -1771,7 +1888,7 @@ namespace Seven_Wonders {
 				
 				break;
 			case 79: // the mausoleum
-				// need code here to be able to build a discarded card
+				buildFromDiscard = true;
 				
 				break;
 			case 80: // piraeus

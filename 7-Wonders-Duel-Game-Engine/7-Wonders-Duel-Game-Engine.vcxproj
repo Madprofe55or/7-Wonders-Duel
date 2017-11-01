@@ -155,6 +155,7 @@
     <ClInclude Include="CardDestroyerState.h" />
     <ClInclude Include="CardPickerState.h" />
     <ClInclude Include="DiscardedCardPickerState.h" />
+    <ClInclude Include="DiscardedPTPickerState.h" />
     <ClInclude Include="EndGameState.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GamePlayingState.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="CardDestroyerState.cpp" />
     <ClCompile Include="CardPickerState.cpp" />
     <ClCompile Include="DiscardedCardPickerState.cpp" />
+    <ClCompile Include="DiscardedPTPickerState.cpp" />
     <ClCompile Include="EndGameState.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
