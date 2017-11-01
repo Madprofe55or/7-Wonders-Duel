@@ -5,6 +5,7 @@
 #include "ProgressTokenBuildingState.h"
 #include "NewAgeChoosePlayerState.h"
 #include "EndGameState.h"
+#include "DiscardedCardPickerState.h"
 
 
 void GamePlayingState::draw(const float dt)
@@ -170,6 +171,7 @@ void GamePlayingState::update(const float dt)
 {
 	checkForDestroyingBrownCard();
 	checkForDestroyingGrayCard();
+	checkForBuildingFromDiscard();
 	checkForPTBuildState();
 	checkForPlayAgain();
 	checkForNewAge();
@@ -209,6 +211,10 @@ void GamePlayingState::handleInput()
 			else if (event.key.code == sf::Keyboard::F7)
 			{
 				p_game->pushState(new CardDestroyerState(p_game, this, GRAY_CARD));
+			}
+			else if (event.key.code == sf::Keyboard::F9)
+			{
+				p_game->pushState(new DiscardedCardPickerState(p_game, this));
 			}
 			// end testing code...REMOVE LATER
 		}
@@ -926,6 +932,11 @@ void GamePlayingState::checkForDestroyingGrayCard()
 			else p_game->world.destroyGrayCard = 0;
 		}
 	}
+}
+
+void GamePlayingState::checkForBuildingFromDiscard()
+{
+	if (p_game->world.buildFromDiscard) p_game->pushState(new DiscardedCardPickerState(p_game, this));
 }
 
 void GamePlayingState::checkForPTBuildState()
