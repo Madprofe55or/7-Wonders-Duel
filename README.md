@@ -5,12 +5,9 @@ README updated on 26-Oct-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
-2. Effects of the following cards/tokens:
-    a. Wonders
-        ii.  The Great Library, which allows player to immediately gain a progress token from three random unused ones
-        iii. The Mausoleum, which allows player to build a discarded card of choice
-3. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built)
-4. Military/aggression milestones
+2. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built)
+3. Military/aggression milestones
+4. Building by linking
 
 REFACTORING PLAN:
 1. All decks at world construction will be pointers to cards, instead of copies of cards
@@ -38,6 +35,10 @@ FIXED BUGS:
 
 CURRENT BUG LIST:
 
-1. Could build Statue of Zeus w/o papyrus or enough coins for trade
+1. Could build Statue of Zeus w/o papyrus or enough coins for trade - See #5 below
 2. Play Again? Crashed Program on click after civilian victory.
+3. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
+4. Chamber of Commerce effect not happening
+5. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
+
 
