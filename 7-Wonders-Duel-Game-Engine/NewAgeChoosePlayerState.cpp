@@ -55,10 +55,6 @@ void NewAgeChoosePlayerState::handleInput()
 			{
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					if (p_game->inputManager.isObjectClicked(mainArea, event.mouseButton.button, p_game->window) == false)
-					{
-						poppingState = true;
-					}
 
 					if (p_game->inputManager.isObjectClicked(player1Button, event.mouseButton.button, p_game->window) == true)
 					{

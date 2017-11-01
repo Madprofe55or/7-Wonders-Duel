@@ -120,49 +120,37 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(txtPlayer1City);
 	p_game->window.draw(txtPlayer2City);
 
-
-
-
-			p_game->window.draw(player1ProgressTokens[0]);
-
-
-			p_game->window.draw(player1ProgressTokens[1]);
+	p_game->window.draw(player1ProgressTokens[0]);
+	p_game->window.draw(player1ProgressTokens[1]);
+	p_game->window.draw(player1ProgressTokens[2]);
+	p_game->window.draw(player1ProgressTokens[3]);
+	p_game->window.draw(player1ProgressTokens[4]);
 		
 
+	if (p_game->world.player2.playerPT1 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[0]);
+	}
+	
+	if (p_game->world.player2.playerPT2 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[1]);
+	}
 
-			p_game->window.draw(player1ProgressTokens[2]);
-		
+	if (p_game->world.player2.playerPT3 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[2]);
+	}
+	
+	if (p_game->world.player2.playerPT4 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[3]);
+	}
 
-			p_game->window.draw(player1ProgressTokens[3]);
-
-
-			p_game->window.draw(player1ProgressTokens[4]);
-		
-
-		if (p_game->world.player2.playerPT1 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[0]);
-		}
-
-		if (p_game->world.player2.playerPT2 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[1]);
-		}
-
-		if (p_game->world.player2.playerPT3 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[2]);
-		}
-
-		if (p_game->world.player2.playerPT4 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[3]);
-		}
-
-		if (p_game->world.player2.playerPT5 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[4]);
-		}
+	if (p_game->world.player2.playerPT5 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[4]);
+	}
 
 }
 

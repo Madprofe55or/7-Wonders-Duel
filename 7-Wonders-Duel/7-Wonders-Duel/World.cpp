@@ -1389,12 +1389,12 @@ namespace Seven_Wonders {
 
 		if (player1Points > player2Points)
 		{
-			player1CivilianVictory == true;
+			player1CivilianVictory = true;
 		}
 
 		else
 		{
-			player2CivlianVictory == true;
+			player2CivlianVictory = true;
 		}
 
 	}
