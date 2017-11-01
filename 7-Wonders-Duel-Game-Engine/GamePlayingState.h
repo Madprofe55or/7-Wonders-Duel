@@ -204,6 +204,8 @@ public:
 	void setBuiltSprites();
 	void checkForDestroyingBrownCard();
 	void checkForDestroyingGrayCard();
+	void checkForBuildingFromDiscard();
+	void checkForBuildingPTFromDiscard();
 	void checkForPTBuildState();
 	void checkForNewAge();
 
