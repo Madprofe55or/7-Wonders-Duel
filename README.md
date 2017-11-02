@@ -32,6 +32,9 @@ FIXED BUGS:
 7. Player Choose State would close without choosing the player for the next age. 
     Fix: Removed event handler for mouse click outside of the main area to pop state. (similar to the function that exists in 
     card picker state, etc.)
+8. Theology token will now repeat turn if the player owns Theology Token and Builds Wonder.
+9. Fixed Bug where the player turn was not changing after building a progress Token.
+10.
 
 CURRENT BUG LIST:
 
