@@ -23,6 +23,8 @@ namespace Seven_Wonders {
 		setClayCost(cardIndexNumber);
 		setPapyrusCost(cardIndexNumber);
 		setGlassCost(cardIndexNumber);
+		setLinkerValue1(cardIndexNumber);
+		setLinkerValue2(cardIndexNumber);
 		mVictoryPoints = setVictoryPoints(cardIndexNumber);
 		mScienceSymbol = setScienceSymbol(cardIndexNumber);
 		mShields = setShields(cardIndexNumber);
@@ -82,6 +84,26 @@ namespace Seven_Wonders {
 	int Card::getCoinCost()
 	{
 		return mCoinCost;
+	}
+
+	void Card::setLinkerValue1(int cardIndexNumber)
+	{
+		mLinkValue1= linkValues[cardIndexNumber];
+	}
+
+	int Card::getLinkerValue1()
+	{
+		return mLinkValue1;
+	}
+
+	void Card::setLinkerValue2(int cardIndexNumber)
+	{
+		mLinkValue2 = linkValues2[cardIndexNumber];
+	}
+
+	int Card::getLinkerValue2()
+	{
+		return mLinkValue2;
 	}
 
 	void Card::setCoinCost(int cardIndexNumber)

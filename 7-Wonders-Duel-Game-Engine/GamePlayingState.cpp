@@ -163,7 +163,6 @@ void GamePlayingState::update(const float dt)
 	checkForBuildingFromDiscard();
 	checkForBuildingPTFromDiscard();
 	checkForPTBuildState();
-	checkForPlayAgain();
 	checkForNewAge();
 }
 
@@ -415,6 +414,11 @@ void GamePlayingState::handleInput()
 		//p_game->popState();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
+
+	if (checkForPlayAgain()==true)
+	{
+		poppingState = true;
+	};
 	
 	
 	
@@ -943,12 +947,13 @@ void GamePlayingState::checkForPTBuildState()
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
 
-void GamePlayingState::checkForPlayAgain()
+bool GamePlayingState::checkForPlayAgain()
 {
 	if (p_game->world.playAgain == true)
 	{
+		//p_game->popState();
 		p_game->world.ExitGame();
-		p_game->popState();
+		return true;
 	}
 }
 

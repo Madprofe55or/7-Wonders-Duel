@@ -14,6 +14,28 @@ namespace Seven_Wonders {
 	const int BOARD = 0;
 
 
+	//Defining the Linking Values
+	const int NOLINKVALUE = 0; //for all cards that do not have a linker value
+	const int HORSESHOE = 1; //stable (age1)->horse breeders (age2)
+	const int SWORD = 2; //garrison (age1)->barracks (age2)
+	const int CASTLE = 3; //palisade (age1) ->foritification (age3)
+	const int TARGET = 4; //archery range (age 2) ->siege workshop (age 3)
+	const int HELMET = 5; //parade ground (age2) ->circus (age 3)
+	const int BOOK = 6; //scriptorium (age1)->library (Age2)
+	const int GEAR= 7; //pharmacist (age1)->dispensary (age2)
+	const int HARP = 8; //school (age 2)->university (age 3)
+	const int GENIELAMP = 9; //laboratory (age 2)->observatory (age 3)
+	const int MASK = 10; //theater (Age 1)->statue (age 2)
+	const int CRESCENTMOON = 11; //altar (age 1)->temple (age 2)
+	const int WATERDROP = 12; //baths (age 1)->aqueduct (act 2)
+	const int PILLAR = 13; //statue (age 2) -> gardens (Age 2)
+	const int SUN = 14; //temple (age 2)-> pantheon (age 3)
+	const int PARTHENON = 15; //rostrum (age 2)->senate (age 3)
+	const int URN = 16; //tavern (age 1)->lighthouse (age 3)
+	const int BARREL = 17; //brewery (age 2)->arena (Age 3)
+	
+
+
 	// Defining conflict pawn-related values
 	const int P1_LOSES_TWO_GOLD = -2;
 	const int P1_LOSES_FIVE_GOLD = -5;

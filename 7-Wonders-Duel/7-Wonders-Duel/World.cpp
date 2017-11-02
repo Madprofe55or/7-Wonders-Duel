@@ -159,7 +159,18 @@ namespace Seven_Wonders {
 
 			doEffect(*currentPlayer, *board[clickedCardIndex]);
 
-			currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
+			//if not linking used then drain resource of player to build card
+			if(buildByLink==false)
+			{
+				currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
+			}
+
+			//if build by linking is true then do not use any of players resources to build the card
+			else if (buildByLink==true)
+			{
+				buildByLink = false;
+			}
+			
 
 			board[clickedCardIndex] = nullptr;
 
@@ -250,28 +261,6 @@ namespace Seven_Wonders {
 
 			doEffect(*currentPlayer, *progressTokenDeck[progressTokenNumber]);
 
-			// This is incorrect. Theology doesn't cause another turn, it just gives that effect to all
-			// future wonder builds...functionality that we need to implement
-			if (progressTokenDeck[progressTokenNumber]->getName() != "Theology")
-			{
-				if (currentPlayer == &player1) currentPlayer = &player2;
-				else if (currentPlayer == &player2) currentPlayer = &player1;
-			}
-
-			else
-			{
-				if (currentPlayer == &player1)
-				{
-					currentPlayer = &player1;
-					player1CountPT++;
-				}
-
-				else if (currentPlayer == &player2)
-				{
-					currentPlayer = &player2;
-					player2CountPT++;
-				}
-			}
 
 			progressTokenDeck[progressTokenNumber] = nullptr;
 		}
@@ -337,32 +326,16 @@ namespace Seven_Wonders {
 
 			doEffect(*currentPlayer, *progressTokenDiscardDeck[progressTokenNumber]);
 
-			// This is incorrect. Theology doesn't cause another turn, it just gives that effect to all
-			// future wonder builds...functionality that we need to implement
-			if (progressTokenDiscardDeck[progressTokenNumber]->getName() != "Theology")
-			{
-				if (currentPlayer == &player1) currentPlayer = &player2;
-				else if (currentPlayer == &player2) currentPlayer = &player1;
-			}
-
-			else
-			{
-				if (currentPlayer == &player1)
-				{
-					currentPlayer = &player1;
-					player1CountPT++;
-				}
-
-				else if (currentPlayer == &player2)
-				{
-					currentPlayer = &player2;
-					player2CountPT++;
-				}
-			}
 
 			progressTokenDiscardDeck[progressTokenNumber] = nullptr;
 			buildPTFromDiscard = false;
 		}
+
+
+
+			if (currentPlayer == &player1) currentPlayer = &player2;
+			else if (currentPlayer == &player2) currentPlayer = &player1;
+
 
 		
 	}
@@ -392,6 +365,41 @@ namespace Seven_Wonders {
 	void World::buildWonder(int wonderNumber, int clickedCardIndex)
 	{
 		currentPlayer->playerWonderDeck[wonderNumber - 1]->builtWonder = true;
+
+		//Take in the current Player, if the current player holds the Theology progress Token then return that is the current players turn. Else change turns to other player.
+
+
+
+			if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+			{
+				repeatTurn = true;
+			}
+
+		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		{
+			repeatTurn = true;
+		}
+
+		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		{
+			repeatTurn = true;
+		}
+
+		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		{
+			repeatTurn = true;
+		}
+
+		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		{
+			repeatTurn = true;
+		}
+
+		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		{
+			repeatTurn = true;
+		}
+
 		currentPlayer->playerWonderDeck[wonderNumber - 1]->builtInAge = getAge();
 
 		doEffect(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]);
@@ -410,6 +418,8 @@ namespace Seven_Wonders {
 		else if (buildFromDiscard == true || buildPTFromDiscard == true) {} // the player turn will be switched in another function
 
 		if (repeatTurn == true) repeatTurn = false; // re-setting the repeatturn flag
+
+		wonderCount++;
 	}
 
 	void World::destroyCard(int cardIndex, Player & targetplayer)
@@ -1076,7 +1086,26 @@ namespace Seven_Wonders {
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
 	{
-		
+		//determine if the card that is built is allowed to be built for free due to linking between card to be built and player city
+		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+		{
+			if ((*it)->getLinkerValue1() == card.getLinkerValue1() && (*it)->getLinkerValue1() != NOLINKVALUE)
+			{
+				buildByLink = true;
+				return true;
+			}
+		}
+
+		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+		{
+			if ((*it)->getLinkerValue2() == card.getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
+
+			{
+				buildByLink = true;
+				return true;
+			}
+		}
+
 		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
 		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
 

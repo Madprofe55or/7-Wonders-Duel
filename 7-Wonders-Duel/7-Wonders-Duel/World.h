@@ -38,6 +38,8 @@ namespace Seven_Wonders {
 		vector<ProgressToken*> progressTokenDeck;
 		vector <ProgressToken*> progressTokenDiscardDeck;
 
+		int wonderCount = 0; //value to store how many wonders have been built
+
 		Card * board[20];
 
 		void Setup();
@@ -46,6 +48,9 @@ namespace Seven_Wonders {
 		bool checkForChoosePlayer = false;
 		int player1CountPT = 0;
 		int player2CountPT = 0;
+
+		//bool value if linker value is true
+		bool buildByLink = false;
 
 		void ExitGame();
 		bool checkForNewAge();

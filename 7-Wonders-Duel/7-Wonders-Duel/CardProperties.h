@@ -817,6 +817,185 @@ namespace Seven_Wonders {
 		1, // the temple of artemis
 	};
 
+	extern int linkValues[85] =
+	{
+		NOLINKVALUE, // lumber yard
+		NOLINKVALUE, // logging camp
+		NOLINKVALUE, // clay pool
+		NOLINKVALUE, // clay pit
+		NOLINKVALUE, // quarry
+		NOLINKVALUE, // stone pit
+		NOLINKVALUE, // glassworks
+		NOLINKVALUE, // press
+		NOLINKVALUE, // guard tower
+		NOLINKVALUE, // workshop
+		NOLINKVALUE, // apothecary
+		NOLINKVALUE, // stone reserve
+		NOLINKVALUE, // clay reserve
+		NOLINKVALUE, // wood reserve
+		HORSESHOE, // stable
+		SWORD, // garrison
+		CASTLE, // palisade
+		BOOK, // scriptorium
+		GEAR, // pharmacist
+		MASK, // theater
+		CRESCENTMOON, // altar
+		WATERDROP, // baths
+		URN, // tavern
+		NOLINKVALUE, // sawmill
+		NOLINKVALUE, // brickyard
+		NOLINKVALUE, // shelf quarry
+		NOLINKVALUE, // glass blower
+		NOLINKVALUE, // drying room
+		NOLINKVALUE, // walls
+		NOLINKVALUE, // forum
+		NOLINKVALUE, // caravnsery
+		NOLINKVALUE, // customs house
+		NOLINKVALUE, // tribunal
+		HORSESHOE, // horse breeders
+		SWORD, // barracks
+		TARGET, // archery range
+		HELMET, // parade ground
+		BOOK, // library
+		GEAR, // dispensary
+		HARP, // school
+		GENIELAMP, // laboratory
+		MASK, // statue
+		CRESCENTMOON, // temple
+		WATERDROP, // aqueduct
+		PARTHENON, // rostrum
+		BARREL, // brewery
+		NOLINKVALUE, // arsenal
+		NOLINKVALUE, // courthouse
+		NOLINKVALUE, // academy
+		NOLINKVALUE, // study
+		NOLINKVALUE, // chamber of commerce
+		NOLINKVALUE, // port
+		NOLINKVALUE, // armory
+		NOLINKVALUE, // palace
+		NOLINKVALUE, // town hall
+		NOLINKVALUE, // obelisk
+		CASTLE, // fortifications
+		TARGET, // siege workshop
+		HELMET, // circus
+		HARP, // university
+		GENIELAMP, // observatory 
+		NOLINKVALUE, // gardens
+		NOLINKVALUE, // pantheon
+		PARTHENON, // senate
+		URN, // lighthouse
+		BARREL, // arena
+		NOLINKVALUE, // merchants guild
+		NOLINKVALUE, // shipowners guild
+		NOLINKVALUE, // builders guild
+		NOLINKVALUE, // magistrates guild
+		NOLINKVALUE, // scientists guild
+		NOLINKVALUE, // moneylenders guild
+		NOLINKVALUE, // tacticians guild
+		NOLINKVALUE, // the appian way
+		NOLINKVALUE, // circus maximus
+		NOLINKVALUE, // the colossus
+		NOLINKVALUE, // the great library
+		NOLINKVALUE, // the great lighthouse
+		NOLINKVALUE, // the hanging gardens
+		NOLINKVALUE, // the mausoleum
+		NOLINKVALUE, // piraeus
+		NOLINKVALUE, // the pyramids
+		NOLINKVALUE, // the sphinx
+		NOLINKVALUE, // the statue of zeus
+		NOLINKVALUE, // the temple of artemis
+	};
+
+	//created for those cards that have two linkers statue and temple double linking abilities.
+	extern int linkValues2[85] =
+	{
+		NOLINKVALUE, // lumber yard
+		NOLINKVALUE, // logging camp
+		NOLINKVALUE, // clay pool
+		NOLINKVALUE, // clay pit
+		NOLINKVALUE, // quarry
+		NOLINKVALUE, // stone pit
+		NOLINKVALUE, // glassworks
+		NOLINKVALUE, // press
+		NOLINKVALUE, // guard tower
+		NOLINKVALUE, // workshop
+		NOLINKVALUE, // apothecary
+		NOLINKVALUE, // stone reserve
+		NOLINKVALUE, // clay reserve
+		NOLINKVALUE, // wood reserve
+		NOLINKVALUE, // stable
+		NOLINKVALUE, // garrison
+		NOLINKVALUE, // palisade
+		NOLINKVALUE, // scriptorium
+		NOLINKVALUE, // pharmacist
+		NOLINKVALUE, // theater
+		NOLINKVALUE, // altar
+		NOLINKVALUE, // baths
+		NOLINKVALUE, // tavern
+		NOLINKVALUE, // sawmill
+		NOLINKVALUE, // brickyard
+		NOLINKVALUE, // shelf quarry
+		NOLINKVALUE, // glass blower
+		NOLINKVALUE, // drying room
+		NOLINKVALUE, // walls
+		NOLINKVALUE, // forum
+		NOLINKVALUE, // caravnsery
+		NOLINKVALUE, // customs house
+		NOLINKVALUE, // tribunal
+		NOLINKVALUE, // horse breeders
+		NOLINKVALUE, // barracks
+		NOLINKVALUE, // archery range
+		NOLINKVALUE, // parade ground
+		NOLINKVALUE, // library
+		NOLINKVALUE, // dispensary
+		NOLINKVALUE, // school
+		NOLINKVALUE, // laboratory
+		PILLAR, // statue
+		SUN, // temple
+		NOLINKVALUE, // aqueduct
+		NOLINKVALUE, // rostrum
+		NOLINKVALUE, // brewery
+		NOLINKVALUE, // arsenal
+		NOLINKVALUE, // courthouse
+		NOLINKVALUE, // academy
+		NOLINKVALUE, // study
+		NOLINKVALUE, // chamber of commerce
+		NOLINKVALUE, // port
+		NOLINKVALUE, // armory
+		NOLINKVALUE, // palace
+		NOLINKVALUE, // town hall
+		NOLINKVALUE, // obelisk
+		NOLINKVALUE, // fortifications
+		NOLINKVALUE, // siege workshop
+		NOLINKVALUE, // circus
+		NOLINKVALUE, // university
+		NOLINKVALUE, // observatory 
+		PILLAR, // gardens
+		SUN, // pantheon
+		NOLINKVALUE, // senate
+		NOLINKVALUE, // lighthouse
+		NOLINKVALUE, // arena
+		NOLINKVALUE, // merchants guild
+		NOLINKVALUE, // shipowners guild
+		NOLINKVALUE, // builders guild
+		NOLINKVALUE, // magistrates guild
+		NOLINKVALUE, // scientists guild
+		NOLINKVALUE, // moneylenders guild
+		NOLINKVALUE, // tacticians guild
+		NOLINKVALUE, // the appian way
+		NOLINKVALUE, // circus maximus
+		NOLINKVALUE, // the colossus
+		NOLINKVALUE, // the great library
+		NOLINKVALUE, // the great lighthouse
+		NOLINKVALUE, // the hanging gardens
+		NOLINKVALUE, // the mausoleum
+		NOLINKVALUE, // piraeus
+		NOLINKVALUE, // the pyramids
+		NOLINKVALUE, // the sphinx
+		NOLINKVALUE, // the statue of zeus
+		NOLINKVALUE, // the temple of artemis
+	};
+
 }
 
 
