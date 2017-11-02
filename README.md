@@ -1,7 +1,7 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 26-Oct-2017
+README updated on 01-Nov-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
@@ -34,15 +34,14 @@ FIXED BUGS:
     card picker state, etc.)
 8. Theology token will now repeat turn if the player owns Theology Token and Builds Wonder.
 9. Fixed Bug where the player turn was not changing after building a progress Token.
-10.
+10. 2. Play Again? Crashed Program on click after civilian victory.-Now Fixed. Popping of state was not occuring correctly. 
 
 CURRENT BUG LIST:
 
 1. Could build Statue of Zeus w/o papyrus or enough coins for trade - See #5 below
-2. Play Again? Crashed Program on click after civilian victory.
-3. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
-4. Chamber of Commerce effect not happening
-5. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
-6. When building a progress Token from the discarded Tokens it is overwriting the first token that was built if it exists.
-7. Two of the same kind of progress Tokens was shown in the beginner game state. Thought this was fixed need to look into.
+2. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
+3. Chamber of Commerce effect not happening
+4. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
+5. When building a progress Token from the discarded Tokens it is overwriting the first token that was built if it exists.
+6. Two of the same kind of progress Tokens was shown in the beginner game state. Thought this was fixed need to look into.
 
