@@ -209,7 +209,7 @@ public:
 	void checkForPTBuildState();
 	void checkForNewAge();
 
-	void checkForPlayAgain();
+	bool checkForPlayAgain();
 	
 	GamePlayingState(Game * game);
 	void resetSprites();

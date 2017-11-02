@@ -34,8 +34,11 @@ void GamePlayingState::draw(const float dt)
 
 	for (int i = 0; i < 4; i++)
 	{
-		p_game->window.draw(mWonderSpritesP1[i]);
-		p_game->window.draw(mWonderSpritesP2[i]);
+		if (p_game->world.wonderCount <=7)
+		{
+			p_game->window.draw(mWonderSpritesP1[i]);
+			p_game->window.draw(mWonderSpritesP2[i]);
+		}
 	}
 
 
@@ -122,49 +125,37 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(txtPlayer1City);
 	p_game->window.draw(txtPlayer2City);
 
-
-
-
-			p_game->window.draw(player1ProgressTokens[0]);
-
-
-			p_game->window.draw(player1ProgressTokens[1]);
+	p_game->window.draw(player1ProgressTokens[0]);
+	p_game->window.draw(player1ProgressTokens[1]);
+	p_game->window.draw(player1ProgressTokens[2]);
+	p_game->window.draw(player1ProgressTokens[3]);
+	p_game->window.draw(player1ProgressTokens[4]);
 		
 
+	if (p_game->world.player2.playerPT1 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[0]);
+	}
+	
+	if (p_game->world.player2.playerPT2 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[1]);
+	}
 
-			p_game->window.draw(player1ProgressTokens[2]);
-		
+	if (p_game->world.player2.playerPT3 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[2]);
+	}
+	
+	if (p_game->world.player2.playerPT4 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[3]);
+	}
 
-			p_game->window.draw(player1ProgressTokens[3]);
-
-
-			p_game->window.draw(player1ProgressTokens[4]);
-		
-
-		if (p_game->world.player2.playerPT1 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[0]);
-		}
-
-		if (p_game->world.player2.playerPT2 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[1]);
-		}
-
-		if (p_game->world.player2.playerPT3 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[2]);
-		}
-
-		if (p_game->world.player2.playerPT4 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[3]);
-		}
-
-		if (p_game->world.player2.playerPT5 != nullptr)
-		{
-			p_game->window.draw(player2ProgressTokens[4]);
-		}
+	if (p_game->world.player2.playerPT5 != nullptr)
+	{
+		p_game->window.draw(player2ProgressTokens[4]);
+	}
 
 }
 
@@ -175,7 +166,6 @@ void GamePlayingState::update(const float dt)
 	checkForBuildingFromDiscard();
 	checkForBuildingPTFromDiscard();
 	checkForPTBuildState();
-	checkForPlayAgain();
 	checkForNewAge();
 }
 
@@ -427,6 +417,11 @@ void GamePlayingState::handleInput()
 		//p_game->popState();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
+
+	if (checkForPlayAgain()==true)
+	{
+		poppingState = true;
+	};
 	
 	
 	
@@ -955,12 +950,13 @@ void GamePlayingState::checkForPTBuildState()
 	if (p_game->world.progressTokenState) p_game->pushState(new ProgressTokenBuildingState(p_game, this));
 }
 
-void GamePlayingState::checkForPlayAgain()
+bool GamePlayingState::checkForPlayAgain()
 {
 	if (p_game->world.playAgain == true)
 	{
+		//p_game->popState();
 		p_game->world.ExitGame();
-		p_game->popState();
+		return true;
 	}
 }
 

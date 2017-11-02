@@ -151,13 +151,13 @@ WonderBuildingState::WonderBuildingState(Game * game, CardPickerState * cardpick
 	p_player = p_game->world.currentPlayer;
 
 	// Game logic to check for buildable wonders
-	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[0]) && p_player->playerWonderDeck[0]->builtWonder == false) canBuildWonder1 = true;
+	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[0]) && p_player->playerWonderDeck[0]->builtWonder == false && p_game->world.wonderCount<=7) canBuildWonder1 = true;
 	else canBuildWonder1 = false;
-	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[1]) && p_player->playerWonderDeck[1]->builtWonder == false) canBuildWonder2 = true;
+	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[1]) && p_player->playerWonderDeck[1]->builtWonder == false && p_game->world.wonderCount<=7) canBuildWonder2 = true;
 	else canBuildWonder2 = false;
-	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[2]) && p_player->playerWonderDeck[2]->builtWonder == false) canBuildWonder3 = true;
+	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[2]) && p_player->playerWonderDeck[2]->builtWonder == false && p_game->world.wonderCount<=7) canBuildWonder3 = true;
 	else canBuildWonder3 = false;
-	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[3]) && p_player->playerWonderDeck[3]->builtWonder == false) canBuildWonder4 = true;
+	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[3]) && p_player->playerWonderDeck[3]->builtWonder == false && p_game->world.wonderCount<=7) canBuildWonder4 = true;
 	else canBuildWonder4 = false;
 	
 	mainArea.setSize(MAIN_AREA_SIZE);

@@ -52,6 +52,13 @@ namespace Seven_Wonders {
 		bool builtWonder = false;
 		int builtInAge = 0;
 
+		void setLinkerValue1(int cardIndexNumber);
+		int getLinkerValue1();
+		void setLinkerValue2(int cardIndexNumber);
+
+		int getLinkerValue2();
+
+
 	private:
 		int mOwner;
 		string mName;
@@ -67,6 +74,8 @@ namespace Seven_Wonders {
 		int mVictoryPoints;
 		int mScienceSymbol;
 		int mShields;
+		int mLinkValue1;
+		int mLinkValue2;
 		bool mFaceup = true;
 		bool mExposed = true;
 

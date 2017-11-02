@@ -150,9 +150,18 @@ void EndGameState::handleInput()
 				}
 				if (p_game->inputManager.isObjectClicked(playAgain, event.mouseButton.button, p_game->window) == true)
 				{
+					p_game->world.player1MilitaryVictory = false;
+					p_game->world.player2MilitaryVictory = false;
+
+					p_game->world.player1ScienceVictory = false;
+					p_game->world.player2ScienceVictory = false;
+
+					p_game->world.player1CivilianVictory = false;
+					p_game->world.player2CivlianVictory = false;
+
+					p_game->world.playAgain = true;
+
 					poppingState = true;
-					p_game->world.playAgain=true;
-					p_game->world.ExitGame();
 					break;
 
 				}
