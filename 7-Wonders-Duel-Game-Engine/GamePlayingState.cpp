@@ -34,20 +34,22 @@ void GamePlayingState::draw(const float dt)
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (p_game->world.wonderCount <=7)
+		if (p_game->world.wonderCount < 7)
 		{
 			p_game->window.draw(mWonderSpritesP1[i]);
 			p_game->window.draw(mWonderSpritesP2[i]);
 		}
+		else if (p_game->world.wonderCount == 7)
+		{
+			if (p_game->world.player1.playerWonderDeck[i]->builtInAge != 0) p_game->window.draw(mWonderSpritesP1[i]);
+			if (p_game->world.player2.playerWonderDeck[i]->builtInAge != 0) p_game->window.draw(mWonderSpritesP2[i]);
+		}
 	}
-
-
 
 	// drawing mouseover card
 	if (mouseover) mouseoverCard.setPosition(900.0f, 350.0f);
 	if (!mouseover) mouseoverCard.setPosition(-400.0f, -400.0f);
 	p_game->window.draw(mouseoverCard);
-
 
 	if (p_game->world.currentPlayer == &p_game->world.player1)
 	{
@@ -157,6 +159,15 @@ void GamePlayingState::draw(const float dt)
 		p_game->window.draw(player2ProgressTokens[4]);
 	}
 
+	// resource flag indicators
+	if (p_game->world.player1.flags.forumResourcesFlag == true) p_game->window.draw(mPlayer1ForumFlag);
+	if (p_game->world.player1.flags.piraeusResourcesFlag == true) p_game->window.draw(mPlayer1PiraeusFlag);
+	if (p_game->world.player1.flags.caravenseryResourcesFlag == true) p_game->window.draw(mPlayer1CaravenseryFlag);
+	if (p_game->world.player1.flags.theGreatLighthouseResourcesFlag == true) p_game->window.draw(mPlayer1TheGreatLighthouseFlag);
+	if (p_game->world.player2.flags.forumResourcesFlag == true) p_game->window.draw(mPlayer2ForumFlag);
+	if (p_game->world.player2.flags.piraeusResourcesFlag == true) p_game->window.draw(mPlayer2PiraeusFlag);
+	if (p_game->world.player2.flags.caravenseryResourcesFlag == true) p_game->window.draw(mPlayer2CaravenseryFlag);
+	if (p_game->world.player2.flags.theGreatLighthouseResourcesFlag == true) p_game->window.draw(mPlayer2TheGreatLighthouseFlag);
 }
 
 void GamePlayingState::update(const float dt)
@@ -250,7 +261,13 @@ void GamePlayingState::handleInput()
 
 			for (int i = 0; i < 4; i++)
 			{
-				if (mRectWondersP1[i].contains(mouse))
+				if (mRectWondersP1[i].contains(mouse) && p_game->world.wonderCount < 7)
+				{
+					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerWonderDeck[i]->getName()));
+					mouseover = true;
+					break;
+				}
+				else if (mRectWondersP1[i].contains(mouse) && p_game->world.wonderCount == 7 && p_game->world.player1.playerWonderDeck[i]->builtInAge != 0)
 				{
 					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player1.playerWonderDeck[i]->getName()));
 					mouseover = true;
@@ -262,7 +279,13 @@ void GamePlayingState::handleInput()
 			mouseoverVectorCount = 0;
 			for (int i = 0; i < 4; i++)
 			{
-				if (mRectWondersP2[i].contains(mouse))
+				if (mRectWondersP2[i].contains(mouse) && p_game->world.wonderCount < 7)
+				{
+					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerWonderDeck[i]->getName()));
+					mouseover = true;
+					break;
+				}
+				else if (mRectWondersP2[i].contains(mouse) && p_game->world.wonderCount == 7 && p_game->world.player2.playerWonderDeck[i]->builtInAge != 0)
 				{
 					mouseoverCard.setTexture(p_game->textureManager.getRef(p_game->world.player2.playerWonderDeck[i]->getName()));
 					mouseover = true;
@@ -270,7 +293,6 @@ void GamePlayingState::handleInput()
 				}
 				mouseoverVectorCount++;
 			}
-
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -282,7 +304,6 @@ void GamePlayingState::handleInput()
 					break;
 				}
 			}
-
 
 			if (player1TokenRect1.contains(mouse) && p_game->world.player1.playerPT1 != nullptr)
 			{
@@ -697,6 +718,32 @@ GamePlayingState::GamePlayingState(Game * game)
 	txtPlayer1City.setFillColor(sf::Color::White);
 	txtPlayer1City.setOrigin(txtPlayer1City.getGlobalBounds().width / 2, txtPlayer1City.getGlobalBounds().height / 2);
 	txtPlayer1City.setPosition(player1City.getPosition());
+
+	// resource flag indicators
+	mPlayer1ForumFlag.setSize(SMALL_FLAG_SIZE);
+	mPlayer1ForumFlag.setFillColor(sf::Color(180,229,18,200));
+	mPlayer1ForumFlag.setPosition(430, 50);
+	mPlayer1PiraeusFlag.setSize(SMALL_FLAG_SIZE);
+	mPlayer1PiraeusFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer1PiraeusFlag.setPosition(430, 60);
+	mPlayer1CaravenseryFlag.setSize(LARGE_FLAG_SIZE);
+	mPlayer1CaravenseryFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer1CaravenseryFlag.setPosition(130, 50);
+	mPlayer1TheGreatLighthouseFlag.setSize(LARGE_FLAG_SIZE);
+	mPlayer1TheGreatLighthouseFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer1TheGreatLighthouseFlag.setPosition(130, 60);
+	mPlayer2ForumFlag.setSize(SMALL_FLAG_SIZE);
+	mPlayer2ForumFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer2ForumFlag.setPosition(430, 875);
+	mPlayer2PiraeusFlag.setSize(SMALL_FLAG_SIZE);
+	mPlayer2PiraeusFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer2PiraeusFlag.setPosition(430, 885);
+	mPlayer2CaravenseryFlag.setSize(LARGE_FLAG_SIZE);
+	mPlayer2CaravenseryFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer2CaravenseryFlag.setPosition(130, 875);
+	mPlayer2TheGreatLighthouseFlag.setSize(LARGE_FLAG_SIZE);
+	mPlayer2TheGreatLighthouseFlag.setFillColor(sf::Color(180, 229, 18, 200));
+	mPlayer2TheGreatLighthouseFlag.setPosition(130, 885);
 
 
 	// built wonder sprites

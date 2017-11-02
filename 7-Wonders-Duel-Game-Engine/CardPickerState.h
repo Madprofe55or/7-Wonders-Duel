@@ -42,9 +42,12 @@ public:
 	sf::Text textDiscardValue;
 	sf::Text textBuildWonder;
 
+	sf::Text linkerText;
+
 
 	// Sprites
 	sf::Sprite cardToDisplay;
+	sf::Sprite linkerCard;
 
 	// Sounds
 	sf::Sound discardCardSound;
