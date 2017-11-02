@@ -1,13 +1,13 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 26-Oct-2017
+README updated on 01-Nov-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
-2. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built)
+2. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built) -removed logic for 8th wonder to be built. Need to change the graphic mousover occuring but removes 8th wonder as well once the 7th is built.
 3. Military/aggression milestones
-4. Building by linking
+4. Building by linking-Functionality Created, can build with linking and will not affect players resources. Need to debug why all cards allowed to be built to be sure full functionality is complete.
 
 REFACTORING PLAN:
 1. All decks at world construction will be pointers to cards, instead of copies of cards
@@ -32,13 +32,16 @@ FIXED BUGS:
 7. Player Choose State would close without choosing the player for the next age. 
     Fix: Removed event handler for mouse click outside of the main area to pop state. (similar to the function that exists in 
     card picker state, etc.)
+8. Theology token will now repeat turn if the player owns Theology Token and Builds Wonder.
+9. Fixed Bug where the player turn was not changing after building a progress Token.
+10. 2. Play Again? Crashed Program on click after civilian victory.-Now Fixed. Popping of state was not occuring correctly. 
 
 CURRENT BUG LIST:
 
 1. Could build Statue of Zeus w/o papyrus or enough coins for trade - See #5 below
-2. Play Again? Crashed Program on click after civilian victory.
-3. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
-4. Chamber of Commerce effect not happening
-5. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
-
+2. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
+3. Chamber of Commerce effect not happening
+4. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
+5. When building a progress Token from the discarded Tokens it is overwriting the first token that was built if it exists.
+6. Two of the same kind of progress Tokens was shown in the beginner game state. Thought this was fixed need to look into.
 
