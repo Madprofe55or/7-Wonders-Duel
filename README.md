@@ -40,5 +40,6 @@ CURRENT BUG LIST:
 3. Buildling Great Library (allowing building PT from discard) at end of age doesn't trigger PT picking until AFTER the new age is started and a starting player chosen.
 4. Chamber of Commerce effect not happening
 5. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
+6. When building a progress Token from the discarded Tokens it is overwriting the first token that was built if it exists.
 
 
