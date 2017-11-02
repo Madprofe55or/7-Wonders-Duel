@@ -7,7 +7,7 @@ FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
 2. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built)
 3. Military/aggression milestones
-4. Building by linking
+4. Building by linking-Functionality Created, can build with linking and will not affect players resources. Need to debug why all cards allowed to be built to be sure full functionality is complete.
 
 REFACTORING PLAN:
 1. All decks at world construction will be pointers to cards, instead of copies of cards
