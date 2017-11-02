@@ -44,5 +44,5 @@ CURRENT BUG LIST:
 4. Chamber of Commerce effect not happening
 5. General issue with being able to build cards that shouldn't be able to be built when there are multiple numbers of a resource needed and multiple trading flags active.
 6. When building a progress Token from the discarded Tokens it is overwriting the first token that was built if it exists.
-
+7. Two of the same kind of progress Tokens was shown in the beginner game state. Thought this was fixed need to look into.
 
