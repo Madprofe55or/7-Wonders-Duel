@@ -34,8 +34,11 @@ void GamePlayingState::draw(const float dt)
 
 	for (int i = 0; i < 4; i++)
 	{
-		p_game->window.draw(mWonderSpritesP1[i]);
-		p_game->window.draw(mWonderSpritesP2[i]);
+		if (p_game->world.wonderCount <=7)
+		{
+			p_game->window.draw(mWonderSpritesP1[i]);
+			p_game->window.draw(mWonderSpritesP2[i]);
+		}
 	}
 
 
