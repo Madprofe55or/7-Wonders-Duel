@@ -101,6 +101,10 @@ public:
 	sf::Sprite player2Token3;
 	sf::Sprite player2Token4;
 	sf::Sprite player2Token5;
+	sf::Sprite militaryToken2P1;
+	sf::Sprite militaryToken5P1;
+	sf::Sprite militaryToken2P2;
+	sf::Sprite militaryToken5P2;
 
 	sf::Sprite mCardSprites[20] = {
 		mCard1, mCard2,

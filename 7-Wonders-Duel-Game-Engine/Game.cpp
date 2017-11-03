@@ -198,6 +198,9 @@ void Game::loadTextures()
 	textureManager.loadTexture("Victory Background", "Resources/Backgrounds/victoryBackground.jpg");
 	textureManager.loadTexture("Science Background", "Resources/Backgrounds/scienceBackground.jpg");
 	textureManager.loadTexture("Civilian Background", "Resources/Backgrounds/civilianBackground.jpg");
+
+	textureManager.loadTexture("Military Token 2", "Resources/BoardItems/MilitaryToken_2CoinDestruction.jpg");
+	textureManager.loadTexture("Military Token 5", "Resources/BoardItems/MilitaryToken_5CoinDestruction.jpg");
 }
 
 void Game::loadFonts()

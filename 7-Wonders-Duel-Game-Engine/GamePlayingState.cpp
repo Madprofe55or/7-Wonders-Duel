@@ -108,6 +108,30 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(mouseOverPlayer2PT);
 
 
+	//draw military token, if the token has been already used do not draw
+	
+	if (p_game->world.player1MilitaryRange1 == false)
+	{
+		p_game->window.draw(militaryToken2P2);
+
+	}
+
+	if (p_game->world.player1MilitaryRange2 == false)
+	{
+		p_game->window.draw(militaryToken5P2);
+	}
+
+	if (p_game->world.player2MilitaryRange1 == false)
+	{
+		p_game->window.draw(militaryToken2P1);
+
+	}
+
+	if (p_game->world.player2MilitaryRange2 == false)
+	{
+		p_game->window.draw(militaryToken5P1);
+	}
+
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
 	p_game->window.draw(player1Stone);
@@ -610,6 +634,31 @@ GamePlayingState::GamePlayingState(Game * game)
 	mConflictPawn.setScale(0.30f, 0.30f);
 	mConflictPawn.setOrigin(mConflictPawn.getGlobalBounds().width / 2, mConflictPawn.getGlobalBounds().height / 2);
 	mConflictPawn.setPosition(108.0f, 392.0f);
+
+	militaryToken2P1.setTexture(p_game->textureManager.getRef("Military Token 2"));
+	militaryToken2P1.setScale(0.88f, 0.88f);
+	militaryToken2P1.setOrigin(militaryToken2P1.getGlobalBounds().width / 2, militaryToken2P1.getGlobalBounds().height / 2);
+	militaryToken2P1.setPosition(187.0f, 290.0f);
+
+	militaryToken5P1.setTexture(p_game->textureManager.getRef("Military Token 5"));
+	militaryToken5P1.setScale(0.90f, 0.90f);
+	militaryToken5P1.setOrigin(militaryToken5P1.getGlobalBounds().width / 2, militaryToken5P1.getGlobalBounds().height / 2);
+	militaryToken5P1.setPosition(187.0f, 185.0f);
+
+	militaryToken2P2.setTexture(p_game->textureManager.getRef("Military Token 2"));
+	militaryToken2P2.setScale(0.88f, 0.88f);
+	militaryToken2P2.setOrigin(militaryToken2P2.getGlobalBounds().width / 2, militaryToken2P2.getGlobalBounds().height / 2);
+	militaryToken2P2.setPosition(187.0f, 580.0f);
+
+	militaryToken5P2.setTexture(p_game->textureManager.getRef("Military Token 5"));
+	militaryToken5P2.setScale(0.90f, 0.90f);
+	militaryToken5P2.setOrigin(militaryToken5P2.getGlobalBounds().width / 2, militaryToken5P2.getGlobalBounds().height / 2);
+	militaryToken5P2.setPosition(187.0f, 695.0f);
+
+
+
+	
+
 
 	player1Turn.setFont(game->fontManager.getRef("Menu Font"));
 	player1Turn.setString("Player 1's Turn");
