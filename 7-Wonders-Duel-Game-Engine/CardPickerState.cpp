@@ -14,6 +14,7 @@ void CardPickerState::draw(const float dt)
 	p_game->window.draw(testRectangle);
 	p_game->window.draw(testRectangle2);
 	p_game->window.draw(cardToDisplay);
+	p_game->window.draw(linkerCard);
 
 	p_game->window.draw(textCardName);
 	p_game->window.draw(textCostHeader);
@@ -37,6 +38,7 @@ void CardPickerState::draw(const float dt)
 	p_game->window.draw(textDiscard);
 	p_game->window.draw(textDiscardValue);
 	p_game->window.draw(textBuildWonder);
+	p_game->window.draw(linkerText);
 
 
 
@@ -186,6 +188,23 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	cardToDisplay.setTexture(game->textureManager.getRef(card->getName()));
 	cardToDisplay.setPosition(500, 300);
 
+	for (vector<Card*>::iterator it = p_game->world.currentPlayer->playerCity.begin(); it != p_game->world.currentPlayer->playerCity.end(); ++it)
+	{
+		if ((*it)->getLinkerValue1() == card->getLinkerValue1() && (*it)->getLinkerValue1() != NOLINKVALUE)
+		{
+			linkerCard.setTexture(game->textureManager.getRef((*it)->getName()));
+			linkerCard.setPosition(250, 300);
+			break;
+		}
+		else if ((*it)->getLinkerValue2() == card->getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
+
+		{
+			linkerCard.setTexture(game->textureManager.getRef((*it)->getName()));
+			linkerCard.setPosition(250, 300);
+			break;
+		}
+	}
+	
 	textCardName.setFont(p_game->fontManager.getRef("Menu Font"));
 	textCardName.setString(card->getName());
 	textCardName.setCharacterSize(40);
@@ -276,7 +295,6 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 
 	if (card->getExposed())
 	{
-
 		if (canBuildCard)
 		{
 			buildRectangle.setFillColor(sf::Color(0, 204, 51));
@@ -301,27 +319,25 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		buildWonderRectangle.setOrigin(buildWonderRectangle.getGlobalBounds().width / 2.0f, buildWonderRectangle.getGlobalBounds().height / 2.0f);
 		buildWonderRectangle.setPosition(1025, 550);
 
-
-
 		textBuild.setFont(p_game->fontManager.getRef("Menu Font"));
-		textBuild.setString("Build");
+		textBuild.setString("Build (" + to_string(p_game->world.goldCost(*p_game->world.currentPlayer, *card)) + ")");
 		textBuild.setCharacterSize(25);
 		textBuild.setFillColor(sf::Color::White);
 		textBuild.setOrigin(textBuild.getGlobalBounds().width / 2.0f, textBuild.getGlobalBounds().height / 2.0f);
 		textBuild.setPosition(buildRectangle.getPosition());
 
 		textDiscard.setFont(p_game->fontManager.getRef("Menu Font"));
-		textDiscard.setString("Discard");
+		textDiscard.setString("Discard (" + to_string(p_game->world.currentPlayer->getDiscardGoldValue()) + ")");
 		textDiscard.setCharacterSize(25);
 		textDiscard.setFillColor(sf::Color::White);
 		textDiscard.setOrigin(textDiscard.getGlobalBounds().width / 2.0f, textDiscard.getGlobalBounds().height / 2.0f);
 		textDiscard.setPosition(discardRectangle.getPosition());
 
-		textDiscardValue.setFont(p_game->fontManager.getRef("Menu Font"));
+		/*textDiscardValue.setFont(p_game->fontManager.getRef("Menu Font"));
 		textDiscardValue.setString(to_string(p_game->world.currentPlayer->getDiscardGoldValue()));
 		textDiscardValue.setCharacterSize(25);
 		textDiscardValue.setOrigin(textDiscardValue.getGlobalBounds().width / 2.0f, textDiscardValue.getGlobalBounds().height / 2.0f);
-		textDiscardValue.setPosition(discardRectangle.getPosition().x - 100, discardRectangle.getPosition().y);
+		textDiscardValue.setPosition(discardRectangle.getPosition().x - 100, discardRectangle.getPosition().y);*/
 
 		textBuildWonder.setFont(p_game->fontManager.getRef("Menu Font"));
 		textBuildWonder.setString("BuildWonder");
@@ -329,6 +345,16 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 		textBuildWonder.setFillColor(sf::Color::White);
 		textBuildWonder.setOrigin(textBuildWonder.getGlobalBounds().width / 2.0f, textBuildWonder.getGlobalBounds().height / 2.0f);
 		textBuildWonder.setPosition(buildWonderRectangle.getPosition());
+
+		if (p_game->world.buildByLink == true)
+		{
+			linkerText.setFont(p_game->fontManager.getRef("Menu Font"));
+			linkerText.setString("Can build by linking");
+			linkerText.setCharacterSize(20);
+			linkerText.setFillColor(sf::Color::White);
+			linkerText.setRotation(90);
+			linkerText.setPosition(495, 400);
+		}
 
 	}
 

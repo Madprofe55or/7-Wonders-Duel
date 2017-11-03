@@ -168,6 +168,17 @@ public:
 	sf::Text txtPlayer2City;
 	sf::Vector2f const BUTTON_SIZE = { 150, 50 };
 
+	// resource flag indicators
+	sf::RectangleShape mPlayer1ForumFlag;
+	sf::RectangleShape mPlayer1PiraeusFlag;
+	sf::RectangleShape mPlayer1CaravenseryFlag;
+	sf::RectangleShape mPlayer1TheGreatLighthouseFlag;
+	sf::RectangleShape mPlayer2ForumFlag;
+	sf::RectangleShape mPlayer2PiraeusFlag;
+	sf::RectangleShape mPlayer2CaravenseryFlag;
+	sf::RectangleShape mPlayer2TheGreatLighthouseFlag;
+	sf::Vector2f SMALL_FLAG_SIZE = { 215, 4 };
+	sf::Vector2f LARGE_FLAG_SIZE = { 260, 4 };
 
 	// placeholder gui stuff
 	sf::RectangleShape mPlayer1GUI;

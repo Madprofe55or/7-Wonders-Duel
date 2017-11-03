@@ -5,9 +5,8 @@ README updated on 01-Nov-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
-2. Need to remove ability to build an 8th wonder (turn it over if and when 7th is built) -removed logic for 8th wonder to be built. Need to change the graphic mousover occuring but removes 8th wonder as well once the 7th is built.
-3. Military/aggression milestones
-4. Building by linking-Functionality Created, can build with linking and will not affect players resources. Need to debug why all cards allowed to be built to be sure full functionality is complete.
+2. Military/aggression milestones
+
 
 REFACTORING PLAN:
 1. All decks at world construction will be pointers to cards, instead of copies of cards

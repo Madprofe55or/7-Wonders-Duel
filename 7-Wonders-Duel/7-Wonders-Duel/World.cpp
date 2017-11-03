@@ -368,34 +368,27 @@ namespace Seven_Wonders {
 
 		//Take in the current Player, if the current player holds the Theology progress Token then return that is the current players turn. Else change turns to other player.
 
-
-
-			if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
-			{
-				repeatTurn = true;
-			}
-
 		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
 
-		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		if (currentPlayer->playerPT2 != nullptr && currentPlayer->playerPT2->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
 
-		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		if (currentPlayer->playerPT3 != nullptr && currentPlayer->playerPT3->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
 
-		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		if (currentPlayer->playerPT4 != nullptr && currentPlayer->playerPT4->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
 
-		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
+		if (currentPlayer->playerPT5 != nullptr && currentPlayer->playerPT5->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
@@ -1976,6 +1969,19 @@ namespace Seven_Wonders {
 		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
 		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
 
+		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
+		{
+			if ((*it)->getLinkerValue1() == card.getLinkerValue1() && (*it)->getLinkerValue1() != NOLINKVALUE)
+			{
+				return 0;
+			}
+			else if ((*it)->getLinkerValue2() == card.getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
+
+			{
+				return 0;
+			}
+		}
+		
 		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
 		{
 			masonryDiscount = 2;
