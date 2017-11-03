@@ -1,11 +1,14 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 01-Nov-2017
+README updated on 02-Nov-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
+    -Added victory points calculated dependent upon the conflict pawn position at games end. JP.
+    -Need to think through of what other victory points calculations are missing. JP. 
 2. Military/aggression milestones
+    -Succesfully created logic and GUI for these milestones. JP. 
 
 
 REFACTORING PLAN:
