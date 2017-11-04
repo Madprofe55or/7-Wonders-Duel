@@ -18,7 +18,7 @@ REFACTORING PLAN:
 
 POLISHING PLAN:
 1. Use symbols instead of text to represent resources - will have to discuss just tried doing it for Wood. Think that text looks better for the resources. JP. 
-2. Music and sounds - STARTED
+2. Music and sounds - COMPLETED SOUNDS. CAN CHANGE AS NEEDED.
 3. Card movement, dealing at beginning of game
 4. Helper cards AND PTs shown in cardpickerstate
 5. Text in cardpickerstate saying what cards do
