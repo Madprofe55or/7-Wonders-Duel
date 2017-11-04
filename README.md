@@ -1,7 +1,7 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 02-Nov-2017
+README updated on 03-Nov-2017
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
@@ -17,7 +17,7 @@ REFACTORING PLAN:
 2. Take a closer look at world and gameplayingstate classes
 
 POLISHING PLAN:
-1. Use symbols instead of text to represent resources
+1. Use symbols instead of text to represent resources - will have to discuss just tried doing it for Wood. Think that text looks better for the resources. JP. 
 2. Music and sounds - STARTED
 3. Card movement, dealing at beginning of game
 4. Helper cards AND PTs shown in cardpickerstate
