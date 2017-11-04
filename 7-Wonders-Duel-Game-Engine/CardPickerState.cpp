@@ -92,6 +92,8 @@ void CardPickerState::handleInput()
 					// checking if last card was built, thus triggering a new age
 					if (p_game->world.checkForNewAge() == true) p_GamePlayingState->resetSprites();
 
+					buildCardSound.play();
+
 					poppingState = true;
 				}
 				else if (p_game->inputManager.isObjectClicked(discardRectangle, event.mouseButton.button, p_game->window) == true)
@@ -176,6 +178,7 @@ CardPickerState::CardPickerState(Game * game, GamePlayingState * gameplayingstat
 	p_card = card;
 
 	discardCardSound.setBuffer(p_game->soundManager.soundMap.at("Discard Card"));
+	buildCardSound.setBuffer(p_game->soundManager.soundMap.at("Build Card"));
 	
 	testRectangle.setFillColor(sf::Color(132, 132, 18, 200));
 	testRectangle.setSize(CARD_GUI_SIZE);

@@ -69,7 +69,8 @@ namespace Seven_Wonders {
 		bool player2MilitaryRange2 = false;
 
 
-
+		bool playAge2Sound = false;
+		bool playAge3Sound = false;
 
 	
 		bool canBuild(Player & currentPlayer, Card & card);
@@ -205,6 +206,8 @@ namespace Seven_Wonders {
 		Card cardTheSphinx;
 		Card cardTheStatueOfZeus;
 		Card cardTheTempleOfArtemis;
+
+		
 
 	private:
 

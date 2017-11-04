@@ -201,6 +201,7 @@ void Game::loadTextures()
 
 	textureManager.loadTexture("Military Token 2", "Resources/BoardItems/MilitaryToken_2CoinDestruction.jpg");
 	textureManager.loadTexture("Military Token 5", "Resources/BoardItems/MilitaryToken_5CoinDestruction.jpg");
+
 }
 
 void Game::loadFonts()
@@ -211,15 +212,16 @@ void Game::loadFonts()
 
 void Game::loadSounds()
 {
-	//soundManager.loadSound("Build Card", "Resources/Sounds/buildcard.ogg");
+	soundManager.loadSound("Game Start", "Resources/Sounds/gamestart.ogg");
+	soundManager.loadSound("Build Card", "Resources/Sounds/buildcard.ogg");
 	soundManager.loadSound("Discard Card", "Resources/Sounds/discardcard.ogg");
-	//soundManager.loadSound("Age 2", "Resources/Sounds/age2.ogg");
-	//soundManager.loadSound("Age 3", "Resources/Sounds/age3.ogg");
-	//soundManager.loadSound("Build Wonder", "Resources/Sounds/buildwonder.ogg");
-	//soundManager.loadSound("Build Progress Token", "Resources/Sounds/buildprogresstoken.ogg");
-	//soundManager.loadSound("Science Victory", "Resources/Sounds/sciencevictory.ogg");
-	//soundManager.loadSound("Civilian Victory", "Resources/Sounds/civilianvictory.ogg");
-	//soundManager.loadSound("Military Victory", "Resources/Sounds/militaryvictory.ogg");
+	soundManager.loadSound("Age 2", "Resources/Sounds/age2.ogg");
+	soundManager.loadSound("Age 3", "Resources/Sounds/age3.ogg");
+	soundManager.loadSound("Build Wonder", "Resources/Sounds/buildwonder.ogg");
+	soundManager.loadSound("Build Progress Token", "Resources/Sounds/buildprogresstoken.ogg");
+	soundManager.loadSound("Science Victory", "Resources/Sounds/sciencevictory.ogg");
+	soundManager.loadSound("Civilian Victory", "Resources/Sounds/civilianvictory.ogg");
+	soundManager.loadSound("Military Victory", "Resources/Sounds/militaryvictory.ogg");
 }
 
 

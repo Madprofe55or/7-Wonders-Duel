@@ -22,6 +22,14 @@ public:
 	// fonts
 	sf::Font font;
 
+	//sounds
+	//sound
+	sf::Sound age2Sound;
+	sf::Sound age3Sound;
+	sf::Sound scienceVictorySound;
+	sf::Sound militaryVictorySound;
+	sf::Sound civilianVictorySound;
+
 	// texts, some are for testing only
 	sf::Text player1GUIText;
 	sf::Text player2GUIText;

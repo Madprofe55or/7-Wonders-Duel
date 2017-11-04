@@ -763,6 +763,8 @@ namespace Seven_Wonders {
 		progressTokenDeck.push_back(&progressTokenTheology);
 		progressTokenDeck.push_back(&progressTokenUrbanism);
 
+		mConflict = 0;
+
 		srand((unsigned)time(NULL));
 		random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
 
@@ -1026,6 +1028,7 @@ namespace Seven_Wonders {
 				}
 				checkForChoosePlayer = true;
 				mAge = 2;
+				playAge2Sound = true; 
 				return true;
 			}
 			else if (mAge == 2)
@@ -1036,6 +1039,7 @@ namespace Seven_Wonders {
 				}
 				checkForChoosePlayer = true;
 				mAge = 3;
+				playAge3Sound = true;
 				return true;
 			}
 			else if (mAge == 3)
@@ -1405,6 +1409,122 @@ namespace Seven_Wonders {
 		}
 
 
+		//implement addition of victory points from Wonders built
+		for (int i = 0; i < 4; i++)
+		{
+
+	
+			if (player1.playerWonderDeck[i]->getName() == "The Appian Way")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "Circus Maximus")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Colossus")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Great Library")
+			{
+				player1Points += 4;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Great Lighthouse")
+			{
+				player1Points += 4;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Hanging Gardens")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Mausoleum")
+			{
+				player1Points += 2;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "Piraeus")
+			{
+				player1Points += 2;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Pyramids")
+			{
+				player1Points += 9;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Sphinx")
+			{
+				player1Points += 6;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Statue of Zeus")
+			{
+				player1Points += 3;
+			}
+
+
+			if (player2.playerWonderDeck[i]->getName() == "The Appian Way")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "Circus Maximus")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Colossus")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Great Library")
+			{
+				player2Points += 4;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Great Lighthouse")
+			{
+				player2Points += 4;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Hanging Gardens")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Mausoleum")
+			{
+				player2Points += 2;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "Piraeus")
+			{
+				player2Points += 2;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Pyramids")
+			{
+				player2Points += 9;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Sphinx")
+			{
+				player2Points += 6;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Statue of Zeus")
+			{
+				player2Points += 3;
+			}
+		}
 
 
 
@@ -1514,6 +1634,10 @@ namespace Seven_Wonders {
 		{
 			player2Points = 3 * (currentPlayer->playerPT.size());
 		}
+
+		player1Points += (player1.getCoins() / 3); //add victory points for player 1 for remaining coins divided by 3
+
+		player2Points += (player2.getCoins() / 3); // add victory points for player 1 for remaining coins divided by 3
 
 		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
 		{

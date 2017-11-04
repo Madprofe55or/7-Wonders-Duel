@@ -93,6 +93,8 @@ void ProgressTokenBuildingState::handleInput()
 					p_game->world.player2CountPT++;
 				}
 				p_GamePlayingState->setBuiltSprites();
+
+				progressTokenSound.play();
 				poppingState = true;
 			}
 
@@ -111,6 +113,8 @@ void ProgressTokenBuildingState::handleInput()
 				}
 
 				p_GamePlayingState->setBuiltSprites();
+
+				progressTokenSound.play();
 				poppingState = true;
 			}
 
@@ -129,6 +133,8 @@ void ProgressTokenBuildingState::handleInput()
 				}
 
 				p_GamePlayingState->setBuiltSprites();
+
+				progressTokenSound.play();
 				poppingState = true;
 			}
 
@@ -147,6 +153,8 @@ void ProgressTokenBuildingState::handleInput()
 				}
 
 				p_GamePlayingState->setBuiltSprites();
+
+				progressTokenSound.play();
 				poppingState = true;
 			}
 
@@ -164,6 +172,8 @@ void ProgressTokenBuildingState::handleInput()
 					p_game->world.player2CountPT++;
 				}
 				p_GamePlayingState->setBuiltSprites();
+
+				progressTokenSound.play();
 				poppingState = true;
 			}
 		}
@@ -182,6 +192,9 @@ ProgressTokenBuildingState::ProgressTokenBuildingState(Game * game, GamePlayingS
 	p_game = game;
 	p_GamePlayingState = gameplayingstate;
 	p_player = p_game->world.currentPlayer;
+
+	progressTokenSound.setBuffer(p_game->soundManager.soundMap.at("Build Progress Token"));
+
 
 	buttonToken1.setSize(BUTTON_SIZE);
 	buttonToken2.setSize(BUTTON_SIZE);

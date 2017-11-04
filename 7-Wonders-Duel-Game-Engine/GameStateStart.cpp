@@ -61,8 +61,10 @@ void GameStateStart::handleInput()
 				}
 				else if (p_game->inputManager.isObjectClicked(startGameText, event.mouseButton.button, p_game->window) == true)
 				{
+					gameStartSound.play();
 					p_game->world.Setup();
 					p_game->pushState(new WonderPickerState(p_game, this));
+					
 				}
 			}
 			
@@ -104,6 +106,9 @@ GameStateStart::GameStateStart(Game * game)
 
 	// Background
 	background.setTexture(p_game->textureManager.getRef("GameStateStart Background"));
+
+	//load sound
+	gameStartSound.setBuffer(p_game->soundManager.soundMap.at("Game Start"));
 
 	// Title Card at top
 	title.setTexture(p_game->textureManager.getRef("GameStateStart Title"));
