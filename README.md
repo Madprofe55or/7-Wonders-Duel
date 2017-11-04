@@ -7,6 +7,7 @@ FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
     -Added victory points calculated dependent upon the conflict pawn position at games end. JP.
     -Need to think through of what other victory points calculations are missing. JP. 
+    -Added victory points calculated by each Wonder owned by Player. JP. 
 2. Military/aggression milestones
     -Succesfully created logic and GUI for these milestones. JP. 
 
