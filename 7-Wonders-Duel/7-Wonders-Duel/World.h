@@ -60,6 +60,18 @@ namespace Seven_Wonders {
 		bool checkForScienceVictory(Player & currentPlayer);
 
 		bool playAgain = false;
+
+		bool player1MilitaryRange0 = false; //bool flags to change after the military range has been achieved by a player as to allow it from not occuring more than one time
+		bool player1MilitaryRange1 = false; //ranges (abs. value): 0=[1,2], 1=[3,5], 2=[6,8]
+		bool player1MilitaryRange2 = false;
+		bool player2MilitaryRange0 = false;
+		bool player2MilitaryRange1 = false;
+		bool player2MilitaryRange2 = false;
+
+
+		bool playAge2Sound = false;
+		bool playAge3Sound = false;
+
 	
 		bool canBuild(Player & currentPlayer, Card & card);
 		void runCivilianVictory();
@@ -68,6 +80,8 @@ namespace Seven_Wonders {
 		int goldCost(Player & currentPlayer, Card & card);
 
 		bool compareMilitary();
+
+		void militaryTokenZone();
 
 		bool player1MilitaryVictory = false;
 		bool player2MilitaryVictory = false;
@@ -192,6 +206,8 @@ namespace Seven_Wonders {
 		Card cardTheSphinx;
 		Card cardTheStatueOfZeus;
 		Card cardTheTempleOfArtemis;
+
+		
 
 	private:
 

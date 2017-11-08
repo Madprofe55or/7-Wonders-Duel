@@ -20,6 +20,9 @@ public:
 	sf::Text startGameText;
 	sf::Text exitGameText;
 
+	//sound
+	sf::Sound gameStartSound;
+
 	// Music
 	sf::Music menuMusic;
 	

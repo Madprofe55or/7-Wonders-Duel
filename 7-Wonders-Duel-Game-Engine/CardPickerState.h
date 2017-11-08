@@ -51,6 +51,7 @@ public:
 
 	// Sounds
 	sf::Sound discardCardSound;
+	sf::Sound buildCardSound;
 
 
 

@@ -60,6 +60,9 @@ public:
 	sf::Text buttonTokenText4;
 	sf::Text buttonTokenText5;
 
+	//sound
+	sf::Sound progressTokenSound;
+
 	std::vector <sf::Text> buttonTokenTexts = { buttonTokenText1, buttonTokenText2, buttonTokenText3, buttonTokenText4, buttonTokenText5 };
 	// Vectors for sizes
 	const sf::Vector2f MAIN_AREA_SIZE = { 600.0f, 750.0f };

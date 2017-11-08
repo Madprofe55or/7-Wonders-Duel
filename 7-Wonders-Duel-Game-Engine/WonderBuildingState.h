@@ -37,6 +37,9 @@ public:
 	// Texts
 	sf::Text mainText;
 
+	//sounds
+	sf::Sound buildWonderSound;
+
 	// Vectors for sizes
 	const sf::Vector2f MAIN_AREA_SIZE = { 600.0f, 750.0f };
 	const sf::Vector2f BUTTON_SIZE = { 75.0f, 40.0f };

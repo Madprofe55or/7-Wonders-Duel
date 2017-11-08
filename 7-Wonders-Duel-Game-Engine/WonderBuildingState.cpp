@@ -55,6 +55,7 @@ void WonderBuildingState::handleInput()
 				{ 
 					if (canBuildWonder1)
 					{
+						buildWonderSound.play();
 						p_game->world.buildWonder(1, p_GamePlayingState->clickedCardIndex);
 						poppingState = true;
 						p_GamePlayingState->setBuiltSprites();
@@ -70,6 +71,7 @@ void WonderBuildingState::handleInput()
 				{
 					if (canBuildWonder2)
 					{
+						buildWonderSound.play();
 						p_game->world.buildWonder(2, p_GamePlayingState->clickedCardIndex);
 						poppingState = true;
 						p_GamePlayingState->setBuiltSprites();
@@ -85,6 +87,7 @@ void WonderBuildingState::handleInput()
 				{
 					if (canBuildWonder3)
 					{
+						buildWonderSound.play();
 						p_game->world.buildWonder(3, p_GamePlayingState->clickedCardIndex);
 						poppingState = true;
 						p_GamePlayingState->setBuiltSprites();
@@ -100,6 +103,7 @@ void WonderBuildingState::handleInput()
 				{
 					if (canBuildWonder4)
 					{
+						buildWonderSound.play();
 						p_game->world.buildWonder(4, p_GamePlayingState->clickedCardIndex);
 						poppingState = true;
 						p_GamePlayingState->setBuiltSprites();
@@ -149,6 +153,9 @@ WonderBuildingState::WonderBuildingState(Game * game, CardPickerState * cardpick
 	p_CardPickerState = cardpickerstate;
 	p_GamePlayingState = gameplayingstate;
 	p_player = p_game->world.currentPlayer;
+
+	//bufffer sound
+	buildWonderSound.setBuffer(p_game->soundManager.soundMap.at("Build Wonder"));
 
 	// Game logic to check for buildable wonders
 	if (p_game->world.canBuild(*p_player, *p_player->playerWonderDeck[0]) && p_player->playerWonderDeck[0]->builtWonder == false && p_game->world.wonderCount<=7) canBuildWonder1 = true;

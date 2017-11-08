@@ -108,6 +108,30 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(mouseOverPlayer2PT);
 
 
+	//draw military token, if the token has been already used do not draw
+	
+	if (p_game->world.player1MilitaryRange1 == false)
+	{
+		p_game->window.draw(militaryToken2P2);
+
+	}
+
+	if (p_game->world.player1MilitaryRange2 == false)
+	{
+		p_game->window.draw(militaryToken5P2);
+	}
+
+	if (p_game->world.player2MilitaryRange1 == false)
+	{
+		p_game->window.draw(militaryToken2P1);
+
+	}
+
+	if (p_game->world.player2MilitaryRange2 == false)
+	{
+		p_game->window.draw(militaryToken5P1);
+	}
+
 	p_game->window.draw(player1Coins);
 	p_game->window.draw(player1Wood);
 	p_game->window.draw(player1Stone);
@@ -121,6 +145,7 @@ void GamePlayingState::draw(const float dt)
 	p_game->window.draw(player2Clay);
 	p_game->window.draw(player2Papyrus);
 	p_game->window.draw(player2Glass);
+
 
 	p_game->window.draw(player1City);
 	p_game->window.draw(player2City);
@@ -406,36 +431,42 @@ void GamePlayingState::handleInput()
 	if (p_game->world.player1ScienceVictory == true)
 	{
 		//p_game->popState();
+		scienceVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player2ScienceVictory == true)
 	{
 		//p_game->popState();
+		scienceVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player1MilitaryVictory == true)
 	{
 		//p_game->popState();
+		militaryVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player2MilitaryVictory == true)
 	{
 		//p_game->popState();
+		militaryVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player1CivilianVictory == true)
 	{
 		//p_game->popState();
+		civilianVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
 	if (p_game->world.player2CivlianVictory == true)
 	{
 		//p_game->popState();
+		civilianVictorySound.play();
 		p_game->pushState(new EndGameState(p_game, this));
 	}
 
@@ -443,6 +474,18 @@ void GamePlayingState::handleInput()
 	{
 		poppingState = true;
 	};
+
+	if (p_game->world.playAge2Sound)
+	{
+		age2Sound.play();
+		p_game->world.playAge2Sound = false;
+	}
+
+	if (p_game->world.playAge3Sound)
+	{
+		age3Sound.play();
+		p_game->world.playAge3Sound = false;
+	}
 	
 	
 	
@@ -480,6 +523,13 @@ GamePlayingState::GamePlayingState(Game * game)
 	// Setting background
 	background.setTexture(p_game->textureManager.getRef("GameStatePlaying Background"));
 
+	age2Sound.setBuffer(p_game->soundManager.soundMap.at("Age 2"));
+	age3Sound.setBuffer(p_game->soundManager.soundMap.at("Age 3"));
+
+	scienceVictorySound.setBuffer(p_game->soundManager.soundMap.at("Science Victory"));
+	militaryVictorySound.setBuffer(p_game->soundManager.soundMap.at("Military Victory"));
+	civilianVictorySound.setBuffer(p_game->soundManager.soundMap.at("Civilian Victory"));
+
 	for (int i = 0; i < 20; ++i)
 		{
 			if (p_game->world.getAge() == 1)
@@ -503,6 +553,7 @@ GamePlayingState::GamePlayingState(Game * game)
 			{
 				mCardSprites[i].setPosition(p_game->world.board[i]->getPosition()[0], p_game->world.board[i]->getPosition()[1]);
 
+				
 				mCardSprites[i].setScale(0.5f, 0.5f);
 
 				if (i == 6 || i == 7 || i == 8 || i == 9 || i == 10 || i == 15 || i == 16 || i == 17)
@@ -513,6 +564,8 @@ GamePlayingState::GamePlayingState(Game * game)
 				{
 					mCardSprites[i].setTexture(p_game->textureManager.getRef(p_game->world.board[i]->getName()));
 				}
+
+				
 			}
 			if (p_game->world.getAge() == 3)
 			{
@@ -611,6 +664,31 @@ GamePlayingState::GamePlayingState(Game * game)
 	mConflictPawn.setOrigin(mConflictPawn.getGlobalBounds().width / 2, mConflictPawn.getGlobalBounds().height / 2);
 	mConflictPawn.setPosition(108.0f, 392.0f);
 
+	militaryToken2P1.setTexture(p_game->textureManager.getRef("Military Token 2"));
+	militaryToken2P1.setScale(0.88f, 0.88f);
+	militaryToken2P1.setOrigin(militaryToken2P1.getGlobalBounds().width / 2, militaryToken2P1.getGlobalBounds().height / 2);
+	militaryToken2P1.setPosition(187.0f, 290.0f);
+
+	militaryToken5P1.setTexture(p_game->textureManager.getRef("Military Token 5"));
+	militaryToken5P1.setScale(0.90f, 0.90f);
+	militaryToken5P1.setOrigin(militaryToken5P1.getGlobalBounds().width / 2, militaryToken5P1.getGlobalBounds().height / 2);
+	militaryToken5P1.setPosition(187.0f, 185.0f);
+
+	militaryToken2P2.setTexture(p_game->textureManager.getRef("Military Token 2"));
+	militaryToken2P2.setScale(0.88f, 0.88f);
+	militaryToken2P2.setOrigin(militaryToken2P2.getGlobalBounds().width / 2, militaryToken2P2.getGlobalBounds().height / 2);
+	militaryToken2P2.setPosition(187.0f, 580.0f);
+
+	militaryToken5P2.setTexture(p_game->textureManager.getRef("Military Token 5"));
+	militaryToken5P2.setScale(0.90f, 0.90f);
+	militaryToken5P2.setOrigin(militaryToken5P2.getGlobalBounds().width / 2, militaryToken5P2.getGlobalBounds().height / 2);
+	militaryToken5P2.setPosition(187.0f, 695.0f);
+
+
+
+	
+
+
 	player1Turn.setFont(game->fontManager.getRef("Menu Font"));
 	player1Turn.setString("Player 1's Turn");
 	player1Turn.setCharacterSize(40);
@@ -666,10 +744,12 @@ GamePlayingState::GamePlayingState(Game * game)
 	player2Coins.setFillColor(sf::Color::White);
 
 	player2Wood.setFont(game->fontManager.getRef("Menu Font"));
-	player2Wood.setString("Wood:  " + to_string(p_game->world.player2.getWood()));
+	player2Wood.setString(to_string(p_game->world.player2.getWood()));
 	player2Wood.setCharacterSize(25);
 	player2Wood.setPosition(130.0f, 845.0f);
 	player2Wood.setFillColor(sf::Color::White);
+
+
 
 	player2Stone.setFont(game->fontManager.getRef("Menu Font"));
 	player2Stone.setString("Stone:  " + to_string(p_game->world.player2.getStone()));

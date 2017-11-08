@@ -47,6 +47,8 @@ public:
 
 
 
+
+
 	//WonderTextFloatRect
 
 	sf::FloatRect chooseWonderTextRect;

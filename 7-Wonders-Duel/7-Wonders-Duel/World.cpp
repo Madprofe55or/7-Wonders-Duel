@@ -763,6 +763,8 @@ namespace Seven_Wonders {
 		progressTokenDeck.push_back(&progressTokenTheology);
 		progressTokenDeck.push_back(&progressTokenUrbanism);
 
+		mConflict = 0;
+
 		srand((unsigned)time(NULL));
 		random_shuffle(progressTokenDeck.begin(), progressTokenDeck.end());
 
@@ -1026,6 +1028,7 @@ namespace Seven_Wonders {
 				}
 				checkForChoosePlayer = true;
 				mAge = 2;
+				playAge2Sound = true; 
 				return true;
 			}
 			else if (mAge == 2)
@@ -1036,6 +1039,7 @@ namespace Seven_Wonders {
 				}
 				checkForChoosePlayer = true;
 				mAge = 3;
+				playAge3Sound = true;
 				return true;
 			}
 			else if (mAge == 3)
@@ -1405,6 +1409,122 @@ namespace Seven_Wonders {
 		}
 
 
+		//implement addition of victory points from Wonders built
+		for (int i = 0; i < 4; i++)
+		{
+
+	
+			if (player1.playerWonderDeck[i]->getName() == "The Appian Way")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "Circus Maximus")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Colossus")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Great Library")
+			{
+				player1Points += 4;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Great Lighthouse")
+			{
+				player1Points += 4;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Hanging Gardens")
+			{
+				player1Points += 3;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Mausoleum")
+			{
+				player1Points += 2;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "Piraeus")
+			{
+				player1Points += 2;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Pyramids")
+			{
+				player1Points += 9;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Sphinx")
+			{
+				player1Points += 6;
+			}
+
+			if (player1.playerWonderDeck[i]->getName() == "The Statue of Zeus")
+			{
+				player1Points += 3;
+			}
+
+
+			if (player2.playerWonderDeck[i]->getName() == "The Appian Way")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "Circus Maximus")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Colossus")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Great Library")
+			{
+				player2Points += 4;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Great Lighthouse")
+			{
+				player2Points += 4;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Hanging Gardens")
+			{
+				player2Points += 3;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Mausoleum")
+			{
+				player2Points += 2;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "Piraeus")
+			{
+				player2Points += 2;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Pyramids")
+			{
+				player2Points += 9;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Sphinx")
+			{
+				player2Points += 6;
+			}
+
+			if (player2.playerWonderDeck[i]->getName() == "The Statue of Zeus")
+			{
+				player2Points += 3;
+			}
+		}
 
 
 
@@ -1515,6 +1635,10 @@ namespace Seven_Wonders {
 			player2Points = 3 * (currentPlayer->playerPT.size());
 		}
 
+		player1Points += (player1.getCoins() / 3); //add victory points for player 1 for remaining coins divided by 3
+
+		player2Points += (player2.getCoins() / 3); // add victory points for player 1 for remaining coins divided by 3
+
 		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
 		{
 			player1Points += (*it)->getVictoryPoints();
@@ -1524,6 +1648,44 @@ namespace Seven_Wonders {
 		for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
 		{
 			player2Points += (*it)->getVictoryPoints();
+		}
+
+		if (mConflict >= -2 && mConflict <= -1) //add 2 victory points for player 2
+		{
+			player2Points += 2;
+		}
+
+		if (mConflict >= -5 && mConflict <= -3 ) //add 5 victory points for player 1
+		{
+
+			player2Points += 5;
+
+		}
+
+		if (mConflict >= -8 && mConflict <= -6 ) //add 10 victory points for player 1
+		{
+			player2Points += 10;
+		}
+
+
+
+
+		if (mConflict >= 1 && mConflict <= 2 ) //add 2 victory points for player 1
+		{
+			player1Points += 2;
+
+		}
+
+		if (mConflict >= 3 && mConflict <= 5) //add 5 victory points for player 1
+		{
+			
+			player1Points += 5;
+
+		}
+
+		if (mConflict >= 6 && mConflict <= 8) //add 10 victory points for player 1
+		{
+			player1Points += 10;
 		}
 
 		if (player1Points > player2Points)
@@ -1541,7 +1703,7 @@ namespace Seven_Wonders {
 	void World::doEffect(Player & currentPlayer, Card & card)
 	{
 		int goldAdded = 0;
-
+		
 		if (card.getType() == GREEN_CARD)
 		{
 			switch (card.getScienceSymbol())
@@ -1637,6 +1799,9 @@ namespace Seven_Wonders {
 			if (mConflict < -9) mConflict = -9;
 			if (mConflict > 9) mConflict = 9;
 
+			//call military effect of military range special functions dependent upon where the conflict pawn is located.
+			militaryTokenZone();
+
 			if (mConflict == -9)
 			{
 				player2MilitaryVictory = true;
@@ -1646,6 +1811,9 @@ namespace Seven_Wonders {
 			{
 				player1MilitaryVictory = true;
 			}
+
+
+			
 		}
 		else if (card.getType() == BLUE_CARD)
 		{
@@ -2202,6 +2370,64 @@ namespace Seven_Wonders {
 			return false;
 		}
 	}
+
+
+	//use to check the location of the progress token
+	//if the conflict token is in ranges [1,2] (player 1 advancing military) or [-1,-2] (player 2 advancing military) then +2 added to victory points
+	//if the conflcit token is in range [3,5] (player 1 advancing military) or [-3,-5] (player 2 advancing military) then -2 coins of opposing player and +5 victory points to current player
+	//if the conflict token is in range [6,8] (player 1 advancing military) or [-6,-8] (player 2 advancing military) then -5 coins of opposing player and +10 victory points to current player
+
+
+
+	void World::militaryTokenZone() 
+	{
+
+		if (mConflict >= -2 && mConflict<=-1 && player2MilitaryRange0 == false) //add 2 victory points for player 2
+		{
+			player2MilitaryRange0 = true;
+			
+		}
+
+		if (mConflict >= -5 && mConflict<=-3 && player2MilitaryRange1==false) //add 5 victory points for player 1, and remove two coins for player 1
+		{
+			player1.setCoins(-2);
+			player2MilitaryRange1 = true;
+			
+			
+		}
+
+		if (mConflict >= -8 && mConflict<= -6 && player2MilitaryRange2 == false) //add 10 victory points for player 1, and remove 5 coins for player 1
+		{
+			player1.setCoins(-5);
+			player2MilitaryRange2 = true;
+		}
+
+
+
+
+		if (mConflict >= 1 && mConflict <= 2 && player1MilitaryRange0 == false) //add 2 victory points for player 1
+		{
+			player1MilitaryRange0 = true;
+
+		}
+
+		if (mConflict >= 3 && mConflict <= 5 && player1MilitaryRange1 == false) //add 5 victory points for player 1, and remove two coins for player 2
+		{
+			player2.setCoins(-2);
+			player1MilitaryRange1 = true;
+
+
+		}
+
+		if (mConflict >= 6 && mConflict <= 8 && player1MilitaryRange2 == false) //add 10 victory points for player 1, and remove 5 coins for player 2
+		{
+			player2.setCoins(-5);
+			player1MilitaryRange2 = true;
+		}
+
+
+	}
+	
 
 
 }
