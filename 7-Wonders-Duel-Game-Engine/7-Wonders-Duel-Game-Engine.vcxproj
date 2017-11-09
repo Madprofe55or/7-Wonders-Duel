@@ -90,12 +90,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SFML_STATIC</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\fpizz\Source\Repos\7-Wonders-Duel3\7-Wonders-Duel\7-Wonders-Duel;C:\Users\fpizz\Source\Repos\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Libraries\Documents\GitHub\7-Wonders-Duel\7-Wonders-Duel\7-Wonders-Duel;C:\SFML\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\fpizz\Source\Repos\7-Wonders-Duel3\7-Wonders-Duel\7-Wonders-Duel;C:\Users\fpizz\Source\Repos\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Libraries\Documents\GitHub\7-Wonders-Duel\7-Wonders-Duel\7-Wonders-Duel;C:\SFML\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;freetype.lib;jpeg.lib;gdi32.lib;sfml-audio-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-system-s-d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

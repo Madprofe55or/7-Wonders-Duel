@@ -72,6 +72,7 @@ void CardPickerState::handleInput()
 			if (event.key.code == sf::Keyboard::Escape)
 			{
 				poppingState = true; // can't popstate while in loop, since loop references this and popstate deletes this
+				p_game->world.buildByLink = false;
 				break;
 			}
 		}
@@ -82,6 +83,7 @@ void CardPickerState::handleInput()
 				if (p_game->inputManager.isObjectClicked(testRectangle, event.mouseButton.button, p_game->window) == false)
 				{
 					poppingState = true;
+					p_game->world.buildByLink = false;
 				}
 				else if (p_game->inputManager.isObjectClicked(buildRectangle, event.mouseButton.button, p_game->window) == true && canBuildCard == true)
 				{

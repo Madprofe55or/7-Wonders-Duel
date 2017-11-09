@@ -135,6 +135,10 @@ namespace Seven_Wonders {
 	   is switched to the opposing player. */
 	void World::buildCard(int clickedCardIndex)
 	{
+		Player * opposingPlayer;
+		if (currentPlayer == &player1) opposingPlayer = &player2;
+		else if (currentPlayer == &player2) opposingPlayer = &player1;
+		
 		if (buildFromDiscard == true)
 		{
 			int pos = 0;
@@ -160,17 +164,42 @@ namespace Seven_Wonders {
 			doEffect(*currentPlayer, *board[clickedCardIndex]);
 
 			//if not linking used then drain resource of player to build card
-			if(buildByLink==false)
+			if (buildByLink == false)
 			{
+				// set building player's coins
 				currentPlayer->setCoins(goldCost(*currentPlayer, *board[clickedCardIndex]));
+				// set opposing player's coins if that player has the Economy PT
+				bool economyFlag = false;
+				if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+				{
+					economyFlag = true;
+				}
+				else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+				{
+					economyFlag = true;
+				}
+				else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+				{
+					economyFlag = true;
+				}
+				else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+				{
+					economyFlag = true;
+				}
+				else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+				{
+					economyFlag = true;
+				}
+
+				if (economyFlag == true) opposingPlayer->setCoins(-1 * (goldCost(*currentPlayer, *board[clickedCardIndex]) - board[clickedCardIndex]->getCoinCost()));
+
 			}
 
 			//if build by linking is true then do not use any of players resources to build the card
-			else if (buildByLink==true)
+			else if (buildByLink == true)
 			{
 				buildByLink = false;
 			}
-			
 
 			board[clickedCardIndex] = nullptr;
 
@@ -366,28 +395,27 @@ namespace Seven_Wonders {
 	{
 		currentPlayer->playerWonderDeck[wonderNumber - 1]->builtWonder = true;
 
-		//Take in the current Player, if the current player holds the Theology progress Token then return that is the current players turn. Else change turns to other player.
+		Player * opposingPlayer;
+		if (currentPlayer == &player1) opposingPlayer = &player2;
+		else if (currentPlayer == &player2) opposingPlayer = &player1;
 
+		//Take in the current Player, if the current player holds the Theology progress Token then return that is the current players turn. Else change turns to other player.
 		if (currentPlayer->playerPT1 != nullptr && currentPlayer->playerPT1->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
-
 		if (currentPlayer->playerPT2 != nullptr && currentPlayer->playerPT2->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
-
 		if (currentPlayer->playerPT3 != nullptr && currentPlayer->playerPT3->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
-
 		if (currentPlayer->playerPT4 != nullptr && currentPlayer->playerPT4->getName() == "Theology")
 		{
 			repeatTurn = true;
 		}
-
 		if (currentPlayer->playerPT5 != nullptr && currentPlayer->playerPT5->getName() == "Theology")
 		{
 			repeatTurn = true;
@@ -397,7 +425,31 @@ namespace Seven_Wonders {
 
 		doEffect(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]);
 
+		// Coin changes for building player
 		currentPlayer->setCoins(goldCost(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]));
+		// Coin changes for opposing player if they have the economy PT
+		bool economyFlag = false;
+		if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+		{
+			economyFlag = true;
+		}
+		else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+		{
+			economyFlag = true;
+		}
+		else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+		{
+			economyFlag = true;
+		}
+		else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+		{
+			economyFlag = true;
+		}
+		else if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
+		{
+			economyFlag = true;
+		}
+		if (economyFlag == true) opposingPlayer->setCoins(-1 * (goldCost(*currentPlayer, *currentPlayer->playerWonderDeck[wonderNumber - 1]) - currentPlayer->playerWonderDeck[wonderNumber - 1]->getCoinCost()));
 
 		board[clickedCardIndex] = nullptr;
 
@@ -1083,7 +1135,7 @@ namespace Seven_Wonders {
 
 	bool World::canBuild(Player & currentPlayer, Card & card)
 	{
-		//determine if the card that is built is allowed to be built for free due to linking between card to be built and player city
+		// Checking for link-building
 		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
 		{
 			if ((*it)->getLinkerValue1() == card.getLinkerValue1() && (*it)->getLinkerValue1() != NOLINKVALUE)
@@ -1091,69 +1143,55 @@ namespace Seven_Wonders {
 				buildByLink = true;
 				return true;
 			}
-		}
-
-		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
-		{
-			if ((*it)->getLinkerValue2() == card.getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
-
+			else if ((*it)->getLinkerValue2() == card.getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
 			{
 				buildByLink = true;
 				return true;
 			}
 		}
 
-		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
-		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
-
+		// Checking for Masonry and Architecture PTs
+		bool masonryDiscount = false;
+		bool architectureDiscount = false;
 		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		else if (currentPlayer.playerPT2 != nullptr && currentPlayer.playerPT2->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		else if (currentPlayer.playerPT3 != nullptr && currentPlayer.playerPT3->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		else if (currentPlayer.playerPT4 != nullptr && currentPlayer.playerPT4->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		else if (currentPlayer.playerPT5 != nullptr && currentPlayer.playerPT5->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
 		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Architecture")
+		else if (currentPlayer.playerPT2 != nullptr && currentPlayer.playerPT2->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Architecture")
+		else if (currentPlayer.playerPT3 != nullptr && currentPlayer.playerPT3->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Architecture")
+		else if (currentPlayer.playerPT4 != nullptr && currentPlayer.playerPT4->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Architecture")
+		else if (currentPlayer.playerPT5 != nullptr && currentPlayer.playerPT5->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
 
 		// need to assign the opposing player
@@ -1162,10 +1200,10 @@ namespace Seven_Wonders {
 		else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
 
 		// need to assign the differences between what the card costs and what the player has
+		// PT discounts need to be fully implemented still
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
-		int stoneCardDiff =( card.getStoneCost()-masonryDiscount) - currentPlayer.getStone();
-		int clayCardDiff = (card.getClayCost()-architectureDiscount) - currentPlayer.getClay();
-		
+		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
+		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
 		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
 		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
 
@@ -1271,6 +1309,82 @@ namespace Seven_Wonders {
 			}
 		}
 
+		// Handling Masonry PT
+		if (card.getType() == BLUE_CARD && masonryDiscount == true)
+		{
+			int numOfDiscounts = 0;
+
+			while (numOfDiscounts < 2)
+			{
+				if (woodCardDiff > 0)
+				{
+					woodCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (stoneCardDiff > 0)
+				{
+					stoneCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (clayCardDiff > 0)
+				{
+					clayCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (papyrusCardDiff > 0)
+				{
+					papyrusCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (glassCardDiff > 0)
+				{
+					glassCardDiff--;
+					numOfDiscounts++;
+				}
+
+				if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff <= 0 && papyrusCardDiff <= 0 && glassCardDiff <= 0) break;
+
+			}
+		}
+
+		// Handling Architecture PT
+		if (card.getType() == WONDER_CARD && architectureDiscount == true)
+		{
+			int numOfDiscounts = 0;
+
+			while (numOfDiscounts < 2)
+			{
+				if (woodCardDiff > 0)
+				{
+					woodCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (stoneCardDiff > 0)
+				{
+					stoneCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (clayCardDiff > 0)
+				{
+					clayCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (papyrusCardDiff > 0)
+				{
+					papyrusCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (glassCardDiff > 0)
+				{
+					glassCardDiff--;
+					numOfDiscounts++;
+				}
+
+				if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff <= 0 && papyrusCardDiff <= 0 && glassCardDiff <= 0) break;
+
+			}
+		}
+
 		// need to assign the cost of trading for resources that are needed
 		int woodTradeCost = 0;
 		int clayTradeCost = 0;
@@ -1318,31 +1432,6 @@ namespace Seven_Wonders {
 		// third condition checks if the player doesn't have the resources but can afford the cost for trading
 		else if (totalCoinsNeeded > 0 && currentPlayer.getCoins() >= totalCoinsNeeded)
 		{
-			if (opposingPlayer->playerPT1 != nullptr && opposingPlayer->playerPT1->getName() == "Economy")
-			{
-				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
-			}
-
-			if (opposingPlayer->playerPT2 != nullptr && opposingPlayer->playerPT2->getName() == "Economy")
-			{
-				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
-			}
-
-			if (opposingPlayer->playerPT3 != nullptr && opposingPlayer->playerPT3->getName() == "Economy")
-			{
-				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
-			}
-
-			if (opposingPlayer->playerPT4 != nullptr &&opposingPlayer->playerPT4->getName() == "Economy")
-			{
-				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
-			}
-
-			if (opposingPlayer->playerPT5 != nullptr && opposingPlayer->playerPT5->getName() == "Economy")
-			{
-				opposingPlayer->setCoins(opposingPlayer->getCoins() + woodTradeCost + stoneTradeCost + clayTradeCost + papyrusTradeCost + glassTradeCost);
-			}
-			
 			return true;
 		}
 		// fourth condition checks if the player doesn't have the resources and CAN'T afford the cost for trading
@@ -1355,6 +1444,27 @@ namespace Seven_Wonders {
 
 	void World::runCivilianVictory()
 	{
+		/*
+		1. Blue Cards
+			a. Just add up the numbers on the cards
+		2. Green Cards
+			a. Just add up the numbers on the cards
+		3. Yellow Cards
+			a. Just add up the numbers on the cards
+		4. Guild Cards
+			a. Use code from buildling these to get gold, in order to add up the victory points
+		5. Wonder Cards
+			a. Just add up the numbers on the cards
+		6. Progress Tokens
+			a. Agriculture = 4
+			b. Philosophy = 7
+			c. Mathematics = 3 x number of PTs (including Mathematics)
+		7. Gold Remaining
+			a. 1 VP per 3 gold, rounded down
+		8. Military Position	
+			a. Just based on the position of the conflict pawn
+		*/
+		
 		int player1Points = 0;
 		int player2Points = 0;
 
@@ -1921,7 +2031,6 @@ namespace Seven_Wonders {
 				currentPlayer.setCoins(goldAdded);
 				break;
 			case 64: // lighthouse
-				goldAdded++; // need to add 1 coin for this card to be counted also
 				for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
 				{
 					if ((*it)->getType() == YELLOW_CARD) goldAdded += 1;
@@ -1957,7 +2066,7 @@ namespace Seven_Wonders {
 				if (player1Worth >= player2Worth) currentPlayer.setCoins(player1Worth);
 				else if (player2Worth > player1Worth) currentPlayer.setCoins(player2Worth);
 				
-				currentPlayer.flags.magistratesGuildFlag = true;
+				currentPlayer.flags.merchantsGuildFlag = true;
 				break;
 			case 67: // shipowners guild
 				for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
@@ -2134,70 +2243,51 @@ namespace Seven_Wonders {
 
 	int World::goldCost(Player & currentPlayer, Card & card)
 	{
-		int masonryDiscount = 0; //make stone cost 2 less for masonry progress token as blue cards are not being used
-		int architectureDiscount = 0; //make clay cost 2 less for architecture progress token as blue cards are not being used
-
-		for (vector<Card*>::iterator it = currentPlayer.playerCity.begin(); it != currentPlayer.playerCity.end(); ++it)
-		{
-			if ((*it)->getLinkerValue1() == card.getLinkerValue1() && (*it)->getLinkerValue1() != NOLINKVALUE)
-			{
-				return 0;
-			}
-			else if ((*it)->getLinkerValue2() == card.getLinkerValue2() && (*it)->getLinkerValue2() != NOLINKVALUE)
-
-			{
-				return 0;
-			}
-		}
+		// Checking for link-building
+		if (buildByLink == true) return 0;
 		
+		// Checking for Masonry and Architecture PTs
+		bool masonryDiscount = false;
+		bool architectureDiscount = false;
 		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Masonry")
+		else if (currentPlayer.playerPT2 != nullptr && currentPlayer.playerPT2->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Masonry")
+		else if (currentPlayer.playerPT3 != nullptr && currentPlayer.playerPT3->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Masonry")
+		else if (currentPlayer.playerPT4 != nullptr && currentPlayer.playerPT4->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
-		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Masonry")
+		else if (currentPlayer.playerPT5 != nullptr && currentPlayer.playerPT5->getName() == "Masonry")
 		{
-			masonryDiscount = 2;
+			masonryDiscount = true;
 		}
-
 		if (currentPlayer.playerPT1 != nullptr && currentPlayer.playerPT1->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT2 != nullptr && player1.playerPT2->getName() == "Architecture")
+		else if (currentPlayer.playerPT2 != nullptr && currentPlayer.playerPT2->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT3 != nullptr && player1.playerPT3->getName() == "Architecture")
+		else if (currentPlayer.playerPT3 != nullptr && currentPlayer.playerPT3->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT4 != nullptr &&player1.playerPT4->getName() == "Architecture")
+		else if (currentPlayer.playerPT4 != nullptr && currentPlayer.playerPT4->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
-
-		if (currentPlayer.playerPT5 != nullptr && player1.playerPT5->getName() == "Architecture")
+		else if (currentPlayer.playerPT5 != nullptr && currentPlayer.playerPT5->getName() == "Architecture")
 		{
-			architectureDiscount = 2;
+			architectureDiscount = true;
 		}
 
 		// need to assign the opposing player
@@ -2206,10 +2296,10 @@ namespace Seven_Wonders {
 		else if (currentPlayer.getPlayerNumber() == PLAYER_2) opposingPlayer = &player1;
 
 		// need to assign the differences between what the card costs and what the player has
+		// PT discounts need to be fully implemented still
 		int woodCardDiff = card.getWoodCost() - currentPlayer.getWood();
-		int stoneCardDiff =( card.getStoneCost()-masonryDiscount) - currentPlayer.getStone();
-		int clayCardDiff = (card.getClayCost()-architectureDiscount) - currentPlayer.getClay();
-		
+		int stoneCardDiff = card.getStoneCost() - currentPlayer.getStone();
+		int clayCardDiff = card.getClayCost() - currentPlayer.getClay();
 		int papyrusCardDiff = card.getPapyrusCost() - currentPlayer.getPapyrus();
 		int glassCardDiff = card.getGlassCost() - currentPlayer.getGlass();
 
@@ -2315,6 +2405,83 @@ namespace Seven_Wonders {
 			}
 		}
 
+		// Handling Masonry PT
+		if (card.getType() == BLUE_CARD && masonryDiscount == true)
+		{
+			int numOfDiscounts = 0;
+
+			while (numOfDiscounts < 2)
+			{
+				if (woodCardDiff > 0)
+				{
+					woodCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (stoneCardDiff > 0)
+				{
+					stoneCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (clayCardDiff > 0)
+				{
+					clayCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (papyrusCardDiff > 0)
+				{
+					papyrusCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (glassCardDiff > 0)
+				{
+					glassCardDiff--;
+					numOfDiscounts++;
+				}
+
+				if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff <= 0 && papyrusCardDiff <= 0 && glassCardDiff <= 0) break;
+
+			}
+		}
+
+		// Handling Architecture PT
+		if (card.getType() == WONDER_CARD && architectureDiscount == true)
+		{
+			int numOfDiscounts = 0;
+
+			while (numOfDiscounts < 2)
+			{
+				if (woodCardDiff > 0)
+				{
+					woodCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (stoneCardDiff > 0)
+				{
+					stoneCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (clayCardDiff > 0)
+				{
+					clayCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (papyrusCardDiff > 0)
+				{
+					papyrusCardDiff--;
+					numOfDiscounts++;
+				}
+				else if (glassCardDiff > 0)
+				{
+					glassCardDiff--;
+					numOfDiscounts++;
+				}
+
+				if (woodCardDiff <= 0 && stoneCardDiff <= 0 && clayCardDiff <= 0 && papyrusCardDiff <= 0 && glassCardDiff <= 0) break;
+
+			}
+		}
+
+
 		// need to assign the cost of trading for resources that are needed
 		int woodTradeCost = 0;
 		int clayTradeCost = 0;
@@ -2353,7 +2520,6 @@ namespace Seven_Wonders {
 		for (vector<Card*>::iterator it = player1.playerCity.begin(); it != player1.playerCity.end(); ++it)
 		{
 			player1ConflictPoints += (*it)->getShields();
-
 		}
 
 		for (vector<Card*>::iterator it = player2.playerCity.begin(); it != player2.playerCity.end(); ++it)
@@ -2371,64 +2537,46 @@ namespace Seven_Wonders {
 		}
 	}
 
-
-	//use to check the location of the progress token
-	//if the conflict token is in ranges [1,2] (player 1 advancing military) or [-1,-2] (player 2 advancing military) then +2 added to victory points
-	//if the conflcit token is in range [3,5] (player 1 advancing military) or [-3,-5] (player 2 advancing military) then -2 coins of opposing player and +5 victory points to current player
-	//if the conflict token is in range [6,8] (player 1 advancing military) or [-6,-8] (player 2 advancing military) then -5 coins of opposing player and +10 victory points to current player
-
-
-
 	void World::militaryTokenZone() 
 	{
-
-		if (mConflict >= -2 && mConflict<=-1 && player2MilitaryRange0 == false) //add 2 victory points for player 2
+		if (mConflict >= -2 && mConflict <= -1 && player2MilitaryRange0 == false) //add 2 victory points for player 2
 		{
 			player2MilitaryRange0 = true;
-			
 		}
 
-		if (mConflict >= -5 && mConflict<=-3 && player2MilitaryRange1==false) //add 5 victory points for player 1, and remove two coins for player 1
+		if (mConflict >= -5 && mConflict<=-3 && player2MilitaryRange1 == false) //add 5 victory points for player 1, and remove two coins for player 1
 		{
 			player1.setCoins(-2);
+			player2.setCoins(2);
 			player2MilitaryRange1 = true;
-			
-			
 		}
 
 		if (mConflict >= -8 && mConflict<= -6 && player2MilitaryRange2 == false) //add 10 victory points for player 1, and remove 5 coins for player 1
 		{
 			player1.setCoins(-5);
+			player2.setCoins(5);
 			player2MilitaryRange2 = true;
 		}
-
-
-
 
 		if (mConflict >= 1 && mConflict <= 2 && player1MilitaryRange0 == false) //add 2 victory points for player 1
 		{
 			player1MilitaryRange0 = true;
-
 		}
 
 		if (mConflict >= 3 && mConflict <= 5 && player1MilitaryRange1 == false) //add 5 victory points for player 1, and remove two coins for player 2
 		{
 			player2.setCoins(-2);
+			player1.setCoins(2);
 			player1MilitaryRange1 = true;
-
-
 		}
 
 		if (mConflict >= 6 && mConflict <= 8 && player1MilitaryRange2 == false) //add 10 victory points for player 1, and remove 5 coins for player 2
 		{
 			player2.setCoins(-5);
+			player1.setCoins(5);
 			player1MilitaryRange2 = true;
 		}
-
-
 	}
-	
-
 
 }
 
