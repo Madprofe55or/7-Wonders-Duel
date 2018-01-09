@@ -1,7 +1,7 @@
 # 7-Wonders-Duel
 Main git for 7 Wonders Duel fan project
 
-README updated on 03-Nov-2017
+README updated on 08-Jan-2018
 
 FUNCTIONALITY STILL NEEDED:
 1. Flesh out Civilian Victory - not all points accounted for yet
